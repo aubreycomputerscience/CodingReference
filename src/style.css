@@ -1,0 +1,96 @@
+body {      /* remove the padding around your webpage/app */
+  margin: 0;
+  padding: 0;
+}
+
+.app {     /* put a period before your custom styles (if it doesn't have a period, it belongs to the system */
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+
+/* HEADER */
+
+.headerSection {
+  /* inserting this as the top row in a column */
+  flex: none;     /* just make row high enough to fit content */
+
+  /* interior elements */
+  display: flex;
+  flex-direction: "row";
+  justify-content: space-around;
+  gap: 20px;
+  padding: 0 30px 0 6px;   /* Top, right, bottom, left. The padding is space between the element and whatever is inside. */
+  background: rgb(154, 9, 9);
+}
+
+.headerLink {
+    padding: 20px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-family: system-ui, sans-serif;
+    color: white;
+}
+
+.pushRight {
+  margin-left: auto;
+}
+
+.prettyText {
+    font-size: 1.15rem;
+    font-style: italic;
+}
+
+/* BODY */
+
+.body {
+  /* inserting this as the second row in a column */
+  flex: 1;    /* make it take all remaining space */
+  
+  /* layout of interior elements */
+  display: flex;
+  flex-direction: row;
+  
+  /* styling */
+}
+
+.sidebar {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #ccc;
+  background-color: whitesmoke;
+}
+
+.content {
+  flex: 1;
+  padding: 16px;
+}
+
+.sidebarElement {
+    padding: 8px;
+    color:  rgb(154, 9, 9);
+    flex: none;
+}
+
+.sidebarButton {
+  background: none;  /* remove any default styling */
+  border: none;      /* remove any default styling */
+
+
+  border-bottom: 1px solid #ccc;
+  background-color: rgb(126, 138, 238);
+  color: white;
+}
+
+.sidebarItem {  /* to use programmatically sidebarElement.classList.add("sidebarElement"); */
+    border-bottom: 1px solid #ccc;
+    text-decoration: none;
+}
+
+/* CONTENT TEXT */
+h1 {
+  color: blueviolet;
+  text-align: center;
+}

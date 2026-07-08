@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <!-- Info About the Webpage / App. The manifest allows us to run as Progressive Web App. -->
+  <head> <link rel="manifest" href="/manifest.json"></head> 
+  
+  <!-- My App -->
+  <body>
+    <div class="app">
+
+      <!-- Header-->
+      <nav class="headerSection">    <!-- nav is the hmtl divider, same as <div, just helps with clarity, accessibility, SEO -->
+        <div class="headerLink prettyText columnFlexBox">Aubrey</div>     <!-- class tells us the styling/layout, found in CSS --> 
+        <a href="#SoftwareDevelopment"  class="pushRight headerLink">Software Development</a>
+        <a href="#HowThingsWork"        class="headerLink">How Things Work</a>
+        <a href="#Ethics"               class="headerLink">Computers, Ethics, & Society</a>
+        <a href="#Topics"               class="headerLink">Topics</a>       
+      </nav>          
+    
+      <!-- Body --> 
+      <div class="body">                            
+        <nav id="sidebar" class="sidebar"></nav>    <!-- id allows us to find/access this element in code -->       
+        <main id="content" class="content"></main>  
+      </div>
+    </div>
+
+    <!-- Run Code on Start Up -->
+    <script type="module" src="/src/main.ts"></script>
+  
+  </body>
+</html>
+
+
+
+<!--
+
+NOTES:
+1) could also use button instead of links, but a) more complicated b) doesn't update address bar
+  <button data-page="arrays">Arrays</button>  we are attaching text data = "arrays" to the button 
+2) the url is stored in a global variable called "location," you can use it anywhere in your code
+
+
+
+
+
+
+
+
+
+-->
