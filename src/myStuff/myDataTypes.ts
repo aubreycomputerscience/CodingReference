@@ -24,10 +24,12 @@ export type SidebarContentType = "SoftwareDevelopment" | "HowThingsWork" | "Topi
 export const SectionNames = {  // alternatively, it is popular to create object to use like enums (another option would be to change compiler settings to allow enums)
                               
     CodingSection_Coding: "Coding", 
+    CodingSection_DataStructures: "Data Structures",
+    CodingSection_Algorithms: "Algorithms",
     CodingSection_UI: "UI", 
     CodingSection_Frameworks: "Frameworks", 
     CodingSection_Services: "Services", 
-    CodingSection_ProgramStructure: "Program Structure",
+    CodingSection_ProgramStructure: "Apps",
     CodingSection_Web: "Web",
 
     EthicsSection_History: "History",

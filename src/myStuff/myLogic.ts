@@ -44,7 +44,12 @@ async function fetchNewContentAfterSidebarSelection() {
     const html = await response.text();  // after receiving a response, the program will resume
                                          // the response from will contain lots of info, we just want the text
     // 4. update our html
-    content.innerHTML = html;
+    if (!response.ok) {
+        content.innerHTML = "<h2>Page Coming Soon</h2>";
+    } else {
+        content.innerHTML = html;
+    }
+    
 }
 
 function buildFileLocationURL(): string {
