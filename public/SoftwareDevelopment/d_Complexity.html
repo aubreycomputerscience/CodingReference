@@ -1,0 +1,1123 @@
+<article class="lesson">
+    <h1>1. COMPLEXITY AND BIG O</h1>
+
+    <section>
+        <h2>Lesson 1.1: Why Efficiency Matters</h2>
+
+        <p>
+            There is often more than one way to solve a problem. Two approaches
+            may produce exactly the same result, but one may require far more
+            work than the other. This difference may not matter when we are
+            working with ten items, but it can become enormous when we are
+            working with thousands or millions of items.
+        </p>
+
+        <p>
+            Suppose we have a list containing 100,000 names and want to find
+            both Alice and Bob. We could search through the entire list for
+            Alice and then begin again and search for Bob. In the worst case,
+            we would examine 200,000 names. A better approach would be to search
+            for both names at the same time. We would examine each name once
+            and perform at most 100,000 checks.
+        </p>
+
+        <p>
+            Both approaches give us the same answer, but the second requires
+            half as much work. Complexity gives us a way to describe
+            differences like this and understand how well an approach will
+            continue to work as the amount of data grows.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 1.2: Big O and Input Size</h2>
+
+        <p>
+            Computer scientists commonly describe complexity using
+            <strong>Big O notation</strong>. Big O does not tell us exactly how
+            many seconds a program will take to run. Instead, it describes how
+            the amount of work grows as the amount of data grows.
+        </p>
+
+        <p>
+            We use the letter <code>n</code> to represent the amount of data.
+            If an array contains 100 items, then <code>n</code> is 100. If it
+            contains one million items, then <code>n</code> is one million.
+        </p>
+
+        <section>
+            <h3>Constant Complexity: O(1)</h3>
+
+            <p>
+                Some tasks require the same amount of work regardless of how
+                much data we have. For example, if we want the first item in an
+                array, we can go directly to index <code>0</code>. It does not
+                matter whether the array contains ten items or ten million
+                items. The task still requires the same amount of work.
+            </p>
+
+            <p>
+                We describe this as <strong>O(1)</strong>, or constant
+                complexity.
+            </p>
+        </section>
+
+        <section>
+            <h3>Linear Complexity: O(n)</h3>
+
+            <p>
+                Other tasks require more work as the amount of data grows.
+                Suppose we search through an array one item at a time. If the
+                array contains twice as many items, the search may require
+                twice as much work. If it contains ten times as many items, it
+                may require ten times as much work.
+            </p>
+
+            <p>
+                The amount of work grows with the number of items. If we double
+                the amount of data, we roughly double the amount of work. We
+                describe this as <strong>O(n)</strong>, or linear complexity.
+            </p>
+
+            <p>
+                Big O focuses on this pattern of growth. It helps us understand
+                whether an approach will continue to work well when the amount
+                of data becomes much larger.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 1.3: Recognizing Complexity in Loops</h2>
+
+        <p>
+            Loops often make complexity easy to see because we can ask how many
+            times the code inside the loop will run.
+        </p>
+
+        <section>
+            <h3>Linear Growth</h3>
+
+            <p>
+                A loop that examines every item in an array runs once for each
+                item. If the array contains <code>n</code> items, the loop runs
+                <code>n</code> times. Its complexity is
+                <strong>O(n)</strong>.
+            </p>
+
+            <pre><code class="language-typescript">for (const animal of animals) {
+    // Examine each animal.
+}</code></pre>
+        </section>
+
+        <section>
+            <h3>Constant Multipliers</h3>
+
+            <p>
+                Suppose we loop through the same array twice. The first loop
+                runs <code>n</code> times, and the second loop also runs
+                <code>n</code> times. Together, they perform about
+                <code>2n</code> operations.
+            </p>
+
+            <pre><code class="language-typescript">for (const animal of animals) {
+    // First task.
+}
+
+for (const animal of animals) {
+    // Second task.
+}</code></pre>
+
+            <p>
+                Big O ignores constant multipliers such as <code>2</code>.
+                Whether we examine each item once, twice, or five times, the
+                amount of work still grows with the number of items. Two
+                separate loops are therefore <strong>O(n)</strong>, not O(2n).
+            </p>
+        </section>
+
+        <section>
+            <h3>Quadratic Growth</h3>
+
+            <p>
+                A nested loop behaves differently. For every item examined by
+                the outer loop, the inner loop examines every item again.
+            </p>
+
+            <pre><code class="language-typescript">for (const firstAnimal of animals) {
+    for (const secondAnimal of animals) {
+        // Compare the two animals.
+    }
+}</code></pre>
+
+            <p>
+                If the array contains <code>n</code> items, the outer loop runs
+                <code>n</code> times. During each of those runs, the inner loop
+                also runs <code>n</code> times.
+            </p>
+
+            <pre><code>n × n = n²</code></pre>
+
+            <p>
+                The complexity is <strong>O(n²)</strong>, pronounced
+                “Big O of n squared.”
+            </p>
+
+            <p>
+                If the array contains 100 items, the inner section may run
+                10,000 times. If the array contains 1,000 items, it may run
+                1,000,000 times. The amount of work grows much more quickly
+                than it does with a single loop.
+            </p>
+        </section>
+
+        <section>
+            <h3>Cubic Growth</h3>
+
+            <p>
+                If we place a third loop inside the first two, the work grows
+                again.
+            </p>
+
+            <pre><code class="language-typescript">for (const firstItem of items) {
+    for (const secondItem of items) {
+        for (const thirdItem of items) {
+            // Examine this combination.
+        }
+    }
+}</code></pre>
+
+            <p>
+                Each loop depends on <code>n</code>, so the total amount of
+                work is:
+            </p>
+
+            <pre><code>n × n × n = n³</code></pre>
+
+            <p>
+                The complexity is <strong>O(n³)</strong>.
+            </p>
+        </section>
+
+        <section>
+            <h3>Constant Work Inside a Loop</h3>
+
+            <p>
+                Not every loop inside another loop creates
+                <code>O(n²)</code> complexity. Consider an inner loop that
+                always runs exactly five times.
+            </p>
+
+            <pre><code class="language-typescript">for (const animal of animals) {
+    for (let count = 0; count &lt; 5; count++) {
+        // Repeat five times.
+    }
+}</code></pre>
+
+            <p>
+                The outer loop runs <code>n</code> times, but the inner loop
+                does not grow with the amount of data. It always runs five
+                times. This gives us approximately <code>5n</code> operations.
+            </p>
+
+            <p>
+                Big O ignores the constant multiplier, so the complexity is
+                still <strong>O(n)</strong>.
+            </p>
+        </section>
+
+        <section>
+            <h3>Examining Part of the Data</h3>
+
+            <p>
+                A loop may examine only part of an array. For example, the
+                following loop examines every other item:
+            </p>
+
+            <pre><code class="language-typescript">for (let index = 0; index &lt; animals.length; index += 2) {
+    // Examine every other animal.
+}</code></pre>
+
+            <p>
+                This loop performs approximately <code>n ÷ 2</code>
+                operations. It does less work than examining every item, but
+                the amount of work still grows with the size of the array. If
+                the array doubles in size, the work also roughly doubles.
+            </p>
+
+            <p>
+                Its complexity is therefore still <strong>O(n)</strong>.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding: Big O Basics</h2>
+
+        <ol>
+            <li>What does complexity describe?</li>
+            <li>What does <code>n</code> represent in Big O notation?</li>
+            <li>
+                Why does Big O focus on growth rather than the exact number of
+                operations?
+            </li>
+            <li>
+                What is the complexity of accessing the value stored at
+                <code>animals[0]</code>? Why?
+            </li>
+            <li>
+                What is the complexity of a loop that examines every item in an
+                array?
+            </li>
+            <li>
+                If an <code>O(n)</code> algorithm receives twice as many items,
+                what generally happens to the amount of work?
+            </li>
+            <li>
+                Why are two separate loops through the same array still
+                considered <code>O(n)</code>?
+            </li>
+            <li>
+                Why do nested loops commonly produce <code>O(n²)</code>
+                complexity?
+            </li>
+            <li>
+                What is the complexity of the following code? Explain your
+                answer.
+
+                <pre><code class="language-typescript">for (const firstItem of items) {
+    for (const secondItem of items) {
+        for (const thirdItem of items) {
+            // Examine this combination.
+        }
+    }
+}</code></pre>
+            </li>
+            <li>
+                Why does a loop that examines every other item still have
+                <code>O(n)</code> complexity?
+            </li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>Lesson 1.4: Combining Different Kinds of Work</h2>
+
+        <p>
+            A program may contain several sections with different levels of
+            complexity. To determine the complexity of the entire program, we
+            first consider each section separately.
+        </p>
+
+        <p>
+            Suppose a program contains one regular loop followed by a pair of
+            nested loops:
+        </p>
+
+        <pre><code class="language-typescript">for (const item of items) {
+    // Examine each item.
+}
+
+for (const firstItem of items) {
+    for (const secondItem of items) {
+        // Compare the two items.
+    }
+}</code></pre>
+
+        <p>
+            The first loop is <code>O(n)</code>, while the nested loops are
+            <code>O(n²)</code>. If we include both parts, the amount of work can
+            be written as:
+        </p>
+
+        <pre><code>O(n² + n)</code></pre>
+
+        <p>
+            However, <code>n²</code> grows much faster than <code>n</code>.
+            When <code>n</code> becomes large, the work performed by the
+            regular loop becomes relatively unimportant compared with the work
+            performed by the nested loops. We therefore keep only the
+            fastest-growing term:
+        </p>
+
+        <pre><code>O(n²)</code></pre>
+
+        <p>
+            Big O is meant to show the general pattern of growth, not to count
+            every operation. For this reason, we ignore constant multipliers
+            and smaller terms.
+        </p>
+
+        <p>
+            A loop that runs through half of an array performs approximately
+            <code>n ÷ 2</code> operations:
+        </p>
+
+        <pre><code class="language-typescript">for (let index = 0; index &lt; items.length / 2; index++) {
+    // Examine half of the items.
+}</code></pre>
+
+        <p>
+            This loop performs less work than one that examines the entire
+            array, but the amount of work still grows with <code>n</code>. If
+            the array doubles in size, the loop performs roughly twice as much
+            work. Its complexity is still <strong>O(n)</strong>.
+        </p>
+
+        <p>
+            The same reasoning applies when a loop examines every other item:
+        </p>
+
+        <pre><code class="language-typescript">for (let index = 0; index &lt; items.length; index += 2) {
+    // Examine every other item.
+}</code></pre>
+
+        <p>
+            Changing the exact number of operations does not necessarily change
+            the pattern of growth.
+        </p>
+
+        <p>
+            Exam questions may also include a loop in which the value doubles
+            during every repetition:
+        </p>
+
+        <pre><code class="language-typescript">for (let number = 1; number &lt;= items.length; number = number * 2) {
+    // 1, 2, 4, 8, 16...
+}</code></pre>
+
+        <p>
+            This is not a particularly common way to write everyday code, but
+            it tests whether we understand logarithmic growth. The loop reaches
+            the end quickly because the value doubles each time.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 1.5: Logarithmic Growth</h2>
+
+        <p>
+            Suppose we have one long strip of paper and want to divide it
+            evenly among eight people. We first divide the strip into two
+            pieces. We then divide both of those pieces, giving us four pieces.
+            After one more round of division, we have eight pieces.
+        </p>
+
+        <pre><code>Round 0: 1 piece
+Round 1: 2 pieces
+Round 2: 4 pieces
+Round 3: 8 pieces</code></pre>
+
+        <p>We can draw this process graphically:</p>
+
+        <pre><code>                     1
+                   /   \
+                  2     3
+                 / \   / \
+                4   5 6   7</code></pre>
+
+        <p>
+            The number of pieces doubles during every round. The question is:
+            how many rounds did we need? In other words, how tall is our tree?
+        </p>
+
+        <p>We can solve this mathematically:</p>
+
+        <pre><code>2ˣ = 8</code></pre>
+
+        <p>We can see that:</p>
+
+        <pre><code>2³ = 8</code></pre>
+
+        <p>Therefore, <code>x</code> is 3.</p>
+
+        <p>
+            In math class, we learned that we can solve for <code>x</code>
+            using a logarithm:
+        </p>
+
+        <pre><code>log₂(8) = 3</code></pre>
+
+        <p>
+            Read this as “the base-two logarithm of eight is three.”
+        </p>
+
+        <p>
+            We can also find the answer by starting with eight and repeatedly
+            dividing by two:
+        </p>
+
+        <pre><code>8 ÷ 2 = 4
+4 ÷ 2 = 2
+2 ÷ 2 = 1</code></pre>
+
+        <p>Once again, it takes three steps.</p>
+
+        <p>
+            When an algorithm cuts the remaining work in half during each step,
+            its complexity is <strong>O(log n)</strong>. Even when the amount
+            of data becomes very large, we need relatively few additional
+            steps.
+        </p>
+
+        <p>
+            It is important not to confuse <code>O(log n)</code> with
+            <code>O(n log n)</code>. If we follow one path while repeatedly
+            cutting the possibilities in half, the complexity is
+            <code>O(log n)</code>. If we process all <code>n</code> items
+            across <code>log n</code> levels, as merge sort does, the
+            complexity is <code>O(n log n)</code>.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 1.6: Comparing Linear Search and Binary Search</h2>
+
+        <section>
+            <h3>Linear Search</h3>
+
+            <p>
+                A linear search checks each value one by one until it finds the
+                desired value or reaches the end of the list.
+            </p>
+
+            <p>
+                If the desired value appears near the beginning, the search
+                finishes quickly. If the value appears near the end or does not
+                exist, the program must examine every item.
+            </p>
+
+            <p>
+                Since the number of checks grows with the number of items,
+                linear search has a complexity of <strong>O(n)</strong>.
+            </p>
+        </section>
+
+        <section>
+            <h3>Binary Search</h3>
+
+            <p>
+                Binary search takes advantage of sorted data. Rather than
+                checking every value, it looks near the middle and uses that
+                value to eliminate half of the remaining possibilities.
+            </p>
+
+            <p>
+                Suppose we want to find <code>70</code> in this sorted list:
+            </p>
+
+            <pre><code>10, 20, 30, 40, 50, 60, 70, 80</code></pre>
+
+            <p>
+                We begin near the middle and examine <code>40</code>. Since
+                <code>70</code> is greater than <code>40</code>, we know that
+                <code>70</code> cannot appear in the left half of the list. We
+                can immediately eliminate:
+            </p>
+
+            <pre><code>10, 20, 30, 40</code></pre>
+
+            <p>We continue with the remaining values:</p>
+
+            <pre><code>50, 60, 70, 80</code></pre>
+
+            <p>
+                We again look near the middle and eliminate another half of the
+                possibilities. We continue until we find <code>70</code> or
+                determine that it is not present.
+            </p>
+
+            <p>
+                Because binary search cuts the remaining search area roughly in
+                half during every step, its complexity is
+                <strong>O(log n)</strong>.
+            </p>
+
+            <p>
+                The difference becomes dramatic when the list is large. A
+                linear search through one million values may require one
+                million comparisons. A binary search through one million
+                sorted values requires only about twenty comparisons.
+            </p>
+
+            <p>
+                Binary search is much faster, but it comes with an important
+                requirement: the information must already be sorted. If the
+                values are not sorted, looking at the middle does not tell us
+                which half can be eliminated.
+            </p>
+        </section>
+
+        <section>
+            <h3>Best, Average, and Worst Cases</h3>
+
+            <p>
+                The amount of work performed by an algorithm may depend on the
+                data it receives.
+            </p>
+
+            <p>
+                For a linear search, the best case occurs when the desired item
+                appears first. The program finds it immediately and stops.
+            </p>
+
+            <p>
+                The average case occurs when the desired item appears somewhere
+                near the middle of the list.
+            </p>
+
+            <p>
+                The worst case occurs when the item appears last or does not
+                exist. The program must search through the entire list.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 1.7: Binary Trees</h2>
+
+        <p>
+            A binary tree is a structure in which each item can connect to no
+            more than two items below it.
+        </p>
+
+        <pre><code>                40
+              /    \
+            20      60
+           /  \    /  \
+         10   30  50   70</code></pre>
+
+        <p>
+            This tree is organized so that smaller values appear to the left
+            and larger values appear to the right. A tree organized in this
+            way is called a <strong>binary search tree</strong>.
+        </p>
+
+        <p>
+            Suppose we want to find <code>70</code>. We begin at
+            <code>40</code>. Since <code>70</code> is larger than
+            <code>40</code>, we move to the right and reach <code>60</code>.
+            Since <code>70</code> is also larger than <code>60</code>, we move
+            right again and find <code>70</code>.
+        </p>
+
+        <p>
+            We do not need to examine <code>10</code>, <code>20</code>,
+            <code>30</code>, or <code>50</code>. At each step, the
+            organization of the tree tells us which direction to follow and
+            allows us to ignore the other part of the tree.
+        </p>
+
+        <p>
+            When a binary tree is balanced, its values are spread across both
+            sides rather than forming one long branch. The number of values
+            approximately doubles at each new level:
+        </p>
+
+        <pre><code>Level 0: 1 item
+Level 1: 2 items
+Level 2: 4 items
+Level 3: 8 items</code></pre>
+
+        <p>
+            As a result, a balanced binary tree can contain many values without
+            becoming very tall. Searching the tree commonly requires us to
+            move down only one branch, giving us
+            <strong>O(log n)</strong> complexity.
+        </p>
+
+        <p>
+            However, this depends on the shape of the tree. Imagine that the
+            values were added in increasing order and formed a long chain:
+        </p>
+
+        <pre><code>10
+  \
+   20
+     \
+      30
+        \
+         40</code></pre>
+
+        <p>
+            This is still a binary tree, but it no longer gives us the same
+            advantage. To find <code>40</code>, we must move through every
+            value. Searching a badly unbalanced tree can therefore take
+            <strong>O(n)</strong> time.
+        </p>
+
+        <p>
+            The structure of the data matters. A tree does not automatically
+            provide a fast search. It must remain reasonably balanced for us to
+            eliminate a large portion of the remaining values during each
+            step.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 1.8: Sorting Algorithms</h2>
+
+        <p>
+            A sorting algorithm rearranges values into a particular order. We
+            might arrange numbers from smallest to largest, names in
+            alphabetical order, or products from least expensive to most
+            expensive.
+        </p>
+
+        <p>
+            There are many ways to sort information. Some approaches are easy
+            to understand but become slow when the list grows. Other approaches
+            are more complicated but handle large amounts of data much more
+            efficiently.
+        </p>
+
+        <section>
+            <h3>Selection Sort</h3>
+
+            <p>
+                Selection sort repeatedly finds the smallest remaining value
+                and moves it into the next open position.
+            </p>
+
+            <p>Suppose we begin with:</p>
+
+            <pre><code>7, 3, 5, 2</code></pre>
+
+            <p>
+                We examine the entire list and find that <code>2</code> is the
+                smallest value. We move it into the first position. We then
+                ignore the first position and find the smallest value in the
+                remaining portion of the list. We continue until every value
+                has been placed in the correct position.
+            </p>
+
+            <p>
+                Selection sort must repeatedly search through the unsorted
+                section. The first search examines nearly <code>n</code>
+                values, the next examines nearly <code>n</code> values again,
+                and the process continues until the list is sorted.
+            </p>
+
+            <p>
+                Its complexity is <strong>O(n²)</strong>. Even if the list is
+                already sorted, selection sort still searches through the
+                remaining values to confirm which one is smallest.
+            </p>
+        </section>
+
+        <section>
+            <h3>Insertion Sort</h3>
+
+            <p>
+                Insertion sort builds a sorted portion of the list one value at
+                a time. Each new value is moved into the correct position among
+                the values that have already been sorted.
+            </p>
+
+            <p>
+                Insertion sort is similar to arranging playing cards in your
+                hand. Each time you receive a new card, you slide it into the
+                correct position among the cards you already hold.
+            </p>
+
+            <p>
+                In the worst case, each new value must move past nearly every
+                value that came before it. This gives insertion sort a
+                worst-case complexity of <strong>O(n²)</strong>.
+            </p>
+
+            <p>
+                However, insertion sort can be efficient when the values are
+                already sorted or nearly sorted. If every value is already in
+                the correct position, the algorithm can move through the list
+                without repeatedly shifting items. Its best-case complexity is
+                <strong>O(n)</strong>.
+            </p>
+        </section>
+
+        <section>
+            <h3>Merge Sort</h3>
+
+            <p>
+                Merge sort repeatedly divides the data in half until each
+                section contains one item. It then combines the items into
+                sorted groups of two, combines those into sorted groups of
+                four, and continues until the entire list has been rebuilt in
+                order.
+            </p>
+
+            <p>
+                This creates the same familiar tree structure we saw earlier.
+                The number of values is <code>n</code>, while the height of the
+                tree is <code>log n</code>.
+            </p>
+
+            <p>
+                At each level, merge sort must process all <code>n</code>
+                values. Since there are <code>log n</code> levels, the total
+                complexity is:
+            </p>
+
+            <pre><code>O(n log n)</code></pre>
+
+            <p>
+                Merge sort always provides <code>O(n log n)</code>
+                performance. However, it creates temporary arrays while
+                dividing and combining the data, so it uses additional memory.
+            </p>
+
+            <p>
+                Merge sort is also a <strong>stable sort</strong>. This means
+                that when two items have the same sorting value, they remain in
+                their original order.
+            </p>
+
+            <p>Suppose we sort students by grade:</p>
+
+            <pre><code>Alex: 90
+Jordan: 80
+Sam: 90</code></pre>
+
+            <p>
+                A stable sort keeps Alex before Sam because Alex appeared first
+                in the original list, even though both students have the same
+                grade.
+            </p>
+        </section>
+
+        <section>
+            <h3>Quicksort</h3>
+
+            <p>
+                Quicksort, sometimes called pivot sort when introducing the
+                idea, also divides the data into smaller sections. It begins by
+                choosing one value called a <strong>pivot</strong>.
+            </p>
+
+            <p>
+                Values smaller than the pivot are moved to one side, while
+                larger values are moved to the other. The same process is then
+                repeated within each section.
+            </p>
+
+            <p>
+                The pivot may or may not divide the data evenly. If we choose a
+                value near the middle, we split the data into two useful
+                sections and get approximately <code>O(n log n)</code>
+                performance.
+            </p>
+
+            <p>
+                If we are unlucky and repeatedly choose one of the smallest or
+                largest values, one section may contain almost all of the
+                remaining data. Quicksort then divides the problem very poorly
+                and can fall to <strong>O(n²)</strong>.
+            </p>
+
+            <p>
+                Quicksort is often extremely fast, but its performance depends
+                on how well the pivots divide the data.
+            </p>
+
+            <p>
+                Traditional quicksort is <strong>not stable</strong>. If two
+                items have the same sorting value, quicksort may reverse their
+                original order. This is an important difference between
+                traditional quicksort and merge sort.
+            </p>
+        </section>
+
+        <section>
+            <h3>Sorting in Real Programs</h3>
+
+            <p>
+                These algorithms are not merely classroom exercises.
+                Programming languages and system libraries use the same ideas
+                when sorting real data.
+            </p>
+
+            <p>
+                For example, Apple guarantees that Swift's built-in
+                <code>sort()</code> and <code>sorted()</code> operations are
+                stable and have <code>O(n log n)</code> complexity. Apple does
+                not promise that these operations use merge sort, quicksort, or
+                any other particular algorithm. This allows the implementation
+                to change while preserving the behavior programmers depend on.
+            </p>
+
+            <p>
+                JavaScript follows a similar approach. Its built-in
+                <code>sort()</code> must be stable, but different JavaScript
+                engines may use different algorithms internally.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 1.9: Comparing Sorting Algorithms</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Algorithm</th>
+                    <th>Best Case</th>
+                    <th>Average Case</th>
+                    <th>Worst Case</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Selection Sort</td>
+                    <td>O(n²)</td>
+                    <td>O(n²)</td>
+                    <td>O(n²)</td>
+                </tr>
+                <tr>
+                    <td>Insertion Sort</td>
+                    <td>O(n)</td>
+                    <td>O(n²)</td>
+                    <td>O(n²)</td>
+                </tr>
+                <tr>
+                    <td>Merge Sort</td>
+                    <td>O(n log n)</td>
+                    <td>O(n log n)</td>
+                    <td>O(n log n)</td>
+                </tr>
+                <tr>
+                    <td>Quicksort</td>
+                    <td>O(n log n)</td>
+                    <td>O(n log n)</td>
+                    <td>O(n²)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>
+            Selection sort is simple, but it performs <code>O(n²)</code> work
+            even when the values are already sorted.
+        </p>
+
+        <p>
+            Insertion sort also has an average and worst-case complexity of
+            <code>O(n²)</code>, but it can perform well when the list is small
+            or already close to sorted.
+        </p>
+
+        <p>
+            Merge sort always provides <code>O(n log n)</code> performance and
+            is stable. However, it creates temporary arrays while combining the
+            data, so it uses additional memory.
+        </p>
+
+        <p>
+            Quicksort usually provides <code>O(n log n)</code> performance and
+            is often extremely fast. However, a series of poor pivots can
+            produce an <code>O(n²)</code> worst case. Traditional quicksort is
+            also not stable.
+        </p>
+
+        <p>
+            Complexity is not the only consideration when choosing an
+            algorithm. We may also care about memory use, the size and
+            condition of the data, whether equal items must remain in their
+            original order, and how difficult the algorithm is to implement
+            correctly.
+        </p>
+
+        <p>
+            Big O does not identify one sorting algorithm as the best in every
+            situation. It gives us a way to understand the tradeoffs and
+            predict what may happen as the list becomes large.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 1.10: Common Complexity Classes</h2>
+
+        <p>We have now seen several common patterns of growth:</p>
+
+        <pre><code>O(1)
+O(log n)
+O(n)
+O(n log n)
+O(n²)
+O(n³)
+O(2ⁿ)</code></pre>
+
+        <p>These are listed from slower growth to faster growth.</p>
+
+        <p>
+            An <code>O(1)</code> operation requires roughly the same amount of
+            work regardless of the amount of data.
+        </p>
+
+        <p>
+            An <code>O(log n)</code> algorithm repeatedly cuts the remaining
+            possibilities into smaller sections.
+        </p>
+
+        <p>
+            An <code>O(n)</code> algorithm performs work that grows with the
+            number of items.
+        </p>
+
+        <p>
+            An <code>O(n log n)</code> algorithm commonly processes all
+            <code>n</code> items across <code>log n</code> levels.
+        </p>
+
+        <p>
+            An <code>O(n²)</code> algorithm commonly compares every item with
+            every other item.
+        </p>
+
+        <p>
+            An <code>O(n³)</code> algorithm may examine every possible
+            combination of three items.
+        </p>
+
+        <section>
+            <h3>Exponential Complexity: O(2ⁿ)</h3>
+
+            <p>
+                Exponential complexity appears when every additional input
+                doubles the number of possibilities.
+            </p>
+
+            <p>
+                Suppose a program examines every possible result of a series of
+                yes-or-no decisions:
+            </p>
+
+            <pre><code>1 decision:  2 possibilities
+2 decisions: 4 possibilities
+3 decisions: 8 possibilities
+4 decisions: 16 possibilities</code></pre>
+
+            <p>
+                With ten decisions, there are 1,024 possible results. With
+                twenty decisions, there are more than one million. With thirty
+                decisions, there are more than one billion.
+            </p>
+
+            <p>
+                The input has increased from ten decisions to thirty, but the
+                number of possibilities has grown from about one thousand to
+                more than one billion.
+            </p>
+
+            <p>
+                This is why exponential algorithms are dangerous. They may work
+                perfectly well with a small input and then become unusable
+                after the input grows only slightly.
+            </p>
+        </section>
+
+        <section>
+            <h3>Factorial Complexity: O(n!)</h3>
+
+            <p>
+                Factorial complexity appears when an algorithm examines every
+                possible ordering of <code>n</code> items. It grows even faster
+                than <code>O(2ⁿ)</code>.
+            </p>
+
+            <p>
+                Factorials are useful in mathematics when calculating how many
+                different ways a group of items can be arranged. An algorithm
+                that actually examines every one of those arrangements can
+                become impractical after only a small increase in
+                <code>n</code>.
+            </p>
+        </section>
+
+        <p>
+            Big O describes how an algorithm grows, but it does not measure its
+            exact running time. A simple <code>O(n²)</code> algorithm may
+            finish faster than a complicated <code>O(n log n)</code> algorithm
+            when the list contains only a few items.
+        </p>
+
+        <p>
+            The advantage of the <code>O(n log n)</code> algorithm becomes
+            clear as <code>n</code> grows. Complexity helps us think beyond the
+            small examples on our screen and consider how the same program will
+            behave when it must process thousands or millions of values.
+        </p>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding: Searching, Trees, and Sorting</h2>
+
+        <ol>
+            <li>What does <code>log₂(8) = 3</code> mean?</li>
+            <li>
+                Why does repeatedly dividing a problem in half produce
+                <code>O(log n)</code> complexity?
+            </li>
+            <li>
+                What is the difference between <code>O(log n)</code> and
+                <code>O(n log n)</code>?
+            </li>
+            <li>
+                What is the difference between linear search and binary search?
+            </li>
+            <li>
+                What must be true about the data before binary search can be
+                used?
+            </li>
+            <li>
+                Describe the best case and worst case for linear search.
+            </li>
+            <li>
+                Why can searching a balanced binary tree take
+                <code>O(log n)</code> time?
+            </li>
+            <li>
+                Why can searching an unbalanced binary tree take
+                <code>O(n)</code> time?
+            </li>
+            <li>Briefly describe how selection sort works.</li>
+            <li>
+                Why does selection sort have <code>O(n²)</code> complexity even
+                when the list is already sorted?
+            </li>
+            <li>
+                Why can insertion sort perform well when a list is already
+                nearly sorted?
+            </li>
+            <li>Briefly describe how merge sort works.</li>
+            <li>
+                Why does merge sort have <code>O(n log n)</code> complexity?
+            </li>
+            <li>
+                What does it mean for a sorting algorithm to be stable?
+            </li>
+            <li>
+                Why does quicksort usually have <code>O(n log n)</code>
+                complexity?
+            </li>
+            <li>
+                What can cause quicksort to have <code>O(n²)</code>
+                complexity?
+            </li>
+            <li>
+                What important difference is there between traditional
+                quicksort and merge sort when two items have the same sorting
+                value?
+            </li>
+            <li>
+                Which sorting algorithm in this lesson always provides
+                <code>O(n log n)</code> performance?
+            </li>
+            <li>
+                Why might a programmer choose an algorithm that uses more
+                memory?
+            </li>
+            <li>
+                Why do exponential algorithms become impractical so quickly?
+            </li>
+        </ol>
+    </section>
+</article>

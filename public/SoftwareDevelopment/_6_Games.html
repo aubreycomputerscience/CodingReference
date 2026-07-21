@@ -1,0 +1,85 @@
+Games
+
+let enemyX = 0;
+let lastMove = 0;
+
+
+
+function runLoop(time: number) {  
+    
+    if (time - lastMoveMadeAtTime >= 1000) {  // time in milliseconds, so this will update every second
+        lastMoveMadeAtTime = time;
+        moveMonster()
+    }  
+
+    requestAnimationFrame(runLoop);  // we pass the code from this function into requestAnimationFrame
+                                                                   // it will be run after the next loop
+                                                                   // the time will be passed in (typical JavaScript–fast, lose, sloppy)
+}
+
+
+Game Loop
+function loop {
+	enemyDiv.textContent = "9";      // will repaint when main thread free
+	requestAnimationFrame(loop);  // browser will repaint and call loop() optiizing to match frame rate
+}
+
+
+let enemyX = 0;
+let lastMove = 0;
+
+function loop(time: number) {
+    if (time - lastMove > 1000) {
+        enemyX++;
+        lastMove = time;
+    }
+
+    drawEnemy(enemyX);
+
+    requestAnimationFrame(loop);
+}
+
+
+
+
+
+
+let lastTime = 0;
+
+function loop(timestamp: number) {
+    const deltaTime = timestamp - lastTime;
+    lastTime = timestamp;
+
+    // update game state based on elapsed time
+
+    requestAnimationFrame(loop);
+}
+
+
+
+
+Get User Input
+document.addEventListener("keydown", (event) => {
+
+    switch (event.key) {
+
+        case "ArrowLeft":
+            x -= 10;
+            break;
+
+        case "ArrowRight":
+            x += 10;
+            break;
+
+        case "ArrowUp":
+            y -= 10;
+            break;
+
+        case "ArrowDown":
+            y += 10;
+            break;
+    }
+
+    render();
+    save();
+});

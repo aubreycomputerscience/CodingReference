@@ -1,0 +1,432 @@
+<article class="lesson">
+    <h1>LESSON 8: OBJECT LITERALS</h1>
+
+    <section>
+        <h2>Lesson 8.1: Grouping Related Data</h2>
+
+        <p>
+            Sometimes several pieces of information belong together. For
+            example, a game player may have a name, hit points, and a score.
+        </p>
+
+        <p>We could store each value in a separate variable:</p>
+
+        <pre><code class="language-typescript">const playerName = "Alex";
+let playerHitPoints = 100;
+let playerScore = 500;</code></pre>
+
+        <p>
+            However, these variables all describe the same player. It is often
+            clearer to group them together in one value.
+        </p>
+
+        <p>
+            In JavaScript and TypeScript, we can do this using an
+            <strong>object literal</strong>:
+        </p>
+
+        <pre><code class="language-typescript">const player = {
+    name: "Alex",
+    hitPoints: 100,
+    score: 500
+};</code></pre>
+
+        <p>
+            An object literal is a collection of related values grouped under
+            one name.
+        </p>
+
+        <p>
+            Each named value inside the object is called a
+            <strong>property</strong>.
+        </p>
+
+        <p>In this example:</p>
+
+        <pre><code>Object: player
+
+Property: name
+Value:    "Alex"
+
+Property: hitPoints
+Value:    100
+
+Property: score
+Value:    500</code></pre>
+
+        <p>
+            The braces mark the beginning and end of the object. Each property
+            contains a name followed by a colon and its value.
+        </p>
+
+        <pre><code class="language-typescript">const player = {
+    name: "Alex",
+    hitPoints: 100
+};</code></pre>
+
+        <p>
+            The property names are <code>name</code> and
+            <code>hitPoints</code>. Their corresponding values are
+            <code>"Alex"</code> and <code>100</code>.
+        </p>
+
+        <p>Object literals are useful for simple grouped data such as:</p>
+
+        <ul>
+            <li>a player’s name, health, and score</li>
+            <li>a product’s name and price</li>
+            <li>a location’s horizontal and vertical position</li>
+            <li>a user’s account information</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Lesson 8.2: Using Object Literals</h2>
+
+        <p>We use a period to access a property:</p>
+
+        <pre><code class="language-typescript">const playerName = player.name;
+const currentHitPoints = player.hitPoints;</code></pre>
+
+        <p>Read <code>player.name</code> as:</p>
+
+        <p>The <code>name</code> property belonging to <code>player</code>.</p>
+
+        <p>We can also change a property:</p>
+
+        <pre><code class="language-typescript">player.hitPoints = 80;</code></pre>
+
+        <p>The <code>player</code> object now contains:</p>
+
+        <pre><code>name:      "Alex"
+hitPoints: 80
+score:     500</code></pre>
+
+        <p>
+            Even though <code>player</code> was declared using
+            <code>const</code>, its properties can still change.
+        </p>
+
+        <pre><code class="language-typescript">const player = {
+    name: "Alex",
+    hitPoints: 100
+};
+
+player.hitPoints = 80; // Allowed</code></pre>
+
+        <p>
+            The constant <code>player</code> must continue to refer to the
+            same object. However, the information stored inside that object may
+            change.
+        </p>
+
+        <p>We cannot make <code>player</code> refer to a different object:</p>
+
+        <pre><code class="language-typescript">player = {
+    name: "Maria",
+    hitPoints: 100
+}; // Error</code></pre>
+
+        <p>This is the same reference behavior that we saw with arrays.</p>
+    </section>
+
+    <section>
+        <h2>Lesson 8.3: Object Literals and References</h2>
+
+        <p>Object literals are accessed through references.</p>
+
+        <p>Consider the following code:</p>
+
+        <pre><code class="language-typescript">const firstPlayer = {
+    name: "Alex",
+    hitPoints: 100
+};
+
+const secondPlayer = firstPlayer;</code></pre>
+
+        <p>
+            This does not create a second player object. It gives us a second
+            variable containing a reference to the same object.
+        </p>
+
+        <pre><code>firstPlayer  \
+              &gt;  Same object: { name: "Alex", hitPoints: 100 }
+secondPlayer /</code></pre>
+
+        <p>
+            Changing the object using either variable changes the shared
+            object:
+        </p>
+
+        <pre><code class="language-typescript">secondPlayer.hitPoints = 50;
+
+// firstPlayer.hitPoints is now 50.
+// secondPlayer.hitPoints is also 50.</code></pre>
+
+        <p>Both variables lead to the same information.</p>
+
+        <p>
+            If we want to create a separate object containing the same
+            properties, we can use the spread operator:
+        </p>
+
+        <pre><code class="language-typescript">const firstPlayer = {
+    name: "Alex",
+    hitPoints: 100
+};
+
+const copiedPlayer = {
+    ...firstPlayer
+};</code></pre>
+
+        <p>Read <code>...firstPlayer</code> as:</p>
+
+        <p>
+            Take all the properties from <code>firstPlayer</code> and place
+            them here.
+        </p>
+
+        <p>Now the two variables refer to separate objects:</p>
+
+        <pre><code class="language-typescript">copiedPlayer.hitPoints = 50;
+
+// firstPlayer.hitPoints is still 100.
+// copiedPlayer.hitPoints is now 50.</code></pre>
+
+        <p>
+            As with arrays, this creates a shallow copy. If one of the
+            properties contains another object or array, that inner value is
+            still accessed through a shared reference.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 8.4: Passing an Object into a Function</h2>
+
+        <p>We can pass an object literal into a function:</p>
+
+        <pre><code class="language-typescript">function healPlayer(player: { name: string; hitPoints: number }) {
+    player.hitPoints = 100;
+}</code></pre>
+
+        <p>
+            The information between the braces describes the properties that
+            the function expects.
+        </p>
+
+        <p>The function requires an object containing:</p>
+
+        <ul>
+            <li>
+                a <code>name</code> property whose value is a string
+            </li>
+            <li>
+                a <code>hitPoints</code> property whose value is a number
+            </li>
+        </ul>
+
+        <p>We can pass in a matching object:</p>
+
+        <pre><code class="language-typescript">const hero = {
+    name: "Alex",
+    hitPoints: 50
+};
+
+healPlayer(hero);</code></pre>
+
+        <p>
+            After the function runs, <code>hero.hitPoints</code> contains
+            <code>100</code>.
+        </p>
+
+        <p>
+            The function receives another reference to the same object.
+            Therefore, changing the object through the parameter also changes
+            the object accessed through <code>hero</code>.
+        </p>
+
+        <p>
+            Writing the complete property description inside every function
+            can become repetitive:
+        </p>
+
+        <pre><code class="language-typescript">function healPlayer(player: { name: string; hitPoints: number }) {
+    player.hitPoints = 100;
+}
+
+function damagePlayer(player: { name: string; hitPoints: number }) {
+    player.hitPoints = player.hitPoints - 10;
+}</code></pre>
+
+        <p>
+            We can give this shape a name using a
+            <strong>type alias</strong>.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 8.5: Describing the Shape</h2>
+
+        <p>
+            A type alias describes the properties an object must contain:
+        </p>
+
+        <pre><code class="language-typescript">type Player = {
+    name: string;
+    hitPoints: number;
+    score: number;
+};</code></pre>
+
+        <p>
+            This does not create a player object. It only describes what a
+            value must look like to be used as a <code>Player</code>.
+        </p>
+
+        <p>We can then create an object literal with that shape:</p>
+
+        <pre><code class="language-typescript">const player: Player = {
+    name: "Alex",
+    hitPoints: 100,
+    score: 500
+};</code></pre>
+
+        <p>
+            The object literal creates the actual grouped data. The type alias
+            describes the shape that the data must have.
+        </p>
+
+        <p>
+            TypeScript checks that the required properties are present and
+            contain the correct types.
+        </p>
+
+        <pre><code class="language-typescript">const player: Player = {
+    name: "Alex",
+    hitPoints: 100
+}; // Error: score is missing.</code></pre>
+
+        <p>It also checks the type of each property:</p>
+
+        <pre><code class="language-typescript">const player: Player = {
+    name: "Alex",
+    hitPoints: "healthy",
+    score: 500
+}; // Error: hitPoints must be a number.</code></pre>
+
+        <p>Once the shape has a name, we can reuse it in functions:</p>
+
+        <pre><code class="language-typescript">function healPlayer(player: Player) {
+    player.hitPoints = 100;
+}
+
+function damagePlayer(player: Player, damage: number) {
+    player.hitPoints = player.hitPoints - damage;
+}</code></pre>
+
+        <p>
+            This makes the function declarations shorter and ensures that they
+            use the same description of a player.
+        </p>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding</h2>
+
+        <ul>
+            <li>What is an object literal?</li>
+
+            <li>
+                Why might we group a player’s name, hit points, and score into
+                one object instead of storing them in three unrelated
+                variables?
+            </li>
+
+            <li>
+                In the following object, what are the property names and
+                values?
+
+                <pre><code class="language-typescript">const product = {
+    name: "Notebook",
+    price: 5
+};</code></pre>
+            </li>
+
+            <li>
+                Write out an object literal representing a location with an
+                <code>x</code> property and a <code>y</code> property.
+            </li>
+
+            <li>
+                How would you retrieve the <code>price</code> property from
+                this object?
+
+                <pre><code class="language-typescript">const product = {
+    name: "Notebook",
+    price: 5
+};</code></pre>
+            </li>
+
+            <li>
+                Write out a statement that changes the product’s price to
+                <code>6</code>.
+            </li>
+
+            <li>
+                Why can the properties of an object declared using
+                <code>const</code> still change?
+            </li>
+
+            <li>
+                How many objects are created in the following code?
+
+                <pre><code class="language-typescript">const firstPlayer = {
+    name: "Alex",
+    hitPoints: 100
+};
+
+const secondPlayer = firstPlayer;</code></pre>
+            </li>
+
+            <li>
+                After the following statement runs, what is the value of
+                <code>firstPlayer.hitPoints</code>? Explain why.
+
+                <pre><code class="language-typescript">secondPlayer.hitPoints = 50;</code></pre>
+            </li>
+
+            <li>
+                Write out a statement that creates a separate copy of
+                <code>firstPlayer</code> using the spread operator.
+            </li>
+
+            <li>
+                Why can a function change an object that was passed into it?
+            </li>
+
+            <li>
+                What properties does this function require its argument to
+                contain?
+
+                <pre><code class="language-typescript">function healPlayer(player: { name: string; hitPoints: number }) {
+    player.hitPoints = 100;
+}</code></pre>
+            </li>
+
+            <li>
+                What is the difference between an object literal and a type
+                alias?
+            </li>
+
+            <li>
+                Write out a type alias called <code>Product</code> containing
+                a string called <code>name</code> and a number called
+                <code>price</code>.
+            </li>
+
+            <li>
+                Write out an object literal that follows the
+                <code>Product</code> shape.
+            </li>
+        </ul>
+    </section>
+</article>

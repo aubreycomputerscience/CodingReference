@@ -1,0 +1,36 @@
+Navigation
+
+Move to New Page
+location.href = "page2.html";  OR   location.replace("about.html");   // no back button
+
+PASSING VARIABLES
+const personId = 42;
+location.href = "details.html?id=" + personId;
+
+Then on page 2: 
+const params = new URLSearchParams(location.search);
+const id = params.get("id");
+
+MULTIPLE VARIABLES
+details.html?name=Alice&age=17  // build text in this format
+
+const params = new URLSearchParams(location.search);
+const name = params.get("name");
+const age = params.get("age");
+
+PASSING COMPLEX OR HIDDEN INFO
+store information in local storage
+
+
+<a href="#arrays">Arrays</a>  // the <a tag means we are going to go somewhere
+
+This changes the URL:
+
+site.com/#arrays
+
+but does not reload the page.
+You can listen for that change:
+
+window.addEventListener("hashchange", ...)
+
+and load content yourself.

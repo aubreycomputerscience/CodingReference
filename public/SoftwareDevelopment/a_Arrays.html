@@ -1,0 +1,576 @@
+<article class="lesson">
+    <h1>1. ARRAYS</h1>
+
+    <p>
+        An array stores several values in a specific order. For example, we can
+        use one array to store the names of every animal in a game.
+    </p>
+
+    <section>
+        <h2>Lesson 1.1: Creating an Array</h2>
+
+        <p>We create an array by placing items inside square brackets:</p>
+
+        <pre><code class="language-typescript">const animals = ["cat", "dog", "monkey"];</code></pre>
+
+        <p>The items remain in the order in which they were added.</p>
+
+        <pre><code>First:  "cat"
+Second: "dog"
+Third:  "monkey"</code></pre>
+
+        <p>
+            An array will normally contain one type of information. We can
+            state that type explicitly:
+        </p>
+
+        <pre><code class="language-typescript">const animals: Array&lt;string&gt; = ["cat", "dog", "monkey"];
+const scores: Array&lt;number&gt; = [10, 20, 30];</code></pre>
+
+        <p>
+            Read <code>Array&lt;string&gt;</code> as “an array of strings.”
+        </p>
+
+        <p>
+            Arrays preserve order, make it easy to add items, and allow us to
+            work through an entire list using a loop.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 1.2: Accessing and Changing Items</h2>
+
+        <section>
+            <h3>INDEXES</h3>
+
+            <p>
+                Each item in an array has a numbered position called an
+                <strong>index</strong>.
+            </p>
+
+            <p>Array indexes begin at <code>0</code>, not <code>1</code>.</p>
+
+            <pre><code class="language-typescript">const animals = ["cat", "dog", "monkey"];
+
+const firstAnimal = animals[0];  // "cat"
+const secondAnimal = animals[1]; // "dog"
+const thirdAnimal = animals[2];  // "monkey"</code></pre>
+
+            <p>We can imagine the array like this:</p>
+
+            <pre><code>Index:     0       1         2
+Item:    "cat"   "dog"   "monkey"</code></pre>
+
+            <p>
+                Starting at <code>0</code> may initially seem strange, but it
+                is standard in TypeScript and many other programming
+                languages.
+            </p>
+        </section>
+
+        <section>
+            <h3>CHANGING AN ITEM</h3>
+
+            <p>We can replace an item by using its index:</p>
+
+            <pre><code class="language-typescript">const animals = ["cat", "dog", "monkey"];
+
+animals[1] = "tiger"; // Replace the second item.</code></pre>
+
+            <p>The array now contains:</p>
+
+            <pre><code>["cat", "tiger", "monkey"]</code></pre>
+
+            <p>
+                Even though <code>animals</code> was declared using
+                <code>const</code>, we can change an item inside the array. The
+                variable still refers to the same array.
+            </p>
+        </section>
+
+        <section>
+            <h3>WORKING THROUGH AN ARRAY</h3>
+
+            <p>
+                When we want to work with every item, we should normally use a
+                <code>for...of</code> loop:
+            </p>
+
+            <pre><code class="language-typescript">const animals = ["cat", "dog", "monkey"];
+
+for (const animal of animals) {
+    if (animal === "dog") {
+        // Do something with the dog.
+    }
+}</code></pre>
+
+            <p>
+                Each time the loop runs, <code>animal</code> contains the next
+                item in the array.
+            </p>
+
+            <p>Use an index when you need one particular position:</p>
+
+            <pre><code class="language-typescript">animals[0] = "tiger";</code></pre>
+
+            <p>
+                Use <code>for...of</code> when you want to work through the
+                entire list. We should not manage indexes ourselves unless the
+                position is actually important.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 1.3: Common Array Properties and Methods</h2>
+
+        <section>
+            <h3>QUICK REFERENCE</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Property, method, or syntax</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td><code>myArray.length</code></td>
+                        <td>Find the number of items</td>
+                    </tr>
+                    <tr>
+                        <td><code>myArray.push(item)</code></td>
+                        <td>Add an item to the end</td>
+                    </tr>
+                    <tr>
+                        <td><code>myArray.pop()</code></td>
+                        <td>Remove and return the last item</td>
+                    </tr>
+                    <tr>
+                        <td><code>myArray.unshift(item)</code></td>
+                        <td>Add an item to the beginning</td>
+                    </tr>
+                    <tr>
+                        <td><code>myArray.shift()</code></td>
+                        <td>Remove and return the first item</td>
+                    </tr>
+                    <tr>
+                        <td><code>myArray.includes(item)</code></td>
+                        <td>Check whether an item appears in the array</td>
+                    </tr>
+                    <tr>
+                        <td><code>myArray.slice(start, end)</code></td>
+                        <td>Copy part of an array</td>
+                    </tr>
+                    <tr>
+                        <td><code>[...myArray]</code></td>
+                        <td>Copy the entire array</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h3>LENGTH</h3>
+
+            <p>
+                The <code>length</code> property tells us how many items are in
+                an array:
+            </p>
+
+            <pre><code class="language-typescript">const animals = ["cat", "dog", "monkey"];
+const numberOfAnimals = animals.length; // 3</code></pre>
+
+            <p>
+                <code>length</code> is a property, so it does not use
+                parentheses.
+            </p>
+        </section>
+
+        <section>
+            <h3>ADDING AND REMOVING ITEMS AT THE END</h3>
+
+            <p>
+                The <code>push()</code> method adds an item to the end of an
+                array:
+            </p>
+
+            <pre><code class="language-typescript">const animals = ["cat", "dog"];
+
+animals.push("monkey");</code></pre>
+
+            <p>The array now contains:</p>
+
+            <pre><code>["cat", "dog", "monkey"]</code></pre>
+
+            <p>
+                The <code>pop()</code> method removes and returns the last
+                item:
+            </p>
+
+            <pre><code class="language-typescript">const animals = ["cat", "dog", "monkey"];
+
+const removedAnimal = animals.pop();</code></pre>
+
+            <p>After this code runs:</p>
+
+            <pre><code>animals:       ["cat", "dog"]
+removedAnimal: "monkey"</code></pre>
+
+            <p>
+                If the array is empty, <code>pop()</code> returns
+                <code>undefined</code>.
+            </p>
+        </section>
+
+        <section>
+            <h3>ADDING AND REMOVING ITEMS AT THE BEGINNING</h3>
+
+            <p>
+                The <code>unshift()</code> method adds an item to the beginning:
+            </p>
+
+            <pre><code class="language-typescript">const animals = ["dog", "monkey"];
+
+animals.unshift("cat");</code></pre>
+
+            <p>The array now contains:</p>
+
+            <pre><code>["cat", "dog", "monkey"]</code></pre>
+
+            <p>
+                The <code>shift()</code> method removes and returns the first
+                item:
+            </p>
+
+            <pre><code class="language-typescript">const animals = ["cat", "dog", "monkey"];
+
+const removedAnimal = animals.shift();</code></pre>
+
+            <p>After this code runs:</p>
+
+            <pre><code>animals:       ["dog", "monkey"]
+removedAnimal: "cat"</code></pre>
+
+            <p>
+                If the array is empty, <code>shift()</code> returns
+                <code>undefined</code>.
+            </p>
+
+            <p>
+                Adding or removing items at the beginning is usually less
+                efficient than working at the end because the remaining items
+                must move to new indexes. For ordinary classroom projects,
+                this usually will not matter.
+            </p>
+        </section>
+
+        <section>
+            <h3>CHECKING WHETHER AN ITEM EXISTS</h3>
+
+            <p>
+                The <code>includes()</code> method checks whether an array
+                contains a particular item:
+            </p>
+
+            <pre><code class="language-typescript">const animals = ["cat", "dog", "monkey"];
+
+const hasDog = animals.includes("dog");     // true
+const hasTiger = animals.includes("tiger"); // false</code></pre>
+
+            <p>The result is a Boolean value.</p>
+        </section>
+
+        <section>
+            <h3>COPYING PART OF AN ARRAY</h3>
+
+            <p>
+                The <code>slice()</code> method copies part of an array without
+                changing the original:
+            </p>
+
+            <pre><code class="language-typescript">const animals = ["cat", "dog", "monkey", "tiger"];
+
+const selectedAnimals = animals.slice(1, 3);</code></pre>
+
+            <p>
+                The new array contains the items beginning at index
+                <code>1</code> and stopping before index <code>3</code>:
+            </p>
+
+            <pre><code>selectedAnimals: ["dog", "monkey"]
+animals:         ["cat", "dog", "monkey", "tiger"]</code></pre>
+
+            <p>The ending index is not included.</p>
+        </section>
+
+        <section>
+            <h3>COPYING AN ENTIRE ARRAY</h3>
+
+            <p>
+                Assigning an array to another variable does not create a new
+                array:
+            </p>
+
+            <pre><code class="language-typescript">const originalAnimals = ["cat", "dog"];
+const copiedAnimals = originalAnimals;</code></pre>
+
+            <p>Both variables refer to the same array.</p>
+
+            <p>
+                To create a separate array containing the same items, use the
+                spread operator:
+            </p>
+
+            <pre><code class="language-typescript">const originalAnimals = ["cat", "dog"];
+const copiedAnimals = [...originalAnimals];</code></pre>
+
+            <p>Read this as:</p>
+
+            <blockquote>
+                <p>
+                    Create a new array and place all the items from
+                    <code>originalAnimals</code> inside it.
+                </p>
+            </blockquote>
+
+            <p>
+                Now changing <code>copiedAnimals</code> does not change
+                <code>originalAnimals</code>:
+            </p>
+
+            <pre><code class="language-typescript">copiedAnimals[0] = "tiger";
+
+// originalAnimals contains ["cat", "dog"]
+// copiedAnimals contains ["tiger", "dog"]</code></pre>
+
+            <p>
+                This works as expected when the array contains primitive values
+                such as strings, numbers, or Booleans. If an array contains
+                objects, those objects have their own references. The two
+                arrays are separate, but both arrays still point to the same
+                objects inside them. We will return to this distinction after
+                learning about objects.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 1.4: Finding and Transforming Items</h2>
+
+        <p>
+            Some array methods ask us to provide a small function describing
+            what we want to find or change. These methods are powerful, but
+            their notation is less obvious.
+        </p>
+
+        <p>
+            We will study functions separately. For now, this section can be
+            used as a reference when these methods appear in code.
+        </p>
+
+        <section>
+            <h3>FIND</h3>
+
+            <p>
+                The <code>find()</code> method returns the first item that
+                matches a condition:
+            </p>
+
+            <pre><code class="language-typescript">const numbers = [1, 2, 3, 4];
+
+const foundNumber = numbers.find(number =&gt; number === 2);</code></pre>
+
+            <p>The variable <code>foundNumber</code> contains <code>2</code>.</p>
+
+            <p>The expression</p>
+
+            <pre><code class="language-typescript">number =&gt; number === 2</code></pre>
+
+            <p>means:</p>
+
+            <blockquote>
+                <p>Take each number and check whether it equals <code>2</code>.</p>
+            </blockquote>
+
+            <p>
+                If no item matches, <code>find()</code> returns
+                <code>undefined</code>.
+            </p>
+        </section>
+
+        <section>
+            <h3>FILTER</h3>
+
+            <p>
+                The <code>filter()</code> method creates a new array containing
+                every item that matches a condition:
+            </p>
+
+            <pre><code class="language-typescript">const numbers = [1, 2, 3, 4, 5, 6];
+
+const evenNumbers =
+    numbers.filter(number =&gt; number % 2 === 0);</code></pre>
+
+            <p>The new array contains:</p>
+
+            <pre><code>[2, 4, 6]</code></pre>
+
+            <p>The original array does not change.</p>
+
+            <p>
+                We could perform the same basic task manually with a loop:
+            </p>
+
+            <pre><code class="language-typescript">const numbers = [1, 2, 3, 4, 5, 6];
+const evenNumbers: Array&lt;number&gt; = [];
+
+for (const number of numbers) {
+    if (number % 2 === 0) {
+        evenNumbers.push(number);
+    }
+}</code></pre>
+
+            <p>
+                The loop is longer, but its steps may be easier to understand
+                when first learning.
+            </p>
+        </section>
+
+        <section>
+            <h3>MAP</h3>
+
+            <p>
+                The <code>map()</code> method creates a new array by
+                transforming every item:
+            </p>
+
+            <pre><code class="language-typescript">const animals = ["cat", "dog", "monkey"];
+
+const uppercaseAnimals =
+    animals.map(animal =&gt; animal.toUpperCase());</code></pre>
+
+            <p>The new array contains:</p>
+
+            <pre><code>["CAT", "DOG", "MONKEY"]</code></pre>
+
+            <p>The original array still contains:</p>
+
+            <pre><code>["cat", "dog", "monkey"]</code></pre>
+
+            <p>
+                These methods can make code shorter, but a
+                <code>for...of</code> loop is often easier for beginning
+                programmers to read. Use <code>for...of</code> unless one of
+                these methods clearly expresses what you want to do.
+            </p>
+
+            <p>
+                You may also encounter <code>splice()</code>, which can insert,
+                remove, or replace items in an existing array. Its behavior
+                depends on several positional arguments, so we will not use it
+                as one of our primary array tools.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding</h2>
+
+        <ol>
+            <li>
+                What is an array, and what does it preserve about its items?
+            </li>
+
+            <li>
+                <p>What are the indexes of the three items in this array?</p>
+
+                <pre><code class="language-typescript">const animals = ["cat", "dog", "monkey"];</code></pre>
+            </li>
+
+            <li>
+                <p>What does <code>secondAnimal</code> contain?</p>
+
+                <pre><code class="language-typescript">const animals = ["cat", "dog", "monkey"];
+const secondAnimal = animals[1];</code></pre>
+            </li>
+
+            <li>
+                <p>Write code that changes <code>"dog"</code> to <code>"tiger"</code>:</p>
+
+                <pre><code class="language-typescript">const animals = ["cat", "dog", "monkey"];</code></pre>
+            </li>
+
+            <li>
+                Which loop should you normally use to work through every item
+                in an array?
+            </li>
+
+            <li>
+                <p>
+                    What does the following array contain after the code runs?
+                </p>
+
+                <pre><code class="language-typescript">const animals = ["cat", "dog"];
+
+animals.push("monkey");</code></pre>
+            </li>
+
+            <li>
+                <p>
+                    What values do <code>animals</code> and
+                    <code>removedAnimal</code> contain?
+                </p>
+
+                <pre><code class="language-typescript">const animals = ["cat", "dog", "monkey"];
+
+const removedAnimal = animals.shift();</code></pre>
+            </li>
+
+            <li>
+                What is the difference between <code>shift()</code> and
+                <code>pop()</code>?
+            </li>
+
+            <li>
+                <p>
+                    What values do <code>hasDog</code> and
+                    <code>hasTiger</code> contain?
+                </p>
+
+                <pre><code class="language-typescript">const animals = ["cat", "dog", "monkey"];
+
+const hasDog = animals.includes("dog");
+const hasTiger = animals.includes("tiger");</code></pre>
+            </li>
+
+            <li>
+                <p>
+                    Write code that creates a separate copy of the following
+                    array:
+                </p>
+
+                <pre><code class="language-typescript">const originalNumbers = [10, 20, 30];</code></pre>
+            </li>
+
+            <li>
+                What is the difference between assigning an array to another
+                variable and copying it with the spread operator?
+            </li>
+
+            <li>
+                <p>Which method would you use to:</p>
+
+                <ul>
+                    <li>Find the first item that matches a condition?</li>
+                    <li>
+                        Create a new array containing only matching items?
+                    </li>
+                    <li>Create a new array by changing every item?</li>
+                </ul>
+            </li>
+        </ol>
+    </section>
+</article>

@@ -1,0 +1,386 @@
+<article class="lesson">
+    <h1>4. TREES</h1>
+
+    <section>
+        <h2>Lesson 4.1: Why Use a Tree?</h2>
+
+        <p>
+            An array is useful when we want an ordered list of items. However,
+            arrays can become inefficient when they contain a very large
+            amount of information.
+        </p>
+
+        <p>
+            Suppose an array contains 100,000,000 words. If we insert “kitty cat” at the beginning, every other item must move one position to the right.
+        </p>
+
+        <p>
+            Finding information can also be time consuming. If the array is not sorted, we must keep searching through the list until we find the word we want. In the worst case, that means checking all 100,000,000 items. Ouch!
+        </p>
+        
+        <p>
+            If our array is sorted, then it makes an item much easier to find. But if we have to sort it, it may not be worth the trouble. With 100,000,000 items, we are talking about moving millions of values.
+        </p>
+
+        <p>
+            A <strong>tree</strong> provides another way to organize
+            information. As each item is added, the tree places it according to
+            a set of rules. This keeps the information sorted while providing
+            quick lookup and insertion.
+        </p>
+
+        <p>
+            Consider adding the numbers <code>50</code>, <code>30</code>,
+            <code>70</code>, <code>20</code>, <code>40</code>,
+            <code>60</code>, and <code>80</code>.
+        </p>
+
+        <p>We begin with <code>50</code>:</p>
+
+        <pre><code>50</code></pre>
+
+        <p>
+            When we add another number, we compare it with <code>50</code>.
+        </p>
+
+        <ul>
+            <li>Smaller numbers go to the left.</li>
+            <li>Larger numbers go to the right.</li>
+        </ul>
+
+        <pre><code>    50
+   /  \
+ 30    70</code></pre>
+
+        <p>We continue using the same procedure:</p>
+
+        <pre><code>        50
+       /  \
+     30    70
+    / \    / \
+   20 40  60 80</code></pre>
+
+        <section>
+            <h3>Searching the Tree</h3>
+
+            <p>
+                Now suppose we want to check whether the tree contains
+                <code>80</code>.
+            </p>
+
+            <ol>
+                <li>
+                    Compare <code>80</code> with <code>50</code>. It is larger,
+                    so move right.
+                </li>
+                <li>
+                    Compare <code>80</code> with <code>70</code>. It is larger,
+                    so move right.
+                </li>
+                <li>We have found <code>80</code>.</li>
+            </ol>
+
+            <p>
+                We found the value in only three comparisons. In a much larger
+                tree, each comparison eliminates a large part of the remaining
+                data.
+            </p>
+        </section>
+
+        <p>
+            The tree also gives us the values in sorted order if we work
+            through the left side, then the current value, and then the right
+            side:
+        </p>
+
+        <pre><code>20, 30, 40, 50, 60, 70, 80</code></pre>
+
+        <p>
+            The tree maintains this organization as items are added. We do not
+            need to repeatedly sort the entire collection.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 4.2: A Binary Search Tree</h2>
+
+        <p>
+            The structure above is called a
+            <strong>binary search tree</strong>.
+        </p>
+
+        <p>
+            The word <code>binary</code> means that each location can lead to
+            no more than two additional locations:
+        </p>
+
+        <ul>
+            <li>one containing smaller values</li>
+            <li>one containing larger values</li>
+        </ul>
+
+        <p>
+            Each location is called a <strong>node</strong>. A node stores a
+            value and references to the nodes connected beneath it.
+        </p>
+
+        <p>
+            In our example, <code>50</code> is the top node, usually called the
+            <strong>root</strong>.
+        </p>
+
+        <pre><code>        50
+       /  \
+     30    70</code></pre>
+
+        <p>
+            The nodes below another node are called its
+            <strong>children</strong>. A node without any children is
+            sometimes called a <strong>leaf</strong>.
+        </p>
+
+        <p>
+            This vocabulary helps us describe a tree, but the main idea is the
+            procedure:
+        </p>
+
+        <ol>
+            <li>Begin at the top.</li>
+            <li>Compare the new value with the current value.</li>
+            <li>Move left if it is smaller.</li>
+            <li>Move right if it is larger.</li>
+            <li>Continue until an empty position is found.</li>
+        </ol>
+
+        <p>
+            Searching follows the same procedure. We stop when we find the
+            value we want or reach an empty position.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 4.3: Balanced and Unbalanced Trees</h2>
+
+        <p>
+            A tree works best when its values are spread reasonably evenly
+            across its branches.
+        </p>
+
+        <p>The previous example is balanced:</p>
+
+        <pre><code>        50
+       /  \
+     30    70
+    / \    / \
+   20 40  60 80</code></pre>
+
+        <p>We can find any value using only a few comparisons.</p>
+
+        <p>However, suppose we insert already sorted values:</p>
+
+        <pre><code>20, 30, 40, 50, 60</code></pre>
+
+        <p>The resulting tree may look like this:</p>
+
+        <pre><code>20
+  \
+   30
+     \
+      40
+        \
+         50
+           \
+            60</code></pre>
+
+        <p>
+            Instead of branching, the tree has become one long chain
+            (similar to a linked list).
+        </p>
+
+        <p>
+            To find <code>60</code>, we must examine every earlier value. The
+            tree has lost much of its advantage.
+        </p>
+
+        <p>
+            For this reason, useful tree implementations try to keep the tree
+            <strong>balanced</strong>. Some trees rearrange their nodes as
+            values are added. Others follow rules that allow them to build from
+            the leaves upward.
+        </p>
+
+        <pre><code>               1
+          /         \
+         2           3
+       /   \       /   \
+      4     5     6     7</code></pre>
+
+        <p>
+            We can think of this like building with bricks. We place the lower
+            bricks first so that they can support the bricks above them. In the
+            same way, a tree can build and rearrange its lower levels to
+            maintain a balanced structure.
+        </p>
+
+        <p>
+            The exact rules depend on the kind of tree. The important idea is
+            that the tree avoids becoming one long chain.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 4.4: Where Trees Are Used</h2>
+
+        <p>Trees are commonly used for:</p>
+
+        <ul>
+            <li>indexes in databases</li>
+            <li>files and folders on a computer</li>
+        </ul>
+
+        <p>
+            Database indexes and file systems often use balanced trees that
+            allow each node to contain several values and connections. This
+            helps them organize and search very large amounts of information
+            efficiently.
+        </p>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding</h2>
+
+        <ul>
+            <li>
+                Why can inserting an item into the middle or beginning of a
+                large array be expensive?
+            </li>
+
+            <li>
+                Why can finding a value in an unsorted array be slow?
+            </li>
+
+            <li>
+                When adding or finding a value, when do we move left and when
+                do we move right?
+            </li>
+
+            <li>
+                Draw the tree created by inserting these values in order:
+
+                <pre><code>50, 25, 75, 10, 30</code></pre>
+            </li>
+
+            <li>
+                Describe the steps used to find <code>30</code> in your tree.
+            </li>
+
+            <li>
+                How can we retrieve the values of a binary search tree in
+                sorted order?
+            </li>
+
+            <li>What is a node?</li>
+
+            <li>What is the top node of a tree called?</li>
+
+            <li>
+                Why does a balanced tree provide quicker lookup than a tree
+                shaped like one long chain?
+            </li>
+
+            <li>
+                Draw the tree created by inserting these values in order:
+
+                <pre><code>10, 20, 30, 40, 50</code></pre>
+            </li>
+
+            <li>
+                Why does this tree lose much of the advantage of a binary
+                search tree?
+            </li>
+
+            <li>
+                At a high level, how can a tree keep itself balanced?
+            </li>
+
+            <li>Where are trees commonly used?</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Lesson 4.5: Implementing a Tree</h2>
+
+        <p>
+            One way to implement a tree is to create a class representing the
+            tree and another class representing each node.
+        </p>
+
+        <pre><code class="language-typescript">class BinaryTree {
+    topNode: TreeNode | undefined;
+
+    insertNew(value: number) {
+        // Not implemented.
+    }
+
+    delete(value: number) {
+        // Not implemented.
+    }
+
+    search(value: number) {
+        // Not implemented.
+    }
+}
+
+class TreeNode {
+    value: number;
+    leftChild: TreeNode | undefined;
+    rightChild: TreeNode | undefined;
+
+    constructor(nodeValue: number) {
+        this.value = nodeValue;
+    }
+}</code></pre>
+
+        <p>
+            The <code>BinaryTree</code> stores a reference to its top node and
+            provides methods for inserting, deleting, and finding values. Each
+            <code>TreeNode</code> stores a value and references to its
+            children, which may then contain references to their own children.
+        </p>
+
+        <p>
+            A binary search tree may also be implemented using an array. This
+            can be more efficient, but using nodes and references provides a
+            more intuitive picture of how the tree is connected.
+        </p>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding: Implementation</h2>
+
+        <ul>
+            <li>
+                What information does the <code>BinaryTree</code> class store?
+            </li>
+
+            <li>
+                What information does each <code>TreeNode</code> store?
+            </li>
+
+            <li>
+                Why can <code>topNode</code> contain
+                <code>undefined</code>?
+            </li>
+
+            <li>
+                What operations do the methods in
+                <code>BinaryTree</code> need to perform?
+            </li>
+
+            <li>
+                Why might nodes and references make a tree easier to
+                understand than an array implementation?
+            </li>
+        </ul>
+    </section>
+</article>

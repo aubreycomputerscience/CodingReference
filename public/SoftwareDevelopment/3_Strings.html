@@ -1,0 +1,298 @@
+<article class="lesson">
+    <h1>LESSON 3: STRINGS</h1>
+
+    <section>
+        <h2>Lesson 3.1: Creating and Combining Strings</h2>
+
+        <p>
+            A string is text stored by a program. We create a string by placing
+            text inside quotation marks.
+        </p>
+
+        <pre><code class="language-typescript">const animal = "cat";
+const greeting = "Hello";
+const playerName = "Jon Snow";</code></pre>
+
+        <p>
+            Quotation marks tell TypeScript where the text begins and ends.
+            The quotation marks are not part of the text itself.
+        </p>
+
+        <p>
+            We can use either double quotation marks or single quotation marks:
+        </p>
+
+        <pre><code class="language-typescript">const firstAnimal = "cat";
+const secondAnimal = 'dog';</code></pre>
+
+        <p>
+            Both create strings. In this class, we will normally use double
+            quotation marks so that our code remains consistent.
+        </p>
+
+        <p>We can combine strings using the <code>+</code> symbol:</p>
+
+        <pre><code class="language-typescript">const firstName = "Jon";
+const lastName = "Snow";
+
+const fullName = firstName + lastName;</code></pre>
+
+        <p>This creates the string:</p>
+
+        <pre><code>JonSnow</code></pre>
+
+        <p>
+            The computer does not automatically insert a space. If we want a
+            space, we must include it ourselves:
+        </p>
+
+        <pre><code class="language-typescript">const fullName = firstName + " " + lastName;</code></pre>
+
+        <p>Now <code>fullName</code> contains:</p>
+
+        <pre><code>Jon Snow</code></pre>
+
+        <p>
+            This is called <strong>string concatenation</strong>. Concatenation
+            means joining strings together.
+        </p>
+
+        <p>We can combine text and variables:</p>
+
+        <pre><code class="language-typescript">const animal = "cat";
+const sentence = "My favorite animal is a " + animal + ".";</code></pre>
+
+        <p>The variable <code>sentence</code> now contains:</p>
+
+        <pre><code>My favorite animal is a cat.</code></pre>
+
+        <p>Later, you may also see strings written using backticks:</p>
+
+        <pre><code class="language-typescript">const sentence = `My favorite animal is a ${animal}.`;</code></pre>
+
+        <p>
+            This is called a <strong>template string</strong>. It provides
+            another way to insert values into text. In this class, we will
+            usually begin by combining strings with the <code>+</code> symbol
+            because it makes each part of the operation easy to see.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 3.2: Working with Strings</h2>
+
+        <p>
+            Strings come with useful tools that allow us to examine or work
+            with text.
+        </p>
+
+        <p>
+            A <strong>property</strong> stores information about a string. For
+            example, the <code>length</code> property tells us how many
+            characters are in it:
+        </p>
+
+        <pre><code class="language-typescript">const animal = "tiger";
+const numberOfCharacters = animal.length;</code></pre>
+
+        <p>
+            The value of <code>numberOfCharacters</code> is <code>5</code>.
+        </p>
+
+        <p>Spaces and punctuation also count as characters:</p>
+
+        <pre><code class="language-typescript">const message = "Hello!";
+const messageLength = message.length;</code></pre>
+
+        <p>The value of <code>messageLength</code> is <code>6</code>.</p>
+
+        <p>
+            We can also ask TypeScript to perform an action using a string.
+            For example:
+        </p>
+
+        <pre><code class="language-typescript">const animal = "tiger";
+const largeAnimal = animal.toUpperCase();</code></pre>
+
+        <p>The expression</p>
+
+        <pre><code class="language-typescript">animal.toUpperCase()</code></pre>
+
+        <p>
+            asks TypeScript to create an uppercase version of the string stored
+            in <code>animal</code>.
+        </p>
+
+        <p>
+            A function attached to a value in this way is called a
+            <strong>method</strong>. We use a period after the variable name,
+            followed by the method name and parentheses.
+        </p>
+
+        <pre><code>variable.method()</code></pre>
+
+        <p>The variable <code>largeAnimal</code> contains:</p>
+
+        <pre><code>TIGER</code></pre>
+
+        <p>
+            The original string has not changed. <code>animal</code> still
+            contains <code>"tiger"</code>. The <code>toUpperCase()</code>
+            method produced a new string, which we stored in
+            <code>largeAnimal</code>.
+        </p>
+
+        <p>
+            The <code>toLowerCase()</code> method produces a lowercase version
+            of a string:
+        </p>
+
+        <pre><code class="language-typescript">const message = "HELLO";
+const quietMessage = message.toLowerCase();</code></pre>
+
+        <p>The variable <code>quietMessage</code> contains <code>"hello"</code>.</p>
+
+        <p>
+            The <code>includes()</code> method checks whether a string contains
+            particular text:
+        </p>
+
+        <pre><code class="language-typescript">const sentence = "The tiger is sleeping.";
+const containsTiger = sentence.includes("tiger");</code></pre>
+
+        <p>The variable <code>containsTiger</code> contains <code>true</code>.</p>
+
+        <pre><code class="language-typescript">const containsLion = sentence.includes("lion");</code></pre>
+
+        <p>The variable <code>containsLion</code> contains <code>false</code>.</p>
+
+        <p>The search is sensitive to capitalization:</p>
+
+        <pre><code class="language-typescript">const containsUppercaseTiger = sentence.includes("Tiger");</code></pre>
+
+        <p>
+            This contains <code>false</code> because <code>"Tiger"</code> and
+            <code>"tiger"</code> are not written the same way.
+        </p>
+
+        <p>Some other useful string methods include:</p>
+
+        <pre><code class="language-typescript">const message = "  Hello, Jon!  ";
+
+const trimmedMessage = message.trim();
+const replacedMessage = message.replace("Jon", "Sam");</code></pre>
+
+        <p>
+            The <code>trim()</code> method produces a new string without spaces
+            at the beginning or end.
+        </p>
+
+        <p>
+            The <code>replace()</code> method produces a new string with one
+            piece of text replaced by another.
+        </p>
+
+        <p>
+            Strings cannot be changed after they are created. Methods such as
+            <code>toUpperCase()</code>, <code>trim()</code>, and
+            <code>replace()</code> produce new strings rather than changing
+            the original string.
+        </p>
+
+        <pre><code class="language-typescript">const originalMessage = "hello";
+const newMessage = originalMessage.toUpperCase();</code></pre>
+
+        <p>After this code runs:</p>
+
+        <pre><code>originalMessage: "hello"
+newMessage:      "HELLO"</code></pre>
+
+        <p>
+            This is why we usually assign the result of a string method to a
+            variable or constant.
+        </p>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding</h2>
+
+        <ul>
+            <li>
+                <p>What does the <code>fullName</code> variable contain?</p>
+
+                <pre><code class="language-typescript">const firstName = "Jon";
+const lastName = "Snow";
+
+const fullName = firstName + " " + lastName;</code></pre>
+            </li>
+
+            <li>
+                <p>
+                    Write code that combines the following variables into the
+                    sentence <code>"The cat is sleeping."</code>
+                </p>
+
+                <pre><code class="language-typescript">const animal = "cat";
+const action = "sleeping";</code></pre>
+            </li>
+
+            <li>
+                <p>What is string concatenation?</p>
+            </li>
+
+            <li>
+                <p>What does the <code>length</code> property tell us?</p>
+            </li>
+
+            <li>
+                <p>What value does <code>animalLength</code> contain?</p>
+
+                <pre><code class="language-typescript">const animal = "monkey";
+const animalLength = animal.length;</code></pre>
+            </li>
+
+            <li>
+                <p>
+                    What values do <code>uppercaseAnimal</code> and
+                    <code>animal</code> contain after this code runs?
+                </p>
+
+                <pre><code class="language-typescript">const animal = "tiger";
+const uppercaseAnimal = animal.toUpperCase();</code></pre>
+            </li>
+
+            <li>
+                <p>What value does <code>containsDog</code> contain?</p>
+
+                <pre><code class="language-typescript">const sentence = "The dog is running.";
+const containsDog = sentence.includes("dog");</code></pre>
+            </li>
+
+            <li>
+                <p>Why does the following expression produce <code>false</code>?</p>
+
+                <pre><code class="language-typescript">const sentence = "The dog is running.";
+const containsDog = sentence.includes("Dog");</code></pre>
+            </li>
+
+            <li>
+                <p>
+                    Write code that removes the spaces from the beginning and
+                    end of this string:
+                </p>
+
+                <pre><code class="language-typescript">const playerName = "   Jon   ";</code></pre>
+            </li>
+
+            <li>
+                <p>
+                    Write code that replaces <code>"cat"</code> with
+                    <code>"tiger"</code> in the following sentence:
+                </p>
+
+                <pre><code class="language-typescript">const sentence = "The cat is sleeping.";</code></pre>
+            </li>
+        </ul>
+    </section>
+</article>
+

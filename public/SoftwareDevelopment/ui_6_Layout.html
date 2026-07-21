@@ -1,0 +1,530 @@
+<article class="lesson">
+    <h1>4. PAGE LAYOUT</h1>
+
+    <p>
+        When designing a webpage or app, the first step is often to divide the
+        screen into sections. We might place a header at the top, a sidebar on
+        the left, and the main content beside it.
+    </p>
+
+    <p>
+        The basic idea is to start with the full page and divide it into boxes.
+        Each box can then arrange the elements placed directly inside it.
+    </p>
+
+    <p>For example:</p>
+
+    <pre><code>Page
+├── Header
+└── Body
+    ├── Sidebar
+    └── Content</code></pre>
+
+    <p>
+        Laying out a page can be a little tricky because each box has two
+        separate jobs. It must determine how much space it takes up, and it may
+        also need to arrange the elements inside it. It is often easiest to
+        build the layout one section at a time.
+    </p>
+
+    <section>
+        <h2>Lesson 4.1: Creating Boxes and Arranging Their Contents</h2>
+
+        <p>
+            A <code>div</code> is a general-purpose HTML element. It can display
+            text, create a visible rectangle, or hold other elements.
+        </p>
+
+        <pre><code class="language-typescript">const myView = document.createElement("div");
+myView.style.width = "200px";
+myView.style.height = "100px";
+myView.style.background = "lightgray";
+
+document.body.append(myView);</code></pre>
+
+        <p>
+            Once a <code>div</code> has a width, height, and background, it acts
+            like a visible box. A <code>div</code> can also hold other elements,
+            allowing us to divide the page into sections and organize what
+            appears inside each section.
+        </p>
+
+        <section>
+            <h3>Arranging Elements in a Row or Column</h3>
+
+            <p>
+                We can organize the elements inside a box in rows or columns.
+                The following example places two labels next to each other:
+            </p>
+
+            <pre><code class="language-typescript">const row = document.createElement("div");
+
+// Arrange the elements inside this box.
+row.style.display = "flex";
+row.style.flexDirection = "row";
+
+const firstLabel = document.createElement("label");
+firstLabel.textContent = "My Label A";
+firstLabel.style.background = "purple";
+firstLabel.style.padding = "8px"; // Add space inside the label around the text.
+
+const secondLabel = document.createElement("label");
+secondLabel.textContent = "My Label B";
+secondLabel.style.background = "yellow";
+secondLabel.style.padding = "8px"; // Add space inside the label around the text.
+
+row.append(firstLabel, secondLabel);
+document.body.append(row);</code></pre>
+
+            <p>
+                Setting <code>display</code> to <code>"flex"</code> tells the
+                box to use this layout system for the elements inside it.
+                Setting <code>flexDirection</code> to <code>"row"</code> places
+                those elements from left to right.
+            </p>
+
+            <pre><code class="language-typescript">row.style.flexDirection = "row";</code></pre>
+
+            <p>We can instead arrange the elements from top to bottom:</p>
+
+            <pre><code class="language-typescript">row.style.flexDirection = "column";</code></pre>
+
+            <p>
+                These settings affect only the elements directly inside the
+                box. If one of those inner elements also needs to arrange its
+                own contents, it must have its own <code>display</code> and
+                <code>flexDirection</code> settings.
+            </p>
+
+            <p>
+                It is important not to confuse
+                <code>display = "flex"</code> with
+                <code>flex = "1"</code>.
+            </p>
+
+            <pre><code class="language-typescript">row.style.display = "flex";</code></pre>
+
+            <p>
+                This controls how <code>row</code> arranges the elements inside
+                it.
+            </p>
+
+            <pre><code class="language-typescript">row.style.flex = "1";</code></pre>
+
+            <p>
+                This controls how much space <code>row</code> takes up inside
+                its parent. The similar names are unfortunate, but the two
+                properties serve different purposes.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 4.2: Building a Page Layout</h2>
+
+        <p>
+            We will build a page with a header at the top and a body underneath
+            it. The body will contain a sidebar and the main content.
+        </p>
+
+        <section>
+            <h3>Create the Full Page</h3>
+
+            <pre><code class="language-typescript">const page = document.createElement("div");
+
+// Use the full height of the screen.
+page.style.height = "100vh";
+
+// Arrange the header and body from top to bottom.
+page.style.display = "flex";
+page.style.flexDirection = "column";
+
+document.body.append(page);</code></pre>
+
+            <p>
+                <code>100vh</code> means 100 percent of the visible height of
+                the screen.
+            </p>
+        </section>
+
+        <section>
+            <h3>Add the Header</h3>
+
+            <pre><code class="language-typescript">const header = document.createElement("div");
+header.textContent = "My App";
+header.style.background = "lightblue";
+header.style.padding = "12px"; // Add space inside the header around its contents.
+header.style.flex = "none";
+
+page.append(header);</code></pre>
+
+            <p>
+                <code>flex = "none"</code> means that the header takes only the
+                space needed to display its content, padding, and any width or
+                height we give it. It does not expand to claim the remaining
+                space.
+            </p>
+        </section>
+
+        <section>
+            <h3>Add the Body</h3>
+
+            <pre><code class="language-typescript">const bodyView = document.createElement("div");
+
+// Fill the space below the header.
+bodyView.style.flex = "1";
+
+// Arrange the sidebar and content from left to right.
+bodyView.style.display = "flex";
+bodyView.style.flexDirection = "row";
+
+page.append(bodyView);</code></pre>
+
+            <p>
+                These properties perform two different jobs.
+                <code>flex = "1"</code> tells <code>bodyView</code> how much
+                space to take inside <code>page</code>.
+                <code>display = "flex"</code> and
+                <code>flexDirection = "row"</code> tell
+                <code>bodyView</code> how to arrange the sidebar and content
+                inside it.
+            </p>
+
+            <p>
+                The page arranges the header and body from top to bottom. The
+                body then arranges the sidebar and content from left to right.
+                The layout settings on <code>page</code> do not automatically
+                control the elements inside <code>bodyView</code>.
+            </p>
+        </section>
+
+        <section>
+            <h3>Add the Sidebar</h3>
+
+            <pre><code class="language-typescript">const sidebar = document.createElement("div");
+sidebar.style.width = "150px";
+sidebar.style.background = "whitesmoke";
+sidebar.style.borderRight = "1px solid #cccccc";
+sidebar.style.flex = "none";
+
+bodyView.append(sidebar);</code></pre>
+
+            <p>
+                The sidebar asks for a width of 150 pixels. Since its
+                <code>flex</code> value is <code>"none"</code>, it does not
+                expand to take additional space.
+            </p>
+        </section>
+
+        <section>
+            <h3>Add the Main Content</h3>
+
+            <pre><code class="language-typescript">const content = document.createElement("div");
+content.style.flex = "1";
+content.style.padding = "16px"; // Add space inside the content area.
+
+bodyView.append(content);</code></pre>
+
+            <p>
+                The content takes the space that remains after the sidebar takes
+                its 150 pixels.
+            </p>
+        </section>
+
+        <section>
+            <h3>Complete Example</h3>
+
+            <pre><code class="language-typescript">const page = document.createElement("div");
+page.style.height = "100vh";
+page.style.display = "flex";
+page.style.flexDirection = "column";
+
+const header = document.createElement("div");
+header.textContent = "My App";
+header.style.background = "lightblue";
+header.style.padding = "12px";
+header.style.flex = "none";
+
+const bodyView = document.createElement("div");
+bodyView.style.flex = "1";
+bodyView.style.display = "flex";
+bodyView.style.flexDirection = "row";
+
+const sidebar = document.createElement("div");
+sidebar.style.width = "150px";
+sidebar.style.background = "whitesmoke";
+sidebar.style.borderRight = "1px solid #cccccc";
+sidebar.style.flex = "none";
+
+const content = document.createElement("div");
+content.textContent = "Main Content";
+content.style.flex = "1";
+content.style.padding = "16px";
+
+bodyView.append(sidebar, content);
+page.append(header, bodyView);
+document.body.append(page);</code></pre>
+
+            <p>This produces the following structure:</p>
+
+            <pre><code>Page
+├── Header
+└── Body
+    ├── Sidebar
+    └── Content</code></pre>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 4.3: Claiming Space</h2>
+
+        <p>
+            Each element must determine how much space it should use inside its
+            parent.
+        </p>
+
+        <p>A fixed width or height asks for a specific amount of space:</p>
+
+        <pre><code class="language-typescript">sidebar.style.width = "150px";</code></pre>
+
+        <p>
+            A <code>flex</code> value asks for a share of the available space.
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Setting</th>
+                    <th>Meaning</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>flex = "none"</code></td>
+                    <td>
+                        Take only the space needed for the content, padding, and
+                        any width or height.
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>flex = "1"</code></td>
+                    <td>Take one share of the remaining space.</td>
+                </tr>
+                <tr>
+                    <td><code>flex = "2"</code></td>
+                    <td>Take two shares of the remaining space.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>Suppose two elements share the remaining space:</p>
+
+        <pre><code class="language-typescript">firstView.style.flex = "1";
+secondView.style.flex = "2";</code></pre>
+
+        <p>
+            The available space is divided into three shares. The first element
+            receives one share, while the second receives two.
+        </p>
+
+        <p>In the page example, the sidebar uses a fixed width:</p>
+
+        <pre><code class="language-typescript">sidebar.style.width = "150px";
+sidebar.style.flex = "none";</code></pre>
+
+        <p>The content takes everything that remains:</p>
+
+        <pre><code class="language-typescript">content.style.flex = "1";</code></pre>
+
+        <p>
+            This is a common layout pattern: one section has a fixed size,
+            while another expands to fill the available space.
+        </p>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding</h2>
+
+        <ol>
+            <li>What is a <code>div</code> commonly used for?</li>
+            <li>
+                What does <code>display = "flex"</code> allow an element to do?
+            </li>
+            <li>What does <code>flexDirection = "row"</code> do?</li>
+            <li>What does <code>flexDirection = "column"</code> do?</li>
+            <li>
+                Which elements are affected by an element’s layout settings?
+            </li>
+            <li>
+                What is the difference between
+                <code>display = "flex"</code> and
+                <code>flex = "1"</code>?
+            </li>
+            <li>
+                Why does <code>bodyView</code> need its own
+                <code>display = "flex"</code> setting?
+            </li>
+            <li>What does <code>height = "100vh"</code> mean?</li>
+            <li>
+                What is the difference between setting a fixed width and setting
+                <code>flex = "1"</code>?
+            </li>
+            <li>What does <code>flex = "none"</code> mean?</li>
+            <li>
+                If one element has <code>flex = "1"</code> and another has
+                <code>flex = "2"</code>, how is the remaining space divided?
+            </li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>Lesson 4.4: Moving the Layout to CSS</h2>
+
+        <p>
+            We can build the same page in TypeScript while storing the layout
+            and appearance in a separate CSS file.
+        </p>
+
+        <section>
+            <h3>TypeScript File</h3>
+
+            <pre><code class="language-typescript">const page = document.createElement("div");
+page.className = "page";
+
+const header = document.createElement("div");
+header.className = "header";
+header.textContent = "My App";
+
+const bodyView = document.createElement("div");
+bodyView.className = "body-view";
+
+const sidebar = document.createElement("div");
+sidebar.className = "sidebar";
+
+const content = document.createElement("div");
+content.className = "content";
+content.textContent = "Main Content";
+
+bodyView.append(sidebar, content);
+page.append(header, bodyView);
+document.body.append(page);</code></pre>
+        </section>
+
+        <section>
+            <h3>CSS File</h3>
+
+            <pre><code class="language-css">.page {
+    height: 100vh;
+
+    /* Arrange the elements inside the page from top to bottom. */
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    /* Take only the space needed to display the header. */
+    flex: none;
+
+    padding: 12px;
+    background: lightblue;
+}
+
+.body-view {
+    /* Take the remaining space below the header. */
+    flex: 1;
+
+    /* Arrange the elements inside the body from left to right. */
+    display: flex;
+    flex-direction: row;
+}
+
+.sidebar {
+    /* Take a fixed amount of space inside the body. */
+    width: 150px;
+    flex: none;
+
+    background: whitesmoke;
+    border-right: 1px solid #cccccc;
+}
+
+.content {
+    /* Take the space remaining beside the sidebar. */
+    flex: 1;
+
+    padding: 16px;
+}</code></pre>
+
+            <p>
+                The structure is the same as before. TypeScript creates the
+                elements and places them inside one another. The CSS file
+                controls both how much space each element takes and how it
+                arranges the elements inside it.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 4.5: Scrolling Inside a Section</h2>
+
+        <p>
+            Sometimes a section contains more information than can fit inside
+            the available space.
+        </p>
+
+        <p>We can allow that section to scroll:</p>
+
+        <pre><code class="language-typescript">content.style.overflow = "auto";</code></pre>
+
+        <p>Or in CSS:</p>
+
+        <pre><code class="language-css">.content {
+    flex: 1;
+    padding: 16px;
+    overflow: auto;
+}</code></pre>
+
+        <p>
+            If the content fits, no scroll bar is needed. If the content
+            becomes too large, the content section can scroll without changing
+            the rest of the page layout.
+        </p>
+
+        <p>A common full-page layout therefore looks like this:</p>
+
+        <pre><code class="language-css">body {
+    margin: 0;
+    padding: 0;
+}
+
+.page {
+    height: 100vh;
+
+    /* Arrange the page contents from top to bottom. */
+    display: flex;
+    flex-direction: column;
+}
+
+.body-view {
+    /* Take the space remaining below the header. */
+    flex: 1;
+
+    /* Arrange the sidebar and content from left to right. */
+    display: flex;
+    flex-direction: row;
+
+    overflow: hidden;
+}
+
+.content {
+    /* Take the space remaining beside the sidebar. */
+    flex: 1;
+
+    overflow: auto;
+}</code></pre>
+
+        <p>
+            The page fills the screen. The body fills the space below the
+            header, and the content section scrolls when necessary.
+        </p>
+    </section>
+</article>

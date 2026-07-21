@@ -1,0 +1,440 @@
+<article class="lesson">
+    <h1>LESSON 4: MATH, COMPARISON, AND LOGIC</h1>
+
+    <section>
+        <h2>Lesson 4.1: Math</h2>
+
+        <section>
+            <h3>BASIC OPERATIONS</h3>
+
+            <p>
+                TypeScript can perform the same basic mathematical operations
+                that we use in ordinary arithmetic.
+            </p>
+
+            <pre><code class="language-typescript">const addition = 8 + 2;        // 10
+const subtraction = 8 - 2;     // 6
+const multiplication = 8 * 2;  // 16
+const division = 8 / 2;        // 4</code></pre>
+
+            <p>
+                The symbols for addition and subtraction are familiar.
+                Multiplication uses an asterisk (<code>*</code>), and division
+                uses a forward slash (<code>/</code>).
+            </p>
+
+            <p>We can also use variables in mathematical expressions:</p>
+
+            <pre><code class="language-typescript">const hitPoints = 100;
+const incomingDamage = 30;
+
+const remainingHitPoints = hitPoints - incomingDamage; // 70</code></pre>
+        </section>
+
+        <section>
+            <h3>ORDER OF OPERATIONS</h3>
+
+            <p>
+                TypeScript follows the normal order of operations.
+                Multiplication and division are performed before addition and
+                subtraction.
+            </p>
+
+            <pre><code class="language-typescript">const answer = 2 + 3 * 4; // 14</code></pre>
+
+            <p>
+                We can use parentheses when we want part of an expression to be
+                performed first:
+            </p>
+
+            <pre><code class="language-typescript">const answer = (2 + 3) * 4; // 20</code></pre>
+        </section>
+
+        <section>
+            <h3>REMAINDERS</h3>
+
+            <p>
+                The remainder operator (<code>%</code>), sometimes called
+                <strong>mod</strong>, gives us the remainder after division:
+            </p>
+
+            <pre><code class="language-typescript">const remainder = 10 % 3; // 1</code></pre>
+
+            <p>
+                The value is <code>1</code> because dividing <code>10</code> by
+                <code>3</code> leaves a remainder of <code>1</code>.
+            </p>
+
+            <p>
+                The remainder operator is especially useful when checking
+                whether a number is even or odd:
+            </p>
+
+            <pre><code class="language-typescript">const remainder = 8 % 2; // 0</code></pre>
+
+            <p>
+                The value is <code>0</code> because <code>8</code> divides
+                evenly by <code>2</code>.
+            </p>
+        </section>
+
+        <section>
+            <h3>MATH FUNCTIONS</h3>
+
+            <p>
+                We can access a library of useful math functions by writing
+                <code>Math</code>, followed by a period and the function we
+                want to use.
+            </p>
+
+            <pre><code class="language-typescript">const roundedNumber = Math.round(4.6); // 5
+const lowerNumber = Math.floor(4.9);   // 4
+const higherNumber = Math.ceil(4.1);   // 5</code></pre>
+
+            <p>
+                The <code>Math.round()</code> function rounds to the nearest
+                whole number.
+            </p>
+
+            <p>
+                The <code>Math.floor()</code> function rounds down, while
+                <code>Math.ceil()</code> rounds up.
+            </p>
+
+            <p>
+                <code>Math.random()</code> creates a random number greater than
+                or equal to <code>0</code> and less than <code>1</code>.
+            </p>
+
+            <pre><code class="language-typescript">const randomNumber = Math.random(); // From 0 up to, but not including, 1</code></pre>
+
+            <p>
+                We will later use random numbers to create game events and
+                other unpredictable behavior.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 4.2: Comparison</h2>
+
+        <section>
+            <h3>TRUE OR FALSE QUESTIONS</h3>
+
+            <p>
+                A comparison asks whether two values have a particular
+                relationship. The result is a Boolean value—a truth value that
+                is either <code>true</code> or <code>false</code>.
+            </p>
+
+            <pre><code class="language-typescript">const isGreater = 10 &gt; 5; // true
+const isLess = 10 &lt; 5;    // false</code></pre>
+
+            <p>TypeScript provides several comparison operators:</p>
+
+            <pre><code>&gt;    greater than
+&lt;    less than
+&gt;=   greater than or equal to
+&lt;=   less than or equal to
+===  equal to
+!==  not equal to</code></pre>
+
+            <p>For example:</p>
+
+            <pre><code class="language-typescript">const playerHP = 50;
+
+const isAlive = playerHP &gt; 0;            // true
+const isAtFullHealth = playerHP === 100; // false
+const isInDanger = playerHP &lt;= 20;       // false</code></pre>
+        </section>
+
+        <section>
+            <h3>ASSIGNMENT AND EQUALITY</h3>
+
+            <p>
+                TypeScript uses three equal signs (<code>===</code>) to ask
+                whether two values are equal.
+            </p>
+
+            <pre><code class="language-typescript">const hasMaximumHP = playerHP === 100; // false</code></pre>
+
+            <p>
+                A single equal sign (<code>=</code>) assigns a value to a
+                variable.
+            </p>
+
+            <pre><code class="language-typescript">let playerHP = 50;
+
+playerHP = 100; // Assign the value 100 to playerHP.</code></pre>
+
+            <p>Compare:</p>
+
+            <pre><code class="language-typescript">playerHP = 100;   // Assign a value.
+playerHP === 100; // Ask whether the value is 100.</code></pre>
+
+            <p>
+                One changes the variable; the other asks a true-or-false
+                question.
+            </p>
+
+            <p>
+                JavaScript also has a two-equal-sign operator
+                (<code>==</code>) that attempts to convert values before
+                comparing them. This can produce confusing results.
+            </p>
+
+            <p>
+                <strong>
+                    Never use <code>==</code>. Use <code>===</code> when
+                    comparing values.
+                </strong>
+            </p>
+
+            <p>
+                To ask whether two values are not equal, use
+                <code>!==</code>.
+            </p>
+
+            <pre><code class="language-typescript">const hasNoHealth = playerHP !== 100; // false</code></pre>
+        </section>
+
+        <section>
+            <h3>COMPARING STRINGS</h3>
+
+            <p>Strings can also be compared:</p>
+
+            <pre><code class="language-typescript">const animal = "cat";
+
+const isCat = animal === "cat"; // true
+const isDog = animal === "dog"; // false</code></pre>
+
+            <p>String comparisons are sensitive to capitalization:</p>
+
+            <pre><code class="language-typescript">const isCat = "cat" === "Cat"; // false</code></pre>
+
+            <p>
+                The strings <code>"cat"</code> and <code>"Cat"</code> are not
+                identical because one begins with a lowercase letter and the
+                other begins with an uppercase letter.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 4.3: Logic</h2>
+
+        <section>
+            <h3>BOOLEAN LOGIC</h3>
+
+            <p>
+                A Boolean is a truth value: either <code>true</code> or
+                <code>false</code>.
+            </p>
+
+            <p>
+                Logical operators allow us to combine or reverse Boolean
+                values. The three most common logical operators are:
+            </p>
+
+            <pre><code>&amp;&amp;   AND
+||   OR
+!    NOT</code></pre>
+        </section>
+
+        <section>
+            <h3>AND</h3>
+
+            <p>
+                The AND operator (<code>&amp;&amp;</code>) produces
+                <code>true</code> only when both sides are true.
+            </p>
+
+            <pre><code class="language-typescript">const hasKey = true;
+const knowsPassword = true;
+
+const canEnter = hasKey &amp;&amp; knowsPassword; // true</code></pre>
+
+            <p>If either side is false, the result is false:</p>
+
+            <pre><code class="language-typescript">const hasKey = false;
+const knowsPassword = true;
+
+const canEnter = hasKey &amp;&amp; knowsPassword; // false</code></pre>
+        </section>
+
+        <section>
+            <h3>OR</h3>
+
+            <p>
+                The OR operator (<code>||</code>) produces <code>true</code>
+                when at least one side is true.
+            </p>
+
+            <pre><code class="language-typescript">const hasKey = false;
+const knowsPassword = true;
+
+const canEnter = hasKey || knowsPassword; // true</code></pre>
+
+            <p>
+                The player can enter because knowing the password is enough.
+                The player does not also need a key.
+            </p>
+        </section>
+
+        <section>
+            <h3>NOT</h3>
+
+            <p>
+                The NOT operator (<code>!</code>) reverses a Boolean value.
+            </p>
+
+            <pre><code class="language-typescript">const gameIsOver = false;
+const gameIsRunning = !gameIsOver; // true</code></pre>
+
+            <p>
+                Because <code>gameIsOver</code> is false, <strong>not</strong>
+                false is true.
+            </p>
+        </section>
+
+        <section>
+            <h3>COMBINING LOGIC AND COMPARISONS</h3>
+
+            <p>We can combine comparisons and logical operators:</p>
+
+            <pre><code class="language-typescript">const playerHP = 40;
+const hasShield = true;
+
+const isSafe = playerHP &gt; 20 &amp;&amp; hasShield; // true</code></pre>
+
+            <p>
+                The comparison <code>playerHP &gt; 20</code> produces
+                <code>true</code>, and <code>hasShield</code> is also
+                <code>true</code>. Therefore, <code>isSafe</code> is
+                <code>true</code>.
+            </p>
+
+            <p>
+                Parentheses can make a more complicated logical expression
+                easier to read:
+            </p>
+
+            <pre><code class="language-typescript">const canEnter =
+    (hasKey || knowsPassword) &amp;&amp; !doorIsBlocked;</code></pre>
+
+            <p>Read this as:</p>
+
+            <pre><code>The player has a key OR knows the password,
+AND the door is not blocked.</code></pre>
+
+            <p>
+                Logical expressions often appear inside <code>if</code>
+                statements, where they help a program decide what to do. We
+                will use them more when we learn about <code>if</code> and
+                <code>else</code>.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding</h2>
+
+        <ul>
+            <li>
+                <p>
+                    What values do <code>firstAnswer</code> and
+                    <code>secondAnswer</code> contain?
+                </p>
+
+                <pre><code class="language-typescript">const firstAnswer = 6 + 2 * 3;
+const secondAnswer = (6 + 2) * 3;</code></pre>
+            </li>
+
+            <li>
+                <p>What value does <code>remainder</code> contain?</p>
+
+                <pre><code class="language-typescript">const remainder = 17 % 5;</code></pre>
+            </li>
+
+            <li>
+                <p>
+                    Write an expression that calculates the amount of health
+                    remaining after damage is received.
+                </p>
+
+                <pre><code class="language-typescript">const hitPoints = 100;
+const damage = 35;</code></pre>
+            </li>
+
+            <li>
+                <p>What value does <code>isAdult</code> contain?</p>
+
+                <pre><code class="language-typescript">const age = 16;
+const isAdult = age &gt;= 18;</code></pre>
+            </li>
+
+            <li>
+                <p>
+                    What is the difference between <code>=</code> and
+                    <code>===</code>?
+                </p>
+            </li>
+
+            <li>
+                <p>
+                    Why should we use <code>===</code> instead of
+                    <code>==</code>?
+                </p>
+            </li>
+
+            <li>
+                <p>
+                    What values do <code>isCat</code> and <code>isDog</code>
+                    contain?
+                </p>
+
+                <pre><code class="language-typescript">const animal = "cat";
+
+const isCat = animal === "cat";
+const isDog = animal === "dog";</code></pre>
+            </li>
+
+            <li>
+                <p>What value does <code>canEnter</code> contain?</p>
+
+                <pre><code class="language-typescript">const hasKey = false;
+const knowsPassword = true;
+
+const canEnter = hasKey || knowsPassword;</code></pre>
+            </li>
+
+            <li>
+                <p>What value does <code>canWin</code> contain?</p>
+
+                <pre><code class="language-typescript">const hasWeapon = true;
+const hasEnergy = false;
+
+const canWin = hasWeapon &amp;&amp; hasEnergy;</code></pre>
+            </li>
+
+            <li>
+                <p>What value does <code>gameIsRunning</code> contain?</p>
+
+                <pre><code class="language-typescript">const gameIsOver = false;
+const gameIsRunning = !gameIsOver;</code></pre>
+            </li>
+
+            <li>
+                <p>
+                    Write a logical expression that is true when a player has
+                    more than <code>0</code> hit points and the game is not
+                    over.
+                </p>
+
+                <pre><code class="language-typescript">const hitPoints = 50;
+const gameIsOver = false;</code></pre>
+            </li>
+        </ul>
+    </section>
+</article>
+

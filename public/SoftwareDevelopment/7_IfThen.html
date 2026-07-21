@@ -1,0 +1,255 @@
+<article class="lesson">
+    <h1>LESSON 6: CONDITIONALS</h1>
+
+    <section>
+        <p>
+            Conditional statements tell a program whether or not to run a piece
+            of code. The program checks whether a condition is true and then
+            decides which code to run.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 6.1: If Statements</h2>
+
+        <p>
+            An <code>if</code> statement tells the program to run a piece of
+            code only when a condition is true.
+        </p>
+
+        <pre><code class="language-typescript">const hitPoints = 20;
+
+if (hitPoints &lt; 30) {
+    // Warn the player that health is low.
+}</code></pre>
+
+        <p>
+            The condition appears inside the parentheses. In this example, the
+            program checks whether <code>hitPoints</code> is less than
+            <code>30</code>.
+        </p>
+
+        <p>
+            If the condition is true, the code inside the braces runs. If it is
+            false, the program skips that code.
+        </p>
+
+        <section>
+            <h3>COMPARISONS</h3>
+
+            <p>We can create conditions by comparing values:</p>
+
+            <pre><code class="language-typescript">score === 100; // Equal to
+score !== 100; // Not equal to
+score &gt; 100;   // Greater than
+score &lt; 100;   // Less than
+score &gt;= 100;  // Greater than or equal to
+score &lt;= 100;  // Less than or equal to</code></pre>
+
+            <p>
+                Use <code>===</code> to check whether two values are equal. A
+                single equal sign, <code>=</code>, assigns a value.
+            </p>
+
+            <pre><code class="language-typescript">score = 100;   // Assign 100 to score.
+score === 100; // Check whether score equals 100.</code></pre>
+        </section>
+
+        <section>
+            <h3>BOOLEAN CONDITIONS</h3>
+
+            <p>A condition can also use a Boolean value directly:</p>
+
+            <pre><code class="language-typescript">const hasKey = true;
+
+if (hasKey) {
+    // Open the door.
+}</code></pre>
+
+            <p>
+                Because <code>hasKey</code> is <code>true</code>, the code
+                inside the braces runs.
+            </p>
+
+            <p>
+                We can combine or reverse Boolean conditions using
+                <code>&amp;&amp;</code>, <code>||</code>, and <code>!</code>.
+            </p>
+
+            <pre><code class="language-typescript">const hasKey = true;
+const doorIsLocked = true;
+
+if (hasKey &amp;&amp; doorIsLocked) {
+    // Unlock the door.
+}</code></pre>
+
+            <p>
+                <code>&amp;&amp;</code> means <strong>and</strong>. Both
+                conditions must be true.
+            </p>
+
+            <pre><code class="language-typescript">if (hasKey || doorIsOpen) {
+    // Allow the player to enter.
+}</code></pre>
+
+            <p>
+                <code>||</code> means <strong>or</strong>. At least one
+                condition must be true.
+            </p>
+
+            <pre><code class="language-typescript">if (!doorIsLocked) {
+    // Allow the player to enter.
+}</code></pre>
+
+            <p>
+                <code>!</code> means <strong>not</strong>. It reverses a
+                Boolean value, changing <code>true</code> to
+                <code>false</code> or <code>false</code> to
+                <code>true</code>.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 6.2: If, Else If, and Else</h2>
+
+        <p>
+            Sometimes a program must choose between two possibilities. We can
+            use <code>else</code> to specify what should happen when the
+            <code>if</code> condition is false.
+        </p>
+
+        <pre><code class="language-typescript">const hasKey = false;
+
+if (hasKey) {
+    // Open the door.
+} else {
+    // Keep the door locked.
+}</code></pre>
+
+        <p>
+            If <code>hasKey</code> is true, the first piece of code runs.
+            Otherwise, the code following <code>else</code> runs.
+        </p>
+
+        <p>
+            We can add <code>else if</code> when there are more than two
+            possible outcomes.
+        </p>
+
+        <pre><code class="language-typescript">const hitPoints = 60;
+
+if (hitPoints &lt;= 0) {
+    // End the game.
+} else if (hitPoints &lt; 30) {
+    // Warn the player that health is low.
+} else {
+    // Continue the game normally.
+}</code></pre>
+
+        <p>
+            The program checks the conditions from top to bottom. As soon as it
+            finds one that is true, it runs the corresponding code and skips
+            the rest.
+        </p>
+
+        <p>
+            Because the order matters, we should usually check the most
+            important or most restrictive condition first. In this example, we
+            must check whether the player is dead before checking whether the
+            player is merely low on health.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 6.3: Switch Statements</h2>
+
+        <p>
+            A <code>switch</code> statement is useful when one value can match
+            several specific choices.
+        </p>
+
+        <pre><code class="language-typescript">const direction = "north";
+
+switch (direction) {
+    case "north":
+        // Move up.
+        break;
+
+    case "south":
+        // Move down.
+        break;
+
+    case "east":
+        // Move right.
+        break;
+
+    case "west":
+        // Move left.
+        break;
+
+    default:
+        // Handle an unknown direction.
+}</code></pre>
+
+        <p>
+            The <code>switch</code> statement checks the value of
+            <code>direction</code> and runs the code under the matching
+            <code>case</code>.
+        </p>
+
+        <p>
+            The <code>break</code> statement tells the program to stop after
+            running that code. Without <code>break</code>, the program
+            continues into the next case.
+        </p>
+
+        <p>
+            The <code>default</code> section runs when none of the cases match.
+        </p>
+
+        <p>
+            A <code>switch</code> statement is usually clearest when comparing
+            one value against several exact choices. For more complicated
+            conditions, an <code>if</code> statement is often easier to read.
+        </p>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding</h2>
+
+        <ol>
+            <li>What does an <code>if</code> statement do?</li>
+
+            <li>
+                What is the difference between <code>=</code> and
+                <code>===</code>?
+            </li>
+
+            <li>
+                What do <code>&amp;&amp;</code>, <code>||</code>, and
+                <code>!</code> mean?
+            </li>
+
+            <li>
+                Write an <code>if</code> statement that checks whether
+                <code>score</code> is greater than or equal to
+                <code>100</code>.
+            </li>
+
+            <li>
+                Write an <code>if</code>, <code>else if</code>, and
+                <code>else</code> statement that checks whether a player is
+                dead, low on health, or healthy.
+            </li>
+
+            <li>
+                When might a <code>switch</code> statement be clearer than
+                several <code>else if</code> statements?
+            </li>
+        </ol>
+    </section>
+</article>
+
+
+

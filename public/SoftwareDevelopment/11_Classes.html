@@ -1,0 +1,1025 @@
+<article class="lesson">
+    <h1>LESSON 9: CLASSES AND OBJECT-ORIENTED PROGRAMMING</h1>
+
+    <section>
+        <h2>Lesson 9.1: Object-Oriented Programming</h2>
+
+        <p>
+            When an application contains 400,000 lines of code, it becomes
+            difficult to understand and change. It is a little like writing a
+            very long paper. We need to divide it into sections, use clear
+            titles, and carefully organize related ideas. Otherwise,
+            everything becomes a big mess.
+        </p>
+
+        <p>
+            In computer science, poorly organized code is sometimes called
+            <strong>spaghetti code</strong>. Different parts of the program
+            become tangled together, making it difficult to understand how
+            everything works or to change one part without breaking another.
+        </p>
+
+        <p>
+            One approach to organizing a large program is called
+            <strong>object-oriented programming</strong>. The basic idea is to
+            divide one large program into smaller, self-contained parts. Each
+            part manages a particular responsibility and hides details that
+            the rest of the program does not need to understand.
+        </p>
+
+        <p>
+            Think of a toaster. We put bread into it, press a lever, and out
+            comes toast. We do not need to understand its wires, heating
+            elements, or electrical circuits in order to use it.
+        </p>
+
+        <p>
+            A clock works in a similar way. It displays the time and allows us
+            to set an alarm. We can use these features without knowing how the
+            clock works internally.
+        </p>
+
+        <p>
+            Suppose we want an alarm to go off five minutes after we press the
+            toaster’s lever. We can describe the process using a few simple
+            instructions:
+        </p>
+
+        <ol>
+            <li>Get the toaster.</li>
+            <li>Press the lever.</li>
+            <li>Get the clock.</li>
+            <li>Set the alarm to go off in five minutes.</li>
+        </ol>
+
+        <p>
+            The internal workings of the toaster and clock may be complicated,
+            but we do not need to think about those details. We only need to
+            know what each object can do and how to use it.
+        </p>
+
+        <p>
+            We can apply the same approach to programming. If we want to
+            display a clock, we can create a self-contained piece of code that
+            manages the time, displays it, and sets alarms. Other parts of the
+            program can use the clock without needing to understand how it
+            works internally.
+        </p>
+
+        <p>This provides several benefits:</p>
+
+        <ul>
+            <li>Related data and code are kept together.</li>
+            <li>Different tasks are separated from one another.</li>
+            <li>Complicated details can be hidden.</li>
+            <li>Code can be reused in different parts of a program.</li>
+        </ul>
+
+        <p>
+            This idea of hiding unnecessary details behind a simpler way of
+            working with something is called <strong>abstraction</strong>.
+        </p>
+
+        <p>
+            Classes often represent recognizable things, such as characters,
+            messages, users, clocks, or bank accounts. However, a class does
+            not need to represent a physical object. It can also represent an
+            abstract part of a program.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 9.2: Classes and Objects</h2>
+
+        <p>
+            A class groups related data and functions together. Variables
+            inside a class are called <strong>properties</strong>, while
+            functions inside a class are called <strong>methods</strong>.
+        </p>
+
+        <p>
+            For example, a game character has information such as a name, hit
+            points, and maximum hit points. It can also perform tasks such as
+            healing.
+        </p>
+
+        <pre><code class="language-typescript">class Character {
+    name: string;
+    hitPoints: number = 100;
+    maxHitPoints: number = 200;
+
+    constructor(characterName: string) {
+        this.name = characterName;
+    }
+
+    heal() {
+        this.hitPoints = this.maxHitPoints;
+    }
+}</code></pre>
+
+        <p>
+            The class describes what a character contains and what a character
+            can do.
+        </p>
+
+        <p>
+            A particular character created from the class is called an
+            <strong>object</strong> or an <strong>instance</strong> of the
+            class.
+        </p>
+
+        <pre><code class="language-typescript">const myCharacter = new Character("Jon Snow");</code></pre>
+
+        <p>
+            The word <code>new</code> tells the program to create a new
+            <code>Character</code> object.
+        </p>
+
+        <p>
+            The constructor runs when the object is created. It provides the
+            object with its starting information.
+        </p>
+
+        <pre><code class="language-typescript">constructor(characterName: string) {
+    this.name = characterName;
+}</code></pre>
+
+        <p>
+            The word <code>this</code> refers to the current object. In this
+            example, <code>this.name</code> means the <code>name</code>
+            property belonging to the character being created.
+        </p>
+
+        <p>
+            We also use <code>this</code> when a method needs to access the
+            object’s properties:
+        </p>
+
+        <pre><code class="language-typescript">heal() {
+    this.hitPoints = this.maxHitPoints;
+}</code></pre>
+
+        <p>
+            This method changes the character’s current hit points so that
+            they equal the maximum hit points.
+        </p>
+
+        <p>We can then call the method using the object:</p>
+
+        <pre><code class="language-typescript">myCharacter.heal();</code></pre>
+
+        <p>
+            A class allows us to create as many separate objects as we need.
+            For example, we can create three characters from the same
+            <code>Character</code> class:
+        </p>
+
+        <pre><code class="language-typescript">const firstCharacter = new Character("Jon Snow");
+const secondCharacter = new Character("Arya Stark");
+const thirdCharacter = new Character("Tyrion Lannister");</code></pre>
+
+        <p>
+            Each character follows the same class description, but it is a
+            separate object with its own properties. We can therefore give
+            each character a different number of hit points:
+        </p>
+
+        <pre><code class="language-typescript">firstCharacter.hitPoints = 50;
+secondCharacter.hitPoints = 75;
+thirdCharacter.hitPoints = 100;</code></pre>
+
+        <p>
+            Changing one character does not change the others. The class gives
+            the objects the same general structure and behavior, while each
+            object stores its own information.
+        </p>
+
+        <p>
+            Because all three objects can be used as
+            <code>Character</code> objects, we can store them together and
+            work with them in the same way:
+        </p>
+
+        <pre><code class="language-typescript">const myParty: Array&lt;Character&gt; = [
+    firstCharacter,
+    secondCharacter,
+    thirdCharacter
+];
+
+for (const character of myParty) {
+    character.heal();
+}</code></pre>
+
+        <p>
+            The loop does not need separate instructions for each character.
+            TypeScript knows that every item in the array can be used as a
+            <code>Character</code> and therefore has the properties and
+            methods required by the class.
+        </p>
+
+        <p>
+            When we create a class, TypeScript also allows us to use its name
+            as a type:
+        </p>
+
+        <pre><code class="language-typescript">function healCharacter(gameCharacter: Character) {
+    gameCharacter.heal();
+}</code></pre>
+
+        <p>
+            The compiler checks that the value passed into this function has
+            everything required by <code>Character</code>. This is one of the
+            major benefits of using TypeScript: the compiler can catch many
+            incorrect uses before the program runs.
+        </p>
+
+        <p>
+            However, TypeScript usually compares the public structure of
+            objects rather than requiring that an object was created from the
+            exact class. An unrelated object may be accepted if it has all the
+            same required public properties and methods.
+        </p>
+
+        <p>
+            Later, we will examine this more closely when we compare classes
+            with shape types.
+        </p>
+
+        <section>
+            <h3>Classes and JavaScript Objects</h3>
+
+            <p>
+                In JavaScript, an object behaves somewhat like a dictionary
+                whose keys can lead to either data or functions.
+            </p>
+
+            <p>
+                For example, the key <code>name</code> may lead to a string,
+                while the key <code>heal</code> may lead to a function.
+            </p>
+
+            <p>
+                This is not a complete definition of a class, but it can help
+                us understand the syntax. A class provides an organized way to
+                describe and create objects containing related data and
+                behavior.
+            </p>
+        </section>
+
+        <section>
+            <h3>Properties and Methods</h3>
+
+            <p>
+                Inside a class, we do not write <code>let</code> or
+                <code>const</code> before properties:
+            </p>
+
+            <pre><code class="language-typescript">class Person {
+    name: string;
+    greeting: string = "";
+}</code></pre>
+
+            <p>
+                A method is written without the <code>function</code> keyword:
+            </p>
+
+            <pre><code class="language-typescript">class Person {
+    name: string;
+    greeting: string = "";
+
+    constructor(personName: string) {
+        this.name = personName;
+    }
+
+    sayHello() {
+        this.greeting = "Hello, my name is " + this.name;
+    }
+}</code></pre>
+
+            <p>We can create and use a <code>Person</code> object:</p>
+
+            <pre><code class="language-typescript">const person = new Person("Jon Snow");
+person.sayHello();</code></pre>
+
+            <p>
+                After <code>sayHello()</code> runs,
+                <code>person.greeting</code> contains:
+            </p>
+
+            <pre><code class="language-typescript">"Hello, my name is Jon Snow"</code></pre>
+        </section>
+
+        <section>
+            <h3>Controlling Access</h3>
+
+            <p>
+                By default, properties and methods can be accessed from outside
+                the class.
+            </p>
+
+            <pre><code class="language-typescript">person.name = "Arya Stark";</code></pre>
+
+            <p>
+                Sometimes we want a property to be managed only by the class
+                itself. We can mark it as <code>private</code>:
+            </p>
+
+            <pre><code class="language-typescript">class Character {
+    name: string;
+    private hitPoints: number = 100;
+
+    constructor(characterName: string) {
+        this.name = characterName;
+    }
+
+    heal() {
+        this.hitPoints = 100;
+    }
+}</code></pre>
+
+            <p>
+                A private property or method can only be accessed by code
+                inside that class.
+            </p>
+
+            <pre><code class="language-typescript">const character = new Character("Jon Snow");
+
+character.hitPoints = 50; // Error: hitPoints is private.</code></pre>
+
+            <p>
+                Private and protected properties also affect how TypeScript
+                compares class types. If two unrelated classes contain private
+                properties, an object from one class cannot be used as the
+                other merely because their public properties look the same.
+            </p>
+
+            <p>
+                We can also use <code>readonly</code> when a property should
+                not be assigned a different value after the object is created:
+            </p>
+
+            <pre><code class="language-typescript">class Character {
+    readonly name: string;
+
+    constructor(characterName: string) {
+        this.name = characterName;
+    }
+}</code></pre>
+
+            <p>Now the name cannot be changed later:</p>
+
+            <pre><code class="language-typescript">const character = new Character("Jon Snow");
+
+character.name = "Arya Stark"; // Error</code></pre>
+
+            <p>
+                Features such as <code>private</code> help a class protect its
+                internal data and control how that data is changed.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 9.3: Classes and Shape Types</h2>
+
+        <p>
+            TypeScript uses the word <strong>type</strong> broadly. To avoid
+            confusion, we will distinguish between <strong>classes</strong>
+            and <strong>shape types</strong>.
+        </p>
+
+        <p>
+            A class exists when the program runs. It can create objects,
+            contain methods, control initialization, and protect internal data.
+        </p>
+
+        <p>
+            A shape type describes what properties and methods a value must
+            have. It is used by TypeScript while checking our code, but it
+            disappears when TypeScript is converted into JavaScript.
+        </p>
+
+        <p>We can create a shape type using a type alias:</p>
+
+        <pre><code class="language-typescript">type CharacterData = {
+    name: string;
+    hitPoints: number;
+};</code></pre>
+
+        <p>
+            This says that <code>CharacterData</code> must contain a property
+            called <code>name</code> whose value is a string and a property
+            called <code>hitPoints</code> whose value is a number.
+        </p>
+
+        <p>We can then create a value with that shape:</p>
+
+        <pre><code class="language-typescript">const characterData: CharacterData = {
+    name: "Jon Snow",
+    hitPoints: 100
+};</code></pre>
+
+        <p>
+            The type alias does not create an object for us. It does not
+            provide a constructor, implemented methods, or private properties.
+            It only describes the required shape of the data.
+        </p>
+
+        <p>
+            A class can describe similar data, but it also provides the code
+            used to create and operate its objects:
+        </p>
+
+        <pre><code class="language-typescript">class Character {
+    name: string;
+    hitPoints: number;
+
+    constructor(characterName: string, startingHitPoints: number) {
+        this.name = characterName;
+        this.hitPoints = startingHitPoints;
+    }
+
+    heal() {
+        this.hitPoints = 100;
+    }
+}</code></pre>
+
+        <p>
+            We can create a new <code>Character</code> using its constructor:
+        </p>
+
+        <pre><code class="language-typescript">const character = new Character("Jon Snow", 50);</code></pre>
+
+        <p>We cannot do this with a type alias:</p>
+
+        <pre><code class="language-typescript">const character = new CharacterData(); // Error</code></pre>
+
+        <p>
+            <code>CharacterData</code> does not exist when the program runs.
+            It is only used by TypeScript to check our code.
+        </p>
+
+        <section>
+            <h3>Structural Typing</h3>
+
+            <p>
+                TypeScript usually checks whether a value has the required
+                public structure rather than checking which class created it.
+                This is called <strong>structural typing</strong>.
+            </p>
+
+            <p>Consider these two classes:</p>
+
+            <pre><code class="language-typescript">class Dog {
+    name: string = "";
+}
+
+class Cat {
+    name: string = "";
+}</code></pre>
+
+            <p>
+                Both classes have the same public structure. Each contains a
+                property called <code>name</code> whose value is a string.
+            </p>
+
+            <p>Now consider this function:</p>
+
+            <pre><code class="language-typescript">function washDog(dog: Dog) {
+    // Wash the dog.
+}</code></pre>
+
+            <p>
+                TypeScript allows us to pass a <code>Cat</code> object into the
+                function:
+            </p>
+
+            <pre><code class="language-typescript">const myCat = new Cat();
+
+washDog(myCat); // Allowed</code></pre>
+
+            <p>
+                TypeScript is not checking whether <code>myCat</code> was
+                created from the <code>Dog</code> class. It is checking whether
+                the object contains the public properties and methods required
+                by <code>Dog</code>.
+            </p>
+
+            <p>
+                The property names and their types must match. These two
+                classes do not have the same public structure:
+            </p>
+
+            <pre><code class="language-typescript">class Dog {
+    name: string = "";
+}
+
+class Cat {
+    catName: string = "";
+}</code></pre>
+
+            <p>
+                A <code>Cat</code> object cannot now be passed into
+                <code>washDog()</code> because it does not contain a property
+                called <code>name</code>.
+            </p>
+
+            <pre><code class="language-typescript">const myCat = new Cat();
+
+washDog(myCat); // Error</code></pre>
+
+            <p>
+                Shape types work in the same general way. TypeScript checks
+                whether the value contains the required public structure.
+            </p>
+
+            <pre><code class="language-typescript">type DogData = {
+    name: string;
+};
+
+type CatData = {
+    name: string;
+};
+
+function identifyDog(dog: DogData) {
+    // Use dog.name.
+}
+
+const cat: CatData = {
+    name: "Mittens"
+};
+
+identifyDog(cat); // Allowed</code></pre>
+
+            <p>
+                TypeScript allows this because <code>cat</code> has the shape
+                required by <code>DogData</code>.
+            </p>
+
+            <p>
+                Structural typing is useful when working with data from
+                webpages, files, or servers.
+            </p>
+
+            <p>
+                For example, a server may send us the following data:
+            </p>
+
+            <pre><code class="language-typescript">{
+    name: "Jon Snow",
+    hitPoints: 100
+}</code></pre>
+
+            <p>
+                We may only need to check that the data has the expected shape.
+                We do not always need to convert it into an object created from
+                a class.
+            </p>
+
+            <p>
+                JavaScript began as a lightweight language for adding behavior
+                to webpages. Languages such as Java, C#, and Swift placed a
+                greater emphasis on classes and object-oriented organization
+                for large applications. TypeScript later added tools for
+                describing and checking structure, but it still builds upon
+                JavaScript’s flexible approach.
+            </p>
+
+            <p>
+                Neither approach should be used automatically. A shape type is
+                often useful for simple data. A class is useful when we want to
+                provide constructors and implemented methods, control how
+                objects are created, hide internal details, or create objects
+                that exist as a particular class when the program runs.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 9.4: Interfaces and Interoperability</h2>
+
+        <p>
+            An <strong>interface</strong> describes a shared set of
+            requirements.
+        </p>
+
+        <p>
+            For example, suppose we have several animal classes. A dog and a
+            cat store different information and behave differently, but both
+            can make a sound.
+        </p>
+
+        <pre><code class="language-typescript">interface Animal {
+     makesSound(): string;
+}</code></pre>
+
+        <p>
+            The interface says that anything treated as an
+            <code>Animal</code> must provide a method called
+            <code> makesSound()</code> that returns a string.
+        </p>
+
+        <p>
+            A class can agree to meet these requirements using
+            <code>implements</code>:
+        </p>
+
+        <pre><code class="language-typescript">class Dog implements Animal {
+     makesSound(): string {
+        return "woof";
+    }
+}</code></pre>
+
+        <pre><code class="language-typescript">class Cat implements Animal {
+     makesSound(): string {
+        return "meow";
+    }
+}</code></pre>
+
+        <p>
+            The <code>Dog</code> and <code>Cat</code> classes are still
+            different classes. However, both implement the
+            <code>Animal</code> interface.
+        </p>
+
+        <p>This allows us to write code that works with either one:</p>
+
+        <pre><code class="language-typescript">function getAnimalSound(animal: Animal): string {
+    return animal. makesSound();
+}</code></pre>
+
+        <p>We can pass either a dog or a cat into the function:</p>
+
+        <pre><code class="language-typescript">const dog = new Dog();
+const cat = new Cat();
+
+const dogSound = getAnimalSound(dog);
+const catSound = getAnimalSound(cat);</code></pre>
+
+        <p>
+            The function does not need to know whether it received a
+            <code>Dog</code> or a <code>Cat</code>. It only needs to know that
+            the object follows the <code>Animal</code> interface and therefore
+            provides <code> makesSound()</code>.
+        </p>
+
+        <p>We can also store different classes in the same array:</p>
+
+        <pre><code class="language-typescript">const animals: Array&lt;Animal&gt; = [
+    new Dog(),
+    new Cat(),
+    new Dog()
+];
+
+for (const animal of animals) {
+    const sound = animal. makesSound();
+}</code></pre>
+
+        <p>
+            This ability to use different classes through the same interface
+            is called <strong>interoperability</strong>.
+        </p>
+
+        <p>
+            The interface acts as a contract between different parts of the
+            program. One part promises to provide particular properties or
+            methods. Another part can then use those properties or methods
+            without needing to know how they were implemented.
+        </p>
+
+        <p>
+            Interfaces help us separate what something can do from how it does
+            it.
+        </p>
+
+        <section>
+            <h3>Interfaces and Shape Types</h3>
+
+            <p>
+                An interface is also a TypeScript shape type. Like a type
+                alias, it describes required properties and methods and
+                disappears when the code is converted to JavaScript.
+            </p>
+
+            <pre><code class="language-typescript">interface Person {
+    name: string;
+}</code></pre>
+
+            <p>
+                For simple data, an interface and a type alias can often
+                describe the same shape:
+            </p>
+
+            <pre><code class="language-typescript">type Person = {
+    name: string;
+};</code></pre>
+
+            <p>
+                Interfaces are especially useful when describing requirements
+                that classes will implement.
+            </p>
+
+            <pre><code class="language-typescript">interface Healable {
+    heal(): void;
+}
+
+class Character implements Healable {
+    hitPoints: number = 50;
+
+    heal() {
+        this.hitPoints = 100;
+    }
+}</code></pre>
+
+            <p>
+                The compiler checks that <code>Character</code> provides the
+                method required by <code>Healable</code>.
+            </p>
+
+            <p>
+                The more important result is that other code can now work with
+                any class that implements <code>Healable</code>.
+            </p>
+
+            <pre><code class="language-typescript">function restoreHealth(item: Healable) {
+    item.heal();
+}</code></pre>
+
+            <p>
+                This function can work with a character, animal, machine, or
+                any other object that provides the required
+                <code>heal()</code> method.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 9.5: Inheritance</h2>
+
+        <p>
+            Inheritance allows one class to build upon another class.
+        </p>
+
+        <p>
+            Suppose several kinds of characters share the same basic
+            properties and methods:
+        </p>
+
+        <pre><code class="language-typescript">class Character {
+    name: string;
+    hitPoints: number = 100;
+
+    constructor(characterName: string) {
+        this.name = characterName;
+    }
+
+    heal() {
+        this.hitPoints = 100;
+    }
+}</code></pre>
+
+        <p>
+            We can create a more specific class using <code>extends</code>:
+        </p>
+
+        <pre><code class="language-typescript">class Wizard extends Character {
+    magicPoints: number = 100;
+
+    castSpell() {
+        this.magicPoints = this.magicPoints - 10;
+    }
+}</code></pre>
+
+        <p>
+            A <code>Wizard</code> inherits the properties and methods of
+            <code>Character</code>. It also adds its own property and method.
+        </p>
+
+        <pre><code class="language-typescript">const wizard = new Wizard("Gandalf");
+
+wizard.heal();
+wizard.castSpell();</code></pre>
+
+        <p>
+            The <code>Wizard</code> class does not need to rewrite the
+            <code>name</code>, <code>hitPoints</code>, or
+            <code>heal()</code> code. It receives them from
+            <code>Character</code>.
+        </p>
+
+        <p>This describes an <strong>is-a</strong> relationship:</p>
+
+        <ul>
+            <li>A wizard is a character.</li>
+            <li>A dog is an animal.</li>
+            <li>A car is a vehicle.</li>
+        </ul>
+
+        <p>
+            Inheritance can reduce repeated code, but it also connects classes
+            closely together. Changes to a parent class can affect all of its
+            subclasses.
+        </p>
+
+        <p>
+            Large inheritance hierarchies can become difficult to understand.
+            For example, a program might contain an <code>Animal</code> class,
+            a <code>Mammal</code> subclass, a <code>Canine</code> subclass,
+            and finally a <code>Dog</code> subclass. As more levels are added,
+            the organization can become more complicated than the problem it
+            was meant to solve.
+        </p>
+
+        <p>
+            Modern programs often use interfaces when the main goal is to
+            allow different classes to work with the same code. Interfaces
+            provide shared requirements without forcing the classes into one
+            inheritance hierarchy.
+        </p>
+
+        <p>
+            Another approach is <strong>composition</strong>. Composition
+            means building a class using other objects rather than inheriting
+            everything from one parent class.
+        </p>
+
+        <p>
+            The general principle is to use inheritance when classes truly
+            share a close relationship and common implementation. Do not
+            create a large class hierarchy merely because inheritance is
+            available.
+        </p>
+
+        <section>
+            <h3>Abstract Classes</h3>
+
+            <p>
+                An abstract class is an incomplete class that is meant to be
+                extended rather than used directly.
+            </p>
+
+            <pre><code class="language-typescript">abstract class Shape {
+    abstract getArea(): number;
+}</code></pre>
+
+            <p>We cannot create a <code>Shape</code> object:</p>
+
+            <pre><code class="language-typescript">const shape = new Shape(); // Error</code></pre>
+
+            <p>
+                Instead, another class must extend <code>Shape</code> and
+                provide the missing method:
+            </p>
+
+            <pre><code class="language-typescript">class Rectangle extends Shape {
+    width: number;
+    height: number;
+
+    constructor(rectangleWidth: number, rectangleHeight: number) {
+        super();
+
+        this.width = rectangleWidth;
+        this.height = rectangleHeight;
+    }
+
+    getArea(): number {
+        return this.width * this.height;
+    }
+}</code></pre>
+
+            <p>
+                The word <code>abstract</code> means that
+                <code>Shape</code> provides part of the description but is not
+                complete enough to create by itself.
+            </p>
+
+            <p>
+                Abstract classes are tied to inheritance. Interfaces are
+                usually simpler when we only need to describe shared
+                requirements.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding</h2>
+
+        <ul>
+            <li>
+                Why does a large program need to be divided into smaller,
+                organized parts?
+            </li>
+
+            <li>
+                What is abstraction? How is using a class similar to using a
+                toaster without understanding its internal wiring?
+            </li>
+
+            <li>What is the difference between a class and an object?</li>
+
+            <li>
+                In a class, what do we call its variables? What do we call its
+                functions?
+            </li>
+
+            <li>What does the constructor do?</li>
+
+            <li>What does <code>this</code> refer to inside a class?</li>
+
+            <li>
+                Create a <code>Dog</code> class containing:
+
+                <ul>
+                    <li>a <code>name</code> property</li>
+                    <li>an <code>energy</code> property</li>
+                    <li>a constructor</li>
+                    <li>
+                        a <code>rest()</code> method that restores its energy
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                Create two separate <code>Dog</code> objects. Give them
+                different names.
+            </li>
+
+            <li>
+                What does <code>private</code> do? What does
+                <code>readonly</code> do?
+            </li>
+
+            <li>
+                How does TypeScript normally decide whether one object can be
+                used as another class type?
+            </li>
+
+            <li>
+                What is the difference between a class and a shape type?
+            </li>
+
+            <li>
+                Does a type alias exist when the program runs? Can we use
+                <code>new</code> with it?
+            </li>
+
+            <li>
+                Why is the following code allowed?
+
+                <pre><code class="language-typescript">class Dog {
+    name: string = "";
+}
+
+class Cat {
+    name: string = "";
+}
+
+function identifyDog(dog: Dog) {
+    // Use dog.name.
+}
+
+const cat = new Cat();
+
+identifyDog(cat);</code></pre>
+            </li>
+
+            <li>
+                Why would changing <code>Cat</code> to use
+                <code>catName</code> prevent it from being passed into
+                <code>identifyDog()</code>?
+            </li>
+
+            <li>What does an interface describe?</li>
+
+            <li>
+                Create an interface called <code>Playable</code> that requires
+                a method called <code>play()</code>.
+            </li>
+
+            <li>
+                Create two different classes that implement
+                <code>Playable</code>.
+            </li>
+
+            <li>
+                How do interfaces allow different classes to be used
+                interchangeably?
+            </li>
+
+            <li>
+                What does inheritance allow one class to receive from another
+                class?
+            </li>
+
+            <li>
+                What is one possible disadvantage of building a large
+                inheritance hierarchy?
+            </li>
+
+            <li>
+                What is an abstract class, and why can it not be used to create
+                an object directly?
+            </li>
+        </ul>
+    </section>
+</article>

@@ -1,0 +1,496 @@
+<article class="lesson">
+    
+    <h1>2. DICTIONARIES</h1>
+
+    <section>
+    <h2>Lesson 2.1: What Is a Dictionary?</h2>
+
+    <p>
+        The Oxford Dictionary contains a list of words and their corresponding
+        definitions. This allows us to look up information with ease.
+    </p>
+
+    <p>
+        In computer science, we can store information in a similar way. For the
+        keyword <code>"cat"</code>, we can store the definition
+        <code>"an animal that goes meow."</code>
+    </p>
+
+    <pre><code>cat: an animal that goes meow
+dog: an animal that goes woof</code></pre>
+    <p>
+        The keyword "cat" is called a <strong>key</strong>, and the information is
+        called a <strong>value</strong>. Thus, a dictionary is a collection of
+        key-value pairs, to put it technically. It should be noted that the
+        keyword does not need to be text.
+    </p>
+
+    <p>
+        A dictionary gives us quick access to stored information. It also
+        allows us to add, delete, or update entries with ease. In TypeScript, we can create a dictionary using a
+            <code>Map</code>.
+    </p>
+            
+
+        <p>
+            Dictionaries are useful when we frequently need to look up
+            information using a known key. For example:
+        </p>
+
+        <pre><code>Student name → grade
+State code   → state name
+User ID      → user information
+Word         → definition</code></pre>
+
+    <p>If we need to store information in an ordered list, an array is a better choice.</p>
+
+        <p>
+            A dictionary provides a quick lookup by key. With an array, we may
+            have to search through the items one by one until we find the one
+            we need. This can require a great deal of work if the array contains
+            millions of items.
+        </p>
+
+        <p>
+            Think of a dictionary as an unordered list of keys and values. In JavaScript,
+            <code>Map</code> guarantees that entries will appear in insertion
+            order when we loop through them, but dictionaries in other
+            programming languages, generally, do not.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 2.2: Using a Dictionary</h2>
+
+        <section>
+            <h3>CREATING A MAP</h3>
+
+            <p>
+                We can create an empty <code>Map</code> and state the types used
+                for its keys and values:
+            </p>
+
+            <pre><code class="language-typescript">const grades = new Map&lt;string, number&gt;();</code></pre>
+
+            <p>Read this as:</p>
+
+            <blockquote>
+                <p>A Map with string keys and number values.</p>
+            </blockquote>
+
+            <p>
+                We can also create a <code>Map</code> that already contains
+                entries:
+            </p>
+
+            <pre><code class="language-typescript">const grades = new Map([
+    ["Maria", 95],
+    ["Devon", 87]
+]);</code></pre>
+
+            <p>
+                Each entry contains a key followed by the value saved for that
+                key.
+            </p>
+
+            <pre><code>Key:   "Maria"
+Value: 95</code></pre>
+        </section>
+
+        <section>
+            <h3>QUICK REFERENCE</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Method/Property</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td><code>myMap.set(key, value)</code></td>
+                        <td>Add or update a value</td>
+                    </tr>
+                    <tr>
+                        <td><code>myMap.get(key)</code></td>
+                        <td>Retrieve the value for a key</td>
+                    </tr>
+                    <tr>
+                        <td><code>myMap.has(key)</code></td>
+                        <td>Check whether a key exists</td>
+                    </tr>
+                    <tr>
+                        <td><code>myMap.delete(key)</code></td>
+                        <td>Delete one entry</td>
+                    </tr>
+                    <tr>
+                        <td><code>myMap.clear()</code></td>
+                        <td>Delete every entry</td>
+                    </tr>
+                    <tr>
+                        <td><code>myMap.size</code></td>
+                        <td>Find the number of entries</td>
+                    </tr>
+                    <tr>
+                        <td><code>myMap.keys()</code></td>
+                        <td>Work through the keys</td>
+                    </tr>
+                    <tr>
+                        <td><code>myMap.values()</code></td>
+                        <td>Work through the values</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h3>ADDING AND UPDATING ENTRIES</h3>
+
+            <p>The <code>set()</code> method saves a value for a key:</p>
+
+            <pre><code class="language-typescript">const grades = new Map&lt;string, number&gt;();
+
+grades.set("Maria", 95);
+grades.set("Devon", 87);</code></pre>
+
+            <p>
+                We can later use the key <code>"Maria"</code> to retrieve the
+                value <code>95</code>.
+            </p>
+
+            <p>
+                If the key already exists, <code>set()</code> replaces the old
+                value:
+            </p>
+
+            <pre><code class="language-typescript">grades.set("Maria", 99);</code></pre>
+
+            <p>
+                The value for the key <code>"Maria"</code> is now
+                <code>99</code>. A <code>Map</code> can contain only one value
+                for each key.
+            </p>
+        </section>
+
+        <section>
+            <h3>LOOKING UP A VALUE</h3>
+
+            <p>
+                The <code>get()</code> method retrieves the value for a key:
+            </p>
+
+            <pre><code class="language-typescript">const mariaGrade = grades.get("Maria"); // 99</code></pre>
+
+            <p>
+                If the key does not exist, <code>get()</code> returns
+                <code>undefined</code>:
+            </p>
+
+            <pre><code class="language-typescript">const samGrade = grades.get("Sam"); // undefined</code></pre>
+
+            <p>We can check the result before using it:</p>
+
+            <pre><code class="language-typescript">const mariaGrade = grades.get("Maria");
+
+if (mariaGrade !== undefined) {
+    // Use mariaGrade.
+}</code></pre>
+
+            <p>
+                We can also use <code>has()</code> when we only need to know
+                whether the key exists:
+            </p>
+
+            <pre><code class="language-typescript">if (grades.has("Maria")) {
+    // The dictionary contains an entry for Maria.
+}</code></pre>
+
+            <p>The difference is simple:</p>
+
+            <ul>
+                <li>
+                    <code>get()</code> retrieves the value for a key.
+                </li>
+                <li>
+                    <code>has()</code> tells us whether the key exists.
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>DELETING ENTRIES</h3>
+
+            <p>
+                The <code>delete()</code> method removes the entry for a key:
+            </p>
+
+            <pre><code class="language-typescript">grades.delete("Devon");</code></pre>
+
+            <p>The <code>clear()</code> method removes every entry:</p>
+
+            <pre><code class="language-typescript">grades.clear();</code></pre>
+        </section>
+
+        <section>
+            <h3>COUNTING ENTRIES</h3>
+
+            <p>
+                The <code>size</code> property tells us how many entries are in
+                a <code>Map</code>:
+            </p>
+
+            <pre><code class="language-typescript">const numberOfStudents = grades.size;</code></pre>
+
+            <p>
+                Like an array’s <code>length</code>, <code>size</code> is a
+                property and does not use parentheses.
+            </p>
+        </section>
+
+        <section>
+            <h3>WORKING THROUGH A MAP</h3>
+
+            <p>
+                We can use a <code>for...of</code> loop to work through every
+                key and value:
+            </p>
+
+            <pre><code class="language-typescript">for (const [name, grade] of grades) {
+    // Use name and grade.
+}</code></pre>
+
+            <p>
+                Each time through the loop, the first variable contains the key
+                and the second contains its value.
+            </p>
+
+            <p>We can also work through only the keys:</p>
+
+            <pre><code class="language-typescript">for (const name of grades.keys()) {
+    // Use name.
+}</code></pre>
+
+            <p>Or only the values:</p>
+
+            <pre><code class="language-typescript">for (const grade of grades.values()) {
+    // Use grade.
+}</code></pre>
+        </section>
+
+        <section>
+            <h3>USING A MAP INSTEAD OF BRACKETS</h3>
+
+            <p>
+                Programmers coming from some other languages may expect to
+                access dictionary values using brackets:
+            </p>
+
+            <pre><code class="language-typescript">grades["Maria"];</code></pre>
+
+            <p>
+                JavaScript’s <code>Map</code> does not use bracket syntax for
+                its entries. We must use <code>set()</code> and
+                <code>get()</code>:
+            </p>
+
+            <pre><code class="language-typescript">grades.set("Maria", 95);
+
+const mariaGrade = grades.get("Maria");</code></pre>
+
+            <p>
+                This syntax is more cumbersome, but it is the syntax required
+                when working with a <code>Map</code>.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 2.3: How Hash Tables Work</h2>
+
+        <p>
+            One common way to build a dictionary is to use an array.
+        </p>
+
+        <section>
+            <pre><code>Index:  0    1    2    3    4    5    6    7
+Entry:  —    —    —    —    —    —    —    —</code></pre>
+
+            <p>
+                The dictionary needs to convert a key, such as
+                <code>"cat"</code>, into one of these array indexes. It does
+                this using a <strong>hash function</strong>.
+            </p>
+
+            <p>
+                A hash function processes the characters in a key and produces
+                a number. It uses an equation like one we might encounter in a
+                mathematics class. The equation must always produce the same
+                result for the same key.
+            </p>
+
+            <p>
+                For example, a simplified hash function might convert each
+                character into a number, multiply those numbers by selected
+                values, and add the results:
+            </p>
+
+            <pre><code>"cat" → character numbers → equation → 139</code></pre>
+
+            <p>
+                The array in our example has only eight positions, so we can
+                use the remainder operator to convert <code>139</code> into a
+                valid index:
+            </p>
+
+            <pre><code>139 % 8 → 3</code></pre>
+
+            <p>The entry is placed at index <code>3</code>:</p>
+
+            <h4>An Array</h4>
+
+            <pre><code>Index:  0    1    2       3       4    5    6    7
+Entry:  —    —    —    cat:meow   —    —    —    —</code></pre>
+
+            <p>
+                When we later ask for the value for <code>"cat"</code>, the
+                dictionary performs the same calculation and returns to index
+                <code>3</code>.
+            </p>
+
+            <p>
+                It does not need to search through every entry one by one. This
+                provides a quick lookup even when the dictionary contains a
+                very large number of entries.
+            </p>
+
+            <p>
+                A real hash function is designed to distribute keys throughout
+                the array rather than placing too many entries at the same
+                indexes.
+            </p>
+        </section>
+
+        <section>
+            <h3>HASH COLLISIONS</h3>
+
+            <p>
+                Different keys can sometimes produce the same array index. This
+                is called a <strong>hash collision</strong>.
+            </p>
+
+            <pre><code>hash("cat") → 3
+hash("dog") → 3</code></pre>
+
+            <p>There are two common ways to handle this.</p>
+
+            <p>
+                With <strong>separate chaining</strong>, each array position
+                contains a bucket that can hold more than one entry:
+            </p>
+
+            <pre><code>Index 3:
+    cat → meow
+    dog → woof</code></pre>
+
+            <p>
+                With <strong>open addressing</strong>, the dictionary looks for
+                another available position when the intended position is
+                already occupied.
+            </p>
+
+            <p>The implementation details vary, but the basic idea remains:</p>
+
+            <ol>
+                <li>Convert the key into a number.</li>
+                <li>Use that number to select an array position.</li>
+                <li>
+                    Handle collisions when multiple keys select the same
+                    position.
+                </li>
+            </ol>
+
+            <p>
+                JavaScript does not require <code>Map</code> to use this exact
+                implementation. Hash tables provide the standard intuition for
+                how dictionaries can perform quick lookups.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding</h2>
+
+        <ol>
+            <li>
+                What is the relationship between a dictionary’s key and value?
+            </li>
+
+            <li>
+                When would a dictionary be more useful than an array?
+            </li>
+
+            <li>
+                Create an empty dictionary with string keys and number values.
+            </li>
+
+            <li>
+                <p>Add these two grades to the dictionary:</p>
+
+                <pre><code>Maria: 95
+Devon: 87</code></pre>
+            </li>
+
+            <li>
+                Write code that changes Maria’s grade to <code>99</code>.
+            </li>
+
+            <li>
+                Which method would you use to retrieve Maria’s grade?
+            </li>
+
+            <li>
+                What does <code>get()</code> return when a key does not exist?
+            </li>
+
+            <li>
+                What is the difference between <code>get()</code> and
+                <code>has()</code>?
+            </li>
+
+            <li>
+                <p>Which property or method would you use to:</p>
+
+                <ul>
+                    <li>Delete one entry?</li>
+                    <li>Delete every entry?</li>
+                    <li>Find the number of entries?</li>
+                </ul>
+            </li>
+
+            <li>
+                <p>
+                    What do <code>name</code> and <code>grade</code> represent
+                    in this loop?
+                </p>
+
+                <pre><code class="language-typescript">for (const [name, grade] of grades) {
+    // Use name and grade.
+}</code></pre>
+            </li>
+
+            <li>
+                Why is a <code>Map</code> usually better for looking up a grade
+                by student name than searching through an array of every
+                student?
+            </li>
+
+            <li>
+                In our simplified model, what does a hash function do?
+            </li>
+
+            <li>What is a hash collision?</li>
+        </ol>
+    </section>
+</article>

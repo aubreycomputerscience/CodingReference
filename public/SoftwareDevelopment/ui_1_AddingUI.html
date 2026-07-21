@@ -1,0 +1,449 @@
+<article class="lesson">
+    <h1>1. Adding UI Elements</h1>
+
+    <section>
+        <h2>Lesson 12.1: Creating and Adding an Element</h2>
+
+        <p>
+            In this class, we will usually create interface elements using
+            TypeScript. The basic process is simple:
+        </p>
+
+        <ol>
+            <li>Create the element.</li>
+            <li>Set its text, properties, and appearance.</li>
+            <li>Add it to the page.</li>
+        </ol>
+
+        <p>For example:</p>
+
+        <pre><code class="language-typescript">const message = document.createElement("p");
+message.textContent = "Hello!";
+message.style.background = "yellow";
+message.style.padding = "10px";
+
+document.body.append(message);</code></pre>
+
+        <p>
+            The browser provides the <code>document</code> object so that our
+            code can work with the webpage. We use it to create an element and
+            add that element to the page.
+        </p>
+
+        <p>
+            The first line creates a paragraph element. We then give it text
+            and define how it should look. Finally, we add it to the webpage.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 12.2: Common Elements</h2>
+
+        <p>
+            The following table provides a quick reference for several common
+            HTML elements.
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Purpose</th>
+                    <th>Element</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Display text</td>
+                    <td>
+                        <code>"p"</code>, <code>"span"</code>,
+                        <code>"div"</code>, or <code>"label"</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Display an image</td>
+                    <td><code>"img"</code></td>
+                </tr>
+                <tr>
+                    <td>Get one line of user input</td>
+                    <td><code>"input"</code></td>
+                </tr>
+                <tr>
+                    <td>Get multiline user input</td>
+                    <td><code>"textarea"</code></td>
+                </tr>
+                <tr>
+                    <td>Create a button</td>
+                    <td><code>"button"</code></td>
+                </tr>
+                <tr>
+                    <td>Other user input</td>
+                    <td>
+                        <code>"checkbox"</code>, <code>"radio"</code>, or
+                        <code>"select"</code> / <code>"option"</code>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <section>
+            <h3>Displaying Text</h3>
+
+            <pre><code class="language-typescript">const message = document.createElement("p");
+message.textContent = "Welcome to my app!";
+message.style.fontSize = "24px";
+
+document.body.append(message);</code></pre>
+        </section>
+
+        <section>
+            <h3>Displaying an Image</h3>
+
+            <pre><code class="language-typescript">const image = document.createElement("img");
+image.src = "cat.jpg"; // src stands for source: the name or location of the image
+image.width = 200;
+image.height = 150;
+
+document.body.append(image);</code></pre>
+
+            <p>
+                The shortened name <code>src</code> comes from the early days
+                of programming, when short names were commonly used to save
+                space.
+            </p>
+
+            <p>
+                We can control the image’s width, height, and other properties
+                directly in TypeScript. Later, we will also learn how to store
+                shared styling in CSS.
+            </p>
+        </section>
+
+        <section>
+            <h3>Creating a Text Input</h3>
+
+            <pre><code class="language-typescript">const myInputTextField = document.createElement("input");
+myInputTextField.type = "text";
+
+document.body.append(myInputTextField);</code></pre>
+
+            <p>
+                The <code>type</code> property controls how the input behaves
+                and how it appears. Other options include
+                <code>"password"</code>, <code>"number"</code>, and
+                <code>"email"</code>.
+            </p>
+
+            <p>
+                To access the user-entered text in code, perhaps after a Submit
+                button is pressed, use the input’s <code>value</code> property:
+            </p>
+
+            <pre><code class="language-typescript">const userEnteredText = myInputTextField.value;</code></pre>
+        </section>
+
+        <section>
+            <h3>Creating a Multiline Text Input</h3>
+
+            <p>
+                A <code>textarea</code> is an input field that allows the user
+                to enter several lines of text.
+            </p>
+
+            <pre><code class="language-typescript">const commentsInput = document.createElement("textarea");
+commentsInput.rows = 5;
+
+document.body.append(commentsInput);</code></pre>
+
+            <p>To access the user-entered text:</p>
+
+            <pre><code class="language-typescript">const userEnteredComments = commentsInput.value;</code></pre>
+        </section>
+
+        <section>
+            <h3>Creating a Label and Input</h3>
+
+            <p>
+                We usually place a label next to an input field. A label and
+                input can also be connected so that clicking the label selects
+                the corresponding input.
+            </p>
+
+            <pre><code class="language-typescript">const label = document.createElement("label");
+label.textContent = "Name:";
+label.htmlFor = "nameInput"; // Connect the label to the input with this id.
+
+const input = document.createElement("input");
+input.type = "text";
+input.id = "nameInput";
+
+document.body.append(label, input);</code></pre>
+        </section>
+
+        <section>
+            <h3>Creating a Button</h3>
+
+            <pre><code class="language-typescript">const button = document.createElement("button");
+button.textContent = "Submit";
+
+document.body.append(button);</code></pre>
+
+            <p>
+                To respond to a click, add an <code>onclick</code> function to
+                the button:
+            </p>
+
+            <pre><code class="language-typescript">button.onclick = () => {
+    const userEnteredText = myInputTextField.value;
+};</code></pre>
+
+            <p>The code inside the function runs when the button is clicked.</p>
+        </section>
+
+        <section>
+            <h3>Creating a Checkbox</h3>
+
+            <pre><code class="language-typescript">const checkbox = document.createElement("input");
+checkbox.type = "checkbox";
+
+document.body.append(checkbox);</code></pre>
+
+            <p>To check whether it is selected:</p>
+
+            <pre><code class="language-typescript">const isSelected = checkbox.checked;</code></pre>
+        </section>
+
+        <section>
+            <h3>Creating Radio Buttons</h3>
+
+            <p>
+                Radio buttons allow one option to be selected from a group.
+            </p>
+
+            <pre><code class="language-typescript">const easyOption = document.createElement("input");
+easyOption.type = "radio";
+easyOption.name = "difficulty";
+easyOption.value = "easy";
+
+const hardOption = document.createElement("input");
+hardOption.type = "radio";
+hardOption.name = "difficulty";
+hardOption.value = "hard";
+
+document.body.append(easyOption, hardOption);</code></pre>
+
+            <p>
+                Radio buttons with the same <code>name</code> belong to the
+                same group. Selecting one option deselects the others.
+            </p>
+        </section>
+
+        <section>
+            <h3>Creating a Dropdown Menu</h3>
+
+            <p>
+                A dropdown menu uses a <code>select</code> element containing
+                several <code>option</code> elements.
+            </p>
+
+            <pre><code class="language-typescript">const menu = document.createElement("select");
+
+const easyOption = document.createElement("option");
+easyOption.textContent = "Easy";
+easyOption.value = "easy";
+
+const hardOption = document.createElement("option");
+hardOption.textContent = "Hard";
+hardOption.value = "hard";
+
+menu.append(easyOption, hardOption);
+document.body.append(menu);</code></pre>
+
+            <p>To access the selected value:</p>
+
+            <pre><code class="language-typescript">const selectedValue = menu.value;</code></pre>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 12.3: Moving Styles to CSS</h2>
+
+        <p>
+            We can define an element’s appearance directly in TypeScript:
+        </p>
+
+        <pre><code class="language-typescript">const message = document.createElement("p");
+message.textContent = "Important Message";
+message.style.background = "lightgray";
+message.style.padding = "10px";
+message.style.borderRadius = "8px";
+
+document.body.append(message);</code></pre>
+
+        <p>
+            We can also store shared styling in a separate CSS file. To use a
+            style from that file, we give the element the same class name used
+            in the CSS.
+        </p>
+
+        <section>
+            <h3>TypeScript File</h3>
+
+            <pre><code class="language-typescript">const message = document.createElement("p");
+message.textContent = "Important Message";
+
+// Use the style named message-style from the CSS file.
+message.className = "message-style";
+
+document.body.append(message);</code></pre>
+        </section>
+
+        <section>
+            <h3>CSS File</h3>
+
+            <pre><code class="language-css">.message-style {
+    background: lightgray;
+    padding: 10px;
+    border-radius: 8px;
+}</code></pre>
+
+            <p>
+                In the CSS file, custom class names begin with a period:
+            </p>
+
+            <pre><code class="language-css">.message-style</code></pre>
+
+            <p>
+                The same CSS class can be reused by any element that should
+                have the same appearance.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding</h2>
+
+        <ol>
+            <li>What does <code>document.createElement()</code> do?</li>
+            <li>What does <code>document.body.append()</code> do?</li>
+            <li>Which element would you use to display an image?</li>
+            <li>
+                Which property provides the name or location of an image?
+            </li>
+            <li>
+                What is the difference between an <code>input</code> and a
+                <code>textarea</code>?
+            </li>
+            <li>
+                How do we access the value entered into a text input?
+            </li>
+            <li>
+                How do we add code that runs when a button is clicked?
+            </li>
+            <li>
+                How do a label’s <code>htmlFor</code> property and an input’s
+                <code>id</code> work together?
+            </li>
+            <li>
+                How do we connect an element created in TypeScript to a style
+                stored in CSS?
+            </li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>Lesson 12.4: Creating Elements in HTML</h2>
+
+        <p>
+            Web apps and webpages use the same basic tools: HTML, CSS, and
+            JavaScript or TypeScript. The difference is often how those tools
+            are used.
+        </p>
+
+        <p>
+            A traditional webpage is more like a document. HTML provides most
+            of the text and structure, while CSS controls the layout and
+            appearance. An app relies more heavily on code because the program
+            decides what should appear on the screen and changes it as the user
+            interacts with it.
+        </p>
+
+        <p>
+            In this class, we will focus primarily on building apps and
+            creating elements with TypeScript. However, it is useful to
+            understand the more traditional web approach, where HTML defines
+            what begins on the page, CSS controls how it looks, and TypeScript
+            handles the interactivity.
+        </p>
+
+        <p>This approach commonly uses three files:</p>
+
+        <ul>
+            <li>HTML defines what begins on the page.</li>
+            <li>CSS defines how it looks.</li>
+            <li>TypeScript connects the page to our code.</li>
+        </ul>
+
+        <section>
+            <h3>HTML File</h3>
+
+            <pre><code class="language-html">&lt;!-- The id allows us to find this element in TypeScript. --&gt;
+&lt;!-- The class connects this element to styling in the CSS file. --&gt;
+
+&lt;p id="welcomeMessage" class="welcome-message"&gt;Welcome&lt;/p&gt;</code></pre>
+        </section>
+
+        <section>
+            <h3>CSS File</h3>
+
+            <pre><code class="language-css">/* Custom classes begin with a period. */
+
+.welcome-message {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.warning-message {
+    background: yellow;
+    padding: 10px;
+}
+
+.large-button {
+    font-size: 20px;
+}
+
+/* Add any other reusable styles here. */</code></pre>
+
+            <p>
+                To connect an HTML element to a CSS style, we give it the
+                matching class name:
+            </p>
+
+            <pre><code class="language-html">&lt;p class="welcome-message"&gt;Welcome&lt;/p&gt;</code></pre>
+
+            <p>
+                The <code>id</code> serves a different purpose. It allows us to
+                find and connect a particular HTML element to our TypeScript
+                code.
+            </p>
+        </section>
+
+        <section>
+            <h3>TypeScript File</h3>
+
+            <pre><code class="language-typescript">const userName = "Jon Snow";
+
+// Find the HTML element whose id is welcomeMessage.
+const welcomeMessage = document.getElementById("welcomeMessage");
+
+if (welcomeMessage !== null) {
+    welcomeMessage.textContent = "Welcome " + userName;
+}</code></pre>
+
+            <p>
+                The HTML places the paragraph on the page. The CSS controls its
+                appearance. The TypeScript finds the paragraph using its
+                <code>id</code> and updates the text.
+            </p>
+        </section>
+    </section>
+</article>

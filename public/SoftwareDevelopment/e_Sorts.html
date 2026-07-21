@@ -1,0 +1,610 @@
+<article class="lesson">
+    <h1>2. SORTING ALGORITHMS</h1>
+
+    <section>
+        <h2>Lesson 2.1: Bubble Sort</h2>
+
+        <p>
+            Bubble sort moves through a list from left to right, comparing
+            neighboring values. If two values are in the wrong order, it swaps
+            them.
+        </p>
+
+        <p>Suppose we begin with:</p>
+
+        <pre><code>5, 2, 4, 1</code></pre>
+
+        <p>
+            We first compare <code>5</code> and <code>2</code>. Since
+            <code>5</code> is larger, we swap them:
+        </p>
+
+        <pre><code>2, 5, 4, 1</code></pre>
+
+        <p>Next, we compare <code>5</code> and <code>4</code>:</p>
+
+        <pre><code>2, 4, 5, 1</code></pre>
+
+        <p>Then we compare <code>5</code> and <code>1</code>:</p>
+
+        <pre><code>2, 4, 1, 5</code></pre>
+
+        <p>
+            After one complete pass, the largest value has moved one step at a
+            time until it reaches the far right. We then begin another pass and
+            move the next-largest value into position. We repeat this process
+            until the entire list is sorted.
+        </p>
+
+        <p>
+            If the list contains <code>n</code> items, bubble sort makes roughly
+            one pass for each item. During each pass, it moves through most of
+            the list. As the list grows, the amount of work grows very quickly.
+        </p>
+
+        <p>
+            Bubble sort is easy to visualize and commonly appears in
+            introductory computer science courses. However, it performs far too
+            much work for most real programs.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 2.2: Selection Sort</h2>
+
+        <p>
+            Selection sort repeatedly searches the unsorted values for the
+            smallest item.
+        </p>
+
+        <p>Suppose we begin with:</p>
+
+        <pre><code>5, 2, 4, 1</code></pre>
+
+        <p>
+            The easiest way to understand selection sort is to imagine creating
+            a new list. We search the original list and find the smallest value,
+            <code>1</code>, then add it to the new list:
+        </p>
+
+        <pre><code>Sorted list: 1
+Remaining values: 5, 2, 4</code></pre>
+
+        <p>We search again and find <code>2</code>:</p>
+
+        <pre><code>Sorted list: 1, 2
+Remaining values: 5, 4</code></pre>
+
+        <p>We continue until the new list is complete:</p>
+
+        <pre><code>Sorted list: 1, 2, 4, 5</code></pre>
+
+        <p>
+            The main idea is simple: repeatedly find the smallest remaining
+            item and place it at the end of the sorted list.
+        </p>
+
+        <p>
+            Creating a second list requires additional memory. We can avoid this
+            by rearranging the original list instead.
+        </p>
+
+        <p>We begin again with:</p>
+
+        <pre><code>5, 2, 4, 1</code></pre>
+
+        <p>
+            We find the smallest value, <code>1</code>, and swap it with the
+            value in the first position:
+        </p>
+
+        <pre><code>1, 2, 4, 5</code></pre>
+
+        <p>
+            The first position is now complete. We leave it alone and search the
+            remaining values for the next-smallest item. We continue moving from
+            left to right until every position is complete.
+        </p>
+
+        <p>
+            Selection sort always performs roughly the same amount of work.
+            Even if the list is already sorted, it still searches through all
+            of the remaining values to confirm which one is smallest.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 2.3: Insertion Sort</h2>
+
+        <p>
+            Insertion sort works much like arranging playing cards in your
+            hand. We create a new list of sorted items and add the original
+            values one at a time.
+        </p>
+
+        <p>Suppose the original values are:</p>
+
+        <pre><code>5, 2, 4, 1</code></pre>
+
+        <p>
+            We take the first item, <code>5</code>, and place it in the sorted
+            list:
+        </p>
+
+        <pre><code>Sorted list: 5</code></pre>
+
+        <p>
+            Next, we take <code>2</code>. We begin at the right side of the
+            sorted list and move left until we find where <code>2</code>
+            belongs. Since <code>2</code> is smaller than <code>5</code>, we
+            place it before <code>5</code>:
+        </p>
+
+        <pre><code>Sorted list: 2, 5</code></pre>
+
+        <p>
+            Next, we take <code>4</code>. We again begin on the right and check
+            each item while moving left. Since <code>4</code> is smaller than
+            <code>5</code> but larger than <code>2</code>, we place it between
+            them:
+        </p>
+
+        <pre><code>Sorted list: 2, 4, 5</code></pre>
+
+        <p>
+            Finally, we take the next item, <code>1</code>. We check the sorted
+            values from right to left until we reach the beginning, then place
+            <code>1</code> there:
+        </p>
+
+        <pre><code>Sorted list: 1, 2, 4, 5</code></pre>
+
+        <p>
+            Insertion sort builds the sorted list one item at a time. For each
+            new item, it begins at the right side of the sorted values and moves
+            left until it finds the correct position.
+        </p>
+
+        <p>
+            We can implement insertion sort using a second array, which makes
+            the idea easy to understand. We can also rearrange the original
+            array by shifting values to the right until there is room for the
+            new item. This saves memory.
+        </p>
+
+        <p>
+            Insertion sort can stop searching as soon as it finds the correct
+            position. If the list is already sorted or nearly sorted, it
+            requires very little work.
+        </p>
+
+        <p>
+            It also has very little overhead. For this reason, more advanced
+            sorting algorithms often switch to insertion sort when they reach a
+            small group of items. The larger algorithm divides the problem, and
+            insertion sort quickly finishes the small sections.
+        </p>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding: Simple Sorts</h2>
+
+        <ol>
+            <li>How does bubble sort move the largest remaining value into position?</li>
+            <li>Why does bubble sort require so much work as the list grows?</li>
+            <li>How does selection sort build a sorted list?</li>
+            <li>Why does selection sort take roughly the same amount of time even when the list is already sorted?</li>
+            <li>How can selection sort avoid creating a second array?</li>
+            <li>How is insertion sort similar to arranging playing cards?</li>
+            <li>When inserting a new item, where does insertion sort begin searching?</li>
+            <li>Why can insertion sort work well with a list that is already nearly sorted?</li>
+            <li>Why might a larger sorting algorithm use insertion sort for small groups of items?</li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>Lesson 2.4: What Makes a Sort Good?</h2>
+
+        <p>
+            Now that we have seen several ways to sort a list, we can compare
+            them more carefully.
+        </p>
+
+        <p>
+            A sorting algorithm is not judged only by whether it produces the
+            correct order. We should also consider how quickly it runs, how much
+            additional memory it requires, and whether it preserves the order
+            of items that have the same sorting value.
+        </p>
+
+        <section>
+            <h3>Speed</h3>
+            <p>
+                Bubble sort, selection sort, and insertion sort become slow when
+                the list grows because they repeatedly move through large
+                portions of the data.
+            </p>
+            <p>
+                More advanced algorithms, such as merge sort and quicksort,
+                divide the problem into smaller sections. This allows them to
+                handle very large lists much more efficiently.
+            </p>
+            <p>
+                The difference may not matter when sorting ten items. It matters
+                enormously when sorting millions of items.
+            </p>
+        </section>
+
+        <section>
+            <h3>Memory</h3>
+            <p>
+                Some sorting algorithms rearrange the values inside the original
+                array. These are called <strong>in-place sorts</strong>. They
+                require very little additional memory.
+            </p>
+            <p>
+                Other algorithms create temporary arrays while they work. This
+                can make the algorithm easier to understand or implement, but it
+                requires more memory.
+            </p>
+            <p>
+                Historically, computers had very little memory, so rearranging
+                values inside the original array was especially important.
+                Modern computers have far more memory, but memory still matters
+                when sorting very large amounts of information.
+            </p>
+        </section>
+
+        <section>
+            <h3>Stable Sorting</h3>
+            <p>
+                A <strong>stable sort</strong> preserves the original order of
+                items that have the same sorting value.
+            </p>
+            <p>Suppose our contacts contain two people with the same name:</p>
+            <pre><code>Bill Gates, Seattle
+Bill Gates, Santa Barbara</code></pre>
+            <p>
+                If we sort by name, both records have the same sorting value. A
+                stable sort keeps them in the same order in which they
+                originally appeared.
+            </p>
+            <p>An unstable sort may reverse them:</p>
+            <pre><code>Bill Gates, Santa Barbara
+Bill Gates, Seattle</code></pre>
+            <p>
+                The information is still technically sorted by name, but the
+                records may unexpectedly change places whenever the list is
+                sorted. This creates a confusing user experience.
+            </p>
+            <p>
+                Stability does not matter when duplicate values are completely
+                identical. If we are sorting the numbers <code>3, 3, 3</code>,
+                there is no meaningful difference between one <code>3</code>
+                and another. Stability becomes important when we sort records
+                using only part of the information they contain.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 2.5: Merge Sort</h2>
+        <p>
+            Merge sort divides the list into smaller sections and then combines
+            those sections in sorted order.
+        </p>
+        <p>Suppose we begin with eight values:</p>
+        <pre><code>7, 3, 6, 2, 8, 1, 5, 4</code></pre>
+        <p>
+            Merge sort repeatedly divides the list in half until each section
+            contains one item:
+        </p>
+        <pre><code>[7, 3, 6, 2]    [8, 1, 5, 4]
+
+[7, 3]    [6, 2]    [8, 1]    [5, 4]
+
+[7]    [3]    [6]    [2]    [8]    [1]    [5]    [4]</code></pre>
+        <p>
+            A group containing one item is already sorted. Merge sort then
+            combines the items into sorted groups of two:
+        </p>
+        <pre><code>[3, 7]    [2, 6]    [1, 8]    [4, 5]</code></pre>
+        <p>It combines those groups into sorted groups of four:</p>
+        <pre><code>[2, 3, 6, 7]    [1, 4, 5, 8]</code></pre>
+        <p>Finally, it combines the two halves:</p>
+        <pre><code>[1, 2, 3, 4, 5, 6, 7, 8]</code></pre>
+
+        <section>
+            <h3>Turn-Taking Sort</h3>
+            <p>
+                When merge sort combines two sorted groups, it does not need to
+                sort the combined group from the beginning.
+            </p>
+            <p>Suppose we have:</p>
+            <pre><code>Left group:  [2, 3, 6, 7]
+Right group: [1, 4, 5, 8]</code></pre>
+            <p>
+                We compare the next available number from each group. Since
+                <code>1</code> is smaller than <code>2</code>, we take
+                <code>1</code> from the right group:
+            </p>
+            <pre><code>Sorted values: [1]</code></pre>
+            <p>
+                The next available numbers are now <code>2</code> and
+                <code>4</code>. Since <code>2</code> is smaller, we take
+                <code>2</code> from the left group:
+            </p>
+            <pre><code>Sorted values: [1, 2]</code></pre>
+            <p>
+                The next available numbers are <code>3</code> and
+                <code>4</code>, so we take <code>3</code>:
+            </p>
+            <pre><code>Sorted values: [1, 2, 3]</code></pre>
+            <p>
+                We continue taking the smaller of the next two available
+                numbers until both groups are empty:
+            </p>
+            <pre><code>Sorted values: [1, 2, 3, 4, 5, 6, 7, 8]</code></pre>
+            <p>
+                In this course, we will call this a
+                <strong>turn-taking sort</strong>. More formally, the process
+                is called merging.
+            </p>
+        </section>
+
+        <p>
+            Merge sort divides the list into about <code>log n</code> levels.
+            At each level, it processes all <code>n</code> items. Its
+            complexity is therefore <code>O(n log n)</code>.
+        </p>
+        <p>
+            Merge sort always provides <code>O(n log n)</code> performance and
+            is stable. Its main disadvantage is memory. A typical merge sort
+            creates temporary arrays while dividing and combining the data.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 2.6: Quicksort or Pivot Sort</h2>
+        <p>
+            Quicksort divides the list using a value called a
+            <strong>pivot</strong>.
+        </p>
+        <p>Suppose we begin with:</p>
+        <pre><code>7, 3, 6, 2, 8, 1, 5, 4</code></pre>
+        <p>
+            We choose <code>5</code> as the pivot. Values smaller than
+            <code>5</code> go on one side, while values larger than
+            <code>5</code> go on the other:
+        </p>
+        <pre><code>Smaller: [3, 2, 1, 4]
+Pivot: 5
+Larger: [7, 6, 8]</code></pre>
+        <p>
+            We repeat the same process within the smaller and larger groups
+            until the entire list is sorted.
+        </p>
+        <p>
+            Quicksort performs well when each pivot divides the values into two
+            reasonably even groups. In this case, it provides approximately
+            <code>O(n log n)</code> performance.
+        </p>
+        <p>
+            However, the pivot may divide the data poorly. Suppose the list is
+            already sorted and we always choose the first value as the pivot:
+        </p>
+        <pre><code>1, 2, 3, 4, 5, 6, 7, 8</code></pre>
+        <p>
+            The pivot <code>1</code> leaves one empty group and one group
+            containing nearly every remaining value. If this happens
+            repeatedly, quicksort falls to <code>O(n²)</code>.
+        </p>
+        <p>
+            Randomized quicksort avoids this predictable problem by shuffling
+            the values before sorting or choosing pivots randomly. Other
+            variations examine several values and select a pivot that is more
+            likely to divide the list evenly.
+        </p>
+        <p>
+            Duplicate values create another problem for a simple quicksort. If
+            the list contains many copies of the pivot, a basic two-group
+            implementation may divide the data poorly. A three-way quicksort
+            creates separate groups for values smaller than, equal to, and
+            larger than the pivot. This handles duplicate values much more
+            efficiently.
+        </p>
+        <p>
+            Traditional textbook quicksort rearranges values inside the
+            original array and is not stable. Equal records may change order
+            during the swaps.
+        </p>
+        <p>
+            Quicksort is often extremely fast and uses less additional memory
+            than a typical merge sort. However, its performance depends on how
+            well the pivots divide the data.
+        </p>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding: Efficient Sorts</h2>
+        <ol>
+            <li>How does merge sort divide and rebuild a list?</li>
+            <li>Why is a group containing one item already sorted?</li>
+            <li>What does the turn-taking sort do?</li>
+            <li>When combining two sorted groups, how do we choose the next number?</li>
+            <li>Why does merge sort create a tree-like structure?</li>
+            <li>Why does merge sort require additional memory?</li>
+            <li>How does quicksort divide a list?</li>
+            <li>What happens when the pivot divides the list into two reasonably even groups?</li>
+            <li>Why can already sorted data create poor performance for a simple quicksort?</li>
+            <li>How can randomization help quicksort?</li>
+            <li>Why can duplicate values cause problems for a basic two-way quicksort?</li>
+            <li>How does a three-way quicksort handle duplicate values?</li>
+            <li>Why is traditional quicksort not stable?</li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>Lesson 2.7: Comparing Sorting Algorithms</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Algorithm</th>
+                    <th>Best Case</th>
+                    <th>Average Case</th>
+                    <th>Worst Case</th>
+                    <th>Additional Memory</th>
+                    <th>Stable</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Bubble Sort</td><td>O(n²)</td><td>O(n²)</td><td>O(n²)</td><td>Low</td><td>Yes</td></tr>
+                <tr><td>Selection Sort</td><td>O(n²)</td><td>O(n²)</td><td>O(n²)</td><td>Low</td><td>No</td></tr>
+                <tr><td>Insertion Sort</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>Low</td><td>Yes</td></tr>
+                <tr><td>Merge Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n log n)</td><td>Higher</td><td>Yes</td></tr>
+                <tr><td>Quicksort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n²)</td><td>Low</td><td>No</td></tr>
+            </tbody>
+        </table>
+        <p>Bubble sort is easy to understand but performs too much unnecessary work for most real programs.</p>
+        <p>Selection sort makes fewer swaps than bubble sort, but it still searches through all of the remaining values during every round.</p>
+        <p>Insertion sort is useful for small or nearly sorted lists. Its low overhead also makes it useful as part of a larger sorting algorithm.</p>
+        <p>Merge sort provides reliable <code>O(n log n)</code> performance and preserves the order of equal items. However, it normally requires additional memory.</p>
+        <p>Quicksort is often extremely fast and uses little additional memory, but poor pivots can produce <code>O(n²)</code> performance. Traditional quicksort is also not stable.</p>
+        <p>No sorting algorithm is best in every situation. The right choice depends on the amount of data, the arrangement of the data, the available memory, and whether stability matters.</p>
+    </section>
+
+    <section>
+        <h2>Lesson 2.8: Implementing Merge Sort</h2>
+        <p>
+            The main merge sort function divides the list into halves. The
+            <code>turnTakingSort()</code> function combines two sorted lists
+            into one sorted list.
+        </p>
+        <pre><code class="language-typescript">function mergeSort(numbers: Array&lt;number&gt;): Array&lt;number&gt; {
+
+    if (numbers.length &lt;= 1) {
+        return numbers;
+    }
+
+    const middleIndex = Math.floor(numbers.length / 2);
+
+    const leftHalf = numbers.slice(0, middleIndex);
+    const rightHalf = numbers.slice(middleIndex);
+
+    const sortedLeftHalf = mergeSort(leftHalf);
+    const sortedRightHalf = mergeSort(rightHalf);
+
+    return turnTakingSort(sortedLeftHalf, sortedRightHalf);
+}
+
+function turnTakingSort(leftNumbers: Array&lt;number&gt;, rightNumbers: Array&lt;number&gt;): Array&lt;number&gt; {
+
+    const sortedNumbers: Array&lt;number&gt; = [];
+
+    let leftIndex = 0;
+    let rightIndex = 0;
+
+    while (leftIndex &lt; leftNumbers.length &amp;&amp; rightIndex &lt; rightNumbers.length) {
+        const leftNumber = leftNumbers[leftIndex];
+        const rightNumber = rightNumbers[rightIndex];
+
+        if (leftNumber &lt;= rightNumber) {
+            sortedNumbers.push(leftNumber);
+            leftIndex = leftIndex + 1;
+        } else {
+            sortedNumbers.push(rightNumber);
+            rightIndex = rightIndex + 1;
+        }
+    }
+
+    while (leftIndex &lt; leftNumbers.length) {
+        sortedNumbers.push(leftNumbers[leftIndex]);
+        leftIndex = leftIndex + 1;
+    }
+
+    while (rightIndex &lt; rightNumbers.length) {
+        sortedNumbers.push(rightNumbers[rightIndex]);
+        rightIndex = rightIndex + 1;
+    }
+
+    return sortedNumbers;
+}</code></pre>
+        <p>
+            The comparison uses <code>&lt;=</code> rather than
+            <code>&lt;</code>. If the two values are equal, the value from the
+            left group is added first. This preserves the original order and
+            keeps the sort stable.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 2.9: Implementing Pivot Sort</h2>
+        <p>
+            The following implementation uses three groups so that it can
+            handle duplicate values clearly. It is easier to read than a
+            traditional in-place quicksort, but it creates additional arrays.
+        </p>
+        <pre><code class="language-typescript">function pivotSort(numbers: Array&lt;number&gt;): Array&lt;number&gt; {
+
+    if (numbers.length &lt;= 1) {
+        return numbers;
+    }
+
+    const pivotIndex = Math.floor(numbers.length / 2);
+    const pivot = numbers[pivotIndex];
+
+    const smallerNumbers: Array&lt;number&gt; = [];
+    const equalNumbers: Array&lt;number&gt; = [];
+    const largerNumbers: Array&lt;number&gt; = [];
+
+    for (const number of numbers) {
+        if (number &lt; pivot) {
+            smallerNumbers.push(number);
+        } else if (number &gt; pivot) {
+            largerNumbers.push(number);
+        } else {
+            equalNumbers.push(number);
+        }
+    }
+
+    const sortedSmallerNumbers = pivotSort(smallerNumbers);
+    const sortedLargerNumbers = pivotSort(largerNumbers);
+
+    return [
+        ...sortedSmallerNumbers, // Add every value from the smaller array.
+        ...equalNumbers,         // Add every value equal to the pivot.
+        ...sortedLargerNumbers   // Add every value from the larger array.
+    ];
+}</code></pre>
+        <p>
+            This version chooses the middle item as the pivot and places values
+            equal to the pivot into their own group. This prevents duplicate
+            values from repeatedly passing through the recursive calls.
+        </p>
+        <p>
+            Unlike traditional quicksort, this implementation creates several
+            new arrays. It is designed to make the algorithm easy to understand
+            rather than to minimize memory use.
+        </p>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding: Comparing and Implementing Sorts</h2>
+        <ol>
+            <li>What three concerns should we consider when comparing sorting algorithms?</li>
+            <li>What does it mean for a sorting algorithm to be stable?</li>
+            <li>When would stability matter when sorting customer records?</li>
+            <li>What is an in-place sort?</li>
+            <li>Why can memory still matter when sorting very large lists?</li>
+            <li>Which sort in this lesson always provides <code>O(n log n)</code> performance?</li>
+            <li>Which sort is often useful for small or nearly sorted lists?</li>
+            <li>What is the purpose of the first <code>while</code> loop in <code>turnTakingSort()</code>?</li>
+            <li>Why are two additional <code>while</code> loops needed after it?</li>
+            <li>Why does <code>turnTakingSort()</code> use <code>&lt;=</code> instead of <code>&lt;</code>?</li>
+            <li>What does the spread syntax <code>...sortedSmallerNumbers</code> do?</li>
+            <li>Why does the pivot sort implementation create an <code>equalNumbers</code> array?</li>
+            <li>How does the readable pivot sort implementation differ from a traditional in-place quicksort?</li>
+            <li>Why is there no single best sorting algorithm for every situation?</li>
+        </ol>
+    </section>
+</article>

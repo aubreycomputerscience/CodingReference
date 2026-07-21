@@ -1,0 +1,269 @@
+<article class="lesson">
+    <h1>LESSON 2: UNDERSTANDING REFERENCES</h1>
+
+    <section>
+        <h2>Lesson 2.1: References</h2>
+
+        <p>
+            A computer stores data at different locations in memory. Each
+            location has an address that allows the computer to find the
+            information stored there.
+        </p>
+
+        <p>
+            When we create an array, the computer places that array somewhere
+            in memory:
+        </p>
+
+        <pre><code class="language-typescript">const animals = ["cat", "dog"];</code></pre>
+
+        <p>
+            We can imagine the array as a house located at a particular
+            address. The variable <code>animals</code> stores the address of
+            the house rather than everything inside it.
+        </p>
+
+        <pre><code>Address: animals
+
+House:
+    cat
+    dog</code></pre>
+
+        <p>
+            The address that leads us to the array is called a
+            <strong>reference</strong>.
+        </p>
+
+        <p>
+            The real system is more complicated, and TypeScript does not allow
+            us to directly see or change numerical memory addresses.
+            Nevertheless, thinking of a reference as an address provides a
+            useful understanding of how arrays work.
+        </p>
+
+        <p>
+            Numbers, strings, and Booleans behave differently. For now, we can
+            think of these primitive variables as containing the value itself:
+        </p>
+
+        <pre><code class="language-typescript">const hitPoints = 100;
+const animalName = "cat";
+const isAlive = true;</code></pre>
+
+        <p>
+            Arrays and other structured types—which we will later call
+            objects—are accessed through references.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 2.2: Why <code>const</code> Is Not Always Constant</h2>
+
+        <p>Consider the following array:</p>
+
+        <pre><code class="language-typescript">const animals = ["cat", "dog"];</code></pre>
+
+        <p>
+            Because <code>animals</code> was declared using
+            <code>const</code>, we cannot give it a different address:
+        </p>
+
+        <pre><code class="language-typescript">animals = ["monkey", "elephant"]; // Error</code></pre>
+
+        <p>However, we can change what is stored at the existing address:</p>
+
+        <pre><code class="language-typescript">animals[0] = "tiger"; // Replace the first item in the array.</code></pre>
+
+        <p>
+            We can imagine that <code>cat</code> moved out of the house and
+            <code>tiger</code> moved in. The address has not changed; only one
+            of the residents has changed.
+        </p>
+
+        <pre><code>Address: animals
+
+Before:
+    cat
+    dog
+
+After:
+    tiger
+    dog</code></pre>
+
+        <p>
+            When we use <code>const</code> with an array, the reference must
+            remain constant. The contents of the array do not.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 2.3: Two Names for the Same Array</h2>
+
+        <p>Suppose we write:</p>
+
+        <pre><code class="language-typescript">const firstAnimals = ["cat", "dog"];
+const secondAnimals = firstAnimals;</code></pre>
+
+        <p>
+            This does not create a second array. It gives us a second name
+            containing the same address.
+        </p>
+
+        <pre><code>firstAnimals  \
+               &gt;  Same address: ["cat", "dog"]
+secondAnimals /</code></pre>
+
+        <p>
+            Both names lead to the same array. Therefore, changing the array
+            using either name changes the one shared array.
+        </p>
+
+        <pre><code class="language-typescript">secondAnimals[0] = "tiger";
+
+// Both firstAnimals and secondAnimals now contain:
+// ["tiger", "dog"]</code></pre>
+
+        <p>This can be surprising because the line</p>
+
+        <pre><code class="language-typescript">const secondAnimals = firstAnimals;</code></pre>
+
+        <p>
+            may look as though it creates a second array. It actually assigns
+            the existing array another name.
+        </p>
+
+        <p>Primitive values behave differently:</p>
+
+        <pre><code class="language-typescript">let firstScore = 10;
+let secondScore = firstScore;
+
+secondScore = 20;</code></pre>
+
+        <p>
+            The first score is still <code>10</code>, while the second score is
+            now <code>20</code>. Changing <code>secondScore</code> does not
+            change <code>firstScore</code>. Each variable has its own number.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 2.4: Creating a New Array</h2>
+
+        <p>
+            Sometimes we want a new array containing the same items rather than
+            another reference to the original array.
+        </p>
+
+        <p>
+            We can use the <strong>spread operator</strong>, written as three
+            periods, to copy the items into a new array:
+        </p>
+
+        <pre><code class="language-typescript">const originalAnimals = ["cat", "dog"];
+const copiedAnimals = [...originalAnimals];</code></pre>
+
+        <p>
+            Read <code>...originalAnimals</code> as “take all the items from
+            <code>originalAnimals</code> and place them here.”
+        </p>
+
+        <p>Now we have two separate arrays:</p>
+
+        <pre><code>originalAnimals: ["cat", "dog"]
+
+copiedAnimals:   ["cat", "dog"]</code></pre>
+
+        <p>Changing one array does not change the other.</p>
+
+        <pre><code class="language-typescript">copiedAnimals[0] = "tiger";
+
+// originalAnimals contains ["cat", "dog"]
+// copiedAnimals contains ["tiger", "dog"]</code></pre>
+
+        <p>The spread operator can also combine arrays:</p>
+
+        <pre><code class="language-typescript">const plants = ["tree", "flower"];
+const animals = ["cat", "dog"];
+
+const plantsAndAnimals = [...plants, ...animals];
+
+// plantsAndAnimals contains:
+// ["tree", "flower", "cat", "dog"]</code></pre>
+
+        <p>For now, remember:</p>
+
+        <ul>
+            <li>
+                Assigning an array to another variable creates another reference
+                to the same array.
+            </li>
+            <li>
+                Using the spread operator creates a new array containing the
+                same items.
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding</h2>
+
+        <ul>
+            <li>What is a reference?</li>
+
+            <li>
+                In our simplified model, how is a reference similar to a house
+                address?
+            </li>
+
+            <li>
+                When an array is declared using <code>const</code>, what cannot
+                change? What can still change?
+            </li>
+
+            <li>
+                How many arrays are created in the following code?
+
+                <pre><code class="language-typescript">const firstAnimals = ["cat", "dog"];
+const secondAnimals = firstAnimals;</code></pre>
+            </li>
+
+            <li>
+                After the following code runs, what does
+                <code>firstAnimals</code> contain? Explain why.
+
+                <pre><code class="language-typescript">const firstAnimals = ["cat", "dog"];
+const secondAnimals = firstAnimals;
+
+secondAnimals[1] = "monkey";</code></pre>
+            </li>
+
+            <li>
+                After the following code runs, what values do
+                <code>firstScore</code> and <code>secondScore</code> contain?
+
+                <pre><code class="language-typescript">let firstScore = 10;
+let secondScore = firstScore;
+
+secondScore = 20;</code></pre>
+            </li>
+
+            <li>
+                How does the spread operator differ from assigning an array to
+                another variable?
+            </li>
+
+            <li>
+                Write code that creates a separate copy of the following array:
+
+                <pre><code class="language-typescript">const originalNumbers = [10, 20, 30];</code></pre>
+            </li>
+
+            <li>
+                Write code that combines these two arrays into a new array:
+
+                <pre><code class="language-typescript">const firstGroup = ["cat", "dog"];
+const secondGroup = ["monkey", "tiger"];</code></pre>
+            </li>
+        </ul>
+    </section>
+</article>

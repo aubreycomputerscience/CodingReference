@@ -1,0 +1,389 @@
+<article class="lesson">
+    <h1>3. SETS</h1>
+
+    <section>
+        <h2>Lesson 3.1: What Is a Set?</h2>
+
+        <p>
+            A set stores a collection of unique items. The same item cannot
+            appear more than once.
+        </p>
+
+        <pre><code class="language-typescript">const animals = new Set(["cat", "dog", "monkey"]);</code></pre>
+
+        <p>
+            If we try to add <code>"cat"</code> again, the set remains
+            unchanged:
+        </p>
+
+        <pre><code class="language-typescript">animals.add("cat");
+
+// animals still contains:
+// "cat", "dog", "monkey"</code></pre>
+
+        <p>
+            Sets are useful when we mainly need to know whether an item is
+            present. For example, we might use a set to store:
+        </p>
+
+        <ul>
+            <li>usernames that have already been selected</li>
+            <li>students who are absent</li>
+            <li>items collected by a player</li>
+            <li>words that appear in a document</li>
+        </ul>
+
+        <p>In review, our basic collection types have different purposes:</p>
+
+        <ul>
+            <li>
+                An array stores an ordered list of items and can contain
+                duplicates.
+            </li>
+            <li>A dictionary connects keys with values.</li>
+            <li>
+                A set stores unique items and provides a quick way to check
+                whether an item is present.
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Lesson 3.2: How a Set May Be Implemented</h2>
+
+        <p>
+            A set can be implemented using a dictionary. Each set item is
+            stored as a dictionary key, while its corresponding value is an
+            unused placeholder.
+        </p>
+
+        <pre><code>Key: "cat"
+Value: unused</code></pre>
+
+        <p>
+            The set can then use the dictionary’s quick key lookup to
+            determine whether <code>"cat"</code> is present.
+        </p>
+
+        <p>
+            This is a common way to implement a set, although JavaScript does
+            not specify exactly how <code>Set</code> must work internally.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 3.3: Using a Set</h2>
+
+        <section>
+            <h3>Working with Sets</h3>
+
+            <p>
+                We can create an empty set and state what type of information
+                it will contain:
+            </p>
+
+            <pre><code class="language-typescript">const animals = new Set&lt;string&gt;();</code></pre>
+
+            <p>Read this as:</p>
+
+            <p>A set of strings.</p>
+
+            <p>We can also create a set that already contains items:</p>
+
+            <pre><code class="language-typescript">const animals = new Set(["cat", "dog", "monkey"]);</code></pre>
+
+            <h3>Quick Reference</h3>
+
+            <table>
+                <tbody>
+                    <tr>
+                        <td><code>mySet.add(value)</code></td>
+                        <td>Add an item</td>
+                    </tr>
+                    <tr>
+                        <td><code>mySet.has(value)</code></td>
+                        <td>Check whether an item is present</td>
+                    </tr>
+                    <tr>
+                        <td><code>mySet.delete(value)</code></td>
+                        <td>Delete one item</td>
+                    </tr>
+                    <tr>
+                        <td><code>mySet.clear()</code></td>
+                        <td>Delete every item</td>
+                    </tr>
+                    <tr>
+                        <td><code>mySet.size</code></td>
+                        <td>Find the number of items</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>The <code>add()</code> method adds an item to a set:</p>
+
+            <pre><code class="language-typescript">animals.add("tiger");</code></pre>
+
+            <p>Adding an item that is already present does nothing:</p>
+
+            <pre><code class="language-typescript">animals.add("cat");</code></pre>
+
+            <p>
+                The <code>has()</code> method checks whether an item is in the
+                set:
+            </p>
+
+            <pre><code class="language-typescript">if (animals.has("cat")) {
+    // The set contains "cat".
+}</code></pre>
+
+            <p>The <code>delete()</code> method removes an item:</p>
+
+            <pre><code class="language-typescript">animals.delete("dog");</code></pre>
+
+            <p>The <code>clear()</code> method removes every item:</p>
+
+            <pre><code class="language-typescript">animals.clear();</code></pre>
+
+            <p>
+                The <code>size</code> property tells us how many items are in
+                the set:
+            </p>
+
+            <pre><code class="language-typescript">const numberOfAnimals = animals.size;</code></pre>
+
+            <p>
+                Like an array’s <code>length</code>, <code>size</code> is a
+                property and does not use parentheses.
+            </p>
+        </section>
+
+        <section>
+            <h3>Working Through a Set and Converting It into an Array</h3>
+
+            <p>
+                We can use a <code>for...of</code> loop to work through every
+                item:
+            </p>
+
+            <pre><code class="language-typescript">for (const animal of animals) {
+    // Use animal.
+}</code></pre>
+
+            <p>
+                JavaScript works through the items in the order in which they
+                were added. However, position is not the main purpose of a
+                set. If order and indexes are important, an array is usually a
+                better choice.
+            </p>
+
+            <p>
+                We can use the spread operator to convert a set into an array:
+            </p>
+
+            <pre><code class="language-typescript">const animalArray = [...animals];</code></pre>
+
+            <p>
+                This also provides a quick way to remove duplicate values from
+                an array:
+            </p>
+
+            <pre><code class="language-typescript">const names = ["Maria", "Devon", "Maria", "Sam"];
+
+const uniqueNames = [...new Set(names)];
+
+// uniqueNames contains:
+// ["Maria", "Devon", "Sam"]</code></pre>
+
+            <p>
+                There is one important detail when storing objects in a set.
+                Objects are compared by reference rather than by their
+                contents.
+            </p>
+
+            <pre><code class="language-typescript">const firstDog = { name: "Spot" };
+const secondDog = { name: "Spot" };
+
+const dogs = new Set([firstDog, secondDog]);</code></pre>
+
+            <p>
+                Although the two objects contain the same information, they
+                are separate objects stored at different locations in memory.
+                Therefore, the set contains two items.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 3.4: Set Operations</h2>
+
+        <p>
+            Set operations allow us to compare or combine groups of items.
+        </p>
+
+        <p>The three basic set operations are:</p>
+
+        <ul>
+            <li>
+                A <strong>union</strong> is like addition. It combines the
+                items from two sets.
+            </li>
+            <li>
+                An <strong>intersection</strong> finds the items that the sets
+                have in common.
+            </li>
+            <li>
+                A <strong>difference</strong> is like subtraction. It removes
+                the items in one set from another.
+            </li>
+        </ul>
+
+        <p>
+            Suppose we have one set containing superheroes who wear capes and
+            another containing superheroes who can fly:
+        </p>
+
+        <pre><code class="language-typescript">const heroesWithCapes = new Set([
+    "Batman",
+    "Superman",
+    "Thor"
+]);
+
+const heroesWhoCanFly = new Set([
+    "Superman",
+    "Thor",
+    "Iron Man"
+]);</code></pre>
+
+        <section>
+            <h3>Union</h3>
+
+            <p>A union contains every item found in either set:</p>
+
+            <pre><code class="language-typescript">const heroesWithCapesOrFlight =
+    heroesWithCapes.union(heroesWhoCanFly);
+
+// Batman, Superman, Thor
+// plus Superman, Thor, Iron Man
+// equals Batman, Superman, Thor, Iron Man</code></pre>
+
+            <p>Items that appear in both sets are included only once.</p>
+        </section>
+
+        <section>
+            <h3>Intersection</h3>
+
+            <p>
+                An intersection contains only the items found in both sets:
+            </p>
+
+            <pre><code class="language-typescript">const flyingHeroesWithCapes =
+    heroesWithCapes.intersection(heroesWhoCanFly);
+
+// Batman, Superman, Thor
+// and Superman, Thor, Iron Man
+// have Superman and Thor in common</code></pre>
+        </section>
+
+        <section>
+            <h3>Difference</h3>
+
+            <p>
+                A difference contains the items found in the first set but not
+                in the second:
+            </p>
+
+            <pre><code class="language-typescript">const heroesWithCapesWhoCannotFly =
+    heroesWithCapes.difference(heroesWhoCanFly);
+
+// Batman, Superman, Thor
+// minus Superman, Thor, Iron Man
+// equals Batman</code></pre>
+
+            <p>The order matters when finding the difference:</p>
+
+            <pre><code class="language-typescript">const flyingHeroesWithoutCapes =
+    heroesWhoCanFly.difference(heroesWithCapes);
+
+// Superman, Thor, Iron Man
+// minus Batman, Superman, Thor
+// equals Iron Man</code></pre>
+
+            <p>
+                These operations create new sets. They do not change the
+                original sets.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding</h2>
+
+        <ul>
+            <li>What makes a set different from an array?</li>
+
+            <li>When would a set be more useful than a dictionary?</li>
+
+            <li>
+                Write out a statement that creates an empty set containing
+                strings.
+            </li>
+
+            <li>
+                Write out a statement that creates a set containing
+                <code>"cat"</code>, <code>"dog"</code>, and
+                <code>"monkey"</code>.
+            </li>
+
+            <li>
+                What happens if you add <code>"cat"</code> to that set a
+                second time?
+            </li>
+
+            <li>
+                Which method would you use to check whether
+                <code>"dog"</code> is in the set?
+            </li>
+
+            <li>
+                Which property tells us how many items are in a set?
+            </li>
+
+            <li>
+                Write out a loop that works through every item in a set.
+            </li>
+
+            <li>
+                Write out a statement that converts a set into an array.
+            </li>
+
+            <li>
+                Write out the TypeScript needed to remove duplicate values
+                from this array:
+
+                <pre><code class="language-typescript">const numbers = [10, 20, 10, 30, 20];</code></pre>
+            </li>
+
+            <li>
+                Why do the following objects count as two separate set items?
+
+                <pre><code class="language-typescript">const firstDog = { name: "Spot" };
+const secondDog = { name: "Spot" };</code></pre>
+            </li>
+
+            <li>
+                What is the difference between a union and an intersection?
+            </li>
+
+            <li>
+                What does this operation find?
+
+                <pre><code class="language-typescript">firstSet.difference(secondSet);</code></pre>
+            </li>
+
+            <li>
+                Do <code>union()</code>, <code>intersection()</code>, and
+                <code>difference()</code> change the original sets?
+            </li>
+        </ul>
+    </section>
+</article>

@@ -1,0 +1,46 @@
+NEW PROJECT (USING VITE)
+create a new one or use an old one as a template
+
+Downloading a Template
+1. Download as a ZIP file from GitHub.
+2. Rename the folder it is in to the name of your app.
+3. Open the file in Visual Studio Code. Then, change the name of the app in public/manifest. Also check to see if the name is in the index file.
+4. Open the bottom window and select the terminal tab. Then type "npm install" and press enter. This will download the code libraries / modules that you need (dependencies).
+5. Get started. Click on the myCode file and you are ready to go.
+
+Creating New
+1. Open Terminal
+2. Create a new project by pasting this into the terminal and hitting enter. Keep name lower case. (This will install the dependencies, including Vite.) 
+		npm create vite@latest my-app-name -- --template vanilla-ts 
+          
+3. type "open ." to open the file folder where the new project is. And drag folder to desired location.
+
+RUN IN DEVELOPMENT
+npm run dev    // run, build, preview are different, they are scripts listed in the package
+
+RUN LIVE (BUNDLE FILE AND RUN)
+npm run build
+npm run preview
+
+
+MAKE INTO A WEB APP (PWA or Progressive Web App)
+* Add create service worker code in main.ts.
+* Add service worker file in public.
+* Add a manifest in the public folder. And reference it in the index.
+
+
+
+HOST
+PWA - installs a URL
+Host using GitHub Pages - a static file hosting service that points to your distirbution file
+see Repo → Settings → Pages
+// vite.config.ts
+export default {
+  base: "/your-repo-name/"
+}
+
+
+
+
+
+

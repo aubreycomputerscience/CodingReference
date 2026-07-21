@@ -1,0 +1,875 @@
+<article class="lesson">
+    <h1>LESSON 5: FUNCTIONS</h1>
+
+    <section>
+        <h2>Lesson 5.1: What Is a Function?</h2>
+
+        <p>
+            As a program becomes larger, it becomes difficult to understand
+            everything at once. We can make the program easier to work with by
+            dividing it into smaller pieces of code called
+            <strong>functions</strong>.
+        </p>
+
+        <p>
+            Each function should perform a small, clearly defined task. For
+            example, a game might contain separate functions for calculating
+            damage, healing a character, moving an enemy, and checking whether
+            the player has won.
+        </p>
+
+        <p>A function gives a name to a piece of code:</p>
+
+        <pre><code class="language-typescript">function healCharacter() {
+    // Restore the character's health.
+}</code></pre>
+
+        <p>
+            The name <code>healCharacter</code> tells us what the function
+            does. In this way, a good function name acts like a topic sentence.
+            It allows us to understand the purpose of the code without
+            immediately reading every instruction inside it.
+        </p>
+
+        <p>
+            Creating a function is called <strong>defining a function</strong>.
+            The code inside the function does not run until we call it:
+        </p>
+
+        <pre><code class="language-typescript">healCharacter();</code></pre>
+
+        <p>The parentheses tell the program to run the function.</p>
+
+        <p>Functions help us:</p>
+
+        <ul>
+            <li>divide a large program into smaller tasks</li>
+            <li>give meaningful names to sections of code</li>
+            <li>reuse code without writing it again</li>
+            <li>hide unnecessary details</li>
+            <li>make programs easier to read, test, and change</li>
+        </ul>
+
+        <p>
+            A function attached to an object or class is called a
+            <strong>method</strong>. Functions and methods work in similar
+            ways, but a method belongs to a particular object or class.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 5.2: Using Functions</h2>
+
+        <section>
+            <h3>Parameters and Arguments</h3>
+
+            <p>A function can receive information through parameters.</p>
+
+            <pre><code class="language-typescript">function greetPerson(name: string) {
+    const greeting = "Hello, " + name;
+}</code></pre>
+
+            <p>
+                The parameter <code>name</code> is a variable that belongs to
+                the function. It allows the function to work with different
+                names.
+            </p>
+
+            <p>When we call the function, we provide a value:</p>
+
+            <pre><code class="language-typescript">greetPerson("Maria");
+greetPerson("Devon");</code></pre>
+
+            <p>
+                The value passed into a function is called an
+                <strong>argument</strong>.
+            </p>
+
+            <p>In this example:</p>
+
+            <pre><code class="language-typescript">function greetPerson(name: string) {
+    const greeting = "Hello, " + name;
+}
+
+greetPerson("Maria");</code></pre>
+
+            <ul>
+                <li><code>name</code> is the parameter.</li>
+                <li><code>"Maria"</code> is the argument.</li>
+            </ul>
+
+            <p>A function can have more than one parameter:</p>
+
+            <pre><code class="language-typescript">function calculateDamage(attack: number, defense: number) {
+    const damage = attack - defense;
+}</code></pre>
+
+            <p>
+                The arguments are matched with the parameters according to
+                their position:
+            </p>
+
+            <pre><code class="language-typescript">calculateDamage(30, 10);</code></pre>
+
+            <p>
+                Here, <code>30</code> becomes <code>attack</code> and
+                <code>10</code> becomes <code>defense</code>.
+            </p>
+
+            <p>
+                Clear parameter names make function calls easier to
+                understand:
+            </p>
+
+            <pre><code class="language-typescript">const playerAttack = 30;
+const enemyDefense = 10;
+
+calculateDamage(playerAttack, enemyDefense);</code></pre>
+
+            <p>
+                This is often clearer than passing several unexplained numbers
+                directly into the function.
+            </p>
+        </section>
+
+        <section>
+            <h3>Return Values</h3>
+
+            <p>
+                A function can send a result back to the code that called it.
+                This is called a <strong>return value</strong>.
+            </p>
+
+            <pre><code class="language-typescript">function calculateDamage(attack: number, defense: number): number {
+    return attack - defense;
+}</code></pre>
+
+            <p>
+                The type after the parentheses states what kind of value the
+                function returns:
+            </p>
+
+            <pre><code class="language-typescript">: number</code></pre>
+
+            <p>We can store the returned value in a variable:</p>
+
+            <pre><code class="language-typescript">const damage = calculateDamage(30, 10);</code></pre>
+
+            <p>
+                The function receives <code>30</code> and <code>10</code>,
+                calculates the result, and returns <code>20</code>. The value
+                <code>20</code> is then stored in <code>damage</code>.
+            </p>
+
+            <p>A returned value can also be used directly:</p>
+
+            <pre><code class="language-typescript">const remainingHitPoints =
+    hitPoints - calculateDamage(attack, defense);</code></pre>
+
+            <p>
+                When a function reaches <code>return</code>, it immediately
+                stops running:
+            </p>
+
+            <pre><code class="language-typescript">function calculateDamage(attack: number, defense: number): number {
+    if (defense &gt;= attack) {
+        return 0;
+    }
+
+    return attack - defense;
+}</code></pre>
+
+            <p>
+                If <code>defense</code> is greater than or equal to
+                <code>attack</code>, the function returns <code>0</code> and
+                skips the remaining code.
+            </p>
+
+            <p>
+                A function that does not return a value can use the return type
+                <code>void</code>:
+            </p>
+
+            <pre><code class="language-typescript">function healCharacter(character: Character): void {
+    character.heal();
+}</code></pre>
+
+            <p>
+                TypeScript can usually determine the return type without our
+                writing it. However, explicitly including it can make the
+                purpose of a function clearer.
+            </p>
+        </section>
+
+        <section>
+            <h3>Optional Parameters and Values</h3>
+
+            <p>
+                Sometimes a parameter does not need to be provided. We can
+                place a question mark after its name:
+            </p>
+
+            <pre><code class="language-typescript">function greetPerson(name: string, title?: string) {
+    // Use name and title.
+}</code></pre>
+
+            <p>The function can now be called with or without a title:</p>
+
+            <pre><code class="language-typescript">greetPerson("Maria");
+greetPerson("Maria", "Captain");</code></pre>
+
+            <p>
+                Inside the function, <code>title</code> may contain a string or
+                it may contain <code>undefined</code>.
+            </p>
+
+            <p>
+                We can write this more explicitly using a
+                <strong>union type</strong>:
+            </p>
+
+            <pre><code class="language-typescript">function greetPerson(name: string, title: string | undefined) {
+    // Use name and title.
+}</code></pre>
+
+            <p>The vertical line means <strong>or</strong>. Read this as:</p>
+
+            <p>
+                <code>title</code> can contain a string or
+                <code>undefined</code>.
+            </p>
+
+            <p>
+                There is an important difference between these two forms. The
+                question mark allows us to leave out the argument:
+            </p>
+
+            <pre><code class="language-typescript">greetPerson("Maria");</code></pre>
+
+            <p>
+                With <code>string | undefined</code>, the argument is still
+                required, although its value may be <code>undefined</code>:
+            </p>
+
+            <pre><code class="language-typescript">greetPerson("Maria", undefined);</code></pre>
+
+            <p>Union types can also describe other optional values:</p>
+
+            <pre><code class="language-typescript">function findCharacter(name: string): Character | undefined {
+    // Return a Character if one is found.
+    // Otherwise, return undefined.
+}</code></pre>
+
+            <p>
+                The function may return a <code>Character</code>, or it may
+                return <code>undefined</code> if no matching character exists.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 5.3: Scope</h2>
+
+        <p>
+            The part of a program where a variable can be used is called its
+            <strong>scope</strong>.
+        </p>
+
+        <p>A variable created inside a function belongs to that function:</p>
+
+        <pre><code class="language-typescript">function calculateDamage(attack: number, defense: number): number {
+    const damage = attack - defense;
+
+    return damage;
+}</code></pre>
+
+        <p>
+            The variable <code>damage</code> can be used only inside
+            <code>calculateDamage()</code>.
+        </p>
+
+        <pre><code class="language-typescript">const finalDamage = damage; // Error</code></pre>
+
+        <p>Code outside the function cannot access it.</p>
+
+        <p>
+            Parameters are also local variables. In this example,
+            <code>attack</code> and <code>defense</code> exist only while the
+            function is running:
+        </p>
+
+        <pre><code class="language-typescript">function calculateDamage(attack: number, defense: number): number {
+    return attack - defense;
+}</code></pre>
+
+        <p>
+            Different functions can use the same local variable names without
+            interfering with one another:
+        </p>
+
+        <pre><code class="language-typescript">function calculateDamage(attack: number, defense: number): number {
+    const result = attack - defense;
+
+    return result;
+}
+
+function calculateHealing(currentHP: number, maxHP: number): number {
+    const result = maxHP - currentHP;
+
+    return result;
+}</code></pre>
+
+        <p>Each <code>result</code> belongs to its own function.</p>
+
+        <p>
+            A variable created outside a function can usually be accessed from
+            inside it:
+        </p>
+
+        <pre><code class="language-typescript">let score = 0;
+
+function addPoint() {
+    score = score + 1;
+}</code></pre>
+
+        <p>
+            However, functions that change outside variables can become
+            difficult to understand. We may need to search through the program
+            to discover which functions can change <code>score</code>.
+        </p>
+
+        <p>
+            When possible, functions should receive the information they need
+            through parameters and return a result:
+        </p>
+
+        <pre><code class="language-typescript">function addPoint(currentScore: number): number {
+    return currentScore + 1;
+}
+
+score = addPoint(score);</code></pre>
+
+        <p>Now the change to <code>score</code> is visible outside the function.</p>
+    </section>
+
+    <section>
+        <h2>Lesson 5.4: Passing Primitive Values and Objects</h2>
+
+        <p>
+            Passing information into a function behaves differently depending
+            on whether we pass a primitive value or an object.
+        </p>
+
+        <section>
+            <h3>Primitive Values</h3>
+
+            <p>
+                Numbers, strings, and Booleans behave like independent copies
+                when passed into a function:
+            </p>
+
+            <pre><code class="language-typescript">function addHealth(hitPoints: number) {
+    hitPoints = hitPoints + 10;
+}
+
+let heroHitPoints = 100;
+
+addHealth(heroHitPoints);</code></pre>
+
+            <p>
+                After the function runs, <code>heroHitPoints</code> is still
+                <code>100</code>.
+            </p>
+
+            <p>
+                The parameter <code>hitPoints</code> received the value
+                <code>100</code>, but changing the parameter did not change the
+                outside variable.
+            </p>
+
+            <p>
+                To change <code>heroHitPoints</code>, the function can return a
+                new value:
+            </p>
+
+            <pre><code class="language-typescript">function addHealth(hitPoints: number): number {
+    return hitPoints + 10;
+}
+
+let heroHitPoints = 100;
+
+heroHitPoints = addHealth(heroHitPoints);</code></pre>
+
+            <p>Now <code>heroHitPoints</code> contains <code>110</code>.</p>
+        </section>
+
+        <section>
+            <h3>Objects and References</h3>
+
+            <p>
+                Objects and arrays behave differently because variables access
+                them through references.
+            </p>
+
+            <pre><code class="language-typescript">type Player = {
+    name: string;
+    hitPoints: number;
+};
+
+function takeDamage(player: Player) {
+    player.hitPoints = player.hitPoints - 10;
+}
+
+const hero: Player = {
+    name: "Alex",
+    hitPoints: 100
+};
+
+takeDamage(hero);</code></pre>
+
+            <p>
+                After the function runs, <code>hero.hitPoints</code> contains
+                <code>90</code>.
+            </p>
+
+            <p>
+                When an object is passed into a function, the function receives
+                another reference to the same object:
+            </p>
+
+            <pre><code>hero ────────────────┐
+                     ├──► { name: "Alex", hitPoints: 100 }
+player parameter ────┘</code></pre>
+
+            <p>
+                Both <code>hero</code> and the parameter
+                <code>player</code> lead to the same object. When the function
+                changes <code>player.hitPoints</code>, it changes that shared
+                object.
+            </p>
+
+            <p>
+                However, assigning a new object to the parameter does not make
+                the outside variable refer to the new object:
+            </p>
+
+            <pre><code class="language-typescript">function replacePlayer(player: Player) {
+    player = {
+        name: "Sam",
+        hitPoints: 200
+    };
+}
+
+const hero: Player = {
+    name: "Alex",
+    hitPoints: 100
+};
+
+replacePlayer(hero);</code></pre>
+
+            <p>
+                The variable <code>hero</code> still refers to the original
+                object:
+            </p>
+
+            <pre><code class="language-typescript">{
+    name: "Alex",
+    hitPoints: 100
+}</code></pre>
+
+            <p>
+                The parameter received another reference to the original
+                object. The function can use that reference to change the
+                shared object, but it cannot make <code>hero</code> store a
+                different reference.
+            </p>
+
+            <p>Arrays behave in the same way:</p>
+
+            <pre><code class="language-typescript">function addAnimal(animals: Array&lt;string&gt;) {
+    animals.push("monkey");
+}
+
+const myAnimals = ["cat", "dog"];
+
+addAnimal(myAnimals);
+
+// myAnimals now contains:
+// ["cat", "dog", "monkey"]</code></pre>
+
+            <p>
+                The function and the outside variable both access the same
+                array.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 5.5: Organizing Functions</h2>
+
+        <p>
+            A function name should clearly explain the task that the function
+            performs.
+        </p>
+
+        <p>Compare these names:</p>
+
+        <pre><code class="language-typescript">function doStuff() {
+    // Perform several unclear tasks.
+}</code></pre>
+
+        <pre><code class="language-typescript">function calculateFinalScore() {
+    // Calculate the player's final score.
+}</code></pre>
+
+        <p>
+            The second name acts like a topic sentence. It tells us what the
+            code is about before we read its details.
+        </p>
+
+        <p>
+            A function should usually perform one main task. If a function
+            performs many unrelated tasks, it becomes difficult to name,
+            understand, test, and change.
+        </p>
+
+        <p>
+            One useful pattern is to create a parent function that shows the
+            major steps of a process:
+        </p>
+
+        <pre><code class="language-typescript">function completeBattle() {
+    const attackDamage = calculateAttackDamage();
+    const remainingHealth = applyDamage(attackDamage);
+
+    showBattleResult(remainingHealth);
+}</code></pre>
+
+        <p>A reader can quickly understand the overall process:</p>
+
+        <ol>
+            <li>Calculate the damage.</li>
+            <li>Apply the damage.</li>
+            <li>Show the result.</li>
+        </ol>
+
+        <p>The smaller functions contain the details:</p>
+
+        <pre><code class="language-typescript">function calculateAttackDamage(): number {
+    // Calculate and return the damage.
+}
+
+function applyDamage(attackDamage: number): number {
+    // Apply the damage and return the remaining health.
+}
+
+function showBattleResult(remainingHealth: number) {
+    // Show the result to the player.
+}</code></pre>
+
+        <p>
+            This creates two levels of detail. The parent function explains
+            what happens, while the helper functions explain how each step
+            works.
+        </p>
+
+        <p>
+            In general, it is easier to follow a program when helper functions
+            do not lead through many additional layers of functions. We should
+            be able to understand the main process without following a long
+            chain of calls.
+        </p>
+
+        <p>
+            When possible, helper functions should receive the information
+            they need and return a result rather than changing unrelated
+            outside variables.
+        </p>
+
+        <pre><code class="language-typescript">let finalMessage = "";
+
+function completeBattle() {
+    const attackDamage = calculateAttackDamage();
+    const remainingHealth = applyDamage(attackDamage);
+    const message = createBattleMessage(remainingHealth);
+
+    finalMessage = message;
+}</code></pre>
+
+        <p>
+            The helper functions calculate and return values. The parent
+            function controls the visible change to <code>finalMessage</code>.
+        </p>
+
+        <p>This makes it easier to find where important values are changed.</p>
+    </section>
+
+    <section>
+        <h2>Lesson 5.6: Mutating and Pure Functions</h2>
+
+        <p>
+            A <strong>mutating function</strong> changes an existing object or
+            array:
+        </p>
+
+        <pre><code class="language-typescript">function healCharacter(character: Character) {
+    character.hitPoints = character.maxHitPoints;
+}</code></pre>
+
+        <p>
+            The function changes the <code>Character</code> object that was
+            passed into it.
+        </p>
+
+        <p>
+            A <strong>pure function</strong> does not change outside values or
+            objects. It uses its inputs to produce a result:
+        </p>
+
+        <pre><code class="language-typescript">function calculateHealing(hitPoints: number, maxHitPoints: number): number {
+    return maxHitPoints - hitPoints;
+}</code></pre>
+
+        <p>
+            Given the same inputs, a pure function produces the same result and
+            does not change anything outside itself.
+        </p>
+
+        <p>
+            Pure functions are often easier to understand and test because we
+            only need to look at their inputs and returned value.
+        </p>
+
+        <p>
+            For objects and arrays, a nonmutating function may create and
+            return a new value:
+        </p>
+
+        <pre><code class="language-typescript">function addAnimal(animals: Array&lt;string&gt;, newAnimal: string): Array&lt;string&gt; {
+    return [...animals, newAnimal];
+}
+
+const originalAnimals = ["cat", "dog"];
+const newAnimals = addAnimal(originalAnimals, "monkey");</code></pre>
+
+        <p>The original array remains unchanged:</p>
+
+        <pre><code>originalAnimals: ["cat", "dog"]
+
+newAnimals:      ["cat", "dog", "monkey"]</code></pre>
+
+        <p>
+            Creating new arrays and objects can require additional work.
+            Mutation is not automatically wrong. The important question is
+            whether the change is clear, controlled, and easy to find.
+        </p>
+
+        <p>A useful general pattern is:</p>
+
+        <ul>
+            <li>helper functions calculate and return values</li>
+            <li>a parent function controls important changes to the program</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Lesson 5.7: Functions as Values</h2>
+
+        <p>A function can be stored or passed into another function as a value.</p>
+
+        <p>First, we define a function:</p>
+
+        <pre><code class="language-typescript">function sayHello() {
+    // Say hello.
+}</code></pre>
+
+        <p>Another function can receive it as a parameter:</p>
+
+        <pre><code class="language-typescript">function runTask(task: () =&gt; void) {
+    task();
+}</code></pre>
+
+        <p>The type</p>
+
+        <pre><code class="language-typescript">() =&gt; void</code></pre>
+
+        <p>means:</p>
+
+        <p>A function that receives no arguments and returns no value.</p>
+
+        <p>We pass the function without calling it:</p>
+
+        <pre><code class="language-typescript">runTask(sayHello);</code></pre>
+
+        <p>
+            Notice that we write <code>sayHello</code>, not
+            <code>sayHello()</code>.
+        </p>
+
+        <pre><code class="language-typescript">runTask(sayHello);   // Pass the function.
+runTask(sayHello()); // Call the function first.</code></pre>
+
+        <p>
+            Passing functions allows one part of a program to decide what task
+            another part should perform.
+        </p>
+
+        <p>
+            TypeScript and JavaScript also allow us to create a function using
+            arrow-function syntax:
+        </p>
+
+        <pre><code class="language-typescript">const sayHello = () =&gt; {
+    // Say hello.
+};</code></pre>
+
+        <p>We can pass an arrow function directly:</p>
+
+        <pre><code class="language-typescript">runTask(() =&gt; {
+    // Say hello.
+});</code></pre>
+
+        <p>
+            Arrow functions are common in JavaScript code, especially when a
+            short function is passed into another function. However, named
+            functions are often easier for beginners to read and can make the
+            purpose of the code clearer.
+        </p>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding</h2>
+
+        <section>
+            <h3>Part 1: Function Basics</h3>
+
+            <ul>
+                <li>What is a function, and why do programmers use functions?</li>
+                <li>
+                    What is the difference between defining a function and
+                    calling a function?
+                </li>
+                <li>What is the difference between a function and a method?</li>
+                <li>What is the difference between a parameter and an argument?</li>
+                <li>
+                    In the following code, identify the parameters and arguments:
+
+                    <pre><code class="language-typescript">function calculateDamage(attack: number, defense: number): number {
+    return attack - defense;
+}
+
+const damage = calculateDamage(30, 10);</code></pre>
+                </li>
+                <li>What does the <code>return</code> keyword do?</li>
+                <li>
+                    Write out a function called <code>doubleNumber()</code> that
+                    receives a number and returns twice its value.
+                </li>
+                <li>
+                    What happens to the remaining code in a function after
+                    <code>return</code> runs?
+                </li>
+                <li>What does a return type of <code>void</code> mean?</li>
+                <li>
+                    What does the question mark mean in this function?
+
+                    <pre><code class="language-typescript">function greetPerson(name: string, title?: string) {
+    // Use name and title.
+}</code></pre>
+                </li>
+                <li>What does <code>string | undefined</code> mean?</li>
+                <li>
+                    What is the difference between an optional parameter and a
+                    parameter whose type is <code>string | undefined</code>?
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Part 2: Scope and Passing Values</h3>
+
+            <ul>
+                <li>What is scope?</li>
+                <li>
+                    Can a variable created inside a function normally be used
+                    outside that function?
+                </li>
+                <li>
+                    Why can two different functions each contain a local
+                    variable called <code>result</code>?
+                </li>
+                <li>
+                    Why might changing outside variables from many different
+                    functions make a program difficult to understand?
+                </li>
+                <li>
+                    What happens to <code>heroHitPoints</code> after this
+                    function runs? Explain why.
+
+                    <pre><code class="language-typescript">function addHealth(hitPoints: number) {
+    hitPoints = hitPoints + 10;
+}
+
+let heroHitPoints = 100;
+
+addHealth(heroHitPoints);</code></pre>
+                </li>
+                <li>
+                    What happens to <code>hero.hitPoints</code> after this
+                    function runs? Explain why.
+
+                    <pre><code class="language-typescript">function takeDamage(player: Player) {
+    player.hitPoints = player.hitPoints - 10;
+}
+
+const hero: Player = {
+    name: "Alex",
+    hitPoints: 100
+};
+
+takeDamage(hero);</code></pre>
+                </li>
+                <li>
+                    Why can a function change the contents of an object but not
+                    make the outside variable refer to a different object?
+                </li>
+                <li>
+                    Write out a function that adds an item to an array passed
+                    into it.
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Part 3: Organizing and Passing Functions</h3>
+
+            <ul>
+                <li>How does a good function name act like a topic sentence?</li>
+                <li>
+                    Why is a parent function showing several named steps often
+                    easier to understand than one long function?
+                </li>
+                <li>
+                    What is the difference between a mutating function and a
+                    pure function?
+                </li>
+                <li>Why are pure functions often easier to understand and test?</li>
+                <li>
+                    When might mutating an existing array or object still be
+                    reasonable?
+                </li>
+                <li>
+                    In this statement, are we passing <code>sayHello</code> or
+                    calling it?
+
+                    <pre><code class="language-typescript">runTask(sayHello);</code></pre>
+                </li>
+                <li>What does the type <code>() =&gt; void</code> describe?</li>
+                <li>
+                    Write out a named function and then pass it into another
+                    function.
+                </li>
+            </ul>
+        </section>
+    </section>
+</article>

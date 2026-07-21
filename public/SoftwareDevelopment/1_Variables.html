@@ -1,0 +1,402 @@
+<article class="lesson">
+    <h1>LESSON 1: VARIABLES AND DATA TYPES</h1>
+
+    <section>
+        <h2>Lesson 1.1: Variables</h2>
+
+        <p>
+            If we have kittens, it is useful to give them names so we can call
+            them by name and tell them apart. The same is true in computer
+            science. In TypeScript, we create a variable by giving it a name
+            and a value. Programmers call this <strong>declaring a variable</strong>.
+        </p>
+
+        <pre><code class="language-typescript">let hitPoints = 100;
+let attackDamage = 30;
+let incomingDamage = 10;</code></pre>
+
+        <p>
+            Here, <code>hitPoints</code>, <code>attackDamage</code>, and
+            <code>incomingDamage</code> are variables: names that we have given
+            to pieces of information so that we can use them later.
+        </p>
+
+        <p>
+            Now we can work with them just like we would work with variables
+            in algebra. In fact, we call them variables.
+        </p>
+
+        <pre><code class="language-typescript">let remainingHitPoints = hitPoints - incomingDamage;</code></pre>
+
+        <p>
+            If we want to prevent a value from ever changing, we use
+            <code>const</code> instead of <code>let</code>.
+            <code>Const</code> stands for constant.
+        </p>
+
+        <pre><code class="language-typescript">const maxHP = 100; // This value cannot be changed.</code></pre>
+
+        <p>
+            <strong>
+                Use <code>const</code> by default. Only use <code>let</code>
+                if the value needs to change.
+            </strong>
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 1.2: Primitive Data Types</h2>
+
+        <p>
+            We can store different types of data in a variable or constant.
+        </p>
+
+        <pre><code class="language-typescript">const myHP = 100;
+const myText = "some text";
+const trueOrFalse = true;</code></pre>
+
+        <p>
+            The most basic types of information we can store are
+            <code>number</code>, <code>string</code> (text), and
+            <code>boolean</code> (<code>true</code> or <code>false</code>).
+            We call these <strong>primitive data types</strong>.
+        </p>
+
+        <p>
+            If we want to be a little more explicit, we can also write:
+        </p>
+
+        <pre><code class="language-typescript">const myHP: number = 100; // Let there be no confusion: this is a number.
+const myText: string = "some text";
+const trueOrFalse: boolean = true;</code></pre>
+
+        <p>
+            Types are important because the type defines how something can be
+            used. We cannot divide the number <code>3</code> by the word
+            <code>"cat"</code> because it does not make sense. TypeScript can
+            recognize many mistakes like this and warn us before the program runs.
+        </p>
+
+        <pre><code class="language-typescript">const hitPoints: number = "cat"; // Error: "cat" is not a number.</code></pre>
+
+        <p>
+            Later, we will also learn how to create our own types for
+            information that TypeScript should treat differently.
+        </p>
+
+        <p>
+            The TypeScript programming language takes JavaScript and adds
+            types, making it easier to build large applications and helping us
+            avoid mistakes. When you have 20,000 lines of code, it is easy to
+            do something that you should not. You do not want to discover that
+            you have been pouring your breakfast cereal into the toaster.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 1.3: Collection Types</h2>
+
+        <p>
+            In TypeScript, we use collection types to store groups of
+            information. Three important collection types are arrays,
+            dictionaries, and sets.
+        </p>
+
+        <section>
+            <h3><em>ARRAY</em></h3>
+
+            <p>An array is an ordered list of items.</p>
+
+            <pre><code class="language-typescript">const animals = ["cat", "dog", "monkey"];</code></pre>
+        </section>
+
+        <section>
+            <h3><em>DICTIONARY</em></h3>
+
+            <p>
+                A dictionary connects each key with a corresponding value.
+                For example:
+            </p>
+
+            <h4>Oxford Dictionary</h4>
+
+            <dl>
+                <dt>cat:</dt>
+                <dd>an animal that goes meow</dd>
+
+                <dt>dog:</dt>
+                <dd>an animal that goes woof</dd>
+            </dl>
+
+            <p>
+                In TypeScript, we can create a dictionary using a
+                <code>Map</code>:
+            </p>
+
+            <pre><code class="language-typescript">const animalDictionary = new Map([
+    ["cat", "an animal that goes meow"],
+    ["dog", "an animal that goes woof"]
+]);</code></pre>
+        </section>
+
+        <section>
+            <h3><em>SET</em></h3>
+
+            <p>
+                A set stores a group of unique items. The same item cannot
+                appear more than once.
+            </p>
+
+            <pre><code class="language-typescript">const animals = new Set(["cat", "dog", "monkey"]);</code></pre>
+        </section>
+
+        <p>
+            We can explicitly state what type of information a collection
+            will contain:
+        </p>
+
+        <pre><code class="language-typescript">const animals: Array&lt;string&gt; = ["cat", "dog", "monkey"];</code></pre>
+
+        <p>
+            Read <code>Array&lt;string&gt;</code> as “an array of strings.”
+        </p>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding</h2>
+
+        <ul>
+            <li>
+                What is a variable? What kinds of information can it store?
+                How can we prevent its value from changing?
+            </li>
+            <li>
+                Write a variable containing text, a variable containing a
+                number, and a variable containing <code>true</code> or
+                <code>false</code>. Explicitly include each type in the
+                declaration.
+            </li>
+            <li>
+                What are the three collection types introduced in this lesson?
+                What is each one used for?
+            </li>
+            <li>Write an array containing five numbers.</li>
+        </ul>
+    </section>
+    <section>
+    <h2>Lesson 1.4: Union Types and Optional Values</h2>
+
+    <p>
+        So far, each variable has contained one type of information:
+    </p>
+
+    <pre><code class="language-typescript">let score: number = 100;
+let playerName: string = "Alex";</code></pre>
+
+    <p>
+        Sometimes a variable may contain more than one possible type. We can
+        describe this using a <strong>union type</strong>:
+    </p>
+
+    <pre><code class="language-typescript">let userID: string | number;</code></pre>
+
+    <p>
+        The vertical line means <strong>or</strong>. Read this as:
+    </p>
+
+    <p>
+        <code>userID</code> may contain a string or a number.
+    </p>
+
+    <p>Both of these values are allowed:</p>
+
+    <pre><code class="language-typescript">userID = 4729;
+userID = "user-4729";</code></pre>
+
+    <p>A value with another type is not allowed:</p>
+
+    <pre><code class="language-typescript">userID = true; // Error</code></pre>
+
+    <p>
+        Before using a union value, we may need to check which type it
+        currently contains:
+    </p>
+
+    <pre><code class="language-typescript">if (typeof userID === "string") {
+    const message = "User ID: " + userID;
+} else {
+    const nextID = userID + 1;
+}</code></pre>
+
+    <p>
+        Inside the first section, TypeScript knows that
+        <code>userID</code> is a string. Inside the second section, it knows
+        that <code>userID</code> is a number.
+    </p>
+
+    <section>
+        <h3>Optional Values</h3>
+
+        <p>
+            Sometimes a program may not have a valid value to store. For
+            example, we may search for a customer but fail to find one.
+        </p>
+
+        <p>
+            A value that may or may not exist is called an
+            <strong>optional value</strong>. In TypeScript, we can represent
+            this by allowing the variable to contain either the expected type
+            or <code>undefined</code>.
+        </p>
+
+        <pre><code class="language-typescript">let selectedCustomer: Customer | undefined;</code></pre>
+
+        <p>
+            If a customer is found, the variable contains a
+            <code>Customer</code>. If no matching customer is found, it
+            contains <code>undefined</code>.
+        </p>
+
+        <pre><code class="language-typescript">selectedCustomer = foundCustomer;
+selectedCustomer = undefined;</code></pre>
+
+        <p>
+            The value <code>undefined</code> means that no valid value is
+            currently available.
+        </p>
+
+        <p>
+            Before using <code>selectedCustomer</code> as a
+            <code>Customer</code>, we must check that it is not
+            <code>undefined</code>:
+        </p>
+
+        <pre><code class="language-typescript">if (selectedCustomer !== undefined) {
+    // Use selectedCustomer.
+}</code></pre>
+
+        <p>
+            This prevents us from trying to use information that was never
+            found or does not exist.
+        </p>
+
+        <p>
+            Optional values are common when searching for information. For
+            example, a function may return a character if one is found or
+            <code>undefined</code> if no matching character exists:
+        </p>
+
+        <pre><code class="language-typescript">function findCharacter(name: string): Character | undefined {
+    // Return the matching Character.
+    // Return undefined if the character is not found.
+}</code></pre>
+    </section>
+
+    <section>
+        <h3>Limiting the Allowed Values</h3>
+
+        <p>
+            A union type can also list the exact values that are allowed:
+        </p>
+
+        <pre><code class="language-typescript">type WindowState = "open" | "closed" | "minimized";</code></pre>
+
+        <p>
+            A variable using <code>WindowState</code> can contain only one of
+            those three strings:
+        </p>
+
+        <pre><code class="language-typescript">let myWindowState: WindowState = "open";
+
+myWindowState = "closed";    // Allowed
+myWindowState = "minimized"; // Allowed
+myWindowState = "hidden";    // Error</code></pre>
+
+        <p>
+            This is useful when managing the state of a program. Rather than
+            allowing any string, we define the complete list of valid
+            possibilities.
+        </p>
+
+        <p>For example:</p>
+
+        <pre><code class="language-typescript">type GameState = "starting" | "playing" | "paused" | "finished";
+
+let currentGameState: GameState = "starting";</code></pre>
+
+        <p>
+            TypeScript can now warn us if we accidentally use an invalid
+            state:
+        </p>
+
+        <pre><code class="language-typescript">currentGameState = "done"; // Error</code></pre>
+
+        <p>Union types allow us to describe both:</p>
+
+        <ul>
+            <li>
+                several possible types, such as
+                <code>string | number</code>
+            </li>
+            <li>
+                several specific values, such as
+                <code>"open" | "closed" | "minimized"</code>
+            </li>
+        </ul>
+    </section>
+</section>
+
+<section>
+    <h2>Check Your Understanding: Union Types and Optional Values</h2>
+
+    <ul>
+        <li>What does the vertical line mean in a union type?</li>
+
+        <li>
+            Which types of values can be stored in this variable?
+
+            <pre><code class="language-typescript">let result: string | number;</code></pre>
+        </li>
+
+        <li>
+            Why might we need to check the current type of a union value before
+            using it?
+        </li>
+
+        <li>What is an optional value?</li>
+
+        <li>
+            What does <code>undefined</code> mean in the following statement?
+
+            <pre><code class="language-typescript">let selectedCustomer: Customer | undefined;</code></pre>
+        </li>
+
+        <li>
+            Write out an <code>if</code> statement that checks whether
+            <code>selectedCustomer</code> contains a valid
+            <code>Customer</code> before using it.
+        </li>
+
+        <li>
+            Which values can be stored in the following variable?
+
+            <pre><code class="language-typescript">type WindowState = "open" | "closed" | "minimized";
+
+let myWindowState: WindowState;</code></pre>
+        </li>
+
+        <li>
+            Why is a union of specific values useful for managing the state of
+            a program?
+        </li>
+
+        <li>
+            Write out a type called <code>TrafficLightState</code> that allows
+            only <code>"red"</code>, <code>"yellow"</code>, or
+            <code>"green"</code>.
+        </li>
+    </ul>
+</section>
+
+</article>
+

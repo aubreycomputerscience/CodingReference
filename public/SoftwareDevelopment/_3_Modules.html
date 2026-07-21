@@ -1,0 +1,50 @@
+Importing Files
+
+import * as math from "./maths.js";  
+
+What you want to do	Syntax	Example
+Same folder	./file	import x from "./utils"
+Subfolder	./folder/file	import x from "./data/file"
+Parent folder (go up one level)	../file	import x from "../utils"
+Parent + subfolder	../folder/file	import x from "../data/file"
+Go up two levels	../../file	import x from "../../utils"
+Root-style (project root via Vite alias)	/ or @/ (if configured)	import x from "@/data/file"
+
+Modules
+We can break our app up into different files to help stay organized. Each of these files is it own little unit or module.
+any file containing a top-level import or export is considered a module
+
+Create New File / Module
+go to: VS Code / File / New File
+name the file: myFileName.ts
+at top of file add "export {};"  // this doesn't export anything, just makes module
+
+Importing another File / Module
+There are a number of variations, but we will use:
+import * as myStuff from "./myCode.js";  
+
+Now you can access variables and functions in your math module.
+ 	myStuff.doSomthing()
+	const userName = myStuff.userName
+
+When we import the file, it will run whatever code is in the file. (In other programming langagues, this will just tell the compiler where to find the code, but will not run anything.) Think of it this way.
+
+	const myStuff = new myCode()
+
+
+
+
+
+
+
+MODULES / NAMESPACING / SCOPING
+
+
+
+MAKING THINGS PUBLICALLY AVAILABLE
+export function add() {}
+export class Person {}
+OR 
+export { add, Person };
+
+

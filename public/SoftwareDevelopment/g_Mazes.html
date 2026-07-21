@@ -1,0 +1,267 @@
+<article class="lesson">
+    <h1>3. Maze Problems</h1>
+
+    <section>
+        <h2>Lesson 3.1: Finding the Shortest Path Through a Maze</h2>
+
+        <p>
+            Finding the shortest path through a maze is simply a matter of
+            checking locations one step at a time, starting from the beginning.
+            Which valid squares are adjacent to the starting square? Which
+            squares are adjacent to those? If we continue moving outward, it is
+            only a matter of time before we reach the end.
+        </p>
+
+        <p>
+            As we work through the maze, we need to keep track of which squares
+            we have already visited so that we do not check them again. We also
+            need to record the path we took to reach each square. As long as we
+            explore the maze one step at a time, the first path that reaches
+            the end will be the shortest.
+        </p>
+
+        <p>
+            To keep track of our progress, we create a data object for each
+            location in the maze. In computer science, these locations are
+            called <strong>vertices</strong>, although you can simply call them
+            <code>Location</code> objects in your code.
+        </p>
+
+        <p>
+            More generally, this is a simple example of a
+            <strong>graph</strong> data structure. A graph contains vertices
+            that are connected to one another.
+        </p>
+
+        <section>
+            <h3>Searching the Maze</h3>
+
+            <p>
+                The following method checks one square at a time. Each square
+                adds its unvisited neighbors to the end of the list. The method
+                then removes the first square from the list and continues the
+                search.
+            </p>
+
+            <pre><code class="language-typescript">private _findShortestPath(startLocation: Vertex, destinationID: string): Vertex | undefined {
+
+    // Check whether the current square is the destination.
+    if (startLocation.id === destinationID) {
+        return startLocation;
+    }
+
+    // Add the unvisited squares above, below, left, and right.
+    // These squares will be checked later.
+    this.addNeighborsToCheck(startLocation);
+
+    // Remove and return the first square waiting to be checked.
+    const nextVertex = this.neighborsToCheck.shift();
+
+    // Return undefined if there are no more squares to check.
+    // This means that the destination cannot be reached.
+    if (nextVertex === undefined) {
+        return undefined;
+    }
+
+    // Check the next square and add its neighbors to the list.
+    return this._findShortestPath(nextVertex, destinationID);
+}</code></pre>
+
+            <p>
+                The order of the list is important. New squares are added to
+                the end using <code>push()</code>, while the next square is
+                removed from the beginning using <code>shift()</code>.
+            </p>
+
+            <p>
+                This means that all squares one step away are checked before
+                squares two steps away. All squares two steps away are checked
+                before squares three steps away. Because the search expands
+                outward in this order, the first path that reaches the
+                destination is the shortest.
+            </p>
+        </section>
+
+        <section>
+            <h3>Full Implementation</h3>
+
+            <pre><code class="language-typescript">// MAZE
+// - Find the shortest path between two points in a maze.
+// - Monsters can use this to determine which direction to travel.
+// - This is a fairly expensive approach, but it provides a useful example
+//   of working with mazes and graphs.
+// - A more advanced implementation could calculate the shortest paths
+//   between every pair of locations, but that is beyond the scope of this class.
+// - Another approach could simply move the monster in a promising direction
+//   without calculating the complete shortest path.
+
+export class Location {
+    x: number;
+    y: number;
+
+    constructor(x: number, y: number) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class Vertex {
+    id: string;
+    location: Location;
+    parentVertex: Vertex | undefined; // Keep track of how we reached this square.
+    wasVisited = false;               // Do not check the same square again.
+
+    constructor(xyLocation: Location) {
+        this.location = xyLocation;
+        this.id = Vertex.generateID(xyLocation);
+    }
+
+    static generateID(xyLocation: Location): string {
+        return this.generateIDFromXY(xyLocation.x, xyLocation.y);
+    }
+
+    static generateIDFromXY(x: number, y: number): string {
+        return x + "/" + y;
+    }
+
+    static getPathStartPointToDestination(vertex: Vertex): Array&lt;Location&gt; {
+
+        if (vertex.parentVertex === undefined) {
+            return Array&lt;Location&gt;();
+        }
+
+        // Follow the chain of parent vertices using recursive calls.
+        const workingPath = Vertex.getPathStartPointToDestination(vertex.parentVertex);
+        workingPath.push(vertex.location);
+        return workingPath;
+    }
+}
+
+export class MazeFinder {
+    private dictionaryOfVertices = new Map&lt;string, Vertex&gt;();
+    private neighborsToCheck: Array&lt;Vertex&gt; = [];
+
+    // Create a vertex for every square that is not a wall.
+    setupRoom(walls: Array&lt;Array&lt;number&gt;&gt;) {
+        this.dictionaryOfVertices = new Map&lt;string, Vertex&gt;();
+        let rowNumber = 0;
+
+        for (const rowOfBlocks of walls) {
+            this.setupRoom_innerLoop(rowOfBlocks, rowNumber);
+            rowNumber = rowNumber + 1;
+        }
+    }
+
+    // Helper method.
+    private setupRoom_innerLoop(rowOfBlocks: Array&lt;number&gt;, rowNumber: number) {
+        let columnNumber = 0;
+
+        for (const block of rowOfBlocks) {
+            if (block === 0) {
+                const location = new Location(columnNumber, rowNumber);
+                const vertex = new Vertex(location);
+                this.dictionaryOfVertices.set(vertex.id, vertex);
+            }
+
+            columnNumber = columnNumber + 1;
+        }
+    }
+
+    findShortestPath(startLocation: Location, destinationLocation: Location): Array&lt;Location&gt; {
+        const lastVertex = this.getShortestPath(startLocation, destinationLocation);
+
+        if (lastVertex === undefined) {
+            return [];
+        }
+
+        const path = Vertex.getPathStartPointToDestination(lastVertex);
+        return path;
+    }
+
+    private getShortestPath(startLocation: Location, destinationLocation: Location): Vertex | undefined {
+        this.resetSearch();
+
+        const startingVertexID = Vertex.generateID(startLocation);
+        const firstVertex = this.dictionaryOfVertices.get(startingVertexID);
+
+        if (firstVertex === undefined) {
+            return undefined;
+        }
+
+        firstVertex.wasVisited = true;
+
+        const destinationVertexID = Vertex.generateID(destinationLocation);
+
+        if (firstVertex.id === destinationVertexID) {
+            this.neighborsToCheck = [];  // we are done, so no more work to do
+            return firstVertex;
+        }
+
+        return this._findShortestPath(firstVertex, destinationVertexID);
+    }
+
+    private resetSearch() {
+        this.neighborsToCheck = [];
+
+        for (const keyAndVertex of this.dictionaryOfVertices) {
+            const vertex = keyAndVertex[1];
+            vertex.wasVisited = false;
+            vertex.parentVertex = undefined;
+        }
+    }
+
+    private _findShortestPath(startLocation: Vertex, destinationID: string): Vertex | undefined {
+
+        // Check whether the current square is the destination.
+        if (startLocation.id === destinationID) {
+            return startLocation;
+        }
+
+        // Add the unvisited neighboring squares to the list.
+        this.addNeighborsToCheck(startLocation);
+
+        // Remove and return the first square waiting to be checked.
+        const nextVertex = this.neighborsToCheck.shift();
+
+        // No squares remain, so the destination cannot be reached.
+        if (nextVertex === undefined) {
+            return undefined;
+        }
+
+        // Continue searching from the next square.
+        return this._findShortestPath(nextVertex, destinationID);
+    }
+
+    private addNeighborsToCheck(vertex: Vertex) {
+        const neighborID_above = Vertex.generateIDFromXY(vertex.location.x,     vertex.location.y + 1);
+        const neighborID_below = Vertex.generateIDFromXY(vertex.location.x,     vertex.location.y - 1);
+        const neighborID_right = Vertex.generateIDFromXY(vertex.location.x + 1, vertex.location.y);
+        const neighborID_left  = Vertex.generateIDFromXY(vertex.location.x - 1, vertex.location.y);
+
+        this.addNeighborWithIDIfNew(neighborID_above, vertex);
+        this.addNeighborWithIDIfNew(neighborID_below, vertex);
+        this.addNeighborWithIDIfNew(neighborID_left,  vertex);
+        this.addNeighborWithIDIfNew(neighborID_right, vertex);
+    }
+
+    private addNeighborWithIDIfNew(id: string, parentVertex: Vertex) {
+        const neighbor = this.dictionaryOfVertices.get(id);
+
+        if (neighbor === undefined) {
+            return;
+        }
+
+        if (neighbor.wasVisited === true) {
+            return;
+        }
+
+        neighbor.wasVisited = true;
+        neighbor.parentVertex = parentVertex;
+
+        // Add the neighbor to the end of the list.
+        this.neighborsToCheck.push(neighbor);
+    }
+}</code></pre>
+        </section>
+    </section>
+</article>

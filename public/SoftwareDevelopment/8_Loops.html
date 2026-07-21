@@ -1,0 +1,362 @@
+<article class="lesson">
+    <h1>LESSON 7: LOOPS</h1>
+
+    <p>
+        Loops allow a program to repeat a piece of code. Different loops are
+        useful for different kinds of repetition.
+    </p>
+
+    <section>
+        <h2>Lesson 7.1: For...of Loops</h2>
+
+        <section>
+            <h3>WORKING WITH A LIST</h3>
+
+            <p>
+                When we want to perform an action for every item in an array,
+                we should normally use a <code>for...of</code> loop.
+            </p>
+
+            <pre><code class="language-typescript">const words = ["cat", "dog", "monkey"];
+
+for (const word of words) {
+    // Do something with word.
+}</code></pre>
+
+            <p>Read this as:</p>
+
+            <blockquote>
+                <p>For each <code>word</code> in <code>words</code>, run this code.</p>
+            </blockquote>
+
+            <p>
+                Each time the loop runs, <code>word</code> represents the next
+                item in the array. The first time through the loop,
+                <code>word</code> is <code>"cat"</code>. It is then
+                <code>"dog"</code> and finally <code>"monkey"</code>.
+            </p>
+
+            <p>
+                A <code>for...of</code> loop is usually the cleanest and safest
+                way to work through an entire array. It handles moving from one
+                item to the next for us.
+            </p>
+
+            <p>Notice that TypeScript uses the word <code>of</code>:</p>
+
+            <pre><code class="language-typescript">for (const word of words)</code></pre>
+
+            <p>
+                Some other programming languages use different words or syntax,
+                so this is worth remembering.
+            </p>
+        </section>
+
+        <section>
+            <h3>KEEPING COUNT</h3>
+
+            <p>Sometimes we want to count how many times the loop has run.</p>
+
+            <pre><code class="language-typescript">const words = ["cat", "dog", "monkey"];
+let counter = 0;
+
+for (const word of words) {
+    // Do something with word.
+
+    counter = counter + 1;
+}</code></pre>
+
+            <p>
+                After the loop finishes, <code>counter</code> is <code>3</code>.
+            </p>
+
+            <p>
+                There are other ways to find an item’s position in an array,
+                but we do not normally need them when simply working through a
+                list. Start with <code>for...of</code> unless you have a
+                specific reason to manage the position yourself.
+            </p>
+
+            <p>You may also see this written using <code>forEach()</code>:</p>
+
+            <pre><code class="language-typescript">words.forEach((word) =&gt; {
+    // Do something with word.
+});</code></pre>
+
+            <p>
+                This performs an action for each item, but it requires function
+                syntax that we will cover later. For now, use
+                <code>for...of</code>.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 7.2: Traditional For Loops</h2>
+
+        <section>
+            <h3>REPEATING A CERTAIN NUMBER OF TIMES</h3>
+
+            <p>
+                A traditional <code>for</code> loop is useful when we want to
+                repeat something a specific number of times.
+            </p>
+
+            <pre><code class="language-typescript">for (let i = 0; i &lt; 10; i = i + 1) {
+    // Do something 10 times.
+}</code></pre>
+
+            <p>The first line contains three instructions:</p>
+
+            <pre><code class="language-typescript">for (
+    let i = 0;  // Start at 0.
+    i &lt; 10;     // Continue while i is less than 10.
+    i = i + 1   // Add 1 after each repetition.
+)</code></pre>
+
+            <p>
+                The variable <code>i</code> keeps track of how many times the
+                loop has run.
+            </p>
+
+            <p>The values of <code>i</code> are:</p>
+
+            <pre><code>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</code></pre>
+
+            <p>
+                Although the loop begins at <code>0</code>, it still runs ten
+                times.
+            </p>
+
+            <p>We can also begin at <code>1</code>:</p>
+
+            <pre><code class="language-typescript">for (let i = 1; i &lt;= 10; i = i + 1) {
+    // Do something 10 times.
+}</code></pre>
+
+            <p>Now the values are:</p>
+
+            <pre><code>1, 2, 3, 4, 5, 6, 7, 8, 9, 10</code></pre>
+
+            <p>
+                Both loops repeat ten times. The correct version depends on
+                which numbers we need inside the loop.
+            </p>
+        </section>
+
+        <section>
+            <h3>COMMON VARIATIONS</h3>
+
+            <p>
+                We can change the starting value, stopping condition, or amount
+                added each time.
+            </p>
+
+            <p>Count from <code>5</code> through <code>10</code>:</p>
+
+            <pre><code class="language-typescript">for (let i = 5; i &lt;= 10; i = i + 1) {
+    // Use i.
+}</code></pre>
+
+            <p>Count by twos:</p>
+
+            <pre><code class="language-typescript">for (let i = 0; i &lt;= 10; i = i + 2) {
+    // i is 0, 2, 4, 6, 8, and 10.
+}</code></pre>
+
+            <p>Count backward:</p>
+
+            <pre><code class="language-typescript">for (let i = 10; i &gt; 0; i = i - 1) {
+    // i is 10, 9, 8, and so on.
+}</code></pre>
+
+            <p>You may also see the shorter forms:</p>
+
+            <pre><code class="language-typescript">i++; // The same basic idea as i = i + 1.
+i--; // The same basic idea as i = i - 1.</code></pre>
+
+            <p>
+                We will generally use the longer version at first because it
+                makes the change easier to see.
+            </p>
+
+            <p>
+                Traditional <code>for</code> loops often appear in programming
+                exercises and AP exam questions. They are also useful in
+                specialized algorithms. However, when working through every
+                item in an array, <code>for...of</code> is usually easier to
+                read and less likely to produce mistakes.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 7.3: While Loops</h2>
+
+        <section>
+            <h3>REPEATING WHILE SOMETHING IS TRUE</h3>
+
+            <p>
+                A <code>while</code> loop continues running as long as its
+                condition remains true.
+            </p>
+
+            <pre><code class="language-typescript">let number = 1;
+
+while (number &lt;= 5) {
+    // Do something with number.
+
+    number = number + 1;
+}</code></pre>
+
+            <p>
+                The loop checks the condition before each repetition. As long
+                as <code>number &lt;= 5</code> is true, the code runs again.
+            </p>
+
+            <p>
+                A <code>while</code> loop is useful when we do not know ahead
+                of time exactly how many repetitions will be needed.
+            </p>
+
+            <pre><code class="language-typescript">while (gameIsRunning) {
+    // Update the game.
+}</code></pre>
+
+            <p>
+                It may also be useful in certain algorithms that continue until
+                a particular task has been completed.
+            </p>
+        </section>
+
+        <section>
+            <h3>INFINITE LOOPS</h3>
+
+            <p>
+                The major danger of a <code>while</code> loop is that its
+                condition may never become false.
+            </p>
+
+            <pre><code class="language-typescript">let number = 1;
+
+while (number &lt;= 5) {
+    // number never changes
+}</code></pre>
+
+            <p>
+                Because <code>number</code> remains <code>1</code>, the
+                condition is always true. The loop continues forever. This is
+                called an <strong>infinite loop</strong>.
+            </p>
+
+            <p>
+                An infinite loop can freeze a webpage or prevent the rest of
+                the program from running.
+            </p>
+
+            <p>
+                Whenever you write a <code>while</code> loop, make sure that
+                something inside the loop moves it toward completion:
+            </p>
+
+            <pre><code class="language-typescript">let number = 1;
+
+while (number &lt;= 5) {
+    number = number + 1;
+}</code></pre>
+
+            <p>
+                In ordinary class projects, we will not use
+                <code>while</code> very often. Use it when repetition truly
+                depends on a changing condition. Otherwise, a
+                <code>for...of</code> or traditional <code>for</code> loop is
+                usually clearer.
+            </p>
+
+            <p>
+                Safety-critical software applies particularly strict rules to
+                loops because an unexpected infinite loop could have serious
+                consequences. One common rule is that every loop should have a
+                clear upper limit on how long it can run.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding</h2>
+
+        <ol>
+            <li>
+                Which loop should you normally use to work through every item
+                in an array?
+            </li>
+
+            <li>
+                <p>
+                    In the following loop, what does <code>animal</code>
+                    represent each time the loop runs?
+                </p>
+
+                <pre><code class="language-typescript">const animals = ["cat", "dog", "monkey"];
+
+for (const animal of animals) {
+    // Do something with animal.
+}</code></pre>
+            </li>
+
+            <li>
+                <p>How many times does the following loop run?</p>
+
+                <pre><code class="language-typescript">for (let i = 0; i &lt; 5; i = i + 1) {
+    // Do something.
+}</code></pre>
+            </li>
+
+            <li>
+                <p>
+                    What values does <code>i</code> have during the following
+                    loop?
+                </p>
+
+                <pre><code class="language-typescript">for (let i = 2; i &lt;= 8; i = i + 2) {
+    // Do something.
+}</code></pre>
+            </li>
+
+            <li>Write a loop that repeats ten times.</li>
+
+            <li>Write a loop that counts backward from <code>5</code> to <code>1</code>.</li>
+
+            <li>
+                When might a <code>while</code> loop be more appropriate than
+                a traditional <code>for</code> loop?
+            </li>
+
+            <li>
+                <p>Why does the following loop never stop?</p>
+
+                <pre><code class="language-typescript">let number = 1;
+
+while (number &lt; 10) {
+    // Do something.
+}</code></pre>
+            </li>
+
+            <li>Correct the preceding loop so that it eventually stops.</li>
+
+            <li>
+                <p>Which kind of loop would you choose for each task?</p>
+
+                <ul>
+                    <li>Perform an action for every name in an array.</li>
+                    <li>Repeat an animation step twenty times.</li>
+                    <li>
+                        Continue a game while <code>gameIsRunning</code> is
+                        true.
+                    </li>
+                </ul>
+            </li>
+        </ol>
+    </section>
+</article>
+

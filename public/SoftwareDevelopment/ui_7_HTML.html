@@ -1,0 +1,389 @@
+<article class="lesson">
+    <h1>5: HTML QUICK REFERENCE</h1>
+
+    <p>
+        HTML defines the elements that begin on a webpage. In this class, we
+        will usually create interface elements with TypeScript, but students
+        should still be able to read an HTML file, make simple changes, and
+        understand how HTML connects to CSS and TypeScript.
+    </p>
+
+    <section>
+        <h2>Lesson 5.1: Basic HTML Structure</h2>
+
+        <p>A basic HTML page looks like this:</p>
+
+        <pre><code class="language-html">&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;My App&lt;/title&gt;
+    &lt;/head&gt;
+
+    &lt;body&gt;
+        &lt;h1&gt;My App&lt;/h1&gt;
+        &lt;p&gt;Welcome to my webpage.&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+        <p>
+            The <code>html</code> element contains the entire webpage. The
+            <code>head</code> stores information about the page, while the
+            <code>body</code> contains the elements that appear on the screen.
+        </p>
+
+        <p>The <code>title</code> appears in the browser tab.</p>
+
+        <p>
+            Vite creates most of this structure for us, so we will not need to
+            rewrite it for every project. However, we should be able to
+            recognize the main parts of the file.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 5.2: HTML Elements</h2>
+
+        <p>Most HTML elements use an opening tag and a closing tag:</p>
+
+        <pre><code class="language-html">&lt;p&gt;Hello!&lt;/p&gt;</code></pre>
+
+        <p>The opening tag begins the element:</p>
+
+        <pre><code class="language-html">&lt;p&gt;</code></pre>
+
+        <p>The closing tag ends it:</p>
+
+        <pre><code class="language-html">&lt;/p&gt;</code></pre>
+
+        <p>
+            The text or other elements placed between the tags become the
+            contents of the element.
+        </p>
+
+        <section>
+            <h3>Common Elements</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Purpose</th>
+                        <th>HTML</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Main heading</td>
+                        <td><code>&lt;h1&gt;My App&lt;/h1&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td>Section heading</td>
+                        <td><code>&lt;h2&gt;Introduction&lt;/h2&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td>Display text</td>
+                        <td><code>&lt;p&gt;Hello!&lt;/p&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td>General section or box</td>
+                        <td><code>&lt;div&gt;&lt;/div&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td>Display an image</td>
+                        <td><code>&lt;img src="cat.jpg"&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td>Create a button</td>
+                        <td><code>&lt;button&gt;Submit&lt;/button&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td>Get text input</td>
+                        <td><code>&lt;input type="text"&gt;</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <p>
+            Some elements, such as <code>img</code> and <code>input</code>, do
+            not contain text or other elements. They therefore do not need a
+            separate closing tag.
+        </p>
+
+        <p>HTML elements can also be placed inside other elements:</p>
+
+        <pre><code class="language-html">&lt;div&gt;
+    &lt;h2&gt;Welcome&lt;/h2&gt;
+    &lt;p&gt;This text is inside the div.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+        <p>The <code>div</code> contains the heading and paragraph.</p>
+    </section>
+
+    <section>
+        <h2>Lesson 5.3: Attributes</h2>
+
+        <p>
+            Attributes add information or settings to an HTML element. They are
+            written inside the opening tag.
+        </p>
+
+        <pre><code class="language-html">&lt;p id="welcomeMessage" class="important-message"&gt;
+    Welcome
+&lt;/p&gt;</code></pre>
+
+        <p>
+            In this example, the paragraph has an <code>id</code> and a CSS
+            class.
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Attribute</th>
+                    <th>Purpose</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>id</code></td>
+                    <td>Connect a particular element to TypeScript</td>
+                </tr>
+                <tr>
+                    <td><code>class</code></td>
+                    <td>Connect an element to CSS styling</td>
+                </tr>
+                <tr>
+                    <td><code>src</code></td>
+                    <td>Give the source of an image</td>
+                </tr>
+                <tr>
+                    <td><code>href</code></td>
+                    <td>Give the destination of a link</td>
+                </tr>
+                <tr>
+                    <td><code>type</code></td>
+                    <td>Set the kind of input</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>For example:</p>
+
+        <pre><code class="language-html">&lt;img src="cat.jpg"&gt;
+
+&lt;input type="email"&gt;
+
+&lt;p id="welcomeMessage"&gt;Welcome&lt;/p&gt;</code></pre>
+
+        <p>
+            The <code>src</code> attribute gives the name or location of the
+            image. The <code>type</code> attribute tells the browser what kind
+            of input to create. The <code>id</code> gives us a way to find a
+            particular element in TypeScript.
+        </p>
+
+        <pre><code class="language-typescript">const welcomeMessage = document.getElementById("welcomeMessage");</code></pre>
+    </section>
+
+    <section>
+        <h2>Lesson 5.4: Links</h2>
+
+        <p>A link allows the user to open another location.</p>
+
+        <pre><code class="language-html">&lt;a href="https://example.com"&gt;Visit Example&lt;/a&gt;</code></pre>
+
+        <p>
+            The <code>a</code> stands for anchor. The <code>href</code>
+            attribute gives the destination.
+        </p>
+
+        <p>
+            HTML elements can load or open certain resources directly. An image
+            uses <code>src</code> to load an image file, while a link uses
+            <code>href</code> to open another page or location.
+        </p>
+
+        <p>
+            Loading data such as JSON requires TypeScript and will be covered in
+            the networking lesson.
+        </p>
+
+        <section>
+            <h3>Links Within the Same Page</h3>
+
+            <p>A hash link can move to another location on the same page.</p>
+
+            <pre><code class="language-html">&lt;a href="#arrays"&gt;Go to Arrays&lt;/a&gt;
+
+&lt;h2 id="arrays"&gt;Arrays&lt;/h2&gt;</code></pre>
+
+            <p>
+                The link contains <code>#arrays</code>, so the browser looks
+                for an element whose <code>id</code> is
+                <code>arrays</code>.
+            </p>
+
+            <p>
+                Hash links are also commonly used in one-page apps. Instead of
+                loading a new webpage, the app can read the hash and decide
+                which content to display.
+            </p>
+
+            <p>For example:</p>
+
+            <pre><code class="language-html">&lt;a href="#settings"&gt;Settings&lt;/a&gt;</code></pre>
+
+            <p>The URL now ends with:</p>
+
+            <pre><code>#settings</code></pre>
+
+            <p>
+                A one-page app can use that value to show the Settings section.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 5.5: Showing and Hiding Elements</h2>
+
+        <p>HTML elements include a built-in <code>hidden</code> property.</p>
+
+        <pre><code class="language-typescript">myElement.hidden = true;  // Hide the element.
+myElement.hidden = false; // Show the element.</code></pre>
+
+        <p>
+            The element still exists in the webpage, but it is not displayed.
+        </p>
+
+        <p>We can also hide elements using a CSS class:</p>
+
+        <pre><code class="language-css">.hidden {
+    display: none;
+}</code></pre>
+
+        <p>Then add or remove that class in TypeScript:</p>
+
+        <pre><code class="language-typescript">myElement.classList.add("hidden");
+myElement.classList.remove("hidden");</code></pre>
+
+        <p>
+            Adding the class hides the element. Removing the class shows it
+            again.
+        </p>
+
+        <p>
+            The built-in <code>hidden</code> property is convenient when we
+            only need to show or hide one element. A CSS class is useful when
+            several elements should share the same rule or when hiding is part
+            of a larger style.
+        </p>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding</h2>
+
+        <ol>
+            <li>
+                What is the difference between the <code>head</code> and the
+                <code>body</code>?
+            </li>
+            <li>What does the <code>title</code> element control?</li>
+            <li>
+                What is the difference between an opening tag and a closing
+                tag?
+            </li>
+            <li>Which HTML element creates a main heading?</li>
+            <li>Which attribute gives the source of an image?</li>
+            <li>
+                Which attribute allows us to find an element in TypeScript?
+            </li>
+            <li>What does the <code>href</code> attribute contain?</li>
+            <li>How does a hash link find another location on the page?</li>
+            <li>How can a one-page app use a hash?</li>
+            <li>
+                How do we hide an element using its built-in property?
+            </li>
+            <li>How do we hide an element using a CSS class?</li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>Lesson 5.6: Custom HTML Elements</h2>
+
+        <p>
+            HTML includes standard elements such as <code>p</code>,
+            <code>button</code>, and <code>img</code>. We can also create our
+            own reusable HTML elements using TypeScript.
+        </p>
+
+        <p>
+            A custom element can package several pieces of an interface into
+            one reusable component. For example, we could create a code viewer,
+            score display, music player, calendar, or custom input control.
+            These reusable interface components are sometimes called
+            <strong>widgets</strong>.
+        </p>
+
+        <p>
+            A code viewer could display our code one line or one section at a
+            time, allowing us to walk through how the program works. Once the
+            custom element exists, we can simply drop it into our HTML wherever
+            we want it to appear:
+        </p>
+
+        <pre><code class="language-html">&lt;code-viewer&gt;
+    const message = "Hello!";
+&lt;/code-viewer&gt;</code></pre>
+
+        <section>
+            <h3>Implementation Overview</h3>
+
+            <p>
+                Custom element names must contain a hyphen so that the browser
+                can distinguish them from standard HTML elements.
+            </p>
+
+            <p>
+                Before using the custom element, we register it in TypeScript:
+            </p>
+
+            <pre><code class="language-typescript">customElements.define(
+    "code-viewer",
+    CodeViewer
+);</code></pre>
+
+            <p>
+                The class extends <code>HTMLElement</code>, giving it the
+                normal behavior of an HTML element:
+            </p>
+
+            <pre><code class="language-typescript">export class CodeViewer extends HTMLElement {
+
+    connectedCallback() {
+        // Set up the code viewer.
+    }
+}</code></pre>
+
+            <p>
+                When the browser finds <code>&lt;code-viewer&gt;</code> in the
+                HTML, it creates the element and calls
+                <code>connectedCallback()</code>. This gives us a place to set
+                up the widget.
+            </p>
+
+            <p>We can also add settings using HTML attributes:</p>
+
+            <pre><code class="language-html">&lt;code-viewer
+    mode="fullText"
+    add-keyboard-control="false"&gt;
+    const message = "Hello!";
+&lt;/code-viewer&gt;</code></pre>
+
+            <p>
+                The full implementation is more advanced, but the main idea is
+                simple: a custom element lets us package interface code into a
+                reusable HTML element that we can place anywhere on the page.
+            </p>
+        </section>
+    </section>
+</article>

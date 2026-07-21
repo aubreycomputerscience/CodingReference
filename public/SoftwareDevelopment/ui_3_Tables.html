@@ -1,0 +1,329 @@
+<article class="lesson">
+    <h1>3: LISTS AND TABLES</h1>
+
+    <p>
+        Programs often store information in arrays. To display that information,
+        we can loop through the array and create one element for each item.
+    </p>
+
+    <p>
+        This works especially well when the amount of data may change. If
+        another item is added to the array, the program can automatically add
+        another item to the screen.
+    </p>
+
+    <section>
+        <h2>Lesson 3.1: Building a List from Data</h2>
+
+        <p>Suppose we have a list of animals:</p>
+
+        <pre><code class="language-typescript">const animals = ["Cat", "Dog", "Rabbit"];</code></pre>
+
+        <p>
+            We can loop through the array and create one visible element for
+            each animal:
+        </p>
+
+        <pre><code class="language-typescript">function buildUI() {
+    for (const animal of animals) {
+        const animalText = document.createElement("p");
+        animalText.textContent = animal;
+
+        document.body.append(animalText);
+    }
+}
+
+buildUI();</code></pre>
+
+        <p>
+            The loop runs once for each animal. During each loop, the program
+            creates an element, adds the animal’s name, and places it on the
+            page.
+        </p>
+
+        <p>
+            The data determines how many elements appear. If we add another
+            animal to the array, the program creates another element the next
+            time <code>buildUI()</code> runs.
+        </p>
+
+        <pre><code class="language-typescript">const animals = ["Cat", "Dog", "Rabbit", "Horse"];</code></pre>
+
+        <p>
+            If the list never changes, we could also write the items directly
+            in HTML. Creating the list with TypeScript is useful when the
+            program needs to add, remove, or update the items.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 3.2: Building a Table from Data</h2>
+
+        <p>
+            A table displays several pieces of related information in rows and
+            columns.
+        </p>
+
+        <p>Suppose we have an array of people:</p>
+
+        <pre><code class="language-typescript">type Person = {
+    name: string;
+    age: number;
+};
+
+const peopleData: Array&lt;Person&gt; = [
+    { name: "Jon Snow", age: 24 },
+    { name: "Arya Stark", age: 18 },
+    { name: "Tyrion Lannister", age: 32 }
+];</code></pre>
+
+        <p>
+            Each item stores a name and an age. We will discuss this format in
+            greater detail later. For now, we only need to know that we can
+            access the information using <code>person.name</code> and
+            <code>person.age</code>.
+        </p>
+
+        <p>We first create an element that will hold the rows:</p>
+
+        <pre><code class="language-typescript">const peopleView = document.createElement("div");
+document.body.append(peopleView);</code></pre>
+
+        <p>
+            A <code>div</code> is a general-purpose element. It can act like a
+            box that holds text or other elements. Here,
+            <code>peopleView</code> holds the entire table.
+        </p>
+
+        <section>
+            <h3>Creating the Rows</h3>
+
+            <p>We can now create one row for each person:</p>
+
+            <pre><code class="language-typescript">function buildPeopleTable() {
+
+    // Remove the old rows before rebuilding the table.
+    peopleView.replaceChildren();
+
+    for (const person of peopleData) {
+        const row = document.createElement("div");
+
+        const name = document.createElement("div");
+        name.textContent = person.name;
+
+        const age = document.createElement("div");
+        age.textContent = person.age.toString();
+
+        row.append(name, age);
+        peopleView.append(row);
+    }
+}
+
+buildPeopleTable();</code></pre>
+
+            <p>
+                During each loop, the program creates a <code>row</code>. It
+                then creates separate elements for the person’s name and age
+                and places both of them inside the row.
+            </p>
+
+            <p>
+                This is our first example of placing elements inside another
+                element:
+            </p>
+
+            <pre><code class="language-typescript">row.append(name, age);</code></pre>
+
+            <p>
+                The name and age are placed inside the row. The row is then
+                placed inside <code>peopleView</code>.
+            </p>
+        </section>
+
+        <section>
+            <h3>Rebuilding the Table</h3>
+
+            <p>
+                If we rebuild the table, we must first remove the old rows:
+            </p>
+
+            <pre><code class="language-typescript">peopleView.replaceChildren();</code></pre>
+
+            <p>
+                Without this line, calling <code>buildPeopleTable()</code> a
+                second time would add another copy of every row.
+            </p>
+
+            <p>After changing the data, we can call the function again:</p>
+
+            <pre><code class="language-typescript">peopleData.push({ // Add an element to the end of the array.
+    name: "Sansa Stark",
+    age: 22
+});
+
+buildPeopleTable();</code></pre>
+
+            <p>
+                The old rows are removed, and the table is rebuilt using the
+                updated array.
+            </p>
+        </section>
+
+        <section>
+            <h3>Arranging Each Row</h3>
+
+            <p>
+                By default, the name and age may not appear next to each other.
+                We can tell the row to arrange the elements inside it from left
+                to right:
+            </p>
+
+            <pre><code class="language-typescript">function buildPeopleTable() {
+
+    // Remove the old rows before rebuilding the table.
+    peopleView.replaceChildren();
+
+    for (const person of peopleData) {
+        const row = document.createElement("div");
+        row.style.display = "flex";
+        row.style.flexDirection = "row";
+        row.style.padding = "6px 0";
+
+        const name = document.createElement("div");
+        name.textContent = person.name;
+        name.style.width = "200px";
+
+        const age = document.createElement("div");
+        age.textContent = person.age.toString();
+        age.style.width = "80px";
+
+        row.append(name, age);
+        peopleView.append(row);
+    }
+}</code></pre>
+
+            <p>
+                Setting <code>display</code> to <code>"flex"</code> allows us
+                to control how the elements inside the row are arranged.
+                Setting <code>flexDirection</code> to <code>"row"</code>
+                places them from left to right. Giving the name and age a width
+                keeps the values aligned in columns.
+            </p>
+
+            <p>
+                We will examine layout options in greater detail later.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding</h2>
+
+        <ol>
+            <li>
+                How does the data determine how many elements appear on the
+                screen?
+            </li>
+            <li>
+                What does the <code>for...of</code> loop do in
+                <code>buildUI()</code>?
+            </li>
+            <li>What is the purpose of <code>peopleView</code>?</li>
+            <li>Why do we create one row for each person?</li>
+            <li>What does <code>row.append(name, age)</code> do?</li>
+            <li>What does <code>replaceChildren()</code> do?</li>
+            <li>
+                What would happen if we rebuilt the table without calling
+                <code>replaceChildren()</code>?
+            </li>
+            <li>
+                Why do we call <code>buildPeopleTable()</code> again after
+                changing the data?
+            </li>
+            <li>
+                What do <code>display = "flex"</code> and
+                <code>flexDirection = "row"</code> do in this example?
+            </li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>Lesson 3.3: Creating a Table in HTML</h2>
+
+        <p>
+            A traditional webpage may define a table directly in HTML. This
+            works well when the rows are known ahead of time and do not need to
+            be created on the fly.
+        </p>
+
+        <pre><code class="language-html">&lt;table class="people-table"&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Name&lt;/th&gt;
+        &lt;th&gt;Age&lt;/th&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+        &lt;td&gt;Jon Snow&lt;/td&gt;
+        &lt;td&gt;24&lt;/td&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+        &lt;td&gt;Arya Stark&lt;/td&gt;
+        &lt;td&gt;18&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+
+        <p>The table uses four main HTML elements:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Element</th>
+                    <th>Purpose</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>table</code></td>
+                    <td>Contains the entire table</td>
+                </tr>
+                <tr>
+                    <td><code>tr</code></td>
+                    <td>Creates a table row</td>
+                </tr>
+                <tr>
+                    <td><code>th</code></td>
+                    <td>Creates a heading cell</td>
+                </tr>
+                <tr>
+                    <td><code>td</code></td>
+                    <td>Creates a regular data cell</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>
+            We can use CSS to add spacing and make the table easier to read:
+        </p>
+
+        <pre><code class="language-css">.people-table {
+    border-collapse: collapse;
+}
+
+.people-table th,
+.people-table td {
+    padding: 8px 16px;
+    text-align: left;
+}
+
+.people-table th:first-child,
+.people-table td:first-child {
+    padding-right: 32px;
+}</code></pre>
+
+        <p>
+            The HTML class <code>people-table</code> connects the table to the
+            matching rules in the CSS file.
+        </p>
+    </section>
+</article>

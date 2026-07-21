@@ -1,0 +1,409 @@
+<article class="lesson">
+    <h1>6: CSS QUICK REFERENCE</h1>
+
+    <p>
+        CSS stands for <strong>Cascading Style Sheets</strong>. HTML defines
+        the elements on a webpage, while CSS defines how those elements look
+        and how they are arranged.
+    </p>
+
+    <p>
+        The word <strong>cascading</strong> refers to the way CSS combines
+        multiple rules and decides which value should be used when more than
+        one rule affects the same property.
+    </p>
+
+    <p>
+        Students should understand the basic structure of CSS and recognize the
+        properties we use regularly. There is no need to memorize every
+        available property. For more complicated styling, layouts, or effects,
+        we can use reference materials or AI and then read through the result
+        to understand what it changes.
+    </p>
+
+    <section>
+        <h2>Lesson 6.1: CSS Rules</h2>
+
+        <p>
+            A CSS rule connects a name with one or more styling instructions.
+        </p>
+
+        <pre><code class="language-css">.message {
+    background: lightgray;
+    padding: 8px;
+}</code></pre>
+
+        <p>We can apply that style to an element in HTML:</p>
+
+        <pre><code class="language-html">&lt;p class="message"&gt;Hello!&lt;/p&gt;</code></pre>
+
+        <p>Or to an element created in TypeScript:</p>
+
+        <pre><code class="language-typescript">const message = document.createElement("p");
+message.className = "message";</code></pre>
+
+        <p>A basic CSS rule follows this format:</p>
+
+        <pre><code class="language-css">.class-name {
+    property: value;
+}</code></pre>
+
+        <p>
+            The class name begins with a period in the CSS file. Inside the
+            braces, each property is followed by a value and a semicolon.
+        </p>
+
+        <p>
+            In HTML and TypeScript, we use the class name without the period:
+        </p>
+
+        <pre><code class="language-html">&lt;p class="message"&gt;Hello!&lt;/p&gt;</code></pre>
+
+        <pre><code class="language-typescript">message.className = "message";</code></pre>
+    </section>
+
+    <section>
+        <h2>Lesson 6.2: Common Properties</h2>
+
+        <p>
+            The following table provides a quick reference for properties we
+            have already used or may use regularly.
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Purpose</th>
+                    <th>CSS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Text color</td>
+                    <td><code>color: white;</code></td>
+                </tr>
+                <tr>
+                    <td>Background color</td>
+                    <td><code>background: blue;</code></td>
+                </tr>
+                <tr>
+                    <td>Text size</td>
+                    <td><code>font-size: 20px;</code></td>
+                </tr>
+                <tr>
+                    <td>Width</td>
+                    <td><code>width: 200px;</code></td>
+                </tr>
+                <tr>
+                    <td>Height</td>
+                    <td><code>height: 100px;</code></td>
+                </tr>
+                <tr>
+                    <td>Interior spacing</td>
+                    <td><code>padding: 8px;</code></td>
+                </tr>
+                <tr>
+                    <td>Exterior spacing</td>
+                    <td><code>margin: 8px;</code></td>
+                </tr>
+                <tr>
+                    <td>Border</td>
+                    <td><code>border: 1px solid gray;</code></td>
+                </tr>
+                <tr>
+                    <td>Rounded corners</td>
+                    <td><code>border-radius: 8px;</code></td>
+                </tr>
+                <tr>
+                    <td>Hide an element</td>
+                    <td><code>display: none;</code></td>
+                </tr>
+                <tr>
+                    <td>Arrange interior elements</td>
+                    <td><code>display: flex;</code></td>
+                </tr>
+                <tr>
+                    <td>Arrange left to right</td>
+                    <td><code>flex-direction: row;</code></td>
+                </tr>
+                <tr>
+                    <td>Arrange top to bottom</td>
+                    <td><code>flex-direction: column;</code></td>
+                </tr>
+                <tr>
+                    <td>Take remaining space</td>
+                    <td><code>flex: 1;</code></td>
+                </tr>
+                <tr>
+                    <td>Allow scrolling when needed</td>
+                    <td><code>overflow: auto;</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <section>
+            <h3>Padding and Margin</h3>
+
+            <p>Padding adds space inside an element, around its contents.</p>
+
+            <pre><code class="language-css">.message {
+    padding: 12px;
+}</code></pre>
+
+            <p>
+                Margin adds space outside an element, separating it from nearby
+                elements.
+            </p>
+
+            <pre><code class="language-css">.message {
+    margin: 12px;
+}</code></pre>
+        </section>
+
+        <section>
+            <h3>Several Values</h3>
+
+            <p>Some properties can accept more than one value.</p>
+
+            <pre><code class="language-css">.message {
+    padding: 8px 16px;
+}</code></pre>
+
+            <p>
+                The first value controls the top and bottom. The second controls
+                the left and right.
+            </p>
+
+            <pre><code class="language-css">.message {
+    margin: 8px 12px 16px 20px;
+}</code></pre>
+
+            <p>With four values, the order is:</p>
+
+            <ol>
+                <li>Top</li>
+                <li>Right</li>
+                <li>Bottom</li>
+                <li>Left</li>
+            </ol>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 6.3: Applying More Than One Class</h2>
+
+        <p>An HTML element can use more than one CSS class.</p>
+
+        <pre><code class="language-html">&lt;button class="sidebar-item selected-item"&gt;
+    Settings
+&lt;/button&gt;</code></pre>
+
+        <p>
+            The class names are separated by spaces. This button receives the
+            rules from both <code>sidebar-item</code> and
+            <code>selected-item</code>.
+        </p>
+
+        <pre><code class="language-css">.sidebar-item {
+    padding: 8px;
+    background: lightgray;
+}
+
+.selected-item {
+    background: blue;
+    color: white;
+}</code></pre>
+
+        <p>
+            The first class provides the basic appearance of every sidebar
+            item. The second class adds the appearance used for the selected
+            item.
+        </p>
+
+        <p>
+            Both classes set the background color, so CSS must decide which
+            value to use. In this simple example, the rule written later wins,
+            and the background becomes blue.
+        </p>
+
+        <pre><code class="language-css">.sidebar-item {
+    background: lightgray;
+}
+
+.selected-item {
+    background: blue;
+}</code></pre>
+
+        <p>
+            This process is part of the <strong>cascade</strong>. CSS combines
+            all of the rules that apply to an element and determines which
+            value should be used for each property.
+        </p>
+
+        <p>
+            More specific rules can override less specific rules, so the last
+            rule does not always win. We do not need to memorize all of the
+            rules yet. When a style does not appear as expected, another CSS
+            rule may be overriding it.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 6.4: Changing Classes in TypeScript</h2>
+
+        <p>
+            We can change an element’s CSS classes while the program is
+            running.
+        </p>
+
+        <section>
+            <h3>Adding a Class</h3>
+
+            <pre><code class="language-typescript">myButton.classList.add("selected-item");</code></pre>
+
+            <p>
+                This adds <code>selected-item</code> without removing the
+                element’s existing classes.
+            </p>
+
+            <p>For example, the button may now have both classes:</p>
+
+            <pre><code class="language-html">&lt;button class="sidebar-item selected-item"&gt;
+    Settings
+&lt;/button&gt;</code></pre>
+        </section>
+
+        <section>
+            <h3>Removing a Class</h3>
+
+            <pre><code class="language-typescript">myButton.classList.remove("selected-item");</code></pre>
+
+            <p>
+                This removes the selected appearance while leaving the other
+                classes unchanged.
+            </p>
+        </section>
+
+        <section>
+            <h3>Replacing All Classes</h3>
+
+            <pre><code class="language-typescript">myButton.className = "sidebar-item";</code></pre>
+
+            <p>
+                The <code>className</code> property replaces the complete list
+                of classes. Use <code>classList.add()</code> or
+                <code>classList.remove()</code> when we want to change one
+                class without affecting the others.
+            </p>
+        </section>
+
+        <section>
+            <h3>Showing and Hiding Elements</h3>
+
+            <p>We can hide an element using a CSS class:</p>
+
+            <pre><code class="language-css">.hidden {
+    display: none;
+}</code></pre>
+
+            <p>Then add or remove that class in TypeScript:</p>
+
+            <pre><code class="language-typescript">myElement.classList.add("hidden");    // Hide the element.
+myElement.classList.remove("hidden"); // Show the element.</code></pre>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 6.5: Reading CSS</h2>
+
+        <p>
+            Students do not need to memorize every CSS property. However, they
+            should be able to read a CSS rule and determine what it is doing.
+        </p>
+
+        <p>Consider the following example:</p>
+
+        <pre><code class="language-css">.sidebar-button {
+    width: 150px;
+    padding: 8px;
+    background: blue;
+    color: white;
+    border: none;
+}</code></pre>
+
+        <p>We can read it one line at a time:</p>
+
+        <ul>
+            <li>
+                Apply these rules to elements using the class
+                <code>sidebar-button</code>.
+            </li>
+            <li>Set the width to 150 pixels.</li>
+            <li>Add 8 pixels of space inside the button.</li>
+            <li>Make the background blue.</li>
+            <li>Make the text white.</li>
+            <li>Remove the border.</li>
+        </ul>
+
+        <p>When using CSS from a reference or AI, check four things:</p>
+
+        <ol>
+            <li>Which element or class does the rule affect?</li>
+            <li>Which property is being changed?</li>
+            <li>What value is being assigned?</li>
+            <li>Could another rule be overriding it?</li>
+        </ol>
+
+        <p>For example, AI might suggest:</p>
+
+        <pre><code class="language-css">.card {
+    box-shadow: 0 2px 8px rgb(0 0 0 / 20%);
+}</code></pre>
+
+        <p>
+            Students do not need to memorize the format of
+            <code>box-shadow</code>. They should understand that the rule
+            affects elements using the <code>card</code> class and adds a
+            shadow.
+        </p>
+
+        <p>
+            The goal is to understand the structure well enough to use CSS
+            safely, make basic changes, and recognize when a result does not
+            match what we intended.
+        </p>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding</h2>
+
+        <ol>
+            <li>What does CSS stand for?</li>
+            <li>What is the role of CSS?</li>
+            <li>
+                Why does a custom class name begin with a period in a CSS file?
+            </li>
+            <li>
+                Do we include the period when assigning a class in HTML or
+                TypeScript?
+            </li>
+            <li>What is the difference between padding and margin?</li>
+            <li>What does <code>display: flex</code> control?</li>
+            <li>What does <code>flex: 1</code> control?</li>
+            <li>How do we apply two CSS classes to one HTML element?</li>
+            <li>What does the cascade determine?</li>
+            <li>
+                Why might a style written earlier still override a style
+                written later?
+            </li>
+            <li>What does <code>classList.add()</code> do?</li>
+            <li>
+                What is the difference between <code>className</code> and
+                <code>classList.add()</code>?
+            </li>
+            <li>
+                What four questions should we ask when reading unfamiliar CSS?
+            </li>
+        </ol>
+    </section>
+</article>

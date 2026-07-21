@@ -1,0 +1,332 @@
+<article class="lesson">
+    <h1>2. USER INPUT</h1>
+
+    <p>
+        A program can respond when the user clicks a button, enters text,
+        presses a key, or drags something across the screen.
+    </p>
+
+    <section>
+        <h2>Lesson 2.1: Buttons and Text Input</h2>
+
+        <section>
+            <h3>Responding to a Button Click</h3>
+
+            <p>
+                A button has an <code>onclick</code> property that allows us to
+                add code that will run when the button is clicked:
+            </p>
+
+            <pre><code class="language-typescript">const myButton = document.createElement("button");
+myButton.textContent = "Click Me";
+
+document.body.append(myButton);
+
+myButton.onclick = () =&gt; {
+    myButton.textContent = "You clicked me!";
+};</code></pre>
+
+            <p>
+                The code inside the function runs when the user clicks the
+                button.
+            </p>
+        </section>
+
+        <section>
+            <h3>Reading Text Input</h3>
+
+            <p>
+                An input field stores the text entered into it in its
+                <code>value</code> property. We can read that value after the
+                user clicks a button:
+            </p>
+
+            <pre><code class="language-typescript">const nameInput = document.createElement("input");
+nameInput.type = "text";
+
+const submitButton = document.createElement("button");
+submitButton.textContent = "Submit";
+
+document.body.append(nameInput, submitButton);
+
+submitButton.onclick = () =&gt; {
+    const userEnteredName = nameInput.value;
+    // Do something with userEnteredName.
+};</code></pre>
+
+            <p>We can also run code whenever the text changes:</p>
+
+            <pre><code class="language-typescript">nameInput.oninput = () =&gt; {
+    const currentText = nameInput.value;
+};</code></pre>
+
+            <p>
+                Use <code>onclick</code> to respond to a click. Use
+                <code>oninput</code> to respond whenever the value of an input
+                changes.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding</h2>
+
+        <ol>
+            <li>
+                Which button property allows us to add code that runs when the
+                button is clicked?
+            </li>
+            <li>
+                How do we access the text entered into an input field?
+            </li>
+            <li>
+                What is the difference between <code>onclick</code> and
+                <code>oninput</code>?
+            </li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>Lesson 2.2: Keyboard Input</h2>
+
+        <p>
+            We can run code whenever the user presses a key. In this example,
+            the arrow keys change a character’s position in a game, while the
+            "q" key quits:
+        </p>
+
+        <pre><code class="language-typescript">document.addEventListener("keydown", (event) =&gt; {
+    switch (event.key) {
+        case "ArrowLeft":
+            event.preventDefault();
+            x = x - 10;
+            break;
+
+        case "ArrowRight":
+            event.preventDefault();
+            x = x + 10;
+            break;
+
+        case "ArrowUp":
+            event.preventDefault();
+            y = y - 10;
+            break;
+
+        case "ArrowDown":
+            event.preventDefault();
+            y = y + 10;
+            break;
+
+        case "q":
+            quit();
+            return;
+    }
+
+    updateUI();
+    save();
+});</code></pre>
+
+        <p>Some common keys that you may use in an app include:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Key</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Left arrow</td>
+                    <td><code>"ArrowLeft"</code></td>
+                </tr>
+                <tr>
+                    <td>Right arrow</td>
+                    <td><code>"ArrowRight"</code></td>
+                </tr>
+                <tr>
+                    <td>Up arrow</td>
+                    <td><code>"ArrowUp"</code></td>
+                </tr>
+                <tr>
+                    <td>Down arrow</td>
+                    <td><code>"ArrowDown"</code></td>
+                </tr>
+                <tr>
+                    <td>Enter</td>
+                    <td><code>"Enter"</code></td>
+                </tr>
+                <tr>
+                    <td>Space bar</td>
+                    <td><code>" "</code></td>
+                </tr>
+                <tr>
+                    <td>Q key</td>
+                    <td><code>"q"</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>
+            Arrow keys normally scroll a webpage when there is room to scroll.
+            The <code>event.preventDefault()</code> instruction prevents this
+            normal response so that the arrow key controls the game instead.
+        </p>
+
+        <p>
+            Webpages also include a small margin around the page by default.
+            Add the following code to the CSS file when building a full-screen
+            app:
+        </p>
+
+        <pre><code class="language-css">body {
+    /* Remove the space around the webpage or app. */
+    margin: 0;
+    padding: 0;
+}</code></pre>
+    </section>
+
+    <section>
+        <h2>Lesson 2.3: Click Position</h2>
+
+        <p>
+            To find out where the user clicked, we can read information from
+            the click:
+        </p>
+
+        <pre><code class="language-typescript">element.onclick = (event) =&gt; {
+    const xPosition = event.clientX;     // Horizontal position
+    const yPosition = event.clientY;     // Vertical position 
+    const clickedElement = event.target;
+};</code></pre>
+
+
+        <p>
+            For example, a drawing app could place a shape at the position of a
+            click:
+        </p>
+
+        <pre><code class="language-typescript">myMainView.onclick = (event) =&gt; {
+    addShape(event.clientX, event.clientY);
+};</code></pre>
+
+    </section>
+
+    <section>
+        <h2>Lesson 2.4: Dragging an Element</h2>
+
+        <p>
+            To drag an element, we need to track when the user presses down,
+            moves the pointer, and releases it. We also need to position the element using absolute coordinates.
+            Otherwise, the webpage layout may determine its position independently of what we are tyring to do.
+        </p>
+
+        <section>
+            <h3>Create an Element to Move</h3>
+
+            <pre><code class="language-typescript">const box = document.createElement("div");
+box.style.width = "100px";
+box.style.height = "100px";
+box.style.background = "blue";
+box.style.position = "absolute";
+
+document.body.append(box);</code></pre>
+        </section>
+
+        <section>
+            <h3>Track Whether It Is Being Dragged</h3>
+
+            <pre><code class="language-typescript">let isDragging = false;</code></pre>
+        </section>
+
+        <section>
+            <h3>Respond to Dragging</h3>
+
+            <pre><code class="language-typescript">box.onpointerdown = () =&gt; {
+    isDragging = true;
+};
+
+box.onpointermove = (event) =&gt; {
+    if (isDragging === true) {
+        box.style.left = event.clientX + "px";
+        box.style.top = event.clientY + "px";
+    }
+};
+
+box.onpointerup = () =&gt; {
+    isDragging = false;
+};</code></pre>
+        </section>
+
+        <p>
+            When the user presses down, <code>isDragging</code> becomes
+            <code>true</code>. The box then follows the pointer until the user
+            releases it. Pointer input works with a mouse, trackpad,
+            touchscreen, or stylus.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 2.5: User Input and Events</h2>
+
+        <p>
+            So far, we have described how to respond to user input. We can now
+            take a step back and look at what is happening more generally.
+        </p>
+
+        <p>
+            The browser watches for actions such as clicks, key presses, and
+            pointer movement. These actions are called
+            <strong>events</strong>. When an event occurs, the browser
+            identifies where it happened and runs the code connected to it.
+        </p>
+
+        <p>For example:</p>
+
+        <pre><code class="language-typescript">button.onclick = () =&gt; {
+    // Respond to the click.
+};</code></pre>
+
+        <p>
+            When the button is clicked, the browser recognizes the click,
+            checks the button’s <code>onclick</code> property, and runs the
+            code stored there.
+        </p>
+
+        <p>
+            Some events also provide additional information. A keyboard event
+            tells us which key was pressed. A click or pointer event tells us
+            where the action occurred.
+        </p>
+
+        <p>
+            Events are simply the system the browser uses to tell our program
+            that the user did something.
+        </p>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding</h2>
+
+        <ol>
+            <li>
+                How do we determine which keyboard key was pressed?
+            </li>
+            <li>
+                What does <code>event.preventDefault()</code> do?
+            </li>
+            <li>
+                What do <code>event.clientX</code> and
+                <code>event.clientY</code> represent?
+            </li>
+            <li>What does <code>event.target</code> contain?</li>
+            <li>Which pointer property begins a drag?</li>
+            <li>
+                Which pointer property runs while the pointer moves?
+            </li>
+            <li>Which pointer property ends a drag?</li>
+            <li>Why do we use an <code>isDragging</code> variable?</li>
+            <li>What does the browser mean by an event?</li>
+        </ol>
+    </section>
+</article>
