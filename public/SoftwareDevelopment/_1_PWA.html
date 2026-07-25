@@ -1,88 +1,293 @@
-PWA 
-- webpage that looks like an app and can run offline
-- can install on device
-- static site - server just provides file (we update locally)
+<article class="lesson">
+    <h1>Chapter 1: Web Apps</h1>
 
-	PROGRAMMING LANGUAGE: TYPESCRIPT (JavaScript with type checking)
-	LAYOUT: TYPESCRIPT (programmatically creating HTML & CSS)
-	EDITOR: VISUAL STUDIO CODE (Running Vite as the Dev Server/Build Engine from the terminal tab)
-	RUNTIME: RUN PROGRAMS in VISUAL STUDIO, CHROME, OR ON THE DESKTOP
+<p>
+    In this course, we will build Progressive Web Apps, or PWAs. A PWA is a
+    website designed to look and behave like an app. It runs in a browser, can
+    work offline, and may be installed on a computer or mobile device.
+</p>
 
-HOSTING: GITHUB
-DATABASE: INDEXEDDB
+<p>
+    We create the app using software on our computer, then publish it online.
+    The app itself is made from text files containing our TypeScript, HTML, and
+    CSS. When someone opens the app, the browser downloads those files and runs
+    the code on their device. The app does not need to send information back and
+    forth with a server in order to run.
+</p>
 
+<h2>Development Tools</h2>
 
-Node.js is a program that can run/translate Javascript programs and connects a program to OS calls / other programs.
-Node.js is running Vite, Vite is serving the files, and the browser is executing your app's actual JavaScript code.
+<table>
+    <thead>
+        <tr>
+            <th>Purpose</th>
+            <th>Tool</th>
+            <th>What It Does</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Programming Language</td>
+            <td>TypeScript</td>
+            <td>Provides the instructions that tell the app what to do.</td>
+        </tr>
+        <tr>
+            <td>Layout and Interface</td>
+            <td>HTML and CSS</td>
+            <td>
+                Define what appears on the screen and how it is arranged and
+                styled. We will initially learn to create and modify these
+                elements in code.
+            </td>
+        </tr>
+        <tr>
+            <td>Code Editor</td>
+            <td>Visual Studio Code</td>
+            <td>
+                A glorified text editor used to write code. It also keeps track
+                of our program files, provides access to the terminal, and
+                allows us to preview our app.
+            </td>
+        </tr>
+        <tr>
+            <td>Development Server</td>
+            <td>Vite</td>
+            <td>
+                Takes our program files and makes them available to the browser
+                while we are developing the app.
+            </td>
+        </tr>
+        <tr>
+            <td>Browser</td>
+            <td>Chrome</td>
+            <td>
+                Downloads the files, reads the JavaScript, and runs the app.
+            </td>
+        </tr>
+    </tbody>
+</table>
 
-HOST: Vite
-OS: connects
-BROWSER: Runs
+<p>We will also use these tools as our apps become more advanced:</p>
 
+<table>
+    <thead>
+        <tr>
+            <th>Purpose</th>
+            <th>Tool</th>
+            <th>What It Does</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Hosting</td>
+            <td>GitHub</td>
+            <td>
+                Stores our app online so that browsers can download it.
+            </td>
+        </tr>
+        <tr>
+            <td>Local Database</td>
+            <td>IndexedDB</td>
+            <td>Stores data on the user’s device.</td>
+        </tr>
+    </tbody>
+</table>
 
+<h2>TypeScript</h2>
 
+<p>
+    TypeScript is the programming language we will use to write instructions
+    for our apps. It is a modern version of JavaScript that adds tools intended
+    to make programs easier to write and maintain.
+</p>
 
+<p>
+    JavaScript was originally created to add small programs and interactivity
+    to webpages. Today, it is used to build complete applications. Browsers can
+    read and run JavaScript directly. This is called interpreted code. We are
+    providing instructions for the browser to read rather than creating machine
+    code for the processor ourselves.
+</p>
 
+<p>
+    The most important feature TypeScript adds is type checking. TypeScript
+    keeps track of the kinds of values used in a program and can warn us when we
+    use them incorrectly.
+</p>
 
+<p>
+    For example, JavaScript may allow us to divide the number
+    <code>3</code> by the word <code>"cat"</code> or try to access a property
+    that does not exist. TypeScript can identify many mistakes like these before
+    the program runs.
+</p>
 
+<p>
+    TypeScript also improves autocomplete. When the editor knows what kind of
+    value we are working with, it can suggest the properties and functions
+    available for that value.
+</p>
 
+<p>
+    Browsers do not read TypeScript directly. Before the browser receives the
+    program, the TypeScript-specific information is removed, leaving regular
+    JavaScript.
+</p>
 
+<h2>Vite</h2>
 
+<p>
+    Our app is made from text files stored on our computer. The browser needs a
+    way to access those files while we are working.
+</p>
 
+<p>
+    Vite starts a local development server. This server takes the files from our
+    project and gives them to the browser, much like an online server would.
+    This allows us to open the app in Chrome and test it before publishing it
+    online.
+</p>
 
-Web App Structure
+<p>
+    Vite also handles our TypeScript files so the browser receives JavaScript it
+    can run. As we make changes, Vite updates the app in the browser so we can
+    quickly see the results.
+</p>
 
+<p>
+    Program Files<br>
+    ↓<br>
+    Vite<br>
+    ↓<br>
+    Browser
+</p>
 
-Basic: Static Website 
+<h2>Node.js and npm</h2>
 
-UI
- ↓
-Local Data
+<p>
+    You will often see the names Node.js and npm when working with Vite.
+    Node.js is a program that allows your computer to read and run JavaScript
+    without using a web browser.
+</p>
 
+<p>
+    This can be confusing because we are not using Node.js to run our app. The
+    browser does that. We use Node.js to run Vite, and Vite runs a local
+    development server that gives our app files to the browser.
+</p>
 
-Simple: Backend Database
+<p>
+    npm stands for Node Package Manager. You can think of it as a tool for
+    downloading programs and libraries used by a project. We can also use npm
+    commands to start downloaded programs, such as Vite.
+</p>
 
-UI
- ↓
-Database (Backend as a Service)
+<p>
+    Thus, npm downloads Vite, Node.js runs Vite, and Vite gives our program
+    files to the browser.
+</p>
 
-the biggest headaches are:
-* Authentication / authorization
-* Session management
-* Permissions
-* Data validation
-* API versioning
-* Error handling
-* Distributed systems issues
+<h2>Web App Architecture</h2>
 
-Medium: Backend
+<p>
+    Web apps can be organized in different ways depending on what they need to
+    do.
+</p>
 
-UI
- ↓
-API (don't trust the user, so move to cloud, which you control)
- ↓
-Database
+<h3>Static App</h3>
 
-Calculate payroll
-Process payments
-Issue refunds
-Generate invoices
-Run AI workflows
-Validate permissions
+<p>
+    A static app works well for games, calculators, personal tools, reference
+    apps, and many other projects.
+</p>
 
+<p>
+    The app consists of one or more files that run locally on the user’s device.
+    If it needs to save information, it can store that data locally as well.
+</p>
 
-Large App: Backend Ecosystem
+<p>
+    App<br>
+    ↓<br>
+    Local Data
+</p>
 
-UI
- ↓
-Many APIs
- ↓
-Many Services
- ↓
-Many Databases
+<p>
+    Most of the apps we build will begin with this structure.
+</p>
 
-Examples:
-* Amazon
-* Facebook
-* Capital One
-* Google
+<h3>App with an Online Database</h3>
+
+<p>
+    Suppose we want a user to sign in on a school computer, save information,
+    and then access the same information later from home. Storing the data only
+    on one device would not work.
+</p>
+
+<p>
+    Instead, the app can connect to an online database service.
+</p>
+
+<p>
+    App<br>
+    ↓<br>
+    Online Database
+</p>
+
+<p>
+    This allows information to be shared between devices and users. It also
+    introduces additional concerns, including authentication, permissions, data
+    validation, session management, and error handling.
+</p>
+
+<h3>App with a Backend</h3>
+
+<p>
+    Some apps rely on programs running on a company’s servers. This allows the
+    company to manage the system itself, run more complicated processes, and
+    control work that should not be trusted to a user’s device.
+</p>
+
+<p>
+    For example, a banking app should not allow code running on a phone to
+    decide what the user’s bank balance should be. The app sends a request to
+    the bank’s computers, which identify the user, check the request, update the
+    account, and return the result.
+</p>
+
+<p>
+    App<br>
+    ↓<br>
+    Backend API<br>
+    ↓<br>
+    Database
+</p>
+
+<p>
+    A backend might process payments, calculate payroll, issue refunds, generate
+    invoices, check permissions, or run AI workflows.
+</p>
+
+<h3>Large Application</h3>
+
+<p>
+    Large applications may require many backend programs, APIs, and databases
+    working together.
+</p>
+
+<p>
+    App<br>
+    ↓<br>
+    Many APIs<br>
+    ↓<br>
+    Many Services<br>
+    ↓<br>
+    Many Databases
+</p>
+
+<p>
+    Companies such as Amazon, Google, Meta, and Capital One operate systems at
+    this scale.
+</p>
+
+</article>

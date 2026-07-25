@@ -1,46 +1,591 @@
-NEW PROJECT (USING VITE)
-create a new one or use an old one as a template
+<article class="lesson">
+    <h1>Chapter 2: Getting Started</h1>
 
-Downloading a Template
-1. Download as a ZIP file from GitHub.
-2. Rename the folder it is in to the name of your app.
-3. Open the file in Visual Studio Code. Then, change the name of the app in public/manifest. Also check to see if the name is in the index file.
-4. Open the bottom window and select the terminal tab. Then type "npm install" and press enter. This will download the code libraries / modules that you need (dependencies).
-5. Get started. Click on the myCode file and you are ready to go.
+    <p>
+        We will use <strong>Visual Studio Code</strong>, usually called
+        <strong>VS Code</strong>, to create and edit our projects. We will also
+        use the terminal inside VS Code to run the program that prepares our
+        TypeScript code and sends the app to the browser.
+    </p>
 
-Creating New
-1. Open Terminal
-2. Create a new project by pasting this into the terminal and hitting enter. Keep name lower case. (This will install the dependencies, including Vite.) 
-		npm create vite@latest my-app-name -- --template vanilla-ts 
-          
-3. type "open ." to open the file folder where the new project is. And drag folder to desired location.
+    <p>
+        VS Code is a complicated program with many features. Ignore anything
+        that you have not been asked to use. You need only a few parts of the
+        interface.
+    </p>
 
-RUN IN DEVELOPMENT
-npm run dev    // run, build, preview are different, they are scripts listed in the package
+    <section>
+        <h2>Lesson 18.1: Working in VS Code</h2>
 
-RUN LIVE (BUNDLE FILE AND RUN)
-npm run build
-npm run preview
+        <section>
+            <h3>The File Explorer</h3>
 
+            <p>
+                Use the File Explorer in the left sidebar to open the files in
+                your project. It is the top icon in the sidebar. If you are
+                working on a small screen, close the sidebar when you do not
+                need it so that you have more room for your code. Your project
+                contains many files, but you should ignore files that you are
+                not currently using.
+            </p>
 
-MAKE INTO A WEB APP (PWA or Progressive Web App)
-* Add create service worker code in main.ts.
-* Add service worker file in public.
-* Add a manifest in the public folder. And reference it in the index.
+            <p>When starting, we will mostly work with:</p>
 
+            <ul>
+                <li><code>myCode.ts</code></li>
+                <li><code>myLogic.ts</code></li>
+                <li><code>myUIElements.ts</code></li>
+                <li><code>style.css</code></li>
+            </ul>
 
+            <p>More generally:</p>
 
-HOST
-PWA - installs a URL
-Host using GitHub Pages - a static file hosting service that points to your distirbution file
-see Repo → Settings → Pages
-// vite.config.ts
-export default {
-  base: "/your-repo-name/"
-}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Location</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>src</code> folder</td>
+                        <td>
+                            TypeScript code. <code>src</code> stands for
+                            source.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>public</code> folder</td>
+                        <td>
+                            Images, additional HTML pages, the app manifest,
+                            and other files copied directly into the finished
+                            app
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>index.html</code></td>
+                        <td>The starting HTML page</td>
+                    </tr>
+                    <tr>
+                        <td><code>style.css</code></td>
+                        <td>CSS styling</td>
+                    </tr>
+                    <tr>
+                        <td><code>package.json</code></td>
+                        <td>Project settings and commands</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
 
+        <section>
+            <h3>The Bottom Panel</h3>
 
+            <p>
+                Use the bottom panel to see coding errors or run the development
+                server that sends your app to the browser. Open the terminal by
+                selecting:
+            </p>
 
+            <pre><code>View → Terminal</code></pre>
 
+            <p>To see a list of coding errors, select:</p>
 
+            <pre><code>View → Problems</code></pre>
 
+            <p>
+                The <strong>Problems</strong> tab shows errors found while
+                checking your code. Errors that occur while the app is running
+                may instead appear in the browser.
+            </p>
+
+            <p>
+                The <strong>Terminal</strong> allows us to type commands that
+                prepare, run, or build the project. You can switch between
+                Problems and Terminal using the tabs at the top of the bottom
+                panel.
+            </p>
+
+            <p>
+                If the preview becomes stuck or you need to restart the
+                development server, click the trash button at the top of the
+                bottom panel. You can then open a new terminal and run the
+                command again.
+            </p>
+        </section>
+
+        <section>
+            <h3>Class Rules</h3>
+
+            <p>Unless your teacher tells you otherwise:</p>
+
+            <ol>
+                <li>Do not use the AI built into VS Code.</li>
+                <li>Do not use source control tools.</li>
+                <li>Do not download additional libraries.</li>
+                <li>Ignore VS Code features that we have not introduced.</li>
+            </ol>
+
+            <p>
+                Use VS Code to edit your files, run the development server, and
+                preview the app.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 18.2: Creating a Project</h2>
+
+        <p>
+            The easiest way to begin is to copy the
+            <code>my-first-pwa</code> template. You can also create a completely
+            new Vite project.
+        </p>
+
+        <section>
+            <h3>Option A: Use the <code>my-first-pwa</code> Template</h3>
+
+            <ol>
+                <li>
+                    <p>
+                        Find the <code>my-first-pwa</code> folder and make a
+                        copy.
+                    </p>
+
+                    <p>
+                        You may also download the project as a ZIP file from
+                        GitHub and unzip it.
+                    </p>
+                </li>
+
+                <li>
+                    <p>
+                        Rename the copied folder using the name of your app.
+                    </p>
+
+                    <p>
+                        Use lowercase letters and hyphens instead of spaces:
+                    </p>
+
+                    <pre><code>maze-game</code></pre>
+                </li>
+
+                <li>Open VS Code.</li>
+
+                <li>
+                    <p>Select:</p>
+
+                    <pre><code>File → Open Folder</code></pre>
+                </li>
+
+                <li>Choose the folder you copied and renamed.</li>
+
+                <li>
+                    Change the app name in the manifest file inside the
+                    <code>public</code> folder.
+                </li>
+
+                <li>
+                    Check <code>index.html</code> and update the app name there
+                    if necessary.
+                </li>
+
+                <li>
+                    <p>Open the terminal by selecting:</p>
+
+                    <pre><code>View → Terminal</code></pre>
+                </li>
+
+                <li>
+                    <p>Type:</p>
+
+                    <pre><code>npm install</code></pre>
+
+                    <p>
+                        This downloads the files that the project needs in
+                        order to run.
+                    </p>
+                </li>
+
+                <li>
+                    In the File Explorer, select <code>myCode.ts</code> and
+                    begin working.
+                </li>
+            </ol>
+
+            <p>
+                Using the <code>my-first-pwa</code> template is the simplest
+                approach because it already contains the additional files
+                needed for our projects and installable web apps.
+            </p>
+        </section>
+
+        <section>
+            <h3>Option B: Create a New Vite Project</h3>
+
+            <p>
+                A new Vite project does not automatically include all of the
+                PWA files found in the template.
+            </p>
+
+            <ol>
+                <li>Open VS Code.</li>
+
+                <li>
+                    <p>Select:</p>
+
+                    <pre><code>File → Open Folder</code></pre>
+                </li>
+
+                <li>
+                    Choose the folder where you want to create the new project.
+                </li>
+
+                <li>
+                    <p>Open the terminal:</p>
+
+                    <pre><code>View → Terminal</code></pre>
+                </li>
+
+                <li>
+                    <p>Create a new TypeScript project:</p>
+
+                    <pre><code>npm create vite@latest my-app-name -- --template vanilla-ts</code></pre>
+
+                    <p>
+                        Keep the project name lowercase and use hyphens instead
+                        of spaces.
+                    </p>
+                </li>
+
+                <li>
+                    <p>After the project is created, select:</p>
+
+                    <pre><code>File → Open Folder</code></pre>
+                </li>
+
+                <li>Choose the new project folder.</li>
+
+                <li>
+                    <p>Open the terminal again:</p>
+
+                    <pre><code>View → Terminal</code></pre>
+                </li>
+
+                <li>
+                    <p>Type:</p>
+
+                    <pre><code>npm install</code></pre>
+
+                    <p>
+                        This downloads the files that the new project needs in
+                        order to run.
+                    </p>
+                </li>
+            </ol>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 18.3: Running the Project</h2>
+
+        <p>
+            Vite includes a development server. It converts our TypeScript into
+            JavaScript that the browser can run and sends the app files to the
+            browser.
+        </p>
+
+        <p>
+            Open the project folder in VS Code, open the terminal, and type:
+        </p>
+
+        <pre><code>npm run dev    # Start Vite's development server.</code></pre>
+
+        <p>The terminal will display a response similar to:</p>
+
+        <pre><code>VITE v8.0.16  ready in 159 ms
+➜  Local:   http://localhost:5173/
+➜  Network: use --host to expose
+➜  press h + enter to show help</code></pre>
+
+        <p>
+            Click the <code>Local</code> link to view the app inside VS Code, or
+            copy and paste the address into your browser. When VS Code opens the
+            app in a preview window, it is still displaying the app in a
+            browser.
+        </p>
+
+        <p>
+            Keep the terminal running while you work. Vite usually updates the
+            page after you save your changes, but the preview can occasionally
+            behave strangely or continue showing an older version. Refresh the
+            preview or browser when the changes you made do not appear.
+        </p>
+
+        <section>
+            <h3>Stopping the Project</h3>
+
+            <p>
+                The easiest way to stop the development server is to click the
+                trash button at the top of the bottom panel.
+            </p>
+
+            <p>You can also click inside the terminal and press:</p>
+
+            <pre><code>Control + C</code></pre>
+
+            <p>To restart the server, type:</p>
+
+            <pre><code>npm run dev</code></pre>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 18.4: Building and Previewing the App</h2>
+
+        <p>While working on the app, use:</p>
+
+        <pre><code>npm run dev    # Run Vite while developing the app.</code></pre>
+
+        <p>
+            When you want to create the finished version and test it, use:
+        </p>
+
+        <pre><code>npm run build      # Create the finished app in the dist folder.
+npm run preview    # Preview the finished files in dist.</code></pre>
+
+        <p>
+            After running <code>npm run build</code>, Vite stores the finished
+            files in the <code>dist</code> folder.
+        </p>
+
+        <p>
+            Then run <code>npm run preview</code> and open the link shown in
+            the terminal. This allows you to test the finished version before
+            publishing it.
+        </p>
+
+        <p>
+            If you change the code, run <code>npm run build</code> again before
+            previewing or publishing the updated version.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 18.5: Making an Installable Web App</h2>
+
+        <p>
+            A <strong>Progressive Web App</strong>, or <strong>PWA</strong>, is
+            a website that can be installed and opened more like a traditional
+            app.
+        </p>
+
+        <p>
+            The <code>my-first-pwa</code> template may already contain the
+            required setup. In general, it includes:
+        </p>
+
+        <ol>
+            <li>A web app manifest in the <code>public</code> folder.</li>
+            <li>A reference to the manifest in <code>index.html</code>.</li>
+            <li>A service worker file in the <code>public</code> folder.</li>
+            <li>
+                Code in <code>main.ts</code> that registers the service worker.
+            </li>
+        </ol>
+
+        <section>
+            <h3>The Manifest</h3>
+
+            <p>The manifest describes the app. It may contain:</p>
+
+            <ul>
+                <li>the app’s name</li>
+                <li>its short name</li>
+                <li>its starting page</li>
+                <li>its icon</li>
+                <li>its display mode</li>
+                <li>its background and theme colors</li>
+            </ul>
+
+            <p>
+                Remember to change the app name when copying the template.
+            </p>
+        </section>
+
+        <section>
+            <h3>The Service Worker</h3>
+
+            <p>
+                A service worker runs separately from the webpage. It can help
+                the app save files for offline use and control how those files
+                are loaded.
+            </p>
+
+            <p>
+                The template already includes a placeholder service worker.
+                Leave it in place. We are not building or editing the service
+                worker when starting.
+            </p>
+        </section>
+
+        <section>
+            <h3>Install the App</h3>
+
+            <p>
+                After the PWA is hosted correctly, the browser may provide an
+                option to install or open it as an app.
+            </p>
+
+            <p>
+                The exact button depends on the browser and operating system.
+                Look in the address bar or browser menu for an option such as:
+            </p>
+
+            <pre><code>Install App</code></pre>
+
+            <p>
+                Once installed, the app can open in its own window without the
+                normal browser controls. It still uses the version of the app
+                stored online.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 18.6: Hosting with GitHub Pages</h2>
+
+        <p>
+            You can upload your project to GitHub, and GitHub Pages can host the
+            finished app for you.
+        </p>
+
+        <section>
+            <h3>Set the App’s Online Folder</h3>
+
+            <p>
+                GitHub Pages usually places the app inside a folder named after
+                your GitHub project.
+            </p>
+
+            <p>For example, if the project is named:</p>
+
+            <pre><code>maze-game</code></pre>
+
+            <p>the app may appear under:</p>
+
+            <pre><code>/maze-game/</code></pre>
+
+            <p>
+                We need to tell the app to look for its files inside that
+                folder.
+            </p>
+
+            <p>In <code>vite.config.ts</code>, write:</p>
+
+            <pre><code class="language-typescript">import { defineConfig } from "vite";
+
+export default defineConfig({
+    base: "/maze-game/"
+});</code></pre>
+
+            <p>
+                Replace <code>maze-game</code> with the exact name of your
+                GitHub project.
+            </p>
+        </section>
+
+        <section>
+            <h3>Configure GitHub Pages</h3>
+
+            <p>In GitHub, open your project and select:</p>
+
+            <pre><code>Settings → Pages</code></pre>
+
+            <p>
+                Choose the publishing method required for the project. GitHub
+                Pages may publish from a branch or use a GitHub Actions
+                workflow.
+            </p>
+
+            <p>
+                After GitHub finishes publishing, it will provide a link to the
+                app.
+            </p>
+
+            <p>
+                Installing the PWA gives this hosted website its own app icon
+                and window. The app still loads from the version stored on
+                GitHub Pages.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Quick Command Reference</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Command</th>
+                    <th>Purpose</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>npm install</code></td>
+                    <td>Download the files needed to run the project</td>
+                </tr>
+                <tr>
+                    <td><code>npm run dev</code></td>
+                    <td>Run Vite while developing the app</td>
+                </tr>
+                <tr>
+                    <td><code>npm run build</code></td>
+                    <td>Create the finished app in the <code>dist</code> folder</td>
+                </tr>
+                <tr>
+                    <td><code>npm run preview</code></td>
+                    <td>Test the finished files in <code>dist</code></td>
+                </tr>
+                <tr>
+                    <td><code>Control + C</code></td>
+                    <td>Stop the running development server</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>Check Your Understanding</h2>
+
+        <ol>
+            <li>Which VS Code panel shows the files in the project?</li>
+            <li>What can we use the bottom panel for?</li>
+            <li>What does <code>src</code> stand for?</li>
+            <li>Where should TypeScript files normally be stored?</li>
+            <li>
+                Where should images and the app manifest normally be stored?
+            </li>
+            <li>What does <code>npm install</code> do?</li>
+            <li>What does Vite’s development server do?</li>
+            <li>
+                Which command runs the project while we are developing it?
+            </li>
+            <li>How can we stop the development server?</li>
+            <li>
+                What is the difference between <code>npm run dev</code> and
+                <code>npm run build</code>?
+            </li>
+            <li>Which folder contains the finished app?</li>
+            <li>What is a PWA?</li>
+            <li>What information is stored in the app manifest?</li>
+            <li>What should we do with the placeholder service worker?</li>
+            <li>
+                Why might we need to set the app’s online folder before using
+                GitHub Pages?
+            </li>
+        </ol>
+    </section>
+</article>

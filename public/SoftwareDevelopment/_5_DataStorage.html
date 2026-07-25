@@ -1,4 +1,327 @@
-function save() {
+<article class="lesson">
+    <h1>Chapter 5: Saving Data</h1>
+
+    <p>
+        Web applications often need to save information so that it remains
+        available after the page is refreshed or the browser is closed. The
+        appropriate storage tool depends on how much information we need to
+        save, how it is organized, and whether it must be shared with other
+        users or devices.
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Need</th>
+                <th>Appropriate Tool</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>A theme setting, username, or a few simple values</td>
+                <td><code>localStorage</code></td>
+            </tr>
+            <tr>
+                <td>Structured records, lists, or offline app data</td>
+                <td>IndexedDB</td>
+            </tr>
+            <tr>
+                <td>Data shared among users or devices</td>
+                <td>A server database</td>
+            </tr>
+            <tr>
+                <td>Complex relational queries</td>
+                <td>Usually a server database using SQL</td>
+            </tr>
+            <tr>
+                <td>Local structured data with cleaner syntax</td>
+                <td>
+                    IndexedDB through <code>idb</code> or
+                    <code>idb-keyval</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <section>
+        <h2>Saving Simple Values with <code>localStorage</code></h2>
+
+        <p>
+            <code>localStorage</code> provides a simple way to save small
+            amounts of data to disk through the browser. It works like a
+            dictionary: we store a value for a key and later use that key to
+            retrieve the value.
+        </p>
+
+        <p>Suppose our program contains two number input fields:</p>
+
+        <pre><code class="language-typescript">function save(): void {
+    const x = Number(xInputField.value);
+    const y = Number(yInputField.value);
+
     localStorage.setItem("x", String(x));
     localStorage.setItem("y", String(y));
 }
+
+function load(): void {
+    const savedX = localStorage.getItem("x");
+    const savedY = localStorage.getItem("y");
+
+    if (savedX !== null) xInputField.value = savedX;
+    if (savedY !== null) yInputField.value = savedY;
+}</code></pre>
+
+        <p>
+            <code>localStorage</code> only stores strings. We therefore use
+            <code>String()</code> when saving a number. When we place the saved
+            value back into an input field, it can remain a string because an
+            input field’s <code>value</code> property is also a string. If we
+            wanted to use the saved value in a calculation, we would convert it
+            back into a number:
+        </p>
+
+        <pre><code class="language-typescript">const x = Number(localStorage.getItem("x"));</code></pre>
+
+        <p>
+            <code>getItem()</code> returns <code>null</code> when nothing has
+            been saved with that key. We check for <code>null</code> before
+            using the returned value so that we do not replace the input field
+            with missing data.
+        </p>
+
+        <p>
+            Calling <code>setItem()</code> again with the same key replaces the
+            previous value. We can also remove one saved value or clear
+            everything saved by the application:
+        </p>
+
+        <pre><code class="language-typescript">localStorage.removeItem("x");
+localStorage.clear();</code></pre>
+
+        <p>
+            <code>localStorage</code> works well for a few simple values, but it
+            becomes awkward when we need to save lists or larger structured
+            objects. For that kind of data, we will use IndexedDB through
+            <code>idb-keyval</code>.
+        </p>
+    </section>
+
+    <section>
+        <h2>Saving Data with <code>idb-keyval</code></h2>
+
+        <p>
+            <code>idb-keyval</code> allows us to save data to disk through the
+            browser using simple keys and values. The saved data remains
+            available after the page is refreshed or the browser is closed.
+        </p>
+
+        <pre><code class="language-typescript">import * as db from "idb-keyval"; // Call db.get(), db.set(), db.del(), or db.clear().
+
+type UserData = {
+    userName: string;
+    favoriteColor: string;
+};
+
+submitButton.onclick = async () =&gt; {
+    const userName = userNameInputField.value;
+    const favoriteColor = favoriteColorInputField.value;
+
+    if (userName === "" || favoriteColor === "") {
+        return; // Do not save until the user has entered both values.
+    }
+
+    await saveUserData(userName, favoriteColor); // Stop here until the save is complete.
+    refreshUI(); // Continue after the data has been saved.
+};
+
+async function saveUserData(userName: string, favoriteColor: string): Promise&lt;void&gt; {
+    const userData: UserData = {
+        userName,
+        favoriteColor
+    };
+
+    await db.set("userData", userData);
+}</code></pre>
+
+        <p>
+            Saving data may take some time. We do not want the entire program or
+            interface to stop while the browser completes the save. Instead,
+            <code>await</code> tells JavaScript to stop this function at that
+            line and resume it after the requested operation has finished. In
+            this example, <code>refreshUI()</code> does not run until
+            <code>saveUserData()</code> is complete.
+        </p>
+
+        <p>
+            A function that contains <code>await</code> must be marked
+            <code>async</code>. This lets TypeScript know that the function may
+            pause and resume later. Because the function does not finish
+            immediately, it returns a <code>Promise</code> rather than returning
+            its final result right away.
+        </p>
+
+        <pre><code class="language-typescript">async function myFunction(): Promise&lt;void&gt; {
+    await someAsyncOperation();
+}</code></pre>
+
+        <p>
+            <code>Promise&lt;void&gt;</code> means that the function promises to
+            finish later but will not return a value. A function that eventually
+            returns user data might instead use:
+        </p>
+
+        <pre><code class="language-typescript">async function getUserData(): Promise&lt;UserData | undefined&gt; {
+    return db.get&lt;UserData&gt;("userData");
+}</code></pre>
+
+        <p>
+            <code>db.get&lt;UserData&gt;()</code> tells TypeScript that we expect
+            the saved value to have the <code>UserData</code> type. The angle
+            brackets are a generic type argument, not destructuring. Because no
+            value may have been saved with that key, the function may still
+            return <code>undefined</code>.
+        </p>
+
+        <p>We can load the saved data using the same key:</p>
+
+        <pre><code class="language-typescript">async function loadUserData(): Promise&lt;void&gt; {
+    const userData = await db.get&lt;UserData&gt;("userData");
+
+    if (userData === undefined) return; // Nothing has been saved with this key.
+
+    userNameInputField.value = userData.userName;
+    favoriteColorInputField.value = userData.favoriteColor;
+}</code></pre>
+
+        <p>
+            The string <code>"userData"</code> is the key. The
+            <code>UserData</code> object is the value saved for that key.
+            Calling <code>db.set()</code> again with the same key replaces the
+            previously saved value.
+        </p>
+
+        <p>
+            Use <code>db.del()</code> to remove the value stored for one key:
+        </p>
+
+        <pre><code class="language-typescript">await db.del("userData");</code></pre>
+
+        <p>
+            Use <code>db.clear()</code> to remove every key and value stored by
+            <code>idb-keyval</code>:
+        </p>
+
+        <pre><code class="language-typescript">await db.clear();</code></pre>
+
+        <p>
+            Be careful with <code>clear()</code>. It removes everything in the
+            store, not just the user data.
+        </p>
+
+        <section>
+            <h3>Installing <code>idb-keyval</code></h3>
+
+            <p>
+                If <code>idb-keyval</code> is not already installed in the
+                project, run:
+            </p>
+
+            <pre><code>npm install idb-keyval</code></pre>
+
+            <p>
+                You only need to add it to the project once. npm records the
+                library in <code>package.json</code> and
+                <code>package-lock.json</code>, so the project remembers that
+                it requires <code>idb-keyval</code>.
+            </p>
+
+            <p>After someone downloads a copy of the project, they run:</p>
+
+            <pre><code>npm install</code></pre>
+
+            <p>
+                npm reads the project files and installs
+                <code>idb-keyval</code>, Vite, and any other required libraries.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Saving Data Online</h2>
+
+        <p>
+            <code>localStorage</code> and IndexedDB save data on the user’s
+            device. This works well when the data belongs to one installation
+            of an application, but it does not allow the same information to be
+            shared automatically between devices or users. A messaging
+            application, for example, needs to store messages online so that
+            every participant can receive them.
+        </p>
+
+        <p>
+            One way to add online storage is to use Firebase, a collection of
+            services provided by Google. Firebase is often described as a
+            <strong>serverless backend</strong>. Serverless does not mean that
+            no servers are involved. It means that Google runs and manages the
+            servers, allowing us to use the service without building and
+            maintaining our own backend server.
+        </p>
+
+        <p>
+            Firebase provides different storage tools for different kinds of
+            data.
+        </p>
+
+        <section>
+            <h3>Cloud Storage</h3>
+
+            <p>
+                Cloud Storage is used to save files, such as images, videos,
+                audio recordings, documents, or game-level files. The files are
+                stored online and can be uploaded or downloaded by an
+                application.
+            </p>
+        </section>
+
+        <section>
+            <h3>Firebase Databases</h3>
+
+            <p>
+                Firebase also provides online databases for structured
+                application data. <strong>Cloud Firestore</strong> stores data
+                in documents organized into collections. Each document contains
+                key-value pairs, making it useful for information such as users,
+                assignments, posts, or saved games.
+            </p>
+
+            <p>
+                <strong>Firebase Realtime Database</strong> stores data as a
+                large JSON structure. JSON is a common text format for
+                organizing data using objects, keys, values, and lists. When
+                the data changes, Firebase can automatically send the updated
+                information to connected applications. This makes it useful for
+                applications such as messaging, shared game state, or live
+                status displays.
+            </p>
+
+            <p>
+                Both databases are NoSQL databases built largely around keys and
+                values rather than traditional SQL tables and joins. SQL is a
+                language used to store, organize, and query data in relational
+                databases made from tables and rows. Firestore provides more
+                flexible organization and queries, while Realtime Database is
+                particularly well suited to simple data structures that must
+                synchronize quickly.
+            </p>
+
+            <p>
+                Using these services requires creating a Firebase project
+                through a Google account, connecting the application to that
+                project, and setting rules that determine who may read or
+                change the data. We will not work through those implementation
+                details yet, but these tools provide a relatively accessible way
+                to add shared online storage without creating our own server.
+            </p>
+        </section>
+    </section>
+</article>

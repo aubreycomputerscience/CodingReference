@@ -32,9 +32,9 @@ export const SectionNames = {  // alternatively, it is popular to create object 
     CodingSection_ProgramStructure: "Apps",
     CodingSection_Web: "Web",
 
-    EthicsSection_History: "History",
-    EthicsSection_Philosophy: "Philosophy",
-    EthicsSection_EthicsOfTechnology: "Ethics of Technology",
+    EthicsSection_History: "Historical Impact",
+    EthicsSection_Power: "Power & Control",
+    EthicsSection_Responsiblity: "Responsibility",
     EthicsSection_AI: "AI",
     EthicsSection_InTheNews: "In the News",
 

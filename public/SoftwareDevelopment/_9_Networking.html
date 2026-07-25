@@ -1,25 +1,700 @@
+<article class="lesson">
+    <h1>Chapter 8: Loading Data from Files and the Internet</h1>
 
-app.get("/users/:id", async (req, res) => {
-const user = await db.users.find(req.params.id);
-res.json(user);
-});
+    <p>
+        Applications often use information stored outside their TypeScript
+        files. An app might display an image, insert instructions from an HTML
+        file, load a list of characters from a data file, or request current
+        information from an online service.
+    </p>
 
+    <p>
+        Loading a file that belongs to our app is different from requesting
+        information from another server. Our own files are included with the
+        project and remain under our control. Information requested from another
+        server may be unavailable, blocked, changed, or require permission.
+    </p>
 
+    <section>
+        <h2>Lesson 8.1: Loading Images and HTML</h2>
 
+        <p>
+            HTML can load and display certain kinds of files directly. An image
+            element uses <code>src</code> to identify the image that should
+            appear on the page:
+        </p>
 
-img.src = url;  // should be enough to trigger the process (no work on your end)
+        <pre><code class="language-html">&lt;img src="images/superhero.png"&gt;</code></pre>
 
+        <p>
+            A link uses <code>href</code> to open another webpage or file when
+            the user selects it:
+        </p>
 
+        <pre><code class="language-html">&lt;a href="instructions.html"&gt;View Instructions&lt;/a&gt;</code></pre>
 
+        <p>
+            The link does not insert the instructions into the current page. It
+            opens the linked page instead.
+        </p>
 
-AWAIT
+        <section>
+            <h3>Displaying Another Page with an iframe</h3>
 
-async function loadData() {
-    const result = await fetch("/api/data");
+            <p>
+                An <code>iframe</code> displays one webpage inside another
+                webpage:
+            </p>
 
+            <pre><code class="language-html">&lt;iframe src="instructions.html"&gt;&lt;/iframe&gt;</code></pre>
 
-try {
-  throw "oh no!";
-} catch (e) {
-  console.log("Oh well.");
-}
+            <p>
+                The page inside the <code>iframe</code> remains a separate
+                webpage. This can be useful for embedding a map, video, form,
+                document, or another page that should remain independent from
+                the rest of the app. Some websites allow their pages to be
+                embedded, while others deliberately block it. An
+                <code>iframe</code> is therefore different from loading HTML
+                and adding those elements directly to our page.
+            </p>
+        </section>
+
+        <section>
+            <h3>Inserting HTML into the Current Page</h3>
+
+            <p>
+                When we want the loaded HTML to become part of the current page,
+                we can retrieve the HTML file and insert it into an element:
+            </p>
+
+            <pre><code class="language-typescript">const content = document.getElementById("content")!;
+
+async function loadInstructions(): Promise&lt;void&gt; {
+    // We created a file named instructions.html containing HTML text.
+    const response = await fetch("instructions.html"); // Retrieve the file.
+    const html = await response.text(); // Get the HTML text from the response.
+
+    content.innerHTML = html; // Insert the HTML inside the content element.
+}</code></pre>
+
+            <p>
+                Setting <code>content.innerHTML</code> replaces the existing
+                contents of the selected element with the loaded HTML. We could
+                instead replace the contents of the entire page by assigning
+                the HTML to <code>document.body.innerHTML</code>, but we will
+                normally use a particular content element so that the rest of
+                the interface remains in place.
+            </p>
+
+            <p>
+                Only insert HTML that belongs to the app or comes from another
+                source that you trust. Text entered by a user should normally
+                be displayed with <code>textContent</code> so that it is treated
+                as text rather than interpreted as HTML. This helps prevent
+                someone from inserting unwanted or harmful HTML or JavaScript
+                into the page.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 8.2: Understanding JSON</h2>
+
+        <p>
+            Programs often need to save or transfer structured data. A text
+            file can contain this information using a format called
+            <strong>JSON</strong>, or JavaScript Object Notation.
+        </p>
+
+        <p>
+            JSON represents data using values, arrays, and collections of
+            key-value pairs. Although its name comes from JavaScript, JSON is
+            used by many programming languages and online services.
+        </p>
+
+        <section>
+            <h3>Simple Values</h3>
+
+            <p>
+                JSON can contain strings, numbers, Boolean values, and
+                <code>null</code>:
+            </p>
+
+            <pre><code class="language-json">"Super Cat"</code></pre>
+
+            <pre><code class="language-json">42</code></pre>
+
+            <pre><code class="language-json">true</code></pre>
+
+            <pre><code class="language-json">null</code></pre>
+        </section>
+
+        <section>
+            <h3>Arrays</h3>
+
+            <p>
+                An array is an ordered list of values surrounded by square
+                brackets:
+            </p>
+
+            <pre><code class="language-json">[
+    "flight",
+    "super strength",
+    "night vision"
+]</code></pre>
+
+            <p>
+                The values in an array may also be numbers, Boolean values, or
+                more complicated data.
+            </p>
+        </section>
+
+        <section>
+            <h3>Key-Value Data</h3>
+
+            <p>Braces contain a collection of keys and values:</p>
+
+            <pre><code class="language-json">{
+    "name": "Super Cat",
+    "powerLevel": 90,
+    "isHero": true
+}</code></pre>
+
+            <p>
+                Each key identifies a value. In most programming languages,
+                this kind of structure would be described as a dictionary, map,
+                or key-value collection.
+            </p>
+
+            <p>
+                When TypeScript reads this JSON, JavaScript represents the
+                key-value collection as an object. We can therefore access the
+                values using ordinary property names:
+            </p>
+
+            <pre><code class="language-typescript">hero.name
+hero.powerLevel
+hero.isHero</code></pre>
+
+            <p>
+                The JSON file itself is still text. It does not contain a
+                TypeScript class or a functioning object. JavaScript creates the
+                object when the JSON text is converted into data the program
+                can use.
+            </p>
+        </section>
+
+        <section>
+            <h3>Arrays of Key-Value Data</h3>
+
+            <p>
+                JSON structures can be combined. The following array contains
+                three superheroes:
+            </p>
+
+            <pre><code class="language-json">[
+    {
+        "name": "Super Cat",
+        "powerLevel": 90
+    },
+    {
+        "name": "The Falcon",
+        "powerLevel": 75
+    },
+    {
+        "name": "Captain Turtle",
+        "powerLevel": 60
+    }
+]</code></pre>
+
+            <p>
+                Each item in the array is a separate collection of key-value
+                pairs.
+            </p>
+        </section>
+
+        <section>
+            <h3>Nested Data</h3>
+
+            <p>
+                Values can themselves contain arrays or additional collections
+                of key-value pairs:
+            </p>
+
+            <pre><code class="language-json">{
+    "teamName": "The Night Watch",
+    "headquarters": {
+        "city": "Dallas",
+        "isSecret": true
+    },
+    "members": [
+        {
+            "name": "Super Cat",
+            "abilities": [
+                "night vision",
+                "super hearing"
+            ]
+        },
+        {
+            "name": "The Falcon",
+            "abilities": [
+                "flight",
+                "long-distance vision"
+            ]
+        }
+    ]
+}</code></pre>
+
+            <p>
+                The outer collection describes the team. The value stored for
+                <code>"headquarters"</code> is another key-value collection.
+                The value stored for <code>"members"</code> is an array, and
+                each member contains an additional array of abilities.
+            </p>
+
+            <p>
+                JSON uses a small number of rules consistently. Keys and strings
+                must use double quotation marks. JSON does not allow comments,
+                functions, <code>undefined</code>, type declarations, or
+                trailing commas.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 8.3: Loading Data from a JSON File</h2>
+
+        <p>
+            Suppose we save the following data in a file named
+            <code>superheroes.json</code>:
+        </p>
+
+        <pre><code class="language-json">[
+    {
+        "name": "Super Cat",
+        "powerLevel": 90,
+        "abilities": [
+            "night vision",
+            "super hearing"
+        ]
+    },
+    {
+        "name": "The Falcon",
+        "powerLevel": 75,
+        "abilities": [
+            "flight",
+            "long-distance vision"
+        ]
+    }
+]</code></pre>
+
+        <p>
+            In a Vite project, place a file that the running app needs to load
+            inside the <code>public</code> folder:
+        </p>
+
+        <pre><code>public/superheroes.json</code></pre>
+
+        <p>
+            When we retrieve this file, the browser initially receives its
+            contents as text. That text must then be converted into arrays and
+            key-value data that the program can use. JavaScript represents the
+            JSON arrays as arrays and the JSON key-value collections as objects.
+        </p>
+
+        <p>
+            We can describe the expected shape of each superhero with a
+            TypeScript type:
+        </p>
+
+        <pre><code class="language-typescript">type Superhero = {
+    name: string;
+    powerLevel: number;
+    abilities: string[];
+};</code></pre>
+
+        <p>We can then load the file:</p>
+
+        <pre><code class="language-typescript">async function loadSuperheroes(): Promise&lt;void&gt; {
+    const response = await fetch("superheroes.json");
+    const superheroes = await response.json() as Superhero[];
+
+    displaySuperheroes(superheroes);
+}</code></pre>
+
+        <p>
+            <code>fetch()</code> retrieves the file and returns a
+            <code>Response</code>. Calling <code>response.json()</code> reads
+            the JSON text and converts it into JavaScript data. Because the
+            outermost JSON value is an array, the result is an array of
+            superhero objects.
+        </p>
+
+        <p>
+            The following part tells TypeScript what kind of result we expect:
+        </p>
+
+        <pre><code class="language-typescript">as Superhero[]</code></pre>
+
+        <p>
+            This does not inspect or validate the downloaded data. It only tells
+            TypeScript to treat the result as an array of
+            <code>Superhero</code> values. Because this file belongs to our own
+            app, we can make sure that its contents match the type.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 8.4: When Loading Data Fails</h2>
+
+        <p>
+            Even a file that belongs to our app may fail to load. The file could
+            be missing, its name could be misspelled, the device could lose its
+            connection, or the JSON could be incorrectly formatted.
+        </p>
+
+        <pre><code class="language-typescript">async function loadSuperheroes(): Promise&lt;void&gt; {
+    try {
+        const response = await fetch("superheroes.json");
+
+        if (!response.ok) {
+            // The server responded, but it could not provide the file.
+            errorLabel.textContent = "The superhero file could not be found.";
+            return;
+        }
+
+        const superheroes = await response.json() as Superhero[];
+        displaySuperheroes(superheroes);
+    } catch {
+        // Something prevented the request or JSON conversion from completing.
+        errorLabel.textContent = "The superhero data could not be loaded.";
+    }
+}</code></pre>
+
+        <p>
+            The <code>try</code> section contains code that may fail. If one of
+            those operations produces an error, JavaScript stops running the
+            remaining statements inside <code>try</code> and moves to
+            <code>catch</code>. The <code>catch</code> section allows us to
+            display an error message or take some other action instead of
+            allowing the failure to continue through the program.
+        </p>
+
+        <p>
+            Not every unsuccessful request produces this kind of error.
+            Sometimes the server responds normally but reports that it could
+            not provide what we requested. A missing file commonly produces a
+            response code called <code>404</code>, which means that the
+            requested file was not found. Because the server still returned a
+            response, <code>fetch()</code> completes and gives us a
+            <code>Response</code> object. We check <code>response.ok</code> to
+            determine whether that response reports success.
+        </p>
+
+        <p>
+            Other failures can move directly to <code>catch</code>. For
+            example, the device may lose its connection, the server may be
+            unreachable, or <code>response.json()</code> may be unable to
+            convert incorrectly formatted JSON. The <code>catch</code> section
+            does not repair the problem, but it allows the app to respond
+            without continuing as though valid data had been loaded.
+        </p>
+
+        <p>
+            The <code>try</code> and <code>catch</code> are not required in
+            order to use <code>fetch()</code>. They are added when we want the
+            program to handle a failure instead of allowing the async function
+            to fail without displaying a useful message.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 8.5: Requesting Data from an Online Service</h2>
+
+        <p>
+            The <code>fetch()</code> function retrieves data from a web
+            address. That address might point to a file included with our own
+            app:
+        </p>
+
+        <pre><code class="language-typescript">const response = await fetch("superheroes.json");</code></pre>
+
+        <p>
+            It can also point to a file or service hosted somewhere else on the
+            internet:
+        </p>
+
+        <pre><code class="language-typescript">const response = await fetch(
+    "https://example.com/superheroes.json"
+);</code></pre>
+
+        <p>
+            The basic process is the same. <code>fetch()</code> retrieves the
+            information, and <code>response.json()</code> converts the returned
+            JSON text into arrays and objects that our program can use.
+        </p>
+
+        <p>
+            The important difference is that we control files included with our
+            own app. When we request information from another server, that
+            server may be unavailable, change its data, restrict access, or
+            require permission.
+        </p>
+
+        <p>
+            A service that provides information for other programs is commonly
+            called an <strong>API</strong>, or application programming
+            interface. Instead of returning a webpage designed for a person to
+            read, an API commonly returns JSON designed for another program to
+            process.
+        </p>
+
+        <p>
+            We could retrieve superhero data from an online JSON file using the
+            same type and nearly the same code:
+        </p>
+
+        <pre><code class="language-typescript">type Superhero = {
+    name: string;
+    powerLevel: number;
+    abilities: string[];
+};
+
+async function loadOnlineSuperheroes(): Promise&lt;void&gt; {
+    const url =
+        "https://example.com/data/superheroes.json";
+
+    const response = await fetch(url);
+    const superheroes =
+        await response.json() as Superhero[];
+
+    displaySuperheroes(superheroes);
+}</code></pre>
+
+        <p>
+            The only important change is the address passed to
+            <code>fetch()</code>. A relative address such as
+            <code>"superheroes.json"</code> points to a file included with our
+            app. A complete address beginning with <code>https://</code> points
+            to another location online.
+        </p>
+
+        <section>
+            <h3>Requesting Weather Data</h3>
+
+            <p>
+                Some APIs allow us to provide additional information as part of
+                the web address. Open-Meteo, for example, needs to know the
+                location and which weather measurements we want.
+            </p>
+
+            <pre><code class="language-typescript">type WeatherData = {
+    current: {
+        // These property names are chosen by Open-Meteo.
+        // Using the same names lets us read the returned data directly.
+        temperature_2m: number;
+        wind_speed_10m: number;
+    };
+};
+
+async function loadWeather(): Promise&lt;void&gt; {
+    // Add parameters to the web address to describe our request.
+    const apiURL =
+        "https://api.open-meteo.com/v1/forecast" +
+        "?latitude=33.68" +
+        "&amp;longitude=-117.87" +
+        "&amp;current=temperature_2m,wind_speed_10m" +
+        "&amp;temperature_unit=fahrenheit" +
+        "&amp;wind_speed_unit=mph";
+
+    const response = await fetch(apiURL);
+    const weather =
+        await response.json() as WeatherData;
+
+    temperatureLabel.textContent =
+        `${weather.current.temperature_2m}°F`;
+
+    windLabel.textContent =
+        `${weather.current.wind_speed_10m} mph`;
+}</code></pre>
+
+            <p>
+                The unusual property names such as
+                <code>temperature_2m</code> and
+                <code>wind_speed_10m</code> come from Open-Meteo. Our
+                TypeScript type uses those same names so that they match the
+                keys in the returned JSON.
+            </p>
+
+            <p>The first part of the address identifies the API:</p>
+
+            <pre><code>https://api.open-meteo.com/v1/forecast</code></pre>
+
+            <p>
+                The additional text describes the information we want. This is
+                somewhat like passing arguments to a function. A function uses
+                formal parameters, while a web request can place
+                <strong>query parameters</strong> after a question mark in the
+                address:
+            </p>
+
+            <pre><code>?latitude=33.68</code></pre>
+
+            <p>An ampersand separates each additional parameter:</p>
+
+            <pre><code>&amp;longitude=-117.87
+&amp;current=temperature_2m,wind_speed_10m
+&amp;temperature_unit=fahrenheit</code></pre>
+
+            <p>
+                Each parameter contains a name and a value. For example:
+            </p>
+
+            <pre><code>latitude=33.68</code></pre>
+
+            <p>
+                tells the server that the value for <code>latitude</code> is
+                <code>33.68</code>.
+            </p>
+
+            <p>
+                The server reads these parameters, prepares the requested
+                weather information, and returns JSON. The returned JSON may
+                contain more information than our program needs. The
+                <code>WeatherData</code> type describes only the part that we
+                intend to use.
+            </p>
+
+            <p>
+                Because an outside server introduces additional uncertainty, we
+                should also handle possible failures:
+            </p>
+
+            <pre><code class="language-typescript">async function loadWeather(): Promise&lt;void&gt; {
+    try {
+        const response = await fetch(apiURL);
+
+        if (!response.ok) {
+            errorLabel.textContent =
+                "The server could not complete the request.";
+            return;
+        }
+
+        const weather =
+            await response.json() as WeatherData;
+
+        displayWeather(weather);
+    } catch {
+        errorLabel.textContent =
+            "The weather data could not be loaded.";
+    }
+}</code></pre>
+
+            <p>
+                This uses the same error handling introduced for our own JSON
+                file. The difference is that we do not control the outside
+                server, so changes, outages, blocked requests, or unexpected
+                data are more likely.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>Lesson 8.6: Why We Cannot Read Every Webpage</h2>
+
+        <p>
+            A program generally cannot download and examine the contents of an
+            arbitrary webpage. Browsers restrict requests between unrelated
+            websites, and the other server must allow our app to read its
+            response. This system is called
+            <strong>Cross-Origin Resource Sharing</strong>, or
+            <strong>CORS</strong>.
+        </p>
+
+        <p>
+            Even when a request is allowed, an ordinary webpage usually returns
+            HTML designed to be displayed by a browser rather than clean data
+            designed for another program. The page may also require a login,
+            change its structure, limit automated requests, or prohibit another
+            application from using its content.
+        </p>
+
+        <p>
+            For these reasons, applications normally request online information
+            through an API or a data file created for that purpose rather than
+            attempting to extract information from an ordinary webpage.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 8.7: Real-World Networking</h2>
+
+        <p>
+            The examples in this lesson are fairly simple because our own files
+            and Open-Meteo do not require user accounts or secret credentials.
+            Other online services may require authentication, special request
+            headers, usage limits, payment, or additional setup.
+        </p>
+
+        <p>
+            Some services require an API key that identifies the application
+            making the request. A permanent secret key cannot be safely hidden
+            inside browser code because users can inspect the files sent to
+            their browser. Applications that require a protected secret commonly
+            send the request through a backend server or use a service designed
+            to accept restricted browser credentials.
+        </p>
+
+        <p>
+            Larger services such as Firebase or AWS often provide their own
+            TypeScript libraries. These libraries still communicate over a
+            network, but they handle many request details for us.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 8.8: Sending JSON</h2>
+
+        <p>Earlier, we used:</p>
+
+        <pre><code class="language-typescript">const data = await response.json();</code></pre>
+
+        <p>
+            This receives JSON from a file or server and converts it into
+            JavaScript arrays and objects.
+        </p>
+
+        <p>
+            When sending data in the other direction, we normally begin with a
+            TypeScript or JavaScript object:
+        </p>
+
+        <pre><code class="language-typescript">const user = {
+    name: "Jon Snow",
+    score: 12
+};</code></pre>
+
+        <p>
+            Before the data can be sent to a server or saved as JSON, we convert
+            the object into JSON text:
+        </p>
+
+        <pre><code class="language-typescript">const jsonText = JSON.stringify(user);</code></pre>
+
+        <p>The resulting text is:</p>
+
+        <pre><code class="language-json">{"name":"Jon Snow","score":12}</code></pre>
+
+        <p>The two directions are therefore:</p>
+
+        <pre><code class="language-typescript">const data = await response.json(); // JSON text → program data
+const jsonText = JSON.stringify(data); // program data → JSON text</code></pre>
+
+        <p>
+            Converting program data into text that can be saved or transmitted
+            is called <strong>serialization</strong>. Converting received JSON
+            into values the program can use is called
+            <strong>deserialization</strong>.
+        </p>
+    </section>
+</article>

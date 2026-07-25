@@ -15,7 +15,7 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
                 },
                 
                 { 
-                    displayName: "New Project",
+                    displayName: "Getting Started",
                     pageName: "_2_NewProject"
                 },
  
@@ -30,7 +30,7 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
                 },  
                 
                 { 
-                    displayName: "Data Storage",
+                    displayName: "Saving Data",
                     pageName: "_5_DataStorage"
                 },   
                 

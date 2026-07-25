@@ -245,3 +245,24 @@ td:first-child {
 tr {
     border-bottom: 1px solid #dddddd;
 }
+
+
+
+
+
+.lesson h1 {
+    margin-bottom: 1.5rem;
+}
+
+.lesson h1 + .chapter-number {
+    margin-top: -1rem;
+}
+
+.chapter-number {
+    margin-top: 0;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 0.95rem;
+    font-style: italic;
+    color: #666;
+}

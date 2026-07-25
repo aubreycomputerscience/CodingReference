@@ -1,36 +1,282 @@
-Navigation
+<article class="lesson">
+    <h1>Chapter 7: Navigation</h1>
 
-Move to New Page
-location.href = "page2.html";  OR   location.replace("about.html");   // no back button
+    <p>
+        When building an app or webpage, we may need to move from one page to
+        another. On a basic website, we can simply add links between pages. We
+        can also move to another page through TypeScript, such as after the user
+        submits a form.
+    </p>
 
-PASSING VARIABLES
-const personId = 42;
-location.href = "details.html?id=" + personId;
+    <p>
+        A one-page app works differently. It may appear to move between pages,
+        but the browser never actually loads a new webpage. Instead, the app
+        replaces the content currently being displayed. See the chapter on HTML
+        for an example of inserting new page content into a one-page app.
+    </p>
 
-Then on page 2: 
-const params = new URLSearchParams(location.search);
-const id = params.get("id");
+    <p>
+        In this chapter, we will cover two approaches. First, we will use
+        traditional page navigation and pass simple values to the next page.
+        Then we will use hash links to make a one-page app appear to move
+        between different pages or sections.
+    </p>
 
-MULTIPLE VARIABLES
-details.html?name=Alice&age=17  // build text in this format
+    <section>
+        <h2>Lesson 7.1: Moving Between Webpages</h2>
 
-const params = new URLSearchParams(location.search);
+        <p>An HTML link opens another page when the user selects it:</p>
+
+        <pre><code class="language-html">&lt;a href="page2.html"&gt;Open Page 2&lt;/a&gt;</code></pre>
+
+        <p>We can also move to another page through TypeScript:</p>
+
+        <pre><code class="language-typescript">location.href = "page2.html";</code></pre>
+
+        <p>
+            This opens the new page and allows the user to return with the
+            browser’s Back button.
+        </p>
+
+        <p>
+            Use <code>location.replace()</code> when the user should not return
+            to the current page:
+        </p>
+
+        <pre><code class="language-typescript">location.replace("about.html"); // Replace the current page in the browser history.</code></pre>
+
+        <section>
+            <h3>Passing a Value to Another Page</h3>
+
+            <p>
+                When navigating through TypeScript, we can add information to
+                the end of the webpage address:
+            </p>
+
+            <pre><code class="language-typescript">const personId = 42;
+
+location.href = "details.html?id=" + personId;</code></pre>
+
+            <p>The resulting address looks like this:</p>
+
+            <pre><code>details.html?id=42</code></pre>
+
+            <p>
+                On the details page, we can retrieve the value from the URL:
+            </p>
+
+            <pre><code class="language-typescript">const params = new URLSearchParams(location.search);
+const id = params.get("id");</code></pre>
+
+            <p>
+                <code>location.search</code> contains the part of the address
+                beginning with the question mark.
+                <code>URLSearchParams</code> separates the values so that we can
+                retrieve them by name.
+            </p>
+        </section>
+
+        <section>
+            <h3>Passing Multiple Values</h3>
+
+            <p>Use an ampersand to separate multiple values:</p>
+
+            <pre><code>details.html?name=Alice&amp;age=17</code></pre>
+
+            <p>We can build the address in TypeScript:</p>
+
+            <pre><code class="language-typescript">const name = "Alice";
+const age = 17;
+
+location.href =
+    "details.html?name=" + name + "&amp;age=" + age;</code></pre>
+
+            <p>Then retrieve the values on the next page:</p>
+
+            <pre><code class="language-typescript">const params = new URLSearchParams(location.search);
+
 const name = params.get("name");
-const age = params.get("age");
+const age = params.get("age");</code></pre>
 
-PASSING COMPLEX OR HIDDEN INFO
-store information in local storage
+            <p>
+                Values placed in the address are visible to the user. For larger
+                information, or information that should not be placed directly
+                in the address, save the data with
+                <code>localStorage</code>, IndexedDB, or an online database and
+                pass only an identifier.
+            </p>
+        </section>
+    </section>
 
+    <section>
+        <h2>Lesson 7.2: Navigation in a One-Page App</h2>
 
-<a href="#arrays">Arrays</a>  // the <a tag means we are going to go somewhere
+        <p>
+            A hash link was originally used to move to a particular location on
+            a long webpage:
+        </p>
 
-This changes the URL:
+        <pre><code class="language-html">&lt;a href="#arrays"&gt;Go to Arrays&lt;/a&gt;
 
-site.com/#arrays
+&lt;h2 id="arrays"&gt;Arrays&lt;/h2&gt;</code></pre>
 
-but does not reload the page.
-You can listen for that change:
+        <p>
+            Selecting the link moves the browser to the element whose
+            <code>id</code> is <code>"arrays"</code>.
+        </p>
 
-window.addEventListener("hashchange", ...)
+        <p>
+            A one-page app can also use the hash as a simple form of navigation.
+            Instead of moving down the page, the app can detect the hash and
+            load different content into the same HTML page:
+        </p>
 
-and load content yourself.
+        <pre><code class="language-html">&lt;a href="#arrays"&gt;Arrays&lt;/a&gt;</code></pre>
+
+        <p>Selecting the link changes the address. For example:</p>
+
+        <pre><code>site.com/#arrays</code></pre>
+
+        <p>
+            The part beginning with <code>#</code> is called the
+            <strong>hash</strong>. Changing the hash does not normally reload
+            the webpage.
+        </p>
+
+        <p>
+            Our TypeScript code can detect the change and display the
+            appropriate content:
+        </p>
+
+        <pre><code class="language-typescript">window.onhashchange = () =&gt; {
+    const pageName = location.hash;
+
+    if (pageName === "#arrays") {
+        loadArraysPage();
+    }
+};</code></pre>
+
+        <p>
+            <code>loadArraysPage()</code> might load HTML from another file or
+            create and display the new content directly. The browser remains on
+            the same HTML page, while both the URL in the address bar and the
+            content shown to the user change.
+        </p>
+
+        <section>
+            <h3>Loading the Correct Content When the App Opens</h3>
+
+            <p>
+                We should also load the correct content when the app first
+                opens:
+            </p>
+
+            <pre><code class="language-typescript">function loadCurrentPage(): void {
+    const pageName = location.hash;
+
+    if (pageName === "#arrays") {
+        loadArraysPage();
+    } else {
+        loadHomePage();
+    }
+}
+
+window.onhashchange = loadCurrentPage;
+
+loadCurrentPage();</code></pre>
+
+            <p>
+                This allows someone to open or bookmark a particular section of
+                the app:
+            </p>
+
+            <pre><code>site.com/#arrays</code></pre>
+
+            <p>
+                The browser address changes, but the app remains on the same
+                HTML page and decides which content to display.
+            </p>
+        </section>
+    </section>
+
+    <section>
+        <h2>File Path Reference</h2>
+
+        <p>
+            We often identify the location of a file using a short path rather
+            than writing its complete URL. This is convenient, but it can become
+            confusing when files are stored in different folders. The following
+            table provides a quick reference for the most common path forms.
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Location</th>
+                    <th>Path</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Same folder</td>
+                    <td><code>./file</code></td>
+                </tr>
+                <tr>
+                    <td>Inside a subfolder</td>
+                    <td><code>./folder/file</code></td>
+                </tr>
+                <tr>
+                    <td>Parent folder</td>
+                    <td><code>../file</code></td>
+                </tr>
+                <tr>
+                    <td>Subfolder of the parent folder</td>
+                    <td><code>../folder/file</code></td>
+                </tr>
+                <tr>
+                    <td>Two folders above</td>
+                    <td><code>../../file</code></td>
+                </tr>
+                <tr>
+                    <td>Root of the hosted website</td>
+                    <td><code>/file</code></td>
+                </tr>
+                <tr>
+                    <td>Configured Vite alias</td>
+                    <td><code>@/file</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>
+            <code>./</code> means “start in the current folder.” Each
+            <code>../</code> moves up one folder. A path beginning with
+            <code>/</code> starts from the root of the hosted website.
+        </p>
+
+        <section>
+            <h3>Examples</h3>
+
+            <pre><code>src/
+    myCode.ts
+    tools/
+        math.ts
+    data/
+        superheroes.ts</code></pre>
+
+            <p>
+                From <code>myCode.ts</code>, we can import a file from a child
+                folder:
+            </p>
+
+            <pre><code class="language-typescript">import * as math from "./tools/math.ts";</code></pre>
+
+            <p>
+                From <code>math.ts</code>, we can move up one folder and then
+                into the <code>data</code> folder:
+            </p>
+
+            <pre><code class="language-typescript">import * as superheroes from "../data/superheroes.ts";</code></pre>
+        </section>
+    </section>
+</article>

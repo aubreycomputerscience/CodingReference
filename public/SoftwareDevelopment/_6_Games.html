@@ -1,85 +1,124 @@
-Games
+<article class="lesson">
+    <h1>Chapter 6: Games</h1>
 
-let enemyX = 0;
-let lastMove = 0;
+    <p>
+        This section provides a quick reference for moving characters and other objects around the screen in a simple browser game. We will use keyboard input to control one character and a run loop to update other game elements over time.
+    </p>
 
+    <section>
+        <h2>Moving a Character with the Keyboard</h2>
 
+        <pre><code class="language-typescript">// Run code
+setupCharacter();
 
-function runLoop(time: number) {  
-    
-    if (time - lastMoveMadeAtTime >= 1000) {  // time in milliseconds, so this will update every second
-        lastMoveMadeAtTime = time;
-        moveMonster()
-    }  
+// My code
+const myCharacter = document.createElement("img");
+let x = 0;
+let y = 0; // y starts at the top and increases as we move down.
 
-    requestAnimationFrame(runLoop);  // we pass the code from this function into requestAnimationFrame
-                                                                   // it will be run after the next loop
-                                                                   // the time will be passed in (typical JavaScript–fast, lose, sloppy)
+function setupCharacter(): void {
+    myCharacter.src = "images/character.png";
+    myCharacter.style.position = "absolute"; // Allows us to use left and top.
+
+    document.body.appendChild(myCharacter);
+    updateCharacterPosition();
 }
 
-
-Game Loop
-function loop {
-	enemyDiv.textContent = "9";      // will repaint when main thread free
-	requestAnimationFrame(loop);  // browser will repaint and call loop() optiizing to match frame rate
-}
-
-
-let enemyX = 0;
-let lastMove = 0;
-
-function loop(time: number) {
-    if (time - lastMove > 1000) {
-        enemyX++;
-        lastMove = time;
-    }
-
-    drawEnemy(enemyX);
-
-    requestAnimationFrame(loop);
-}
-
-
-
-
-
-
-let lastTime = 0;
-
-function loop(timestamp: number) {
-    const deltaTime = timestamp - lastTime;
-    lastTime = timestamp;
-
-    // update game state based on elapsed time
-
-    requestAnimationFrame(loop);
-}
-
-
-
-
-Get User Input
-document.addEventListener("keydown", (event) => {
-
+document.onkeydown = (event) =&gt; {
     switch (event.key) {
-
         case "ArrowLeft":
-            x -= 10;
+            event.preventDefault(); // Prevent the webpage from scrolling.
+            x = x - 10;
             break;
 
         case "ArrowRight":
-            x += 10;
+            event.preventDefault();
+            x = x + 10;
             break;
 
         case "ArrowUp":
-            y -= 10;
+            event.preventDefault();
+            y = y - 10;
             break;
 
         case "ArrowDown":
-            y += 10;
+            event.preventDefault();
+            y = y + 10;
             break;
     }
 
-    render();
-    save();
-});
+    updateCharacterPosition();
+};
+
+function updateCharacterPosition(): void {
+    myCharacter.style.left = x + "px";
+    myCharacter.style.top = y + "px";
+}</code></pre>
+    </section>
+
+    <section>
+        <h2>Running the Game</h2>
+
+        <p>
+            A game uses a <strong>run loop</strong> to update the game
+            repeatedly. The browser usually updates the display about 60 times
+            per second. Before each update, we change the game state and update
+            the properties of any HTML elements that need to change.
+        </p>
+
+        <pre><code class="language-typescript">// Run code
+requestAnimationFrame(runLoop);
+
+// My code
+function runLoop(time: number): void {
+    // Update the game state and HTML element properties.
+
+    requestAnimationFrame(runLoop); // Run this function again before the next display update.
+}</code></pre>
+
+        <p>
+            The browser passes the current animation time into the function. The
+            time is measured in milliseconds.
+        </p>
+    </section>
+
+    <section>
+        <h2>Moving a Monster</h2>
+
+        <p>We can use a run loop to move a monster across the screen.</p>
+
+        <pre><code class="language-typescript">// Run code
+setupMonster();
+requestAnimationFrame(runLoop);
+
+// My code
+const monster = document.createElement("img");
+
+let monsterX = 300;
+let monsterY = 100;
+let lastMoveMadeAtTime = 0;
+
+function setupMonster(): void {
+    monster.src = "images/monster.png";
+    monster.style.position = "absolute"; // Allows us to use left and top.
+
+    document.body.appendChild(monster);
+    updateMonsterPosition();
+}
+
+function runLoop(time: number): void {
+    if (time - lastMoveMadeAtTime &gt;= 1000) { // Move once every 1,000 milliseconds.
+        lastMoveMadeAtTime = time;
+        monsterX = monsterX - 20;
+        updateMonsterPosition();
+    }
+
+    requestAnimationFrame(runLoop); // Run this function again before the next display update.
+}
+
+function updateMonsterPosition(): void {
+    monster.style.left = monsterX + "px";
+    monster.style.top = monsterY + "px";
+}</code></pre>
+    </section>
+</article>

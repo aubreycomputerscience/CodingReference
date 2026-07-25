@@ -1,10 +1,300 @@
+<article class="lesson">
+    <h1>Chapter 4: Debugging</h1>
 
+    <section>
+        <h2>Introduction</h2>
 
-In web development, Build Errors, Warnings, & Runtime Errors are typically split across different tools:
+        <p>
+            Debugging your code can be challenging and requires perseverance
+            and patience. This is one of the reasons developers place an
+            emphasis on writing good code. It is easier to write good code than
+            to spend time trying to debug bad code. If you do not write clean
+            code, you will pay the price.
+        </p>
 
-Type	Where it appears
-TypeScript type errors	VS Code Problems panel
-Syntax errors caught by TypeScript	VS Code Problems panel
-Vite build/import errors	Vite terminal and browser overlay
-Runtime JavaScript errors	Browser console
-Network/API failures	Browser Network tab / Console
+        <p>
+            When you start a project, it is important to keep things organized
+            and use intuitive names for variables and functions, enabling you
+            to follow the program logic without a lot of effort. Furthermore,
+            by organizing the code into different sections, you do not need to
+            focus on debugging the entire program, but simply a small part of
+            it.
+        </p>
+
+        <p>
+            As you add code, run it often. We want to catch errors right away.
+            When you have multiple bugs, it becomes increasingly difficult to
+            figure out what is going on or where the problem is. Always make
+            sure that you are actually running the latest version of your code.
+        </p>
+
+        <p>
+            If there is an error, the browser may continue displaying an older
+            version of your app instead. Check that you are seeing the changes
+            you expect, or check the terminal to confirm that the app was
+            updated. Alternatively, it may be convenient to display the app’s
+            start time in the corner of your screen.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 4.1: Finding the Problem</h2>
+
+        <p>
+            When something goes wrong, begin by identifying what kind of problem
+            you are seeing.
+        </p>
+
+        <ol>
+            <li>
+                <strong>The code will not build.</strong> TypeScript or Vite
+                found a problem before the app could run.
+            </li>
+            <li>
+                <strong>The app stops or silently fails.</strong> Something
+                went wrong while the program was running. Sometimes the browser
+                displays an error. Other times, a button or feature simply stops
+                working.
+            </li>
+            <li>
+                <strong>The app runs, but the result is wrong.</strong> The code
+                is valid, but the program does not behave as intended.
+            </li>
+            <li>
+                <strong>The app cannot load data.</strong> A file may be
+                missing, a server request may have failed, or the returned data
+                may not match what the app expects.
+            </li>
+        </ol>
+
+        <p>Use the following tools to help locate the problem:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>What Happened</th>
+                    <th>Where to Look</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>TypeScript error</td>
+                    <td>VS Code <strong>Problems</strong> panel</td>
+                </tr>
+                <tr>
+                    <td>Vite or import problem</td>
+                    <td>Terminal or browser error screen</td>
+                </tr>
+                <tr>
+                    <td>App crashes or does nothing</td>
+                    <td>Browser <strong>Console</strong></td>
+                </tr>
+                <tr>
+                    <td>File or server request fails</td>
+                    <td>Browser <strong>Network</strong> tab</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>
+            When part of a JavaScript app fails, the entire page may remain
+            visible. A button or feature may simply stop working, so check the
+            browser Console whenever nothing appears to happen.
+        </p>
+
+        <p>
+            TypeScript checks the types in our code before it runs, but it
+            cannot guarantee that data loaded from a file, storage, or server
+            actually has the expected structure. This is one reason runtime
+            errors can still occur even when TypeScript did not report a
+            problem.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 4.2: Checking Values</h2>
+
+        <p>
+            A simple way to debug a program is to display information while it
+            runs. This helps us confirm whether a function ran, what value a
+            variable contains, how far the program reached, and where the result
+            first became incorrect.
+        </p>
+
+        <p>We can create a temporary label and add it to the page:</p>
+
+        <pre><code class="language-typescript">const debugOutput = document.createElement("p");
+document.body.appendChild(debugOutput);</code></pre>
+
+        <p>We can then display the value we want to check:</p>
+
+        <pre><code class="language-typescript">debugOutput.textContent = `score: ${score}`;</code></pre>
+
+        <p>We can also add several messages to the same element:</p>
+
+        <pre><code class="language-typescript">debugOutput.textContent =
+    debugOutput.textContent + `Loaded user: ${userName}\n`;
+
+debugOutput.textContent =
+    debugOutput.textContent + `Current score: ${score}\n`;</code></pre>
+
+        <p>
+            Move these statements through the code to see how far the program
+            gets:
+        </p>
+
+        <pre><code class="language-typescript">debugOutput.textContent =
+    debugOutput.textContent + "Starting calculation\n";
+
+calculateScore();
+
+debugOutput.textContent =
+    debugOutput.textContent + "Finished calculation\n";</code></pre>
+
+        <p>
+            If the second message never appears, the problem probably occurred
+            inside <code>calculateScore()</code>.
+        </p>
+
+        <p>
+            As an alternative way to print debugging information, we can send it
+            to the browser Console:
+        </p>
+
+        <pre><code class="language-typescript">console.log(score);</code></pre>
+
+        <p>
+            In Chrome on a Mac, select
+            <strong>View → Developer → Developer Tools</strong>, and then
+            select the <strong>Console</strong> tab. The Console contains a
+            great deal of other information. Ignore anything that is not
+            related to the values you printed or errors connected to your app.
+        </p>
+
+        <p>
+            Temporary debugging messages should be removed after the problem
+            has been fixed.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 4.3: A Basic Debugging Process</h2>
+
+        <ol>
+            <li>Confirm that the newest code is running.</li>
+            <li>Read the error message.</li>
+            <li>Find the file and line number.</li>
+            <li>
+                Identify the smallest section that could contain the problem.
+            </li>
+            <li>Check the values going into that section.</li>
+            <li>Fix one problem at a time.</li>
+            <li>Run the code again.</li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>Lesson 4.4: Walking Through Code</h2>
+
+        <p>
+            A debugger allows us to pause the program and examine it one line at
+            a time.
+        </p>
+
+        <p>
+            Open the app in Chrome, select
+            <strong>View → Developer → Developer Tools</strong>, and open the
+            <strong>Sources</strong> tab. Find the TypeScript file containing
+            the code you want to examine.
+        </p>
+
+        <p>
+            Our goal is to stop the program at a particular location and then
+            move through it one line at a time. As we move through the code, we
+            can watch variables change and see exactly which statements run.
+        </p>
+
+        <p>
+            Click the line number next to a statement to add a breakpoint. A
+            breakpoint tells the browser to pause before running that line.
+        </p>
+
+        <p>
+            Run the app and perform the action that reaches the breakpoint. For
+            example, click the button that calls the function you are debugging.
+            When the program pauses, Chrome will show the current line and the
+            values of nearby variables.
+        </p>
+
+        <p>
+            Use <strong>Step over</strong> to run the current line and move to
+            the next one. Continue stepping through the code while watching how
+            the variable values change. If a value first becomes incorrect
+            after a particular line, that line or the function it calls is
+            probably connected to the problem.
+        </p>
+
+        <p>
+            Use <strong>Resume</strong> to continue running the app normally.
+            Click the line number again when you want to remove the breakpoint.
+        </p>
+
+        <p>
+            When debugging, focus on the smallest section that could contain the
+            problem. Check the values going into that section, walk through its
+            code, and fix one problem at a time.
+        </p>
+    </section>
+
+    <section>
+        <h2>Lesson 4.5: Common Runtime Errors</h2>
+
+        <p>
+            Runtime errors occur after the app has started. The code may build
+            successfully, but something goes wrong while it is running.
+        </p>
+
+        <p>
+            TypeScript checks the types in the code we write, but it cannot
+            guarantee that values loaded from HTML, storage, files, or online
+            services actually contain what we expect. It also cannot prevent
+            every logical mistake, such as a loop that never ends.
+        </p>
+
+        <p>
+            A common problem is trying to use a value that is
+            <code>null</code> or <code>undefined</code>. This often happens
+            when an HTML element was not found, data was never loaded, or a key
+            did not exist.
+        </p>
+
+        <pre><code class="language-typescript">const userName = userData.name;</code></pre>
+
+        <p>This fails if <code>userData</code> is <code>undefined</code>.</p>
+
+        <p>
+            A similar problem occurs when an object does not contain the
+            property we expected. This is especially common with data loaded
+            from a file, storage, or server.
+        </p>
+
+        <p>
+            Functions can also receive unexpected values. A function may expect
+            a number but receive an empty string, <code>undefined</code>, or
+            some other value that causes the calculation to fail or produce the
+            wrong result.
+        </p>
+
+        <p>
+            Finally, a loop may never reach its stopping condition, or a
+            function may continue calling itself without reaching an ending
+            point. This can cause the app to freeze or eventually stop with an
+            error.
+        </p>
+
+        <p>
+            When a runtime error occurs, look at the error message and line
+            number, then check the values being used on that line.
+        </p>
+    </section>
+</article>

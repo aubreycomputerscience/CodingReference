@@ -5,59 +5,62 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
     sidebarContentType: "Ethics",  // we use a colon, not an =, and a comma at the end
     sidebarGroups: [
 
-        {   displayName: DataTypes.SectionNames.EthicsSection_EthicsOfTechnology,
-            sidebarItems: [
-                { 
-                    displayName: "arrays",
-                    pageName: "Arrays"
-                },
-                { 
-                    displayName: "Loops",
-                    pageName: "Loops"
-                }
-        ] },
-
-
-        {   displayName: "UI",
-            sidebarItems: [
-                                { 
-                    displayName: "css",
-                    pageName: "css"
-                },
-                { 
-                    displayName: "ui",
-                    pageName: "ui"
-                }
-        ] },
-
-
         {   displayName: DataTypes.SectionNames.EthicsSection_History,
             sidebarItems: [
 
                 { 
-                    displayName: "css",
-                    pageName: "css"
+                    displayName: "The Telephone",
+                    pageName: "1_Telephone"
                 },
                 { 
-                    displayName: "ui",
-                    pageName: "ui"
+                    displayName: "The Television",
+                    pageName: "2_Television"
+                },
+                { 
+                    displayName: "The Internet",
+                    pageName: "2b_Internet"
+                },
+                { 
+                    displayName: "Health, Wealth, & Happiness",
+                    pageName: "0_HealthWealth"
                 }
         ] },
 
 
-        {   displayName: DataTypes.SectionNames.EthicsSection_Philosophy,
+        {   displayName: DataTypes.SectionNames.EthicsSection_Power,
             sidebarItems: [
 
-                                                { 
-                    displayName: "css",
-                    pageName: "css"
+                { 
+                    displayName: "Control of People",
+                    pageName: "3_ControlPeople"
                 },
                 { 
-                    displayName: "ui",
-                    pageName: "ui"
-                }
+                    displayName: "Control of Data",
+                    pageName: "4_ControlData"
+                },
+                                { 
+                    displayName: "Social Engineering",
+                    pageName: "5_SocialEngineering"
+                },
         ] },
 
+        {   displayName: DataTypes.SectionNames.EthicsSection_Responsiblity,
+            sidebarItems: [
+
+                { 
+                    displayName: "Intro",
+                    pageName: "6_EthicsIntro"
+                },
+                { 
+                    displayName: "Moral Responsibility",
+                    pageName: "7_Morality"
+                },
+
+                              { 
+                    displayName: "Usage & Design",
+                    pageName: "8_EthicsOfDesign"
+                }
+        ] },
 
         {   displayName: DataTypes.SectionNames.EthicsSection_AI,
             sidebarItems: [
@@ -68,7 +71,15 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
         {   displayName: DataTypes.SectionNames.EthicsSection_InTheNews,
             sidebarItems: [
 
-        ] },
+                { 
+                    displayName: "Articles",
+                    pageName: "9_Articles"
+                },
+                { 
+                    displayName: "Discussion Prompts",
+                    pageName: "10_Prompts"
+                }
+            ] },
 
     ]
 }
