@@ -65,12 +65,6 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
         ] },
 
 
-        {   displayName: "Program Structure",
-            sidebarItems: [
-
-        ] },
-
-
         {   displayName: "Web",
             sidebarItems: [
 

@@ -74,7 +74,7 @@ export class CodeBoxController extends HTMLElement {  // we are using HTML Eleme
 
     // UI Elements
     private mainView: HTMLDivElement = document.createElement("div");
-    private button: HTMLButtonElement = document.createElement("button");
+    //private button: HTMLButtonElement = document.createElement("button");
     private bodyTextView: HTMLDivElement = document.createElement("div");
     //#endregion
 
@@ -293,11 +293,12 @@ export class CodeBoxController extends HTMLElement {  // we are using HTML Eleme
 
     private createHeaderLabelAndButton(): HTMLDivElement {
 
-        const button = this.createStandardButton("Discuss");
-        button.style.marginLeft = "auto";
-        button.onclick = () => { 
-            this.discussButtonPressed(); 
-        };
+        // const button = this.createStandardButton("Discuss");
+        // button.style.marginLeft = "auto";
+        // button.onclick = () => { 
+        //     this.discussButtonPressed(); 
+        // };
+        //this.button = button;
 
         const titleLabel = document.createElement("label");
         titleLabel.textContent = "Code Snippet";
@@ -311,8 +312,7 @@ export class CodeBoxController extends HTMLElement {  // we are using HTML Eleme
         row.style.flexDirection = "row";
         row.style.padding = "2px";
 
-        this.button = button;
-        row.append(titleLabel, button);
+        row.append(titleLabel); //, button);
         return row;
     }
 
