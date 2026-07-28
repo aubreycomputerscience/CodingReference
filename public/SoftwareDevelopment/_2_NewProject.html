@@ -453,23 +453,19 @@ npm run preview    # Preview the finished files in dist.</code></pre>
         </section>
     </section>
 
-    <section>
-   
-        
-
-
-
-
-    <h2>Lesson 2.6: Hosting with GitHub Pages</h2>
+   <section>
+    <h2>Lesson 18.6: Hosting with GitHub Pages</h2>
 
 
 <p>You can upload your project to GitHub and use GitHub Pages to make the finished app available online.</p>
 
-<p>A Vite project cannot be published directly from its source files. Before the app can run online, Vite must build the project and place the finished HTML, CSS, JavaScript, and other files inside the <code>dist</code> folder. GitHub Actions can perform this build automatically and publish the result whenever you update the project.</p>
+<p>A Vite project must be built before it can be published. Vite turns the project into finished HTML, CSS, and JavaScript files and places them in a folder named <code>dist</code>.</p>
 
-<h2>Set the App’s Online Location</h2>
+<p>We will use GitHub Actions to build the project and publish the <code>dist</code> folder automatically.</p>
 
-<p>A normal GitHub Pages project is placed inside a folder named after its GitHub repository.</p>
+<h3>Set the App’s Online Location</h3>
+
+<p>A normal GitHub Pages project is published inside a folder named after its GitHub repository.</p>
 
 <p>For example, suppose the repository is named:</p>
 
@@ -489,32 +485,62 @@ npm run preview    # Preview the finished files in dist.</code></pre>
 
 <pre><code class="language-typescript">import { defineConfig } from "vite";
 
+
 export default defineConfig({
 base: "/maze-game/"
 });</code></pre>
 
-<p>Replace <code>maze-game</code> with the exact name of your GitHub repository, including capitalization.</p>
 
-<p>This setting is not needed when the repository itself is named <code>username.github.io</code>, because that website is published at the main address rather than inside a project folder.</p>
+<p>Replace <code>maze-game</code> with the exact name of your GitHub repository.</p>
 
-<h2>Configure GitHub Pages</h2>
+<p>For example, the project may now look like this:</p>
 
-<p>Upload or push the project to GitHub. Then open the repository and select:</p>
+<pre><code>maze-game
 
-<pre><code>Settings → Pages</code></pre>
 
-<p>Under <strong>Build and deployment</strong>, set <strong>Source</strong> to:</p>
+├── index.html
+├── package.json
+├── src
+└── vite.config.ts</code></pre>
 
-<pre><code>GitHub Actions</code></pre>
 
-<p>Vite requires a build step, so we will create a GitHub Actions workflow that installs the project, runs <code>npm run build</code>, and publishes the resulting <code>dist</code> folder.</p>
+<h3>Create the GitHub Actions Workflow</h3>
 
-<p>In the project, create these folders and file:</p>
+<p>GitHub Actions uses workflow files to determine what GitHub should do when the project is updated.</p>
 
-<pre><code>.github
+<p>These workflow files must be stored inside a folder named:</p>
 
-└── workflows
-└── deploy.yml</code></pre>
+<pre><code>.github/workflows</code></pre>
+
+<p>The period at the beginning of <code>.github</code> is part of the folder name.</p>
+
+<p>In the main project folder, create a folder named:</p>
+
+<pre><code>.github</code></pre>
+
+<p>Inside <code>.github</code>, create another folder named:</p>
+
+<pre><code>workflows</code></pre>
+
+<p>Inside <code>workflows</code>, create a file named:</p>
+
+<pre><code>deploy.yml</code></pre>
+
+<p>You are creating two folders and one file:</p>
+
+<pre><code>maze-game
+
+
+├── .github
+│   └── workflows
+│       └── deploy.yml
+├── index.html
+├── package.json
+├── src
+└── vite.config.ts</code></pre>
+
+
+<p>The <code>workflows</code> folder is not used by the app itself. GitHub looks inside this folder for instructions that GitHub Actions can run.</p>
 
 <p>Add the following code to <code>deploy.yml</code>:</p>
 
@@ -541,6 +567,7 @@ deploy:
 environment:
 name: github-pages
 url: ${{ steps.deployment.outputs.page_url }}
+
 
 runs-on: ubuntu-latest
 
@@ -572,28 +599,93 @@ steps:
     id: deployment
     uses: actions/deploy-pages@v4</code></pre>
 
-<p>This file tells GitHub to rebuild and publish the app whenever new changes are pushed to the <code>main</code> branch.</p>
+<p>This workflow tells GitHub to:</p>
 
-<h2>Open the Published App</h2>
+<pre><code>1. Download the project.
 
-<p>After pushing the workflow file to GitHub, open the repository’s <strong>Actions</strong> tab. GitHub will show the deployment as it installs the project, builds the app, and publishes it.</p>
 
-<p>When the deployment finishes, return to:</p>
+2. Install Node.
+3. Install the project’s packages.
+4. Run npm run build.
+5. Upload the finished dist folder.
+6. Publish the dist folder through GitHub Pages.</code></pre>
+
+
+<h3>Push the New Files to GitHub</h3>
+
+<p>The workflow is created locally as part of the project. You must then commit and push it to GitHub.</p>
+
+<p>In the terminal, run:</p>
+
+<pre><code class="language-bash">git add .
+
+
+git commit -m "Configure GitHub Pages"
+git push</code></pre>
+
+
+<p>This uploads both of the new files:</p>
+
+<pre><code>vite.config.ts
+
+
+.github/workflows/deploy.yml</code></pre>
+
+
+<p>GitHub will recognize the workflow file because it is inside <code>.github/workflows</code>.</p>
+
+<h3>Configure GitHub Pages</h3>
+
+<p>On GitHub, open the repository and select:</p>
+
+<pre><code>Settings → Pages</code></pre>
+
+<p>Under <strong>Build and deployment</strong>, set <strong>Source</strong> to:</p>
+
+<pre><code>GitHub Actions</code></pre>
+
+<p>You do not need to choose the suggested <strong>Jekyll</strong> or <strong>Static HTML</strong> workflows. You already created the workflow locally and pushed it to the repository.</p>
+
+<p>Vite requires a build step, so the Static HTML workflow is not the correct option for this project.</p>
+
+<h3>Check the Deployment</h3>
+
+<p>Open the repository’s <strong>Actions</strong> tab.</p>
+
+<p>You should see a workflow named:</p>
+
+<pre><code>Deploy App to GitHub Pages</code></pre>
+
+<p>GitHub will run the workflow after you push it. The workflow installs the project, runs Vite’s build command, and publishes the resulting <code>dist</code> folder.</p>
+
+<p>When the workflow finishes, return to:</p>
 
 <pre><code>Settings → Pages</code></pre>
 
 <p>GitHub will display the public address of the app.</p>
 
-<p>If the deployment fails, open the failed run in the <strong>Actions</strong> tab. GitHub will show which step caused the problem.</p>
+<p>If the deployment fails, open the failed workflow in the <strong>Actions</strong> tab. GitHub will show which step caused the problem.</p>
 
-<h2>Updating the App</h2>
+<h3>Updating the App</h3>
 
-<p>After the initial setup, you do not need to publish the app manually. Push your latest changes to the <code>main</code> branch, and GitHub Actions will build and publish the new version.</p>
+<p>After the initial setup, you do not need to publish the app manually.</p>
+
+<p>Make your changes, commit them, and push them to the <code>main</code> branch:</p>
+
+<pre><code class="language-bash">git add .
+
+
+git commit -m "Update app"
+git push</code></pre>
+
+
+<p>Each push causes GitHub Actions to build and publish the latest version of the app.</p>
 
 <p>Installing the Progressive Web App gives the hosted website its own app icon and window. The installed app still comes from the version published through GitHub Pages.</p>
 
 
-    </section>
+</section>
+
 
     <section>
         <h2>Quick Command Reference</h2>
