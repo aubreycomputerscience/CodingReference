@@ -66,8 +66,8 @@ function buildFileLocationURL(): string {
 
     const contentType = pageNameComponents[0] ?? "SoftwareDevelopment";
     const fileName = pageNameComponents[2] ?? defaultPageContentName;
-    const fileLocation = "/" + contentType + "/" + fileName + ".html";  // note: html needs to go in the public folder, not src                                                            
-  
+    const fileLocation = import.meta.env.BASE_URL + contentType + "/" + fileName + ".html";  // note: html needs to go in the public folder, not src                                                            
+ 
     console.log(pageNameComponents);
     console.log(fileLocation)
 
