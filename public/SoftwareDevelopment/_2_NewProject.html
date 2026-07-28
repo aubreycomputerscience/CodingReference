@@ -15,7 +15,7 @@
     </p>
 
     <section>
-        <h2>Lesson 18.1: Working in VS Code</h2>
+        <h2>Lesson 2.1: Working in VS Code</h2>
 
         <section>
             <h3>The File Explorer</h3>
@@ -135,7 +135,7 @@
     </section>
 
     <section>
-        <h2>Lesson 18.2: Creating a Project</h2>
+        <h2>Lesson 2.2: Creating a Project</h2>
 
         <p>
             The easiest way to begin is to copy the
@@ -288,7 +288,7 @@
     </section>
 
     <section>
-        <h2>Lesson 18.3: Running the Project</h2>
+        <h2>Lesson 2.3: Running the Project</h2>
 
         <p>
             Vite includes a development server. It converts our TypeScript into
@@ -342,7 +342,7 @@
     </section>
 
     <section>
-        <h2>Lesson 18.4: Building and Previewing the App</h2>
+        <h2>Lesson 2.4: Building and Previewing the App</h2>
 
         <p>While working on the app, use:</p>
 
@@ -373,7 +373,7 @@ npm run preview    # Preview the finished files in dist.</code></pre>
     </section>
 
     <section>
-        <h2>Lesson 18.5: Making an Installable Web App</h2>
+        <h2>Lesson 2.5: Making an Installable Web App</h2>
 
         <p>
             A <strong>Progressive Web App</strong>, or <strong>PWA</strong>, is
@@ -454,72 +454,145 @@ npm run preview    # Preview the finished files in dist.</code></pre>
     </section>
 
     <section>
-        <h2>Lesson 18.6: Hosting with GitHub Pages</h2>
+   
+        
 
-        <p>
-            You can upload your project to GitHub, and GitHub Pages can host the
-            finished app for you.
-        </p>
 
-        <section>
-            <h3>Set the App’s Online Folder</h3>
 
-            <p>
-                GitHub Pages usually places the app inside a folder named after
-                your GitHub project.
-            </p>
 
-            <p>For example, if the project is named:</p>
+    <h2>Lesson 2.6: Hosting with GitHub Pages</h2>
 
-            <pre><code>maze-game</code></pre>
 
-            <p>the app may appear under:</p>
+<p>You can upload your project to GitHub and use GitHub Pages to make the finished app available online.</p>
 
-            <pre><code>/maze-game/</code></pre>
+<p>A Vite project cannot be published directly from its source files. Before the app can run online, Vite must build the project and place the finished HTML, CSS, JavaScript, and other files inside the <code>dist</code> folder. GitHub Actions can perform this build automatically and publish the result whenever you update the project.</p>
 
-            <p>
-                We need to tell the app to look for its files inside that
-                folder.
-            </p>
+<h2>Set the App’s Online Location</h2>
 
-            <p>In <code>vite.config.ts</code>, write:</p>
+<p>A normal GitHub Pages project is placed inside a folder named after its GitHub repository.</p>
 
-            <pre><code class="language-typescript">import { defineConfig } from "vite";
+<p>For example, suppose the repository is named:</p>
+
+<pre><code>maze-game</code></pre>
+
+<p>The app will normally be published at an address similar to:</p>
+
+<pre><code>https://username.github.io/maze-game/</code></pre>
+
+<p>Because the app is inside <code>/maze-game/</code>, Vite must include that folder when it creates links to the app’s JavaScript, CSS, images, and other files.</p>
+
+<p>Your project may not already contain a Vite configuration file. In the main project folder, next to <code>package.json</code> and <code>index.html</code>, create a file named:</p>
+
+<pre><code>vite.config.ts</code></pre>
+
+<p>Add:</p>
+
+<pre><code class="language-typescript">import { defineConfig } from "vite";
 
 export default defineConfig({
-    base: "/maze-game/"
+base: "/maze-game/"
 });</code></pre>
 
-            <p>
-                Replace <code>maze-game</code> with the exact name of your
-                GitHub project.
-            </p>
-        </section>
+<p>Replace <code>maze-game</code> with the exact name of your GitHub repository, including capitalization.</p>
 
-        <section>
-            <h3>Configure GitHub Pages</h3>
+<p>This setting is not needed when the repository itself is named <code>username.github.io</code>, because that website is published at the main address rather than inside a project folder.</p>
 
-            <p>In GitHub, open your project and select:</p>
+<h2>Configure GitHub Pages</h2>
 
-            <pre><code>Settings → Pages</code></pre>
+<p>Upload or push the project to GitHub. Then open the repository and select:</p>
 
-            <p>
-                Choose the publishing method required for the project. GitHub
-                Pages may publish from a branch or use a GitHub Actions
-                workflow.
-            </p>
+<pre><code>Settings → Pages</code></pre>
 
-            <p>
-                After GitHub finishes publishing, it will provide a link to the
-                app.
-            </p>
+<p>Under <strong>Build and deployment</strong>, set <strong>Source</strong> to:</p>
 
-            <p>
-                Installing the PWA gives this hosted website its own app icon
-                and window. The app still loads from the version stored on
-                GitHub Pages.
-            </p>
-        </section>
+<pre><code>GitHub Actions</code></pre>
+
+<p>Vite requires a build step, so we will create a GitHub Actions workflow that installs the project, runs <code>npm run build</code>, and publishes the resulting <code>dist</code> folder.</p>
+
+<p>In the project, create these folders and file:</p>
+
+<pre><code>.github
+
+└── workflows
+└── deploy.yml</code></pre>
+
+<p>Add the following code to <code>deploy.yml</code>:</p>
+
+<pre><code class="language-yaml">name: Deploy App to GitHub Pages
+
+
+on:
+push:
+branches: ["main"]
+
+workflow_dispatch:
+
+permissions:
+contents: read
+pages: write
+id-token: write
+
+concurrency:
+group: "pages"
+cancel-in-progress: true
+
+jobs:
+deploy:
+environment:
+name: github-pages
+url: ${{ steps.deployment.outputs.page_url }}
+
+runs-on: ubuntu-latest
+
+steps:
+  - name: Download the project
+    uses: actions/checkout@v4
+
+  - name: Install Node
+    uses: actions/setup-node@v4
+    with:
+      node-version: 22
+      cache: npm
+
+  - name: Install the project
+    run: npm ci
+
+  - name: Build the app
+    run: npm run build
+
+  - name: Prepare GitHub Pages
+    uses: actions/configure-pages@v5
+
+  - name: Upload the finished app
+    uses: actions/upload-pages-artifact@v3
+    with:
+      path: ./dist
+
+  - name: Publish the app
+    id: deployment
+    uses: actions/deploy-pages@v4</code></pre>
+
+<p>This file tells GitHub to rebuild and publish the app whenever new changes are pushed to the <code>main</code> branch.</p>
+
+<h2>Open the Published App</h2>
+
+<p>After pushing the workflow file to GitHub, open the repository’s <strong>Actions</strong> tab. GitHub will show the deployment as it installs the project, builds the app, and publishes it.</p>
+
+<p>When the deployment finishes, return to:</p>
+
+<pre><code>Settings → Pages</code></pre>
+
+<p>GitHub will display the public address of the app.</p>
+
+<p>If the deployment fails, open the failed run in the <strong>Actions</strong> tab. GitHub will show which step caused the problem.</p>
+
+<h2>Updating the App</h2>
+
+<p>After the initial setup, you do not need to publish the app manually. Push your latest changes to the <code>main</code> branch, and GitHub Actions will build and publish the new version.</p>
+
+<p>Installing the Progressive Web App gives the hosted website its own app icon and window. The installed app still comes from the version published through GitHub Pages.</p>
+
+
     </section>
 
     <section>
