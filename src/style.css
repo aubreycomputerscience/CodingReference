@@ -51,8 +51,8 @@ body {      /* remove the padding around your webpage/app */
   /* layout of interior elements */
   display: flex;
   flex-direction: row;
-  
-  /* styling */
+  overflow: hidden;   /* it does not all have to be on screen */
+  min-height: 0;
 }
 
 .sidebar {
@@ -66,6 +66,8 @@ body {      /* remove the padding around your webpage/app */
 .content {
   flex: 1;
   padding: 16px;
+  overflow-y: auto;  /* makes the content area scroll internally while the sidebar remains in place */
+  min-width: 0;
 }
 
 .sidebarElement {
