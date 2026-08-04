@@ -28,6 +28,9 @@ function ifHeaderSelected_UpdateSidebar() {
         case "#Ethics":
             MyUIElements.generateCodingSidebar("Ethics");
             break;
+        case "#About":
+            MyUIElements.generateCodingSidebar("About");
+            break;
     }
 }
 
@@ -67,10 +70,6 @@ function buildFileLocationURL(): string {
     const contentType = pageNameComponents[0] ?? "SoftwareDevelopment";
     const fileName = pageNameComponents[2] ?? defaultPageContentName;
     const fileLocation = import.meta.env.BASE_URL + contentType + "/" + fileName + ".html";  // note: html needs to go in the public folder, not src                                                            
- 
-    console.log(pageNameComponents);
-    console.log(fileLocation)
-
     return fileLocation;
 
     // 1) we could have done this all in one line of code

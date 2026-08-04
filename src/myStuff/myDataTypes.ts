@@ -17,7 +17,7 @@ export type SidebarItem = {
 
 
 // STRINGS
-export type SidebarContentType = "SoftwareDevelopment" | "HowThingsWork" | "Topics" | "Ethics";  // this the standard approach in TypeScript, but leaves a great deal to be desired
+export type SidebarContentType = "SoftwareDevelopment" | "HowThingsWork" | "Topics" | "Ethics" | "About";  // this the standard approach in TypeScript, but leaves a great deal to be desired
 
 
 // CODING SECTION NAMES
@@ -42,7 +42,7 @@ export const SectionNames = {  // alternatively, it is popular to create object 
     HowDoesItWork_CPU: "CPU",
     HowDoesItWork_AI: "AI",
 
-    Topics_APCSP: "AP CSP",
+    About_Standards: "Standards",
 
 } as const;
 

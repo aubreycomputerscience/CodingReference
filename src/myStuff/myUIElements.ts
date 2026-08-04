@@ -10,6 +10,7 @@ import * as CodingSidebarData from "./SidebarData/CodingSidebarData";
 import * as HowThingsWorkdSidebarData from "./SidebarData/HowThingsWorkSidebarData";
 import * as TopicsSidebarData from "./SidebarData/TopicsSidebarData";
 import * as EthicsSidebarData from "./SidebarData/EthicsSidebarData";
+import * as AboutSidebarData from "./SidebarData/AboutSidebarData";
 
 const sidebarElement = document.getElementById("sidebar");
 let lastSelectItem: HTMLDivElement | undefined;
@@ -22,18 +23,19 @@ const allSidebarData= new Map(  // store sidebar data as a dictionary
         [CodingSidebarData.data.sidebarContentType,         CodingSidebarData.data],
         [HowThingsWorkdSidebarData.data.sidebarContentType, HowThingsWorkdSidebarData.data],
         [TopicsSidebarData.data.sidebarContentType,         TopicsSidebarData.data],
-        [EthicsSidebarData.data.sidebarContentType,         EthicsSidebarData.data]
+        [EthicsSidebarData.data.sidebarContentType,         EthicsSidebarData.data],
+        [AboutSidebarData.data.sidebarContentType,          AboutSidebarData.data]
     ]);
 
 export function generateCodingSidebar(sidebarContentType: DataTypes.SidebarContentType) {
-    
+ 
     // build all the sidebar elements corresponding to the header link
     // we will just hide stuff we don't want to see right now
     const sidebarData = allSidebarData.get(sidebarContentType) ?? CodingSidebarData.data;
     let sidebarViews: Array<HTMLElement> = [];
 
     for (const sidebarGroup of sidebarData.sidebarGroups) {
-
+ 
         const sectionContainerView = document.createElement("div");
         sectionContainerView.style.display = "none";  
         sectionContainerView.style.flexDirection = "column";

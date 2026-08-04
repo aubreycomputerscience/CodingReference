@@ -5,7 +5,7 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
     sidebarContentType: "Topics",  // we use a colon, not an =, and a comma at the end
     sidebarGroups: [
 
-        {   displayName: DataTypes.SectionNames.Topics_APCSP,
+        {   displayName: DataTypes.SectionNames.CodingSection_Coding,
             sidebarItems: [
                 { 
                     displayName: "arrays",
