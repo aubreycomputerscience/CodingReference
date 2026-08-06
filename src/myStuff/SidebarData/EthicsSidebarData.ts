@@ -32,15 +32,15 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
 
                 { 
                     displayName: "Control of People",
-                    pageName: "3_ControlPeople"
+                    pageName: "comingSoon" /* "3_ControlPeople" */
                 },
                 { 
                     displayName: "Control of Data",
-                    pageName: "4_ControlData"
+                    pageName: "comingSoon" /* "4_ControlData" */
                 },
                                 { 
                     displayName: "Social Engineering",
-                    pageName: "5_SocialEngineering"
+                    pageName: "comingSoon" /* "5_SocialEngineering" */
                 },
         ] },
 
@@ -49,16 +49,16 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
 
                 { 
                     displayName: "Intro",
-                    pageName: "6_EthicsIntro"
+                    pageName: "comingSoon" /* "6_EthicsIntro" */
                 },
                 { 
                     displayName: "Moral Responsibility",
-                    pageName: "7_Morality"
+                    pageName: "comingSoon" /* "7_Morality" */
                 },
 
                               { 
                     displayName: "Usage & Design",
-                    pageName: "8_EthicsOfDesign"
+                    pageName: "comingSoon" /* "8_EthicsOfDesign" */
                 }
         ] },
 
@@ -73,11 +73,11 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
 
                 { 
                     displayName: "Articles",
-                    pageName: "9_Articles"
+                    pageName: "comingSoon" /* "9_Articles" */
                 },
                 { 
                     displayName: "Discussion Prompts",
-                    pageName: "10_Prompts"
+                    pageName: "comingSoon" /* "10_Prompts" */
                 }
             ] },
 
