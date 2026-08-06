@@ -9,25 +9,18 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
             sidebarItems: [
                 { 
                     displayName: "Network Stack",
-                    pageName: "NetworkStack"
+                    pageName: "comingSoon" /* "NetworkStack" */
                 },
                 { 
                     displayName: "Routing",
-                    pageName: "Routing"
+                    pageName: "comingSoon" /* "Routing" */
                 }
         ] },
 
 
         {   displayName: DataTypes.SectionNames.HowDoesItWork_CPU,
             sidebarItems: [
-                                { 
-                    displayName: "css",
-                    pageName: "css"
-                },
-                { 
-                    displayName: "ui",
-                    pageName: "ui"
-                }
+     
         ] },
 
 
@@ -36,11 +29,11 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
 
                 { 
                     displayName: "Neural Nets",
-                    pageName: "NeuralNet"
+                    pageName: "comingSoon" /* "NeuralNet" */
                 },
                 { 
                     displayName: "Training",
-                    pageName: "Training"
+                    pageName: "comingSoon" /* "Training" */
                 }
         ] },
 
