@@ -42,7 +42,8 @@ export const SectionNames = {  // alternatively, it is popular to create object 
     HowDoesItWork_CPU: "CPU",
     HowDoesItWork_AI: "AI",
 
-    About_Standards: "Coursework",
+    About_Standards: "Standards",
+    About_Overview: "Overview",
 
 } as const;
 
