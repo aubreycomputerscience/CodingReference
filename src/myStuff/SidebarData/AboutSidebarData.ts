@@ -5,13 +5,6 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
     sidebarContentType: "About",  // we use a colon, not an =, and a comma at the end
     sidebarGroups: [
 
-         {   displayName: DataTypes.SectionNames.About_Overview,
-            sidebarItems: [
-                { 
-                    displayName: "Syllabus",
-                    pageName: "syllabus"
-                },
-        ] },
 
         {   displayName: DataTypes.SectionNames.About_Standards,
             sidebarItems: [
@@ -26,6 +19,14 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
                                 { 
                     displayName: "Year III",
                     pageName: "cs3"
+                },
+        ] },
+
+        {   displayName: DataTypes.SectionNames.About_Overview,
+            sidebarItems: [
+                { 
+                    displayName: "Full Syllabus",
+                    pageName: "syllabus"
                 },
         ] },
 

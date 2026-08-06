@@ -43,7 +43,7 @@ export const SectionNames = {  // alternatively, it is popular to create object 
     HowDoesItWork_AI: "AI",
 
     About_Standards: "Standards",
-    About_Overview: "Overview",
+    About_Overview: "Syllabus",
 
 } as const;
 
