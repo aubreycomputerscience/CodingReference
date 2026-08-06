@@ -8,6 +8,10 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
         {   displayName: DataTypes.SectionNames.About_Standards,
             sidebarItems: [
                 { 
+                    displayName: "Syllabus",
+                    pageName: "syllabus"
+                },
+                { 
                     displayName: "Year I",
                     pageName: "cs1"
                 },
