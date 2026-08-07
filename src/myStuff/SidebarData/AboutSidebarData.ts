@@ -25,9 +25,14 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
         {   displayName: DataTypes.SectionNames.About_Overview,
             sidebarItems: [
                 { 
+                    displayName: "Mr. Cline",
+                    pageName: "mrc"
+                },
+                { 
                     displayName: "Full Syllabus",
                     pageName: "syllabus"
                 },
+                
         ] },
 
     ]
