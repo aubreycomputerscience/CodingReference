@@ -45,6 +45,8 @@ export const SectionNames = {  // alternatively, it is popular to create object 
     About_Standards: "Standards",
     About_Overview: "About",
 
+    Topics_Careers: "Careers",
+
 } as const;
 
 export type SectionNames = typeof SectionNames[keyof typeof SectionNames];  // kind of wacky, don't think about too much

@@ -8,13 +8,18 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
         {   displayName: DataTypes.SectionNames.CodingSection_Coding,
             sidebarItems: [
                 { 
-                    displayName: "arrays",
+                    displayName: "Building",
                     pageName: "Arrays"
                 },
                 { 
-                    displayName: "Loops",
+                    displayName: "Operations",
+                    pageName: "Loops"
+                },
+                { 
+                    displayName: "Implementation",
                     pageName: "Loops"
                 }
+
         ] },
 
 
