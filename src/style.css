@@ -268,3 +268,37 @@ tr {
     font-style: italic;
     color: #666;
 }
+
+/* TOPICS */
+.careerQuestionnaire .careerSection {
+  margin-top: 1.5rem;
+}
+
+.careerQuestionnaire .careerSection h2 {
+  margin-bottom: 0.35rem;
+}
+
+.careerQuestionnaire .careerDetails {
+  margin-left: 2rem;
+}
+
+.careerQuestionnaire .careerDetails p {
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+}
+
+.careerQuestionnaire .careerDetails h3 {
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.careerQuestionnaire .careerDetails ul {
+  margin-top: 0.25rem;
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+}
+
+.careerQuestionnaire .careerDetails li {
+  margin-top: 0.15rem;
+  margin-bottom: 0.15rem;
+}

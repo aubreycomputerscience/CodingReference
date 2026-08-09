@@ -5,6 +5,16 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
     sidebarContentType: "HowThingsWork",  // we use a colon, not an =, and a comma at the end
     sidebarGroups: [
 
+        {   displayName: DataTypes.SectionNames.HowDoesItWork_Hardware,
+            sidebarItems: [
+
+                { 
+                    displayName: "Overview",
+                    pageName: "ComputerHardware"
+                },
+     
+        ] },
+
         {   displayName: DataTypes.SectionNames.HowDoesItWork_Internet,
             sidebarItems: [
                 { 
@@ -18,10 +28,7 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
         ] },
 
 
-        {   displayName: DataTypes.SectionNames.HowDoesItWork_CPU,
-            sidebarItems: [
-     
-        ] },
+
 
 
         {   displayName: DataTypes.SectionNames.HowDoesItWork_AI,

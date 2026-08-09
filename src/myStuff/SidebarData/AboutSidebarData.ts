@@ -7,7 +7,7 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
 
 
         {   displayName: DataTypes.SectionNames.About_Standards,
-            sidebarItems: [
+            sidebarItems: [              
                 { 
                     displayName: "Year I",
                     pageName: "cs1"
@@ -20,6 +20,10 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
                     displayName: "Year III",
                     pageName: "cs3"
                 },
+                { 
+                    displayName: "Principles of IT",
+                    pageName: "pit"
+                }, 
         ] },
 
         {   displayName: DataTypes.SectionNames.About_Overview,

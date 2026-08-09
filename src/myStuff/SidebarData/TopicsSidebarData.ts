@@ -5,74 +5,15 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
     sidebarContentType: "Topics",  // we use a colon, not an =, and a comma at the end
     sidebarGroups: [
 
-        {   displayName: DataTypes.SectionNames.CodingSection_Coding,
+        {   displayName: DataTypes.SectionNames.Topics_Careers,
             sidebarItems: [
                 { 
-                    displayName: "Building",
-                    pageName: "Arrays"
+                    displayName: "Careers",
+                    pageName: "Careers"
                 },
-                { 
-                    displayName: "Operations",
-                    pageName: "Loops"
-                },
-                { 
-                    displayName: "Implementation",
-                    pageName: "Loops"
-                }
 
         ] },
 
 
-        {   displayName: "UI",
-            sidebarItems: [
-                                { 
-                    displayName: "css",
-                    pageName: "css"
-                },
-                { 
-                    displayName: "ui",
-                    pageName: "ui"
-                }
-        ] },
-
-
-        {   displayName: "Frameworks",
-            sidebarItems: [
-
-                { 
-                    displayName: "css",
-                    pageName: "css"
-                },
-                { 
-                    displayName: "ui",
-                    pageName: "ui"
-                }
-        ] },
-
-
-        {   displayName: "Coding",
-            sidebarItems: [
-
-                                                { 
-                    displayName: "css",
-                    pageName: "css"
-                },
-                { 
-                    displayName: "ui",
-                    pageName: "ui"
-                }
-        ] },
-
-
-        {   displayName: "Services",
-            sidebarItems: [
-
-        ] },
-
-
-        {   displayName: "Web",
-            sidebarItems: [
-
-        ] }
     ]
 }

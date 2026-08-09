@@ -39,7 +39,7 @@ export const SectionNames = {  // alternatively, it is popular to create object 
     EthicsSection_InTheNews: "In the News",
 
     HowDoesItWork_Internet: "The Internet",
-    HowDoesItWork_CPU: "CPU",
+    HowDoesItWork_Hardware: "Computer Hardware",
     HowDoesItWork_AI: "AI",
 
     About_Standards: "Standards",
