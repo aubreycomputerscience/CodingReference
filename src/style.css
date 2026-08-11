@@ -302,3 +302,54 @@ tr {
   margin-top: 0.15rem;
   margin-bottom: 0.15rem;
 }
+
+
+
+/* SLIDE SHOWS */
+
+  .slide {
+    font-family: Arial, sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px;
+    line-height: 1.5;
+  }
+
+  .slide__title {
+    margin: 0 0 24px;
+    font-size: 2rem;
+  }
+
+  .slide__instructions {
+    font-size: 1.15rem;
+  }
+
+  .slide__instructions p {
+    margin: 0 0 16px;
+  }
+
+  .slide__divider {
+    margin: 45px 0 40px;
+    border: 0;
+    border-top: 2px solid #ccc;
+  }
+
+  .slide__prompt {
+    text-align: center;
+  }
+
+  .slide__prompt h2 {
+    margin: 0 0 25px;
+    font-size: 2.2rem;
+  }
+
+  .slide__response {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  .slide__note {
+    margin-top: 30px;
+    font-style: italic;
+    color: #555;
+  }

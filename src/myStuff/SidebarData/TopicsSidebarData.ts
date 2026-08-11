@@ -14,6 +14,18 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
 
         ] },
 
+        {   displayName: DataTypes.SectionNames.Topics_Other,
+            sidebarItems: [
+                { 
+                    displayName: "Money Week 1",
+                    pageName: "_MM_W1"
+                },
+                { 
+                    displayName: "CS Week 1",
+                    pageName: "_CS_W1"
+                },
+
+        ] },
 
     ]
 }
