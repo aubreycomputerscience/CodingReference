@@ -304,6 +304,22 @@ tr {
 }
 
 
+/* ABOUT */
+.term {
+    margin: 1.5rem 2rem;
+    padding: 1rem 1.25rem;
+    background: #f5f5f5;
+    border-left: 4px solid #999;
+}
+
+.term h3 {
+    margin-top: 0;
+}
+
+.term p {
+    margin-bottom: 0;
+}
+
 
 /* SLIDE SHOWS */
 
@@ -322,3 +338,9 @@ objective-text {
     display: block;
     margin: 0;
 }
+
+
+
+
+
+

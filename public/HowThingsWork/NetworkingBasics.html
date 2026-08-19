@@ -1,129 +1,125 @@
-<article>
-  <h1>Building a Network: From One Computer to the Internet</h1>
+<article class="lesson">
 
-  <p>
-    Rather than starting with dozens of networking terms and protocols, we can understand a network by
-    <strong>building one piece at a time</strong>. Each new component solves a problem created by the previous step.
-  </p>
+    <h1>Building a Network: From One Computer to the Internet</h1>
 
-  <h2>1. Start with One Computer</h2>
-
-  <p>
-    A computer by itself doesn't really need a network. It can process and store information locally, but it has
-    nothing else to communicate with.
-  </p>
-
-  <p>To create a network, we need another device.</p>
-
-  <h2>2. Connect Two Computers</h2>
-
-  <p>
-    Connect two computers with an Ethernet cable and we have a very simple network.
-  </p>
-
-  <p>
-    Each computer needs an <strong>IP address</strong> so that software can identify the other computer.
-    Because there is no system automatically assigning addresses yet, we can assign them manually.
-  </p>
-
-  <aside class="term">
-    <h3>IP Address — What is it?</h3>
     <p>
-      An IP address is a number used to identify a device's location on a network. It allows computers to specify
-      where network information is supposed to go.
+        Rather than starting with dozens of networking terms and protocols, we can understand a network by
+        <strong>building one piece at a time</strong>. We will begin with a single computer and add new components
+        as we need them. Each new component solves a problem created as our network grows.
     </p>
-  </aside>
 
-  <p>For example:</p>
+    <section>
+        <h2>1. Start with One Computer</h2>
 
-  <ul>
-    <li>Computer A: <code>10.0.0.1</code></li>
-    <li>Computer B: <code>10.0.0.2</code></li>
-  </ul>
+        <p>
+            A computer by itself does not really need a network. It can process and store information locally,
+            but it has nothing else to communicate with. To create a network, we need another device.
+        </p>
+    </section>
 
-  <p>
-    These are <strong>static IP addresses</strong> because we assigned them ourselves.
-  </p>
+    <section>
+        <h2>2. Connect Two Computers</h2>
 
-  <p>Now the computers can communicate directly.</p>
+        <p>
+            If we connect two computers with an Ethernet cable, we have a very simple network. Each computer needs
+            an <strong>IP address</strong> so that software can identify where information should go. Because there
+            is no system automatically assigning addresses yet, we can assign them manually.
+        </p>
 
-  <h2>3. Add More Computers — The Switch</h2>
+        <aside class="term">
+            <h3>IP Address — What Is It?</h3>
+            <p>
+                An IP address is a number used to identify a device's location on a network. It allows computers
+                to specify where network information is supposed to go.
+            </p>
+        </aside>
 
-  <p>
-    Suppose we want to add a third computer, then a fourth, then a fifth.
-  </p>
+        <p>For example:</p>
 
-  <p>
-    In theory, we could try connecting every computer directly to every other computer. But the number of
-    connections would grow rapidly. With <em>n</em> computers, a fully connected network would require:
-  </p>
+        <ul>
+            <li>Computer A: <code>10.0.0.1</code></li>
+            <li>Computer B: <code>10.0.0.2</code></li>
+        </ul>
 
-  <p><strong>n(n − 1) / 2 connections</strong></p>
+        <p>
+            These are <strong>static IP addresses</strong> because we assigned them ourselves. With an address
+            for each computer, the two machines can communicate directly.
+        </p>
+    </section>
 
-  <p>Ten computers would require 45 connections.</p>
+    <section>
+        <h2>3. Add More Computers — The Switch</h2>
 
-  <p>Instead, we use a <strong>switch</strong>.</p>
+        <p>
+            Adding a third, fourth, or fifth computer creates a new problem. In theory, we could connect every
+            computer directly to every other computer, but the number of connections would grow rapidly. With
+            <em>n</em> computers, a fully connected network would require:
+        </p>
 
-  <aside class="term">
-    <h3>Switch — What is it?</h3>
-    <p>
-      A switch is a device for connecting many devices on the same local network. Each computer plugs into the
-      switch, and the switch sends information out the appropriate port.
-    </p>
-  </aside>
+        <p><strong>n(n − 1) / 2 connections</strong></p>
 
-  <pre><code>Computer A ──┐
+        <p>
+            Ten computers would already require 45 connections. Instead, we use a <strong>switch</strong>.
+        </p>
+
+        <aside class="term">
+            <h3>Switch — What Is It?</h3>
+            <p>
+                A switch connects many devices on the same local network. Each computer plugs into the switch,
+                and the switch sends information out the appropriate port.
+            </p>
+        </aside>
+
+        <pre><code>Computer A ──┐
 Computer B ──┤
 Computer C ──┼── SWITCH
 Computer D ──┤
 Computer E ──┘</code></pre>
 
-  <p>
-    Now every new computer requires only <strong>one additional connection</strong> to the switch.
-  </p>
+        <p>
+            Now each new computer requires only <strong>one additional connection</strong> to the switch.
+            The switch learns which devices are connected to which ports and uses <strong>MAC addresses</strong>
+            to determine where to send information.
+        </p>
 
-  <p>
-    The switch learns which devices are connected to which ports and uses <strong>MAC addresses</strong> to
-    determine where to send information.
-  </p>
+        <aside class="term">
+            <h3>MAC Address — What Is It?</h3>
+            <p>
+                A MAC address is an identifier associated with a network interface, such as an Ethernet or Wi-Fi
+                interface. Switches use MAC addresses to deliver information within a local network.
+            </p>
+        </aside>
 
-  <aside class="term">
-    <h3>MAC Address — What is it?</h3>
-    <p>
-      A MAC address is an identifier associated with a network interface, such as an Ethernet or Wi-Fi interface.
-      Switches use MAC addresses to deliver information within a local network.
-    </p>
-  </aside>
+        <p>
+            With the switch in place, we now have a practical <strong>Local Area Network (LAN)</strong>.
+        </p>
 
-  <p>
-    We now have a practical <strong>Local Area Network (LAN)</strong>.
-  </p>
+        <aside class="term">
+            <h3>LAN — What Is It?</h3>
+            <p>
+                A Local Area Network is a network covering a relatively limited area, such as a home, classroom,
+                office, or building.
+            </p>
+        </aside>
+    </section>
 
-  <aside class="term">
-    <h3>LAN — What is it?</h3>
-    <p>
-      A Local Area Network is a network covering a relatively limited area, such as a home, classroom, office,
-      or building.
-    </p>
-  </aside>
+    <section>
+        <h2>4. Connect Our Network to Another Network — The Router</h2>
 
-  <h2>4. Connect Our Network to Another Network — The Router</h2>
+        <p>
+            Our computers can now communicate with each other, but they still cannot reach anything outside their
+            local network. To connect our LAN to another network, we add a <strong>router</strong>.
+        </p>
 
-  <p>
-    Our computers can communicate with each other, but they still cannot reach anything outside their local network.
-  </p>
+        <aside class="term">
+            <h3>Router — What Is It?</h3>
+            <p>
+                A router connects <strong>different networks</strong>. It examines IP addresses and decides where
+                information should be sent next to reach another network.
+            </p>
+        </aside>
 
-  <p>For that, we add a <strong>router</strong>.</p>
-
-  <aside class="term">
-    <h3>Router — What is it?</h3>
-    <p>
-      A router connects <strong>different networks</strong>. It examines IP addresses and decides where information
-      should be sent next to reach another network.
-    </p>
-  </aside>
-
-  <pre><code>Computers
+        <pre><code>Computers
     │
     ▼
   Switch
@@ -131,83 +127,72 @@ Computer E ──┘</code></pre>
     ▼
   Router</code></pre>
 
-  <p>This gives us an important distinction:</p>
+        <p>
+            This gives us an important distinction:
+            <strong>A switch connects devices within a local network. A router connects different networks.</strong>
+        </p>
 
-  <p>
-    <strong>A switch connects devices within a local network.</strong><br>
-    <strong>A router connects different networks.</strong>
-  </p>
+        <p>
+            For the computers on our LAN, the router also becomes their <strong>default gateway</strong>.
+        </p>
 
-  <p>
-    For our computers, the router also becomes their <strong>default gateway</strong>.
-  </p>
+        <aside class="term">
+            <h3>Default Gateway — What Is It?</h3>
+            <p>
+                The default gateway is the router a device sends information to when the destination is outside
+                its own local network. Think of it as the network's <strong>exit door</strong>.
+            </p>
+        </aside>
+    </section>
 
-  <aside class="term">
-    <h3>Default Gateway — What is it?</h3>
-    <p>
-      The default gateway is the router a device sends information to when the destination is outside its own local
-      network. Think of it as the network's <strong>exit door</strong>.
-    </p>
-  </aside>
+    <section>
+        <h2>5. Stop Assigning Addresses by Hand — DHCP</h2>
 
-  <h2>5. Stop Assigning Addresses by Hand — DHCP</h2>
+        <p>
+            Manually entering an IP address and other network settings on every computer would quickly become
+            tedious. Networks therefore commonly provide an automatic configuration service called
+            <strong>DHCP (Dynamic Host Configuration Protocol)</strong>.
+        </p>
 
-  <p>
-    Manually entering an IP address on every computer would quickly become annoying.
-  </p>
+        <aside class="term">
+            <h3>DHCP — What Is It?</h3>
+            <p>
+                DHCP automatically gives devices the network settings they need. Most importantly, it assigns IP
+                addresses so that an administrator does not have to configure every device manually. DHCP can also
+                provide subnet information, the default gateway, and the DNS server the device should use.
+            </p>
+        </aside>
 
-  <p>
-    So networks commonly provide an <strong>automatic address service</strong> called
-    <strong>DHCP (Dynamic Host Configuration Protocol)</strong>.
-  </p>
+        <p>
+            On a home network, the home router commonly provides this service. A simple way to remember DHCP is:
+            <strong>DHCP gives out addresses.</strong>
+        </p>
+    </section>
 
-  <aside class="term">
-    <h3>DHCP — What is it?</h3>
-    <p>
-      DHCP automatically gives devices the network settings they need. Most importantly, it assigns them IP
-      addresses so that an administrator doesn't have to configure every device manually.
-    </p>
-  </aside>
+    <section>
+        <h2>6. Connect to the Internet</h2>
 
-  <p>DHCP can provide information such as:</p>
+        <p>
+            Our router can now connect our Local Area Network to an
+            <strong>Internet Service Provider (ISP)</strong>.
+        </p>
 
-  <ul>
-    <li>an IP address</li>
-    <li>subnet information</li>
-    <li>the default gateway</li>
-    <li>the DNS server to use</li>
-  </ul>
+        <aside class="term">
+            <h3>ISP — What Is It?</h3>
+            <p>
+                An Internet Service Provider is the company or organization that connects your network to the
+                larger Internet.
+            </p>
+        </aside>
 
-  <p>
-    On a home network, the home router commonly provides this service.
-  </p>
+        <pre><code>Computers → Switch → Router → ISP → Internet</code></pre>
 
-  <p>A simple way to remember it is:</p>
+        <p>
+            The Internet is not one giant local network. It is a <strong>network of networks</strong>.
+            At a very high level, routers connect those networks together:
+        </p>
 
-  <p><strong>DHCP gives out addresses.</strong></p>
-
-  <h2>6. Connect to the Internet</h2>
-
-  <p>
-    Our router can now connect our Local Area Network to an <strong>Internet Service Provider (ISP)</strong>.
-  </p>
-
-  <aside class="term">
-    <h3>ISP — What is it?</h3>
-    <p>
-      An Internet Service Provider is the company or organization that connects your network to the larger Internet.
-    </p>
-  </aside>
-
-  <pre><code>Computers → Switch → Router → ISP → Internet</code></pre>
-
-  <p>
-    The Internet is not one giant local network. It is a <strong>network of networks</strong>.
-  </p>
-
-  <p>At a very high level, routers connect those networks together:</p>
-
-  <pre><code>Our LAN
+        <pre><code>Our LAN
    │
  Router
    │
@@ -221,79 +206,68 @@ Computer E ──┘</code></pre>
    │
 Another Network</code></pre>
 
-  <p>
-    The real Internet is much more interconnected than this simple chain. There are many possible paths between
-    networks.
-  </p>
+        <p>
+            The real Internet is much more interconnected than this simple chain. There are many possible paths
+            between networks, but the basic idea remains the same: routers move information from one network toward
+            another until it reaches its destination.
+        </p>
+    </section>
 
-  <h2>7. Stop Memorizing IP Addresses — DNS</h2>
+    <section>
+        <h2>7. Stop Memorizing IP Addresses — DNS</h2>
 
-  <p>
-    Technically, computers can communicate using IP addresses. But people don't want to remember numerical addresses
-    for every website they visit.
-  </p>
+        <p>
+            Computers can communicate using IP addresses, but people do not want to remember a numerical address
+            for every website they visit. We would rather type a name such as <code>google.com</code>.
+            That creates another problem: <strong>How do we find the IP address associated with that name?</strong>
+            We use <strong>DNS (Domain Name System)</strong>.
+        </p>
 
-  <p>
-    We would rather type a name such as <code>google.com</code>.
-  </p>
+        <aside class="term">
+            <h3>DNS — What Is It?</h3>
+            <p>
+                DNS is the Internet's <strong>name service</strong>. It translates names such as
+                <code>google.com</code> into IP addresses that computers can use. You can think of it roughly
+                as a shared Internet contact list.
+            </p>
+        </aside>
 
-  <p>That creates another problem:</p>
-
-  <p><strong>How do we find the IP address associated with that name?</strong></p>
-
-  <p>
-    We use <strong>DNS (Domain Name System)</strong>.
-  </p>
-
-  <aside class="term">
-    <h3>DNS — What is it?</h3>
-    <p>
-      DNS is the Internet's <strong>name service</strong>. It translates names such as
-      <code>google.com</code> into IP addresses that computers can use. You can think of it roughly as a shared
-      Internet contact list.
-    </p>
-  </aside>
-
-  <pre><code>google.com
+        <pre><code>google.com
     ↓
    DNS
     ↓
 IP address</code></pre>
 
-  <p>This makes the difference between DHCP and DNS easier to remember:</p>
+        <p>
+            This also makes the difference between DHCP and DNS easier to remember:
+        </p>
 
-  <p>
-    <strong>DHCP:</strong> "I'm a new device. Give me an address."
-  </p>
+        <p>
+            <strong>DHCP:</strong> "I'm a new device. Give me an address."<br>
+            <strong>DNS:</strong> "I know someone's name. What's their address?"
+        </p>
+    </section>
 
-  <p>
-    <strong>DNS:</strong> "I know someone's name. What's their address?"
-  </p>
+    <section>
+        <h2>8. Use Internet Services</h2>
 
-  <h2>8. Use Internet Services</h2>
+        <p>
+            Once our computer has its network configuration and can find other computers by name, we can begin
+            doing useful things across the network. One of the most familiar examples is the <strong>Web</strong>.
+            Web browsers and web servers communicate using <strong>HTTP or HTTPS</strong>.
+        </p>
 
-  <p>
-    Once our computer has its network configuration and can find other computers by name, we can actually start
-    doing useful things across the network.
-  </p>
+        <aside class="term">
+            <h3>HTTP/HTTPS — What Is It?</h3>
+            <p>
+                HTTP is the protocol used to request and send web pages and other web resources. HTTPS is the
+                secure, encrypted form normally used on the modern Web.
+            </p>
+        </aside>
 
-  <p>For example, we can use the <strong>Web</strong>.</p>
+        <p>Visiting a website therefore looks roughly like this:</p>
 
-  <p>
-    Web browsers and web servers communicate using <strong>HTTP or HTTPS</strong>.
-  </p>
-
-  <aside class="term">
-    <h3>HTTP/HTTPS — What is it?</h3>
-    <p>
-      HTTP is the protocol used to request and send web pages and other web resources. HTTPS is the secure,
-      encrypted form normally used on the modern Web.
-    </p>
-  </aside>
-
-  <p>So visiting a website looks roughly like this:</p>
-
-  <pre><code>Type a website name
+        <pre><code>Type a website name
         ↓
 DNS finds its IP address
         ↓
@@ -306,102 +280,38 @@ Traffic crosses the Internet
 It reaches the web server
         ↓
 HTTP/HTTPS handles the web communication</code></pre>
+    </section>
 
-  <h2>The Whole Story</h2>
+    <section>
+        <h2>The Whole Story</h2>
 
-  <p>
-    We can build our understanding of networking as a sequence of problems and solutions:
-  </p>
+        <p>
+            We can now see networking as a sequence of problems and solutions. We begin with
+            <strong>one computer</strong>, which has nothing else to communicate with. Connecting
+            <strong>two computers with a cable</strong> creates a simple network, but adding more computers
+            makes direct connections increasingly complicated. A <strong>switch</strong> solves that problem
+            by allowing every device to make one connection to a shared local network.
+        </p>
 
-  <p>
-    <strong>One computer</strong><br>
-    Nothing to communicate with.
-  </p>
+        <p>
+            Once we want to communicate outside that network, we need a <strong>router</strong>, which connects
+            our LAN to other networks. Configuring every device by hand quickly becomes tedious, so
+            <strong>DHCP</strong> automatically provides addresses and other network settings. Connecting the router
+            to an <strong>ISP</strong> makes our LAN part of the larger <strong>Internet</strong>, a network made
+            up of many interconnected networks.
+        </p>
 
-  <p>↓</p>
+        <p>
+            People do not want to remember numerical IP addresses, so <strong>DNS</strong> translates
+            human-friendly names into those addresses. Finally, protocols such as <strong>HTTP and HTTPS</strong>
+            allow us to use services across the network.
+        </p>
 
-  <p>
-    <strong>Two computers + cable</strong><br>
-    Now they can communicate.
-  </p>
+        <p>
+            The important idea is that <strong>none of these pieces is arbitrary</strong>. Each new component
+            solves a problem that appears as our network grows:
+            <strong>connect → organize → route → automate → find → communicate.</strong>
+        </p>
+    </section>
 
-  <p>↓</p>
-
-  <p>
-    <strong>More computers</strong><br>
-    Direct connections become increasingly complicated.
-  </p>
-
-  <p>↓</p>
-
-  <p>
-    <strong>Switch</strong><br>
-    One connection per device creates a manageable local network.
-  </p>
-
-  <p>↓</p>
-
-  <p>
-    <strong>Need to reach another network</strong>
-  </p>
-
-  <p>↓</p>
-
-  <p>
-    <strong>Router</strong><br>
-    Connects our network to other networks.
-  </p>
-
-  <p>↓</p>
-
-  <p>
-    <strong>Manually configuring every computer is tedious</strong>
-  </p>
-
-  <p>↓</p>
-
-  <p>
-    <strong>DHCP</strong><br>
-    Automatically gives devices addresses and network settings.
-  </p>
-
-  <p>↓</p>
-
-  <p>
-    <strong>Connect the router to an ISP</strong>
-  </p>
-
-  <p>↓</p>
-
-  <p>
-    <strong>Internet</strong><br>
-    Our network becomes one network among many interconnected networks.
-  </p>
-
-  <p>↓</p>
-
-  <p>
-    <strong>Humans don't want to remember IP addresses</strong>
-  </p>
-
-  <p>↓</p>
-
-  <p>
-    <strong>DNS</strong><br>
-    Translates human-friendly names into IP addresses.
-  </p>
-
-  <p>↓</p>
-
-  <p>
-    <strong>HTTP/HTTPS and other services</strong><br>
-    Now we can actually do useful things across the network.
-  </p>
-
-  <p>
-    The important idea is that <strong>none of these pieces is arbitrary</strong>. Each new piece solves a problem
-    that appears as our network grows:
-  </p>
-
-  <p><strong>connect → organize → route → automate → find → communicate.</strong></p>
 </article>
