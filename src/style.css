@@ -307,6 +307,18 @@ tr {
 
 /* SLIDE SHOWS */
 
-  .spacer {
-    height: 150px;
+.spacer {
+    height: 60px;
+}
+
+objective-title {    
+    display: block;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0;
+}
+
+objective-text {
+    display: block;
+    margin: 0;
 }

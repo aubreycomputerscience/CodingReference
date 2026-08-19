@@ -26,6 +26,15 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
                 }, 
         ] },
 
+        {   displayName: DataTypes.SectionNames.About_CS1Projects,
+            sidebarItems: [
+                { 
+                    displayName: "Hello World",
+                    pageName: "Project1_Hello"
+                },
+                
+        ] },
+
         {   displayName: DataTypes.SectionNames.About_Overview,
             sidebarItems: [
                 { 

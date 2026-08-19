@@ -20,7 +20,61 @@ export class BellWorkTag extends HTMLElement {
                 Responses will be discussed after Bell Work.
             </p>
 
+        `;
+    }
+}
+
+export class ProjectName extends HTMLElement {
+
+    connectedCallback() {
+        const prompt = this.innerHTML.trim();
+
+        this.innerHTML = `
+            <div class="spacer"></div>
+            <h1>${prompt}</h1>
+        `;
+    }
+}
+
+export class ProjectObjectives extends HTMLElement {
+
+    connectedCallback() {
+        const prompt = this.innerHTML.trim();
+
+        this.innerHTML = `
+            <objective-title>Objectives</objective-title>
+            <objective-text>${prompt}</objective-text>
+        `;
+    }
+}
+
+export class Teaser extends HTMLElement {
+
+    connectedCallback() {
+        const prompt = this.innerHTML.trim();
+
+        this.innerHTML = `
+            <div class="spacer"></div>
+            <h1>“${prompt}”</h1>
             <div class="spacer"></div>
         `;
     }
 }
+
+export class Closure extends HTMLElement {
+
+    connectedCallback() {
+        const prompt = this.innerHTML.trim();
+
+        this.innerHTML = `
+            <div class="spacer"></div>
+
+            <h1>Closure</h1>
+
+            <h1>“${prompt}”</h1>
+
+            <div class="spacer"></div>
+        `;
+    }
+}
+

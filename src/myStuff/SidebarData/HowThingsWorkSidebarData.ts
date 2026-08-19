@@ -18,6 +18,11 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
         {   displayName: DataTypes.SectionNames.HowDoesItWork_Internet,
             sidebarItems: [
                 { 
+                    displayName: "Connecting Computers",
+                    pageName: "NetworkingBasics" 
+                },
+
+                { 
                     displayName: "Network Stack",
                     pageName: "comingSoon" /* "NetworkStack" */
                 },
