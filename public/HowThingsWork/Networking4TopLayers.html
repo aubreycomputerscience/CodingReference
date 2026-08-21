@@ -1,0 +1,236 @@
+<article class="lesson">
+  <h1>The Network and Transport Layers</h1>
+
+  <section>
+    <h2>The Network Layer</h2>
+
+    <p>
+      Architecture describes how computers divide the work. We can now look more closely at how
+      information actually gets from one computer to another.
+    </p>
+
+    <p>
+      When two computers communicate over the internet, the information has to travel across many
+      different networks. The job of the <strong>network layer</strong> is to move that
+      information from one computer to another. Every computer connected to the internet has an
+      address called an <strong>IP address</strong>. Just as every house has a mailing address,
+      every computer has an IP address so that it can be found on the network.
+    </p>
+
+    <p>
+      As information travels, special computers called <strong>routers</strong> read the
+      destination address and decide where to send it next. Each router uses what it knows about
+      the network to choose the route that seems best at that moment. The next router does the
+      same, and so on, until the information arrives.
+    </p>
+
+    <h3>Think About Google Maps</h3>
+
+    <p>
+      Think about using Google Maps while driving. You enter your destination before you leave,
+      but the route may change as you travel. If there is heavy traffic or an accident, Google
+      Maps may suggest a different road. The destination is fixed, but the path can change along
+      the way.
+    </p>
+
+    <p>
+      Routers work in much the same way. The destination address stays the same, but each router
+      decides the next step based on what it knows about the network at that moment.
+    </p>
+  </section>
+
+  <section>
+    <h2>Packets</h2>
+
+    <p>
+      When information travels across the internet, it is not usually sent all at once. Instead,
+      it is divided into many small pieces called <strong>packets</strong>. You can think of a
+      packet as a small container carrying part of the information from one computer to another.
+      A large file, webpage, or video may be divided into many packets before it is sent.
+    </p>
+
+    <p>
+      The packets travel across the network and are put back together when they reach their
+      destination. Breaking information into packets allows many different computers to share the
+      same network efficiently. It also raises an important question:
+      <strong>What happens if a packet gets lost or arrives out of order?</strong>
+    </p>
+
+    <p>That brings us to the <strong>transport layer</strong>.</p>
+  </section>
+
+  <section>
+    <h2>The Transport Layer</h2>
+
+    <p>
+      The network layer is concerned with getting information from one computer to another. The
+      <strong>transport layer</strong> deals with another question:
+      <strong>How should that information be delivered?</strong>
+    </p>
+
+    <p>
+      Two important transport protocols take different approaches to that problem:
+      <strong>TCP</strong> and <strong>UDP</strong>.
+    </p>
+
+    <h3>TCP: Reliable Delivery</h3>
+
+    <p>
+      Most of the time packets arrive without a problem. But sometimes one gets lost, delayed, or
+      arrives out of order. <strong>TCP (Transmission Control Protocol)</strong> is designed to
+      deal with these problems.
+    </p>
+
+    <p>
+      TCP keeps track of the information being sent. It numbers the pieces so that they can be
+      put back into the correct order. If something does not arrive, TCP can have it sent again.
+    </p>
+
+    <h4>The Pages of a Book</h4>
+
+    <p>
+      Imagine receiving the pages of a book through the mail. If every page is numbered, you can
+      put the pages into their proper order even if they arrive mixed up. If page 47 never
+      arrives, you can ask for page 47 again rather than requesting another copy of the entire
+      book. TCP works in much the same way.
+    </p>
+
+    <p>
+      Because TCP checks that information arrives correctly, it is useful when
+      <strong>accuracy and completeness matter</strong>. Webpages, email, file downloads, and
+      online transactions commonly need this kind of reliable delivery.
+    </p>
+
+    <p>
+      TCP's basic job is straightforward:
+      <strong>Make sure the information arrives completely and in the correct order.</strong>
+    </p>
+
+    <h3>UDP: Fire and Forget</h3>
+
+    <p>
+      <strong>UDP (User Datagram Protocol)</strong> takes a different approach. Instead of
+      checking that everything arrives, UDP sends the information and moves on.
+    </p>
+
+    <p>
+      Imagine watching a live game. If a tiny piece of video is lost, you probably will not
+      notice. But if the video freezes while waiting for that piece, the interruption can be much
+      more noticeable. For things such as live video, voice calls, or many online games, keeping
+      information moving can be more important than recovering every missing piece.
+    </p>
+
+    <p>
+      That is why UDP is sometimes described as <strong>“fire and forget.”</strong> Send it and
+      keep going. TCP emphasizes reliable delivery. UDP provides a simpler delivery mechanism
+      without those guarantees. Each approach is useful for different purposes.
+    </p>
+
+    <h4>A Note About Congestion</h4>
+
+    <p>
+      TCP does more than check that data arrives correctly. It also includes mechanisms that slow
+      down transmission when the network becomes congested. UDP itself does not include that
+      behavior. An application using UDP decides for itself how quickly to send information and
+      may implement its own congestion-control mechanisms.
+    </p>
+
+    <p>Congestion is its own topic.</p>
+
+    <h3>Enrichment: How TCP Keeps Everything Organized</h3>
+
+    <p>
+      TCP uses several mechanisms to provide reliable communication. First, TCP keeps track of
+      the sequence of data being transmitted. The receiving computer sends back
+      <strong>acknowledgements</strong> indicating what it has received. If expected information
+      is never acknowledged, TCP can send it again.
+    </p>
+
+    <p>
+      But TCP does not normally send one piece and then sit idle waiting for a response before
+      sending another. That would waste a tremendous amount of time. Instead, TCP can have a
+      group of data in transit at once. This is called a <strong>window</strong>.
+    </p>
+
+    <p>
+      As acknowledgements come back, the window moves forward and the sender continues
+      transmitting. This mechanism is commonly described as a <strong>sliding window</strong>.
+      The result is a useful combination: TCP can keep the network busy while still keeping track
+      of what has arrived and retransmitting information when necessary.
+    </p>
+  </section>
+
+  <section>
+    <h2>Enrichment: A Simple Routing Table</h2>
+
+    <p>
+      How does a router decide where information should go next? It uses a
+      <strong>routing table</strong>.
+    </p>
+
+    <p>
+      A routing table is essentially a set of directions. The router looks at the destination IP
+      address, finds the appropriate entry in its table, and uses that entry to decide where to
+      send the information next.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Destination</th>
+          <th>Subnet Mask</th>
+          <th>Next Hop</th>
+          <th>Interface</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>192.168.1.0</td>
+          <td>255.255.255.0</td>
+          <td>Directly connected</td>
+          <td>Ethernet 1</td>
+        </tr>
+        <tr>
+          <td>10.0.0.0</td>
+          <td>255.0.0.0</td>
+          <td>192.168.1.2</td>
+          <td>Ethernet 1</td>
+        </tr>
+        <tr>
+          <td>Default</td>
+          <td>—</td>
+          <td>192.168.1.1</td>
+          <td>Ethernet 1</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Reading the Table</h3>
+
+    <p>
+      <strong>Destination</strong> — The network or computer we are trying to reach.
+    </p>
+
+    <p>
+      <strong>Subnet Mask</strong> — Tells us which part of an IP address identifies the network
+      and which part identifies a particular computer within that network. It is somewhat like
+      distinguishing the address of an apartment building from the individual apartment number.
+    </p>
+
+    <p>
+      <strong>Next Hop</strong> — The next router to which the information should be handed.
+    </p>
+
+    <p>
+      <strong>Interface</strong> — The network connection the router uses to send the
+      information. In other words, which connection the information is sent out through.
+    </p>
+
+    <p>
+      A real routing table can contain considerably more information, but the basic idea is
+      simple: <strong>Look at the destination, consult the table, and determine the next
+      step.</strong> The next router then makes its own decision, and the process continues until
+      the information reaches its destination.
+    </p>
+  </section>
+</article>

@@ -1,0 +1,257 @@
+<article class="lesson">
+  <h1>Network Architecture</h1>
+
+  <p>
+    Once computers are connected, there is another question to answer:
+    <strong>How should the computers divide the work?</strong>
+  </p>
+
+  <p>
+    There are several ways to organize computers on a network. Two of the most important are
+    <strong>peer-to-peer</strong> and <strong>client-server</strong> architecture.
+  </p>
+
+  <section>
+    <h2>Peer-to-Peer Architecture</h2>
+
+    <p>
+      The simplest arrangement is for two computers to communicate directly with one another.
+      In a <strong>peer-to-peer</strong> system, the computers are essentially equals. Either
+      computer can request information from the other, and either computer can provide
+      information to the other.
+    </p>
+
+    <pre><code>Computer A  ⇄  Computer B</code></pre>
+
+    <p>
+      As more computers join, each computer can potentially communicate directly with the others.
+    </p>
+
+    <pre><code>Computer A  ⇄  Computer B
+     ⇅              ⇅
+Computer C  ⇄  Computer D</code></pre>
+
+    <p>
+      There does not have to be one central computer controlling the interaction. Each computer
+      can provide its own information or resources directly to other computers. This approach can
+      be simple and powerful, particularly when users want to communicate or share resources
+      directly. However, it becomes more difficult when many people need to work with the same
+      information or depend on the same services.
+    </p>
+
+    <p>That leads to another architecture: <strong>client-server</strong>.</p>
+  </section>
+
+  <section>
+    <h2>Client-Server Architecture</h2>
+
+    <p>
+      In a peer-to-peer system, computers communicate directly with one another. Either computer
+      can request information, and either computer can provide it.
+      <strong>Client-server architecture</strong> organizes things differently. Some computers
+      are designated as <strong>servers</strong> and provide information or services to other
+      computers. The computers that use those services are called <strong>clients</strong>.
+    </p>
+
+    <p>
+      For example, when you visit a website, your computer is the client. It asks a web server
+      for a webpage, and the server sends the page back. Hundreds or thousands of other clients
+      may be making requests to that same server at the same time.
+    </p>
+
+    <pre><code>Client ──┐
+Client ──┤
+Client ──┼── Server
+Client ──┤
+Client ──┘</code></pre>
+
+    <p>
+      The important difference is that the computers now have <strong>different roles</strong>.
+      Clients generally request and use services; servers are specifically set up to provide
+      those services.
+    </p>
+
+    <h3>A Common Place for Data</h3>
+
+    <p>
+      One of the most important advantages of client-server architecture is that it provides a
+      common place to keep information. Imagine a company with hundreds of employees and thousands
+      of customers. The company needs one reliable set of customer records. If every employee
+      maintained a separate copy, those copies would quickly become inconsistent.
+    </p>
+
+    <p>
+      Instead, the company can maintain a central <strong>database</strong> on its servers.
+      Employees use client applications to view or change information in that database.
+    </p>
+
+    <pre><code>Employee ──┐
+Employee ──┤
+Employee ──┼── Server ── Database
+Employee ──┤
+Employee ──┘</code></pre>
+
+    <p>Everyone is therefore working with the same underlying information.</p>
+
+    <h3>Centralized Services and Control</h3>
+
+    <p>
+      Servers can centralize more than data. They can provide applications, store files, manage
+      user accounts, process transactions, control access to information, and perform
+      computational work for clients. This is particularly useful for organizations. A company
+      can maintain its important systems centrally rather than depending upon hundreds or
+      thousands of individual computers to maintain separate copies.
+    </p>
+
+    <p>
+      Centralization also makes it easier to control <strong>who can access information</strong>,
+      maintain backups, update systems, enforce organizational rules, and protect important data.
+    </p>
+
+    <h3>Why Client-Server Architecture Matters</h3>
+
+    <p>
+      Client-server architecture therefore provides two major benefits. First, it
+      <strong>organizes computing around specialized roles</strong>. Clients request services,
+      while servers are designed to provide them. Second, it
+      <strong>brings shared information and services together</strong>. Data that needs to be
+      shared can have a common home rather than being scattered among many independent computers.
+    </p>
+
+    <p>
+      This basic architecture appears throughout modern computing. Websites, email systems,
+      business databases, cloud storage, social networks, banking systems, and countless other
+      applications use some form of client-server architecture.
+    </p>
+
+    <p>
+      The basic idea is simple: <strong>Clients ask. Servers provide.</strong> And when many
+      people need to work with the same information, the server can provide a
+      <strong>common source of data and services for everyone</strong>.
+    </p>
+  </section>
+
+  <section>
+    <h2>A Brief History: Centralization and Decentralization</h2>
+
+    <p>
+      The story of computing is not just a list of technologies. Throughout its history,
+      different ideas about where computing power and information should reside have helped
+      shape the systems we use.
+    </p>
+
+    <h3>Mainframes and Dumb Terminals</h3>
+
+    <p>
+      Early organizational computing was dominated by <strong>mainframes</strong>: large,
+      expensive computers that performed the actual computation for many users. Individual users
+      were often given <strong>dumb terminals</strong>. A dumb terminal might provide little more
+      than a keyboard and screen. It allowed someone to interact with the mainframe, but the
+      terminal itself had very little computing power.
+    </p>
+
+    <p>
+      This arrangement was partly a consequence of the technology of the time, but it also fit
+      the way large organizations operated. Computing resources were expensive and centrally
+      administered, and system administrators generally did not want individual users modifying
+      or controlling the underlying computer. Users were given access to the system, but not
+      control over it. The intelligence, the data, and the control remained in the center.
+    </p>
+
+    <h3>The Personal Computer</h3>
+
+    <p>
+      The arrival of the <strong>personal computer</strong> challenged that model. Instead of
+      giving a user a dumb terminal connected to somebody else's computer, the personal computer
+      put a complete computer on the user's desk. That was an enormous change.
+    </p>
+
+    <p>
+      People could install software, write programs, store their own information, experiment,
+      and use the computer in ways that a central administrator had never anticipated. Computing
+      was no longer something that happened only inside a centralized system controlled by an
+      organization. Personal computers gave individual users considerably more
+      <strong>independence and control</strong>, and that freedom contributed to an explosion of
+      new software and new uses for computers.
+    </p>
+
+    <h3>Client-Server Computing</h3>
+
+    <p>
+      But decentralization created its own problems. Businesses still needed employees to share
+      information. A company could not reasonably maintain hundreds of unrelated versions of its
+      customer database, accounting records, inventory, or other important information.
+    </p>
+
+    <p>
+      <strong>Client-server computing</strong> provided a way to combine the power of personal
+      computers with centralized resources. The user's personal computer became the
+      <strong>client</strong>. It could run its own software and perform work locally. But when
+      it needed shared information or services, it could request them from a
+      <strong>server</strong>.
+    </p>
+
+    <p>
+      The result was neither the old dumb-terminal model nor completely independent personal
+      computers. Users had capable machines of their own, while organizations could still
+      maintain common databases and shared services on central servers. Client-server
+      architecture became a foundation of business computing and, eventually, of much of the
+      internet.
+    </p>
+
+    <h3>Cloud Computing</h3>
+
+    <p>
+      As internet connections became faster and more reliable, servers no longer had to sit
+      inside the same building—or even belong directly to the organization using them.
+      Increasingly, computing and storage moved into enormous collections of servers housed in
+      <strong>data centers</strong>. This became known as <strong>cloud computing</strong>.
+    </p>
+
+    <p>
+      From the user's perspective, a laptop or phone could still act as the client. But the
+      server might now be hundreds or thousands of miles away, serving enormous numbers of users.
+      This architecture also fit a powerful new business model:
+      <strong>Software as a Service (SaaS)</strong>.
+    </p>
+
+    <p>
+      Instead of selling someone a copy of a program that would run indefinitely on that person's
+      computer, companies could operate the software on their own servers and charge customers
+      for continuing access—often through a monthly or yearly subscription. Cloud computing
+      therefore reflects both technological developments and economic choices. Centralized
+      servers make it possible to aggregate enormous amounts of data and computing power, but
+      they also give the organizations operating those servers considerable control over the
+      software, the data, and the relationship with the customer.
+    </p>
+
+    <h3>Decentralized Systems</h3>
+
+    <p>
+      The movement toward centralization has never been the only approach.
+      <strong>Peer-to-peer systems</strong> allow computers to communicate and share resources
+      more directly rather than requiring everything to pass through one central service.
+    </p>
+
+    <p>
+      More recently, <strong>blockchains and cryptocurrencies</strong> have explored another form
+      of decentralization. Rather than relying on one organization to maintain the authoritative
+      record, a blockchain distributes that record across many computers. These technologies
+      reflect a very different view of how computer systems can be organized.
+    </p>
+
+    <h3>What Comes Next?</h3>
+
+    <p>
+      AI may be the next chapter in this story. The largest AI systems depend heavily on enormous
+      centralized data centers. At the same time, increasingly capable AI models can run directly
+      on personal computers, phones, and other local devices.
+    </p>
+
+    <p>
+      That creates an interesting question for the next generation of computing:
+      <strong>How much computation and data will remain centralized, and how much will move back
+      onto the devices people control themselves?</strong> The answer is still being written.
+    </p>
+  </section>
+</article>
