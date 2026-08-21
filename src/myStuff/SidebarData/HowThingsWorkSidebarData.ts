@@ -19,15 +19,34 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
             sidebarItems: [
                 { 
                     displayName: "Networks",
-                    pageName: "NetworkingBasics" 
+                    pageName: "Networking1Basics" 
                 },
 
                 { 
-                    displayName: "Network Stack",
+                    displayName: "Applications",
+                    pageName: "Networking2Applications" /* "NetworkStack" */
+                },
+                
+                { 
+                    displayName: "Architecture",
+                    pageName: "Networking3Architecture" /* "NetworkStack" */
+                },
+                
+                { 
+                    displayName: "Top Layers",
+                    pageName: "Networking4TopLayers" /* "NetworkStack" */
+                },
+                
+                { 
+                    displayName: "Mac Addresses",
                     pageName: "comingSoon" /* "NetworkStack" */
                 },
                 { 
                     displayName: "Routing",
+                    pageName: "comingSoon" /* "NetworkStack" */
+                },
+                { 
+                    displayName: "Blockchain",
                     pageName: "comingSoon" /* "Routing" */
                 }
         ] },
