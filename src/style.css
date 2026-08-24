@@ -73,7 +73,7 @@ body {      /* remove the padding around your webpage/app */
 .content {
   flex: 1;
   padding: 1rem;
-  overflow: hidden;
+overflow: auto;
   min-width: 0;
   min-height: 0;
 
