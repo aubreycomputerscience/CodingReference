@@ -116,101 +116,102 @@ export class SlideViewerController extends HTMLElement {
     }
 
 
-    private createControls() {
+private createControls() {
 
-        // Viewer becomes a vertical flexbox: content scrolls above, controls stay at the bottom.
-        this.style.display = "flex";
-        this.style.flexDirection = "column";
-        this.style.height = "100%";
-        this.style.minHeight = "0";
-
-
-        const content = document.createElement("div");
-        content.style.flex = "1";
-        content.style.minHeight = "0";
-        content.style.overflowY = "auto";
+    // Viewer becomes a vertical flexbox.
+    this.style.display = "flex";
+    this.style.flexDirection = "column";
+    this.style.minHeight = "0";
 
 
-        for (const page of this.pages) {
-            content.append(page);
-        }
+    // View controls at the top right.
+    const viewControls = document.createElement("div");
+    viewControls.style.flex = "none";
+    viewControls.style.display = "flex";
+    viewControls.style.justifyContent = "flex-end";
+    viewControls.style.alignItems = "center";
+    viewControls.style.gap = "0.5rem";
+    viewControls.style.padding = "0.5rem 1rem";
 
 
-        const controls = document.createElement("div");
-        controls.style.flex = "none";
-        controls.style.position = "relative";
-        controls.style.display = "flex";
-        controls.style.alignItems = "center";
-        controls.style.justifyContent = "center";
-        controls.style.padding = "0.75rem 1rem";
-        controls.style.boxSizing = "border-box";
+    this.slideButton = document.createElement("button");
+    this.slideButton.style.width = "5rem";
 
 
-        const navigationControls = document.createElement("div");
-        navigationControls.style.display = "flex";
-        navigationControls.style.alignItems = "center";
-        navigationControls.style.gap = "1rem";
+    this.detailButton = document.createElement("button");
+    this.detailButton.style.width = "5rem";
 
 
-        this.previousButton = document.createElement("button");
-        this.previousButton.textContent = "Previous";
+    this.allPagesButton = document.createElement("button");
+    this.allPagesButton.style.width = "8rem";
 
 
-        this.pageIndicator = document.createElement("span");
-        this.pageIndicator.style.minWidth = "4rem";
-        this.pageIndicator.style.textAlign = "center";
+    viewControls.append(
+        this.slideButton,
+        this.detailButton,
+        this.allPagesButton
+    );
 
 
-        this.nextButton = document.createElement("button");
-        this.nextButton.textContent = "Next";
+    // Slide/page content fills the remaining space.
+    const content = document.createElement("div");
+    content.style.flex = "1";
+    content.style.minHeight = "0";
+    content.style.overflowY = "auto";
 
 
-        navigationControls.append(
-            this.previousButton,
-            this.pageIndicator,
-            this.nextButton
-        );
-
-
-        const viewControls = document.createElement("div");
-        viewControls.style.position = "absolute";  // Keeps navigation centered regardless of the controls on the right.
-        viewControls.style.right = "1rem";
-        viewControls.style.display = "flex";
-        viewControls.style.alignItems = "center";
-        viewControls.style.gap = "0.5rem";
-
-
-        this.slideButton = document.createElement("button");
-        this.slideButton.style.width = "5rem";  // Fixed widths prevent the checkmark from shifting the layout.
-
-
-        this.detailButton = document.createElement("button");
-        this.detailButton.style.width = "5rem";
-
-
-        this.allPagesButton = document.createElement("button");
-        this.allPagesButton.style.width = "7rem";
-
-
-        viewControls.append(
-            this.slideButton,
-            this.detailButton,
-            this.allPagesButton
-        );
-
-
-        controls.append(
-            navigationControls,
-            viewControls
-        );
-
-
-        this.append(
-            content,
-            controls
-        );
+    for (const page of this.pages) {
+        content.append(page);
     }
 
+
+    // Page navigation stays in its own row at the bottom.
+    const controls = document.createElement("div");
+    controls.style.flex = "none";
+    controls.style.display = "flex";
+    controls.style.alignItems = "center";
+    controls.style.justifyContent = "center";
+    controls.style.padding = "0.75rem 1rem";
+    controls.style.boxSizing = "border-box";
+
+
+    const navigationControls = document.createElement("div");
+    navigationControls.style.display = "flex";
+    navigationControls.style.alignItems = "center";
+    navigationControls.style.gap = "1rem";
+
+
+    this.previousButton = document.createElement("button");
+    this.previousButton.textContent = "Previous";
+
+
+    this.pageIndicator = document.createElement("span");
+    this.pageIndicator.style.minWidth = "4rem";
+    this.pageIndicator.style.textAlign = "center";
+
+
+    this.nextButton = document.createElement("button");
+    this.nextButton.textContent = "Next";
+
+
+    navigationControls.append(
+        this.previousButton,
+        this.pageIndicator,
+        this.nextButton
+    );
+
+
+    controls.append(
+        navigationControls
+    );
+
+
+    this.append(
+        viewControls,
+        content,
+        controls
+    );
+}
 
     private updateDisplay() {
 
@@ -359,8 +360,7 @@ export class SlideViewerController extends HTMLElement {
         this.detailButton.textContent =
             `${this.showDetail ? "✓ " : ""}Detail`;
 
-
         this.allPagesButton.textContent =
-            `${this.pageMode === "all" ? "✓ " : ""}Show All`;
+            `${this.pageMode === "singlePage" ? "✓ " : ""}Show Slides`;
     }
 }
