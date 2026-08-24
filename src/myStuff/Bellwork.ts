@@ -64,17 +64,51 @@ export class Teaser extends HTMLElement {
 export class Closure extends HTMLElement {
 
     connectedCallback() {
-        const prompt = this.innerHTML.trim();
+        let prompt = this.innerHTML.trim();
+        const defaultText = "What is one thing you learned? One thing you want to learn? One thing you didn't understand?"
+
+        if (prompt === "") {
+            prompt = defaultText;
+        }
 
         this.innerHTML = `
             <div class="spacer"></div>
 
-            <h1>Closure</h1>
+            <h2>Closure</h2>
 
             <h1>“${prompt}”</h1>
+        `;
+    }
+}
+
+export class Homework extends HTMLElement {
+
+    connectedCallback() {
+        let prompt = this.innerHTML.trim();
+
+        this.innerHTML = `
+            <div class="spacer"></div>
+
+            <h1>Homework</h1>
+
+            <h3>${prompt}</h3>
 
             <div class="spacer"></div>
         `;
     }
 }
 
+export class MultilineText extends HTMLElement {
+
+    connectedCallback() {
+        let prompt = this.innerHTML.trim();
+
+        this.innerHTML = `
+            <div class="spacer"></div>
+
+            <h3>${prompt}</h3>
+
+            <div class="spacer"></div>
+        `;
+    }
+}

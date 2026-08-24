@@ -51,6 +51,8 @@ export class CodeBoxController extends HTMLElement {  // we are using HTML Eleme
              // alternatively, could have dumped html in
              //     this.innerHTML = `<div> new HTML </div>`
 
+        this.bodyTextView.style.minHeight = `${this.bodyTextView.offsetHeight}px`;
+
         // add keyboard control, if needed
         const setupKeyboardToControl = this.getAttribute("setupKeyboardToControl");
      
@@ -59,7 +61,6 @@ export class CodeBoxController extends HTMLElement {  // we are using HTML Eleme
         }
     }
 
-    
     //#region CLASS DECLARATIONS
     mode: CodeBoxMode = "fullText";
     annotation: CodeBoxAnnotation = "on";
@@ -179,10 +180,6 @@ export class CodeBoxController extends HTMLElement {  // we are using HTML Eleme
     
     switchOutOfFullTextMode() {
                     
-        // freeze size of bodyTextView
-        this.bodyTextView.style.height = `${this.bodyTextView.offsetHeight}px`;
-        this.bodyTextView.style.flex = "0 0 auto";            
-
         this.rowCounter = 0;
         this.wordCounter = 0;
     }
