@@ -86,6 +86,75 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
             </objectives-viewer>
     </div></section>
 
+     <!-- FOLLOW ALONG  -->
+    <section class="page"> <div class="slide">  
+        <h2>  FOLLOW ALONG  </h2>
+        <codebox-controller  mode="lineByLine" fullText=
+        '   
+
+export function startApp() { 
+
+    // create button
+    const myButton = document.createElement("button");
+    myButton.textContent = "Click Me";
+
+    // add to UI
+    document.body.append(myButton);
+
+    // on click
+    myButton.onclick = () => {
+        myButton.textContent = "You clicked me!";
+   };
+}
+
+
+
+
+        '
+        ></codebox-controller> </div> <div class="detail">
+        <h3>If complete, help right and left shoulder partners. Do not do it for them.</h3>
+    </div></section>
+
+     <!-- FOLLOW ALONG  -->
+    <section class="page"> <div class="slide">  
+        <h2>  FOLLOW ALONG  </h2>
+        <codebox-controller  mode="lineByLine" fullText=
+        '   
+export function startApp() { 
+
+    const myButton = document.createElement("button");
+    myButton.textContent = "Click Me";
+    myButton.style.fontSize = "20px";
+    myButton.style.background = "yellow";
+    myButton.style.padding = "10px";
+
+    myButton.style.position = "absolute";
+    myButton.style.top = "400px";  
+    myButton.style.left = "500px";
+
+    const myLabel = document.createElement("label");
+    myLabel.textContent = "Monster";
+    myLabel.style.fontSize = "40px";
+
+    myLabel.style.position = "absolute";
+    myLabel.style.top = "100px";
+    myLabel.style.left = "100px";
+
+    document.body.append(myButton);
+    document.body.append(myLabel);
+
+    myButton.onclick = () => {
+        myLabel.textContent = "Roar!";
+        myLabel.style.background = "red";
+        myLabel.style.top = "100px";
+        myLabel.style.left = "200px";
+   };
+}
+        '
+        ></codebox-controller> </div> <div class="detail">
+        <h3>If complete, help right and left shoulder partners. Do not do it for them.</h3>
+    </div></section>
+
     <!-- YOU DO -->
     <section class="page"> <div class="slide">
         <multiline-text>`
