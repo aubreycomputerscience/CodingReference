@@ -1,0 +1,243 @@
+<article class="lesson"> <slide-viewer>
+    
+
+    <!-- BELLWORK -->
+    <section class="page"> <div class="slide"> <bellwork-viewer>  
+        Quiz: Write out code using paper and pencil. Create a label, setting text, size, and color. Add to screen.
+    </bellwork-viewer> </div> </section>
+
+    <!-- INTRO -->
+    <section class="page"> <div class="slide">
+            <projectname-viewer>
+                Hello World (Part II)
+            </projectname-viewer>
+            <objectives-viewer>
+                `Set up development environment and run app. (TOOLS-1 & 2) </TOOLS-1> Create HTML elements and and display on screen. (UI-1)'
+            </objectives-viewer>
+    </div></section>
+
+     <!-- FOLLOW ALONG  -->
+    <section class="page"> <div class="slide">  
+        <h2>  FOLLOW ALONG  </h2>
+        <codebox-controller  mode="lineByLine" fullText=
+        '   
+
+export function startApp() { 
+
+    // create button
+    const myButton = document.createElement("button");
+    myButton.textContent = "Click Me";
+
+    // add to UI
+    document.body.append(myButton);
+
+    // on click
+    myButton.onclick = () => {
+        myButton.textContent = "You clicked me!";
+   };
+}
+
+
+
+
+        '
+        ></codebox-controller> </div> <div class="detail">
+        <h3>If complete, help right and left shoulder partners. Do not do it for them.</h3>
+    </div></section>
+
+     <!-- FOLLOW ALONG  -->
+    <section class="page"> <div class="slide">  
+        <h2>  FOLLOW ALONG  </h2>
+        <codebox-controller  mode="lineByLine" fullText=
+        '   
+export function startApp() { 
+
+    const myButton = document.createElement("button");
+    myButton.textContent = "Click Me";
+    myButton.style.fontSize = "20px";
+    myButton.style.background = "yellow";
+    myButton.style.padding = "10px";
+
+    myButton.style.position = "absolute";
+    myButton.style.top = "400px";  
+    myButton.style.left = "500px";
+
+    const myLabel = document.createElement("label");
+    myLabel.textContent = "Monster";
+    myLabel.style.fontSize = "40px";
+
+    myLabel.style.position = "absolute";
+    myLabel.style.top = "100px";
+    myLabel.style.left = "100px";
+
+    document.body.append(myButton);
+    document.body.append(myLabel);
+
+    myButton.onclick = () => {
+        myLabel.textContent = "Roar!";
+        myLabel.style.background = "red";
+        myLabel.style.top = "100px";
+        myLabel.style.left = "200px";
+   };
+}
+        '
+        ></codebox-controller> </div> <div class="detail">
+        <h3>If complete, help right and left shoulder partners. Do not do it for them.</h3>
+    </div></section>
+
+    <!-- YOU DO -->
+    <section class="page"> <div class="slide">
+        <multiline-text>`
+            1.	Get Hello World Up on your screen.
+            2.	Change the size and color. 
+            3.	Add more than one label.
+            4.	Upgrade: Experiment using "p", "span", "div" instead of "label." Stylize for fun.
+            5.	Write up direction explaining how to create your first web app, listing the specific steps that are required. Try to do it without using your notes, as much as possible.
+            `
+        </multiline-text>
+    </div></section>
+
+     <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+ 
+
+<!--
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxx PAET III: FLEX xxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+-->
+
+    <!-- BELLWORK -->
+    <section class="page"> <div class="slide"> <bellwork-viewer>  
+        Write down three specific questions that you have. Explain in detail?
+    </bellwork-viewer> </div> </section>
+
+    <!-- INTRO -->
+    <section class="page"> <div class="slide">
+            <projectname-viewer>
+                Hello World (Part III Flex)
+            </projectname-viewer>
+            <objectives-viewer>
+                `Set up development environment and run app. (TOOLS-1 & 2) </TOOLS-1> Create HTML elements and and display on screen. (UI-1)'
+            </objectives-viewer>
+    </div></section>
+
+    <!-- Q&A -->
+    <section class="page"> <div class="slide">
+        <h1>Question & Answer</h1>
+    </div></section>
+
+     <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+ 
+    <!--
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxx Day IV: TRACK B xxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+-->
+
+    <!-- BELLWORK -->
+    <section class="page"> <div class="slide"> <bellwork-viewer>  
+        Which tech careers are you interested in?
+    </bellwork-viewer> </div> </section>
+
+    <!-- INTRO -->
+    <section class="page"> <div class="slide">
+            <projectname-viewer>
+                Hello World (Track II)
+            </projectname-viewer>
+            <objectives-viewer>
+                Explore Careers (Career-1)
+            </objectives-viewer>
+    </div></section>
+
+    <section class="page"> <div class="slide">
+        <multiline-text>`
+            Work Through: Topics/Careers/Careers
+        </multiline-text>
+    </div></section>
+
+     <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer>Reflect: Which careers are you most interested in? What are the next steps?</closure-viewer>
+    </div></section>
+
+
+<!--
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxx FLEX xxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+-->
+
+    <!-- BELLWORK -->
+    <section class="page"> <div class="slide"> <bellwork-viewer>  
+        Summarize, in detail, what you have learned about using Visual Studio to write Web Apps.
+    </bellwork-viewer> </div> </section>
+
+    <!-- INTRO -->
+    <section class="page"> <div class="slide">
+            <projectname-viewer>
+                Hello World (Part II)
+            </projectname-viewer>
+            <objectives-viewer>
+                `Set up development environment and run app. (TOOLS-1 & 2) </TOOLS-1> Create HTML elements and and display on screen. (UI-1)'
+            </objectives-viewer>
+    </div></section>
+
+    <!-- YOU DO -->
+    <section class="page"> <div class="slide">
+        <multiline-text>`
+            Review UI/1.2. Pick controls to add to your screen and try them out.
+            `
+        </multiline-text>
+    </div></section>
+
+     <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</slide-viewer>
+</article>
+
+<!-- TRY YOURSELF
+
+
+
+    <!-- <section class="page"> <div class="slide">
+        <bellwork-viewer>   Your slide content   </bellwork-viewer>
+            Your slide content
+        </div>
+
+        <div class="detail">
+            Your detail text
+        </div>
+
+        <div class="notes">
+            Your teacher notes
+        </div>
+    </section> -->

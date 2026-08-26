@@ -1,0 +1,152 @@
+<article class="lesson"> <slide-viewer>
+    
+
+    <!-- BELLWORK -->
+    <section class="page"> <div class="slide"> <bellwork-viewer>  
+        Quiz: Write out code using paper and pencil. Create a label, setting text, size, and color. Add to screen.
+    </bellwork-viewer> </div> </section>
+
+    <!-- INTRO -->
+    <section class="page"> <div class="slide">
+            <projectname-viewer>
+                On Click
+            </projectname-viewer>
+            <objectives-viewer>
+                Set up development environment and run app. (TOOLS-1 & 2) </TOOLS-1> Create HTML elements and and display on screen. (UI-1)
+            </objectives-viewer>
+    </div></section>
+
+    <!--LESSON I-->
+    <section class="page"> <div class="slide">
+
+        <h2>  UNDERSTANDING VARIABLES </h2>
+        <codebox-controller  mode="lineByLine" fullText=
+        '  
+// create variable to store data 
+let hitPoints = 100;
+let attackDamage = 30;
+let incomingDamage = 10;
+
+// work with data
+let remainingHitPoints = hitPoints - incomingDamage;
+
+// prevent from changing
+const maxHP = 100; // This value cannot be changed.
+        '
+        ></codebox-controller> </div> <div class="detail">
+        </div>
+
+        <div class="detail">
+See Coding, Lesson 1.1: Variables
+        </div>
+
+        <div class="notes">
+        </div>
+    </section>
+
+    
+    <!--LESSON II-->
+    <section class="page"> <div class="slide">
+
+        <h2>  UNDERSTANDING VARIABLES </h2>
+        <codebox-controller  mode="lineByLine" fullText=
+        '  
+// primative variable types 
+const myHP = 100;
+const myText = "some text";
+const trueOrFalse = true;
+
+// types help prevent errors
+const myHP: number = 100; // Let there be no confusion: this is a number.
+const myText: string = "some text";
+const trueOrFalse: boolean = true;
+
+const hitPoints: number = "cat"; // Error: "cat" is not a number.
+        '
+        ></codebox-controller> </div> <div class="detail">
+        </div>
+
+        <div class="detail">
+See Coding, Lesson 1.2: Primitive Data Types
+        </div>
+
+        <div class="notes">
+        </div>
+    </section>
+
+
+
+     <!-- FOLLOW ALONG  -->
+    <section class="page"> <div class="slide">  
+        <h2>  FOLLOW ALONG  </h2>
+        <codebox-controller  mode="lineByLine" fullText=
+        '   
+export function startApp() { 
+
+    // create button
+    const myButton = document.createElement("button");
+    myButton.textContent = "Click Me";
+
+    // add to UI
+    document.body.append(myButton);
+
+    // on click
+    myButton.onclick = () => {
+        myButton.textContent = "You clicked me!";
+   };
+}
+        '
+        ></codebox-controller> </div> <div class="detail">
+        <h3>If complete, help right and left shoulder partners. Do not do it for them.</h3>
+            See Coding, Lesson 2.1 User Input (Intro only).
+    </div></section>
+
+     <!-- FOLLOW ALONG  -->
+    <section class="page"> <div class="slide">  
+        <h2>  FOLLOW ALONG  </h2>
+        <codebox-controller  mode="lineByLine" fullText=
+        '   
+export function startApp() { 
+
+    const myButton = document.createElement("button");
+    myButton.textContent = "Click Me";
+    myButton.style.fontSize = "20px";
+    myButton.style.background = "yellow";
+    myButton.style.padding = "10px";
+
+    myButton.style.position = "absolute";
+    myButton.style.top = "400px";  
+    myButton.style.left = "500px";
+
+    const myLabel = document.createElement("label");
+    myLabel.textContent = "Monster";
+    myLabel.style.fontSize = "40px";
+
+    myLabel.style.position = "absolute";
+    myLabel.style.top = "100px";
+    myLabel.style.left = "100px";
+
+    document.body.append(myButton);
+    document.body.append(myLabel);
+
+    myButton.onclick = () => {
+        myLabel.textContent = "Roar!";
+        myLabel.style.background = "red";
+        myLabel.style.top = "100px";
+        myLabel.style.left = "200px";
+   };
+}
+        '
+        ></codebox-controller> </div> <div class="detail">
+        <h3>If complete, help right and left shoulder partners. Do not do it for them.</h3>
+        See Coding, Lesson 2.1 User Input (Intro only).
+    </div></section>
+
+     <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+ 
+</slide-viewer>
+</article>
