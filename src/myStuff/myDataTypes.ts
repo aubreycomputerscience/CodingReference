@@ -44,7 +44,7 @@ export const SectionNames = {  // alternatively, it is popular to create object 
 
     About_Standards: "Standards",
     About_Overview: "About",
-    About_CS1Projects: "Projects",
+    About_CS1Projects: "Unit I",
 
     Topics_Careers: "Careers",
     Topics_Other: "Other"
