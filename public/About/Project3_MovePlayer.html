@@ -1,0 +1,231 @@
+<article class="lesson"> <slide-viewer>
+    
+    <!-- BELLWORK -->
+    <section class="page"> <div class="slide"> <bellwork-viewer>  
+        Quiz: Write out code using paper and pencil. Create a label, setting text, size, and color. Add to screen.
+    </bellwork-viewer> </div> </section>
+
+    <!-- INTRO -->
+    <section class="page"> <div class="slide">
+            <projectname-viewer>
+                Move Player
+            </projectname-viewer>
+            <objectives-viewer>
+                <p>Set up development environment and run app. (TOOLS-1 & 2) </p>
+                <P>Create HTML elements and and display on screen. (UI-1)</P>
+                <p>Write readable TypeScript that breaks work into functions (with arguments, return values, local vs. global scope). (PROG-2)</p>
+            </objectives-viewer>
+    </div></section>
+
+
+
+
+    <!--LESSON I-->
+    <section class="page"> <div class="slide">
+
+        <h2>  LESSON: GLOBAL VARIABLES (AND SCOPE) </h2>
+        <codebox-controller  mode="lineByLine" fullText=
+        '  
+        // SHARED/PERMANENT DATA (also known as GLOBAL VARIALBES)
+        let xPosition = 0;
+        let yPosition = 0;
+
+        export function startApp() { 
+
+            // A function performs a task, moving line by line, down through the code,
+            // and then deletes everything within when completed.
+
+            let xPosition = 0;  // When startApp() is run, these variables will be created.
+            let yPosition = 0;  // When startApp() ends, everything is deleted.     
+
+            // In Computer Science, we say that the variable exists within a "local scope"
+            // and after this function (code chunk) variables are “deallocated.”
+        }
+        '
+        ></codebox-controller> </div> <div class="detail">
+        </div>
+
+        <div class="detail">
+        </div>
+
+        <div class="notes">
+        </div>
+    </section>
+
+
+
+
+
+    
+    <!--LESSON II-->
+    <section class="page"> <div class="slide">
+
+        <h2>  LESSON II: USING FUNCTIONS TO DIVIDE UP CODE </h2>
+        <codebox-controller  mode="lineByLine" fullText=
+        '  
+    export function startApp() { 
+
+        // setup
+        addRightButton();  // break code up into readable chunks
+        addLeftButton();   // making it easy to see the logic
+    }
+
+    function addLeftButton() {
+
+        const leftButton = document.createElement("button");
+        leftButton.textContent = "buttonA";
+        document.body.append(leftButton);  // the document stores this, so isn't deleted
+    }
+
+    function addRightButton() {
+
+        const rightButton = document.createElement("button");
+        rightButton.textContent = "buttonB";
+        document.body.append(rightButton);  
+    }
+        '
+        ></codebox-controller> </div> <div class="detail">
+        </div>
+
+        <div class="detail">
+        </div>
+
+        <div class="notes">
+        </div>
+    </section>
+
+
+
+     <!-- PROJECT  -->
+    <section class="page"> <div class="slide">  
+        <h2>  PROJECT: MOVE PLAYER  </h2>
+        <p>1. Use Global Variables.</p>
+        <p>2. Learn to use Functions to break up code into small chunks.</p>
+        <codebox-controller  mode="lineByLine" fullText=
+        '   
+    // GLOBAL VARIALBES
+    const playerLabel = document.createElement("button"); // this is shared/permanent variables
+    let xPosition = 100;  
+    let yPosition = 200;
+
+    export function startApp() { 
+
+        // setup
+        addPlayer()
+        addRightButton();
+        addLeftButton();
+    }
+
+    // BUILD UI
+
+    function addPlayer() {
+    
+        playerLabel.textContent = "PLAYER";
+        playerLabel.style.fontSize = "40px";
+        playerLabel.style.position = "absolute";
+        updatePosition()  // only update the position in one place
+                          // otherwise, you have to always update in 2 places
+                          // and it is easy to forget and can be hard to manage 
+                          // in a large code base
+
+        document.body.append(playerLabel);
+    }
+
+    function addLeftButton() {
+
+        const leftButton = document.createElement("button");
+        leftButton.textContent = "<";
+        leftButton.style.fontSize = "40px";
+
+        leftButton.style.position = "absolute";
+        leftButton.style.top = "400px";
+        leftButton.style.left = "400px";
+
+        leftButton.onclick = () => {
+            onLeftButtonPressed()
+        };
+
+        document.body.append(leftButton);  // the document stores this, so isn't deleted
+    }
+
+    function addRightButton() {
+
+        const rightButton = document.createElement("button");
+        rightButton.textContent = ">";
+        rightButton.style.fontSize = "40px";
+
+        rightButton.style.position = "absolute";
+        rightButton.style.top = "400px";
+        rightButton.style.left = "450px";
+
+        rightButton.onclick = () => {
+            onRightButtonPressed()
+        };
+
+        document.body.append(rightButton);  
+    }
+
+    // ON BUTTON PRESS
+
+    function onRightButtonPressed() {
+
+        xPosition = xPosition + 10;
+        updatePosition()
+    }
+
+    function onLeftButtonPressed() {
+
+        xPosition = xPosition - 10;
+        updatePosition()
+    }
+
+    function updatePosition() {
+
+        playerLabel.style.top = yPosition + "px";   
+        playerLabel.style.left = xPosition + "px";  
+    
+        // TypeScript allows us to add a number and a string 
+        // This gives us a text string. Convenient, but sloppy!   
+    }
+
+    UPGRADES
+    // 1) add up and down buttons
+    // 2) add player image (look at coding reference for instructions)
+    // 3) add other objects that move across the screen towards you
+    //    now you have something to dodge
+
+        '
+        ></codebox-controller> </div> <div class="detail">
+        <h3>If complete, help right and left shoulder partners. Do not do it for them.</h3>
+        See Coding, Lesson 2.1 User Input (Intro only).
+    </div></section>
+
+
+    <!-- TASK -->
+    <section class="page"> <div class="slide">  
+       <h1>ASSIGNMENT</h1>
+       <p>1. Create Player Label.</p>
+       <p>2. Create right and left Buttons that move the player right and left.</p>
+       <p>3. Use functions to break the code up into Sections.</p>
+       <h1>UPGRADES</h1>
+       <p>1) Add up and down buttons.</p>
+       <p>2) Add player image (look at coding reference for instructions).</p>
+       <p>3) Add other objects that move across the screen towards you. Now, you have something to dodge.</p>
+       <p>4) Add custom features.</p> 
+    </div></section>
+
+
+
+
+     <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+ 
+</slide-viewer>
+</article>
+
+
+
+

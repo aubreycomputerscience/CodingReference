@@ -36,6 +36,10 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
                     displayName: "On Click",
                     pageName: "Project2_OnClick"
                 },
+                { 
+                    displayName: "Move Player",
+                    pageName: "Project3_MovePlayer"
+                },
                 
         ] },
 

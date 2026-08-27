@@ -74,7 +74,7 @@ export class Closure extends HTMLElement {
         this.innerHTML = `
             <div class="spacer"></div>
 
-            <h2>Closure</h2>
+            <h1>CLOSURE</h1>
 
             <h1>“${prompt}”</h1>
         `;
