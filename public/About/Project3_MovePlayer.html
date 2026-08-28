@@ -18,51 +18,11 @@
     </div></section>
 
 
-
-
     <!--LESSON I-->
     <section class="page"> <div class="slide">
 
-        <h2>  LESSON: GLOBAL VARIABLES (AND SCOPE) </h2>
-        <codebox-controller  mode="lineByLine" fullText=
-        '  
-        // SHARED/PERMANENT DATA (also known as GLOBAL VARIALBES)
-        let xPosition = 0;
-        let yPosition = 0;
-
-        export function startApp() { 
-
-            // A function performs a task, moving line by line, down through the code,
-            // and then deletes everything within when completed.
-
-            let xPosition = 0;  // When startApp() is run, these variables will be created.
-            let yPosition = 0;  // When startApp() ends, everything is deleted.     
-
-            // In Computer Science, we say that the variable exists within a "local scope"
-            // and after this function (code chunk) variables are “deallocated.”
-        }
-        '
-        ></codebox-controller> </div> <div class="detail">
-        </div>
-
-        <div class="detail">
-        </div>
-
-        <div class="notes">
-        </div>
-    </section>
-
-
-
-
-
-    
-    <!--LESSON II-->
-    <section class="page"> <div class="slide">
-
-        <h2>  LESSON II: USING FUNCTIONS TO DIVIDE UP CODE </h2>
-        <codebox-controller  mode="lineByLine" fullText=
-        '  
+        <h2>  LESSON I: USING FUNCTIONS TO DIVIDE UP CODE </h2>
+        <codebox-controller  mode="lineByLine">
     export function startApp() { 
 
         // setup
@@ -83,8 +43,8 @@
         rightButton.textContent = "buttonB";
         document.body.append(rightButton);  
     }
-        '
-        ></codebox-controller> </div> <div class="detail">
+    
+        </codebox-controller> </div> <div class="detail">
         </div>
 
         <div class="detail">
@@ -95,14 +55,141 @@
     </section>
 
 
+    <!--YOUR TURN-->
+    <section class="page"> <div class="slide">
+        <h2>YOUR TURN</h2>
+        <p>Rewrite old code using functions. ("Refactoring")</p>
+        <codebox-controller  mode="lineByLine">
+export function startApp() { 
+
+    const myButton = document.createElement("button");
+    myButton.textContent = "Click Me";
+    myButton.style.fontSize = "20px";
+    myButton.style.background = "yellow";
+    myButton.style.padding = "10px";
+
+    myButton.style.position = "absolute";
+    myButton.style.top = "400px";  
+    myButton.style.left = "500px";
+
+    const myLabel = document.createElement("label");
+    myLabel.textContent = "Monster";
+    myLabel.style.fontSize = "40px";
+
+    myLabel.style.position = "absolute";
+    myLabel.style.top = "100px";
+    myLabel.style.left = "100px";
+
+    document.body.append(myButton);
+    document.body.append(myLabel);
+
+    myButton.onclick = () => {
+        myLabel.textContent = "Roar!";
+        myLabel.style.background = "red";
+        myLabel.style.top = "100px";
+        myLabel.style.left = "200px";
+   };
+}   
+    </codebox-controller> 
+        Note: If you try to reference a variable found in another function, you will get an error. But why?
+    </div> 
+        
+        <div class="detail">
+        </div>
+
+        <div class="notes">
+        </div>
+    </section>
+
+
+
+    <!--LESSON II-->
+    <section class="page"> <div class="slide">
+
+        <h2>  LESSON: GLOBAL VARIABLES (AND SCOPE) </h2>
+        <codebox-controller  mode="lineByLine"> 
+  
+        export function startApp() { 
+
+            let xPosition = 0;  // When startApp() is run, these variables will be created.
+            let yPosition = 0;  // When startApp() ends, everything is deleted.     
+        }
+        </codebox-controller> 
+    
+        <p>A function performs a task, moving line by line, down through the code,
+            and then deletes everything within when completed. In Computer Science, 
+            we say that the variable exists within a "local scope" and after this 
+            function (code chunk) variables are “deallocated.”</p>
+        <p>We can solve this problem by creating/storing/declaring the variables outside 
+            of our function. </p>
+
+              <codebox-controller  mode="lineByLine"> 
+        // SHARED/PERMANENT DATA (also known as GLOBAL VARIALBES)
+        let xPosition = 0;
+        let yPosition = 0;
+
+        export function startApp() { 
+            // now we can use xPosition and yPosition in our function
+        }
+        </codebox-controller> 
+    
+    </div> 
+        
+    
+
+        <div class="detail">
+        </div>
+
+        <div class="notes">
+        </div>
+    </section>
+
+
+
+    <!--YOUR TURN-->
+    <section class="page"> <div class="slide">
+        <h2>YOUR TURN</h2>
+        <p>Make your variables global. (Pull them out of your function and place them up top.)</p>
+        <codebox-controller  mode="lineByLine">
+            // Global Variables
+            => MOVE HERE
+
+            export function startApp() { 
+                // MOVE ME
+                const myButton = document.createElement("button");
+            }   
+    </codebox-controller> </div> 
+  
+        <div class="notes">
+        </div>
+    </section>
+
+
+     <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+
+    <!--DAY II-->
+    <section class="page"> <div class="slide">
+        <h1>DAY II</h1>
+        </div>
+    </section>
+
+       
+    <!-- BELLWORK -->
+    <section class="page"> <div class="slide"> <bellwork-viewer>  
+        What makes computer science challenging? What study skills are required to be successful? How can you better prepare for your next quiz?
+    </bellwork-viewer> </div> </section>
+
 
      <!-- PROJECT  -->
     <section class="page"> <div class="slide">  
         <h2>  PROJECT: MOVE PLAYER  </h2>
         <p>1. Use Global Variables.</p>
         <p>2. Learn to use Functions to break up code into small chunks.</p>
-        <codebox-controller  mode="lineByLine" fullText=
-        '   
+        <codebox-controller  mode="lineByLine">  
     // GLOBAL VARIALBES
     const playerLabel = document.createElement("button"); // this is shared/permanent variables
     let xPosition = 100;  
@@ -194,8 +281,7 @@
     // 3) add other objects that move across the screen towards you
     //    now you have something to dodge
 
-        '
-        ></codebox-controller> </div> <div class="detail">
+        </codebox-controller> </div> <div class="detail">
         <h3>If complete, help right and left shoulder partners. Do not do it for them.</h3>
         See Coding, Lesson 2.1 User Input (Intro only).
     </div></section>

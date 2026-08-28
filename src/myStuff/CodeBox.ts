@@ -35,8 +35,13 @@ export class CodeBoxController extends HTMLElement {  // we are using HTML Eleme
 
         // get parameters
         const fullText = this.getAttribute("fullText");
-        this.fullText = fullText ?? "";
-        
+
+        if (fullText !== null) {
+            this.fullText = fullText;  // todo: can we just remove this, I don't love the format
+        } else {
+            this.fullText = this.textContent ?? "";
+        }
+
         const mode = this.getAttribute("mode");
         switch (mode) { 
             case "lineByLine": this.mode = "lineByLine"; break;
