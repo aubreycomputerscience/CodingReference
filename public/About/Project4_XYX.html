@@ -1,0 +1,90 @@
+// UI ELEMENTS
+const fontSizeButton = document.createElement("button");
+const fontColorButton = document.createElement("button");
+const targetText = document.createElement("p");
+
+// STATE
+let useBigFont = false;
+let useRedFont = false;
+
+export function startApp() { 
+
+    setupFontSizeButton();
+    setupFontColorButton();
+    setupTargetText();
+}
+
+function setupTargetText() {
+
+    targetText.textContent = "Next Level";
+    document.body.append(targetText);
+
+    updateButtonUI();
+    updateTextUI();
+}
+
+function setupFontSizeButton() {
+
+    fontSizeButton.style.fontSize = "30px";
+    fontSizeButton.onclick = () => {
+
+        if (useBigFont === true) {  
+            useBigFont = false;
+        } else {
+            useBigFont = true;
+        }
+
+        updateButtonUI();
+        updateTextUI()
+    };
+
+    document.body.append(fontSizeButton);
+}
+
+function setupFontColorButton() {
+       
+    fontColorButton.style.fontSize = "30px"
+    fontColorButton.onclick = () => {
+
+        if (useRedFont) {   // useRedFont is true or false, so we can do this
+            useRedFont = false;
+        } else {
+            useRedFont = true;
+        }
+
+        updateButtonUI();
+        updateTextUI();
+    };
+
+    document.body.append(fontColorButton);
+}
+
+function updateButtonUI() {
+
+    if (useBigFont) {
+        fontSizeButton.textContent = "✔ Large"
+    } else {
+        fontSizeButton.textContent = "✔ Small"
+    }
+
+    if (useRedFont) {
+        fontColorButton.textContent = "✔ Red"
+    } else {
+        fontColorButton.textContent = "✔ Black"
+    }
+}
+
+function updateTextUI() {
+
+    if (useBigFont) {
+        targetText.style.fontSize = "50px";
+    } else {
+        targetText.style.fontSize = "30px";
+    }
+
+    if (useRedFont) {
+        targetText.style.color = "red";
+    } else {
+        targetText.style.color = "black";
+    }
+}
