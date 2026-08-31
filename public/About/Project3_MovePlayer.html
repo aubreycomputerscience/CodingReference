@@ -1,8 +1,8 @@
 <article class="lesson"> <slide-viewer>
     
-    <!-- BELLWORK -->
+    <!-- BELLWORK I -->
     <section class="page"> <div class="slide"> <bellwork-viewer>  
-        Quiz: Write out code using paper and pencil. Create a label, setting text, size, and color. Add to screen.
+        Write out code using paper and pencil. Create a label, setting text, size, and color. Add to screen.
     </bellwork-viewer> </div> </section>
 
     <!-- INTRO -->
@@ -60,36 +60,36 @@
         <h2>YOUR TURN</h2>
         <p>Rewrite old code using functions. ("Refactoring")</p>
         <codebox-controller  mode="lineByLine">
-export function startApp() { 
+        export function startApp() { 
 
-    const myButton = document.createElement("button");
-    myButton.textContent = "Click Me";
-    myButton.style.fontSize = "20px";
-    myButton.style.background = "yellow";
-    myButton.style.padding = "10px";
+            const myButton = document.createElement("button");
+            myButton.textContent = "Click Me";
+            myButton.style.fontSize = "20px";
+            myButton.style.background = "yellow";
+            myButton.style.padding = "10px";
 
-    myButton.style.position = "absolute";
-    myButton.style.top = "400px";  
-    myButton.style.left = "500px";
+            myButton.style.position = "absolute";
+            myButton.style.top = "400px";  
+            myButton.style.left = "500px";
 
-    const myLabel = document.createElement("label");
-    myLabel.textContent = "Monster";
-    myLabel.style.fontSize = "40px";
+            const myLabel = document.createElement("label");
+            myLabel.textContent = "Monster";
+            myLabel.style.fontSize = "40px";
 
-    myLabel.style.position = "absolute";
-    myLabel.style.top = "100px";
-    myLabel.style.left = "100px";
+            myLabel.style.position = "absolute";
+            myLabel.style.top = "100px";
+            myLabel.style.left = "100px";
 
-    document.body.append(myButton);
-    document.body.append(myLabel);
+            document.body.append(myButton);
+            document.body.append(myLabel);
 
-    myButton.onclick = () => {
-        myLabel.textContent = "Roar!";
-        myLabel.style.background = "red";
-        myLabel.style.top = "100px";
-        myLabel.style.left = "200px";
-   };
-}   
+            myButton.onclick = () => {
+                myLabel.textContent = "Roar!";
+                myLabel.style.background = "red";
+                myLabel.style.top = "100px";
+                myLabel.style.left = "200px";
+            };
+        }   
     </codebox-controller> 
         Note: If you try to reference a variable found in another function, you will get an error. But why?
     </div> 
@@ -123,7 +123,7 @@ export function startApp() {
         <p>We can solve this problem by creating/storing/declaring the variables outside 
             of our function. </p>
 
-              <codebox-controller  mode="lineByLine"> 
+        <codebox-controller  mode="lineByLine"> 
         // SHARED/PERMANENT DATA (also known as GLOBAL VARIALBES)
         let xPosition = 0;
         let yPosition = 0;
@@ -165,6 +165,46 @@ export function startApp() {
     </section>
 
 
+      <!--YOUR TURN-->
+        <section class="page"> <div class="slide">
+        <h2>YOUR TURN</h2>
+        <p>Follow along. There is an error. What are two ways you can fix it? Try them out.</p>
+        <codebox-controller  mode="lineByLine">
+            export function startApp() { 
+
+                makePlayerLabel();
+                changePlayerLabel();
+            }
+
+            function makePlayerLabel() {
+    
+                const playerLabel = document.createElement("button"); // this is shared/permanent variables
+                playerLabel.textContent = "PLAYER";
+                playerLabel.style.fontSize = "40px";
+                playerLabel.style.position = "absolute";
+                playerLabel.onClick = () => {
+                    changePlayerLabel()
+                };
+
+                document.body.append(playerLabel);
+            }
+
+            function changePlayerLabel() {  
+
+                playerLabel.style.fontSize = "30"; 
+            }
+ 
+    </codebox-controller> </div> 
+  
+        <div class="notes">
+        </div>
+    </section>
+
+
+
+
+
+
      <!-- CLOSURE  -->
     <section class="page"> <div class="slide">  
        <closure-viewer></closure-viewer>  <!-- default text -->
@@ -176,22 +216,16 @@ export function startApp() {
 
 
 
-    <!--DAY II-->
-    <section class="page"> <div class="slide">
-        <h1>DAY II</h1>
-        </div>
-    </section>
-
-       
+    <!--DAY II-->  
     <!-- BELLWORK -->
     <section class="page"> <div class="slide"> <bellwork-viewer>  
-        What makes computer science challenging? What study skills are required to be successful? How can you better prepare for your next quiz?
+        Day II: What makes computer science challenging? What study skills are required to be successful? How can you better prepare for your next quiz?
     </bellwork-viewer> </div> </section>
 
 
      <!-- PROJECT  -->
     <section class="page"> <div class="slide">  
-        <h2>  PROJECT: MOVE PLAYER  </h2>
+        <h2>  MOVE PLAYER: FOLLOW ALONG  </h2>
         <p>1. Use Global Variables.</p>
         <p>2. Learn to use Functions to break up code into small chunks.</p>
         <codebox-controller  mode="lineByLine">  
@@ -291,23 +325,6 @@ export function startApp() {
         See Coding, Lesson 2.1 User Input (Intro only).
     </div></section>
 
-
-    <!-- TASK -->
-    <section class="page"> <div class="slide">  
-       <h1>ASSIGNMENT</h1>
-       <p>1. Create Player Label.</p>
-       <p>2. Create right and left Buttons that move the player right and left.</p>
-       <p>3. Use functions to break the code up into Sections.</p>
-       <h1>UPGRADES</h1>
-       <p>1) Add up and down buttons.</p>
-       <p>2) Add player image (look at coding reference for instructions).</p>
-       <p>3) Add other objects that move across the screen towards you. Now, you have something to dodge.</p>
-       <p>4) Add custom features.</p> 
-    </div></section>
-
-
-
-
      <!-- CLOSURE  -->
     <section class="page"> <div class="slide">  
        <closure-viewer></closure-viewer>  <!-- default text -->
@@ -316,23 +333,13 @@ export function startApp() {
 
 
 
-
-
     
-
-    <!--DAY III-->
-    <section class="page"> <div class="slide">
-        <h1>DAY III</h1>
-        </div>
-    </section>
-
        
-    <!-- BELLWORK -->
+    <!-- BELLWORK III -->
+
     <section class="page"> <div class="slide"> <bellwork-viewer>  
-        Create a lesson for a friend. What, why, when, and how.
-
+        Day III: Create a lesson for a friend. What, why, when, and how.
         In two paragraphs, explain what functions are, why we divide code into functions, when you should use them, and how we do it.
-
         Then, explain global variables: what they are, why we use them, when we use them, and how we create them.
    </bellwork-viewer> </div> </section>
 
@@ -422,7 +429,7 @@ export function startApp() {
             }
 
         </codebox-controller> </div> 
-
+        <p> Practice to make sure you have it down.</p>
         <p> See Coding: If... Then</p>
         <div class="detail">
         </div>
@@ -437,19 +444,77 @@ export function startApp() {
     
      <!-- PRACTICE  -->
     <section class="page"> <div class="slide">  
-   
-        <codebox-controller  mode="lineByLine">  
-    
+        <h1>FOLLOW ALONG</h1>
+        <codebox-controller  mode="lineByLine"> 
+        export function startApp() { 
+ 
+            let hp = 50;
 
-        </codebox-controller> </div> <div class="detail">
-        <h3>If complete, help right and left shoulder partners. Do not do it for them.</h3>
-        See Coding, Lesson 2.1 User Input (Intro only).
+            export function startApp() { 
+
+            const textElementA = document.createElement("p");
+            textElementA.textContent = "HP " + hp;
+            textElementA.style.fontSize = "50px";
+
+            const textElementB = document.createElement("p");
+            textElementB.textContent = "Start Game";
+            textElementB.style.fontSize = "50px";
+
+            const myButton = document.createElement("button");
+            myButton.textContent = "Attack";
+            myButton.style.fontSize = "50px";
+
+            myButton.onclick = () => {
+
+                hp = hp - 10;
+                textElementA.textContent = "HP " + hp;
+
+                if (hp === 0) {
+                    textElementB.textContent = "Game Over!"
+                } 
+            };
+
+            document.body.append(textElementA);
+            document.body.append(textElementB);
+            document.body.append(myButton);
+        }
+
+    </codebox-controller> 
+
+    <h3>UPGRADES</h3>
+    <codebox-controller  mode="lineByLine"> 
+    // 1) Use if () { } else if () {} else {} to add more messages.
+    // 2) Stylize UI.
+    // 3) Add game over image.
+    // For help, check documentation: Lessons 6.1–6.2. For help with upgrades,
+    // search the documentation. (This is something that you do every day of your
+    // career as a developer.)
+    </codebox-controller>
+    </div> <div class="detail">
     </div></section>
+
+
+
+         <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+    </div> <div class="detail">
+    </div></section>
+
+
+
+    <!-- BELLWORK IV -->
+    <section class="page"> <div class="slide"> <bellwork-viewer>  
+        Day IV: Create a lesson for a friend. What, why, where, and how.
+        What is an `if` statement? Why do you need one? Where do you put it? What is the syntax for numbers and booleans? How do you check if something is greater than, less than, equal to, or not equal to something else?
+    </bellwork-viewer> </div> </section>
 
 
     <!-- TASK -->
     <section class="page"> <div class="slide">  
-        <h2>PROJECT: DODGE THE ATTACK</h2>
+        <h2>PROJECT: SCROLLING GAME</h2>
+        <p>BUILD FROM SCRATCH</p>
         <p>1. Use Global Variables.</p>
         <p>2. Use Functions to break up code into small chunks.</p>
         <p>3. Use simple "if" statements.</p>
@@ -458,15 +523,13 @@ export function startApp() {
        <p>1. Create Player Label.</p>
        <p>2. Create right and left Buttons that move the player right and left.</p>
        <p>3. Use functions to break the code up into Sections.</p>
+       <p>4. Add elements that are in your player's way.</p>
+       <p>5. Allow the player to collect objects or change the player's position, speed, etc., when they hit an object. (Track object x-positions and use an if statement to see if you hit them.)</p>
        <h1>UPGRADES</h1>
-       <p>1) Add up and down buttons.</p>
-       <p>2) Add player image (look at coding reference for instructions).</p>
-       <p>3) Add other objects that move across the screen towards you. Now, you have something to dodge.</p>
-       <p>4) Add custom features.</p> 
+       <p>1) Add player image (look at coding reference for instructions).</p>
+       <p>2) Allow your player to jump into the air. Then, add gravity to pull back down. (Use if statements.)</p>
+       <p>3) Be creative. Add custom features!</p> 
     </div></section>
-
-
-
 
      <!-- CLOSURE  -->
     <section class="page"> <div class="slide">  
@@ -474,6 +537,92 @@ export function startApp() {
     </div></section>
 
  
+
+        <!-- BELLWORK V -->
+    <section class="page"> <div class="slide">
+        <bellwork-viewer>
+            Day V: What questions do you have for Q&A? Articulate them carefully.
+        </bellwork-viewer>
+        </div>
+    </section> 
+
+    <!-- Q&A  -->
+    <section class="page"> <div class="slide">  
+       <h1>Question & Answer</h1>
+    </div></section>
+
+    <!-- PROJECT  -->
+    <section class="page"> <div class="slide">  
+       <h1>Continue Project</h1>
+    </div></section>
+
+     <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+
+
+    <!-- BELLWORK VI -->
+    <section class="page"> <div class="slide">
+        <bellwork-viewer>
+            Day VI: 1) Daily Standup: What have you completed? What are you going to do today? What are your blockers? 2. What does complete mean?
+        </bellwork-viewer>
+        </div>
+    </section> 
+
+    <!-- Q&A  -->
+    <section class="page"> <div class="slide">  
+       <h1>Question & Answer</h1>
+    </div></section>
+
+    <!-- PROJECT  -->
+    <section class="page"> <div class="slide">  
+       <h1>Continue Project</h1>
+    </div></section>
+
+     <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+
+    <!-- BELLWORK VII / DEMO DAY -->
+    <section class="page"> <div class="slide">
+        <bellwork-viewer>
+            Day VII: Write out a detailed plan for your project demo.
+        </bellwork-viewer>
+        </div>
+    </section> 
+
+    <!-- Q&A  -->
+    <section class="page"> <div class="slide">  
+       <h1>DEMO DAY!</h1>
+    </div></section>
+
+     <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer>Why do high-functioning teams often require weekly demos?
+       </closure-viewer> 
+    </div></section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </slide-viewer>
 </article>
 

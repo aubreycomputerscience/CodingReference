@@ -1,3 +1,51 @@
+
+    <!-- <section class="page"> <div class="slide">
+        <bellwork-viewer>   Your slide content   </bellwork-viewer>
+            Your slide content
+        </div>
+
+        <div class="detail">
+            Your detail text
+        </div>
+
+        <div class="notes">
+            Your teacher notes
+        </div>
+    </section> -->
+
+
+    
+
+
+// An input field stores the text entered into it in its value property. We can read that value after the user clicks a button.
+export function startApp() {
+
+    const inputField = document.createElement("input");
+    inputField.type = "text";
+    document.body.append(inputField);
+
+    const submitButton = document.createElement("button");
+    submitButton.textContent = "Submit";
+    document.body.append(submitButton);
+
+    const workingText = document.createElement("p");
+    workingText.textContent = "On a cold dark night,";
+    document.body.append(workingText);
+
+    submitButton.onclick = () => {
+        const userInput = inputField.value;
+        const userInputPlusLeadingSpace = " " + userInput;
+        workingText.textContent = workingText.textContent + userInputPlusLeadingSpace;
+    };
+}
+
+
+
+
+
+
+
+
 // UI ELEMENTS
 const fontSizeButton = document.createElement("button");
 const fontColorButton = document.createElement("button");
