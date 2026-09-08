@@ -28,6 +28,10 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
                     displayName: "CS Week 1",
                     pageName: "_CS_W1"
                 },
+                                { 
+                    displayName: "Hiring",
+                    pageName: "_PIT_W1"
+                },
 
         ] },
 

@@ -101,13 +101,13 @@ export class Homework extends HTMLElement {
 export class MultilineText extends HTMLElement {
 
     connectedCallback() {
-        let prompt = this.innerHTML.trim();
+ 
+        // Changing innerHTML to textContent preserves the raw newlines (\n)
+        let prompt = this.textContent.trim(); 
 
         this.innerHTML = `
             <div class="spacer"></div>
-
-            <h3>${prompt}</h3>
-
+            <h1 style="white-space: pre-wrap;">${prompt}</h1>
             <div class="spacer"></div>
         `;
     }
