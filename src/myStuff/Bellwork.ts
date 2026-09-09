@@ -106,9 +106,7 @@ export class MultilineText extends HTMLElement {
         let prompt = this.textContent.trim(); 
 
         this.innerHTML = `
-            <div class="spacer"></div>
-            <h1 style="white-space: pre-wrap;">${prompt}</h1>
-            <div class="spacer"></div>
+            <p style="white-space: pre-wrap;">${prompt}</p>
         `;
     }
 }

@@ -40,9 +40,24 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
                     displayName: "Move Player",
                     pageName: "Project3_MovePlayer"
                 },
+
+
+
                 { 
-                    displayName: "User Input",
-                    pageName: "Project4_UserInput"
+                    displayName: "User Input (A)",
+                    pageName: "Project4a_UserInput"
+                },
+                                { 
+                    displayName: "User Input (B)",
+                    pageName: "Project4b_UserInput"
+                },
+                                { 
+                    displayName: "User Input (C)",
+                    pageName: "Project4c_UserInput"
+                },
+                                { 
+                    displayName: "User Input (D)",
+                    pageName: "Project4d_UserInput"
                 },
                 
         ] },
