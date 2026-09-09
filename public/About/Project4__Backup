@@ -1,0 +1,461 @@
+<article class="lesson"> <slide-viewer>
+
+    <!-- Bell Work -->
+    <section class="page"> <div class="slide">
+        <bellwork-viewer>
+            Magic School: Practice Coding
+            https://student.magicschool.ai/s/login
+            Join Code: 8Sievg
+        </bellwork-viewer></div>
+    </section>
+
+    <!-- Lesson 1-->
+    <section class="page"> <div class="slide">
+        <h1>Lesson 1: Text Input Fields</h1>
+        <codebox-controller  mode="lineByLine">
+
+        const label = document.createElement("label");
+        label.textContent = "Name:";
+        document.body.append(input);
+
+        </codebox-controller></div>
+        <div class="detail"></div>
+        <div class="notes"></div>
+    </section>
+
+    <!-- Lesson 2 -->
+    <section class="page"> <div class="slide">
+        <h1>Lesson 2: Text Input Fields</h1>
+        <codebox-controller  mode="lineByLine">
+        // Creating a Label and Input
+        // We usually place a label next to an input field. A label and input can also be connected so that clicking the label selects the corresponding input.
+
+        const label = document.createElement("label");
+        label.textContent = "Name:";
+        label.htmlFor = "nameInput"; // Connect the label to the input with this id.
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.id = "nameInput";
+
+        document.body.append(label, input);
+        
+        </codebox-controller></div>
+        <div class="detail"></div>
+        <div class="notes"></div>
+    </section>
+
+
+    <!-- Lesson -->
+    <section class="page"> <div class="slide">
+        <h1>Follow Along</h1>
+        <codebox-controller  mode="lineByLine">
+        
+        // Creating a Text Input
+        const myInputTextField = document.createElement("input");
+        myInputTextField.type = "text";  // options include "password", "number", and "email"
+        myInputTextField.value = "My default text";  // use .value to get or set text, not .textContent
+        document.body.append(myInputTextField);
+
+        const button = document.createElement("button");
+        button.textContent = "Submit";
+        button.onclick = () => {
+            const userEnteredText = myInputTextField.value;
+        };
+        document.body.append(button);
+        
+        </codebox-controller></div>
+        <div class="detail"></div>
+        <div class="notes"></div>
+    </section>
+
+
+    <!-- FOLLOW ALONG -->
+    <section class="page"> <div class="slide">
+        <h1>Project: Creating your story.</h1>
+        <codebox-controller  mode="lineByLine">
+
+        export function startApp() {
+
+            // An input field stores the text entered into it in its value property. 
+            // We can read that value after the user clicks a button.
+
+            const workingText = document.createElement("p");
+            workingText.textContent = "On a cold dark night,";
+            document.body.append(workingText);
+    
+            const inputField = document.createElement("input");
+            inputField.type = "text";
+            document.body.append(inputField);
+
+            const submitButton = document.createElement("button");
+            submitButton.textContent = "Submit";
+            document.body.append(submitButton);
+
+            submitButton.onclick = () => {
+                const userInput = inputField.value;  // inputFields use .value, not .textContent
+                const userInputPlusLeadingSpace = " " + userInput;
+                workingText.textContent = workingText.textContent + userInputPlusLeadingSpace;
+                inputField.value = "";  // remove old text
+            };
+        }
+        </codebox-controller></div>
+        <div class="detail"></div>
+        <div class="notes"></div>
+    </section>
+
+
+     <!-- Closure  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer>How does a text input field differ from a p or label element?</closure-viewer>  <!-- default text -->
+    </div></section>
+
+
+<!-- xxxxxxxx -->
+<!-- DAY II  -->
+<!-- xxxxxxxx -->
+
+    <!-- Bell Work -->
+    <section class="page"> <div class="slide">
+        <bellwork-viewer>
+            Magic School: Practice Coding
+            https://student.magicschool.ai/s/login
+            Join Code: 8Sievg
+        </bellwork-viewer></div>
+    </section>
+
+    <!-- Lesson -->
+    <section class="page"> <div class="slide">
+        <h1>Project: Build Login Page</h1>
+        <codebox-controller  mode="lineByLine">
+
+        let userPassword = "MyPassword";
+
+export function startApp() { 
+
+    const titleElement = document.createElement("p");
+    titleElement.textContent = "My Game";
+    document.body.append(titleElement);
+
+    const passwordField = document.createElement("input");
+    document.body.append(passwordField);
+
+    const submitButton = document.createElement("button");
+    submitButton.textContent = "Submit";
+    submitButton.onclick = () => {
+
+        const userEnteredText = passwordField.value;
+
+        if (userEnteredText === userPassword) {
+            //setupGameUI();
+        } else {
+            passwordField.style.backgroundColor = "red";
+        }
+    }
+    document.body.append(submitButton);
+}
+
+
+// PROJECT:
+// 0) Start a new project.
+// 1) Create title element and set title to "My Game".  // Using English grammar rules.
+// 2) Add password field.
+// 3) Add a submit function.
+// 4) Create a global variable named userPassword = "My Password".
+// 5) Add an if statement. If the password is correct, run // setupGame().
+//    You can just put a comment in there. If not, turn the password field red.
+
+// UPGRADES
+// 1) Add a label that says Password. When you click on it, it should move you
+//    to the password input field. See Coding Reference.
+// 2) Break code up into functions. One for the title, one for the password field,
+//    and one for the submit button.
+// 3) Add function to setupGameUI.
+// 4) Update layout, fonts, etc. to make this look like a real login page. Switch to password-styled input.
+// 5) Update game page.
+// function setupGameUI() {
+//     document.body.replaceChildren();  // will remove all views
+//     const newUI = document.createElement("p");
+//     newUI.textContent = "Put Stuff Here";
+//     document.body.append(newUI);
+// }
+
+// FOOD FOR THOUGHT
+// - We can store a single password in our userPassword variable,
+//   but we need to be able to store more than one item. What we
+//   really need is a list of users and their passwords.
+
+        </codebox-controller></div>
+        <div class="detail"></div>
+        <div class="notes"></div>
+    </section>
+
+     <!-- Closure  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+
+<!-- xxxxxxxx -->
+<!-- DAY III  -->
+<!-- xxxxxxxx -->
+
+    <!-- Bell Work -->
+    <section class="page"> <div class="slide">
+        <bellwork-viewer>   Your slide content 
+            Magic School: Practice Coding
+            https://student.magicschool.ai/s/login
+            Join Code: 8Sievg
+        </bellwork-viewer></div>
+    </section>
+
+    <!-- TEST PREP -->
+    <section class="page"> <div class="slide">
+        <h1>TEST PREP!!!</h1></div>
+        <div class="detail"></div>
+        <div class="notes"></div>
+    </section>
+
+     <!-- Closure  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer>What do you need to do tonight to start to prepare?</closure-viewer>  <!-- default text -->
+    </div></section>
+
+    <!-- xxxxxxxx -->
+<!--  DAY IV  -->
+<!-- xxxxxxxx -->
+
+    <!-- Bell Work -->
+    <section class="page"> <div class="slide">
+        <bellwork-viewer> 
+            Magic School: Practice Coding
+            https://student.magicschool.ai/s/login
+            Join Code: 8Sievg
+        </bellwork-viewer></div>
+    </section>
+
+    <!-- Lesson -->
+    <section class="page"> <div class="slide">
+        
+        </div>
+
+        <div class="detail">
+            Your detail text
+        </div>
+
+        <div class="notes">
+            Your teacher notes
+        </div>
+    </section>
+
+     <!-- Closure  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+
+<!-- xxxxxxxx -->
+<!--  DAY V  -->
+<!-- xxxxxxxx -->
+
+    <!-- Lesson -->
+    <section class="page"> <div class="slide">
+        <h1>Day VI: TEST</h1>
+    </div></section>
+
+<!-- xxxxxxxx -->
+<!--  DAY VII  -->
+<!-- xxxxxxxx -->
+
+    <!-- Bell Work -->
+    <section class="page"> <div class="slide">
+        <bellwork-viewer>
+            Magic School: Practice Coding
+            https://student.magicschool.ai/s/login
+            Join Code: 8Sievg
+        </bellwork-viewer></div>
+    </section>
+
+    <!-- Lesson -->
+    <section class="page"> <div class="slide">
+        <h1>Project: Settings Page</h1>
+        <codebox-controller  mode="lineByLine">
+// Creating a Checkbox
+const checkbox = document.createElement("input");
+checkbox.type = "checkbox";
+
+document.body.append(checkbox);
+// To check whether it is selected:
+// const isSelected = checkbox.checked;
+Creating Radio Buttons
+Radio buttons allow one option to be selected from a group.
+
+const easyOption = document.createElement("input");
+easyOption.type = "radio";
+easyOption.name = "difficulty";
+easyOption.value = "easy";
+
+const hardOption = document.createElement("input");
+hardOption.type = "radio";
+hardOption.name = "difficulty";
+hardOption.value = "hard";
+
+document.body.append(easyOption, hardOption);
+Radio buttons with the same name belong to the same group. Selecting one option deselects the others.
+
+Creating a Dropdown Menu
+A dropdown menu uses a select element containing several option elements.
+
+const menu = document.createElement("select");
+
+const easyOption = document.createElement("option");
+easyOption.textContent = "Easy";
+easyOption.value = "easy";
+
+const hardOption = document.createElement("option");
+hardOption.textContent = "Hard";
+hardOption.value = "hard";
+
+menu.append(easyOption, hardOption);
+document.body.append(menu);
+To access the selected value:
+
+const selectedValue = menu.value;
+
+
+export function startApp() {
+
+    addCheckboxes();  // move to bottom when done
+
+    addLineBreak();
+    addLineBreak();
+
+    addRadioButtons();
+
+    addLineBreak();
+    addLineBreak();
+
+    addDropDownMenu();
+
+    // we will handle using onclick, but a submit button would be better
+    // this would require using global variables for our elements
+}
+
+function addCheckboxes() {
+
+    // a checkbox does not come with text, so need to create it
+    const label = document.createElement("label");
+    label.textContent = "I agree to terms of use.";
+    label.style.color = "red";
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.onclick = () => {
+
+        if (checkbox.checked) {
+            label.style.color = "black";
+        } else {
+            label.style.color = "red";
+        }
+    }
+
+    document.body.append(checkbox, label);
+}
+
+function addLineBreak() {
+
+    const lineBreak = document.createElement("br");  // br stands for break
+    document.body.append(lineBreak);
+}
+
+function addRadioButtons() {
+
+    const labelA = document.createElement("label");
+    labelA.textContent = "Easy Mode";
+
+    const labelB = document.createElement("label");
+    labelB.textContent = "Hard Mode";
+
+    const buttonA = document.createElement("input");
+    buttonA.type = "radio";
+    buttonA.name = "groupOfButtonsA";
+    buttonA.checked = true;
+    buttonA.onclick = () => {
+
+        if (buttonA.checked) {
+            labelA.style.color = "green";
+            labelB.style.color = "black";
+        } else {
+            labelA.style.color = "black";
+            labelB.style.color = "red";
+        }
+    }
+
+    const buttonB = document.createElement("input");
+    buttonB.type = "radio";
+    buttonB.name = "groupOfButtonsA";
+    buttonB.onclick = () => {
+        
+        if (buttonB.checked) {
+            labelB.style.color = "red";
+            labelA.style.color = "black";
+        } else {
+            labelB.style.color = "black";
+            labelA.style.color = "green";
+        }
+    }
+
+    document.body.append(buttonA, labelA, buttonB, labelB);
+
+    // note: you may also see buttonA.value = "easy";  
+    // this isn't shown to user, it tells us what this button/option is for
+    // which in some use cases is very useful
+}
+
+function addDropDownMenu() {
+
+    // create options/text to put inside a menu
+    const optionA = document.createElement("option");
+    optionA.textContent = "Easy";  
+    optionA.selected = true;
+    optionA.value = "easy";
+
+    const optionB = document.createElement("option");
+    optionB.textContent = "Hard";
+    optionB.value = "hard";
+
+    // create drop down menu
+    const menu = document.createElement("select");
+    menu.style.color = "green";
+    menu.onclick = () => {
+    
+        if (menu.value === "easy") {
+            menu.style.color = "green";
+        } else if (menu.value === "hard") {
+            menu.style.color = "red";
+        }
+
+        // alternatively, you could put onClick onto the options
+        // and check for selected (not checked)
+    }
+    menu.append(optionA, optionB);
+    document.body.append(menu);
+
+    // to check value use:
+    // const selectedValue = menu.value;
+}
+</codebox-controller>
+
+    </div></section>
+
+     <!-- Closure  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+
+</slide-viewer>
+</article>
+    
+
+

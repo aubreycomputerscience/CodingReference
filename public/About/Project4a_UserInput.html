@@ -1,0 +1,173 @@
+<article class="lesson"> <slide-viewer>
+
+    <!-- Bell Work -->
+    <section class="page"> <div class="slide">
+        <bellwork-viewer>
+        Finish the code using pen and paper.</bellwork-viewer></div>
+        <codebox-controller mode="lineByLine">
+        let x = 6;
+
+        export function startApp() { 
+            const myButton = document.createElement("button");
+            myButton.textContent = "Click Me";
+            myButton.onclick = () => {
+                // if x is between 3-5, set the button text to "Option B"
+                // if x is greater than 5, set it to "Option C"
+                // if x is less than 3, set it to "Option D"
+                // Hint: This should be easy if you do things in the correct order.
+            };
+
+            document.body.append(myButton);
+        }   
+        </codebox-controller>
+  
+    </section>
+
+    <!-- Lesson 1-->
+    <section class="page"> <div class="slide">
+        <h1>Lesson 1: Text Input Fields</h1>
+        <codebox-controller  mode="lineByLine">
+        const nameInput = document.createElement("input");
+        nameInput.type = "text";
+
+        const submitButton = document.createElement("button");
+        submitButton.textContent = "Submit";
+        submitButton.onclick = () => {
+            
+            const userEnteredName = nameInput.value;  // use value, not textContent
+            // Do something with userEnteredName.
+        };
+
+        document.body.append(nameInput);
+        document.body.append(submitButton);
+        </codebox-controller></div>
+        <div class="detail"></div>
+        <div class="notes"></div>
+    </section>
+
+    <!-- Lesson 2 -->
+    <section class="page"> <div class="slide">
+        <h1>Lesson 2: Adding Labels</h1>
+        <codebox-controller  mode="lineByLine">
+        // Creating a Label and Input
+        // We usually place a label next to an input field. 
+        // A label and input can also be connected so that clicking the label selects the corresponding input.
+
+        const label = document.createElement("label");
+        label.textContent = "Name:";
+        label.htmlFor = "nameInput"; // Connect the label to the input with this id.
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.id = "nameInput";
+
+        document.body.append(label, input);
+        </codebox-controller></div>
+        <div class="detail"></div>
+        <div class="notes"></div>
+    </section>
+
+
+    <!-- FOLLOW ALONG -->
+    <section class="page"> <div class="slide">
+        <h1>Follow Along</h1>
+        <codebox-controller  mode="lineByLine">
+        // Creating a Text Input
+        const myInputTextField = document.createElement("input");
+        myInputTextField.type = "text";  // options include "password", "number", and "email"
+        myInputTextField.value = "My default text";  // use .value to get or set text, not .textContent
+        document.body.append(myInputTextField);
+
+        const button = document.createElement("button");
+        button.textContent = "Submit";
+        button.onclick = () => {
+            const userEnteredText = myInputTextField.value;
+        };
+        document.body.append(button);
+        </codebox-controller></div>
+        <div class="detail"></div>
+        <div class="notes"></div>
+    </section>
+
+    <!-- PROJECT -->
+    <section class="page"> <div class="slide">
+        <h1>Project: Creating your story.</h1>
+        <codebox-controller  mode="lineByLine">
+        export function startApp() {
+
+            // An input field stores the text entered into it in its value property. 
+            // We can read that value after the user clicks a button.
+
+            const workingText = document.createElement("p");
+            workingText.textContent = "On a cold dark night,";
+            document.body.append(workingText);
+    
+            const inputField = document.createElement("input");
+            inputField.type = "text";
+            document.body.append(inputField);
+
+            const submitButton = document.createElement("button");
+            submitButton.textContent = "Submit";
+            document.body.append(submitButton);
+
+            submitButton.onclick = () => {
+                const userInput = inputField.value;  // inputFields use .value, not .textContent
+                const userInputPlusLeadingSpace = " " + userInput;
+                workingText.textContent = workingText.textContent + userInputPlusLeadingSpace;
+                inputField.value = "";  // remove old text
+            };
+        }
+        </codebox-controller></div>
+        <div class="detail"></div>
+        <div class="notes"></div>
+    </section>
+
+
+     <!-- Closure  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer>How does a text input field differ from a p or label element?</closure-viewer>  <!-- default text -->
+    </div></section>
+
+
+
+</slide-viewer>
+</article>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

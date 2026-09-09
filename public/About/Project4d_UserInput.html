@@ -1,0 +1,205 @@
+<article class="lesson"> <slide-viewer>
+
+    <!-- Bell Work -->
+    <section class="page"> <div class="slide">
+        <bellwork-viewer>
+            Magic School: Practice Coding
+            https://student.magicschool.ai/s/login
+            Join Code: 8Sievg
+        </bellwork-viewer></div>
+    </section>
+
+    <!-- Lesson -->
+    <section class="page"> <div class="slide">
+        <h1>Project: Settings Page</h1>
+        <codebox-controller  mode="lineByLine">
+// Creating a Checkbox
+const checkbox = document.createElement("input");
+checkbox.type = "checkbox";
+
+document.body.append(checkbox);
+// To check whether it is selected:
+// const isSelected = checkbox.checked;
+Creating Radio Buttons
+Radio buttons allow one option to be selected from a group.
+
+const easyOption = document.createElement("input");
+easyOption.type = "radio";
+easyOption.name = "difficulty";
+easyOption.value = "easy";
+
+const hardOption = document.createElement("input");
+hardOption.type = "radio";
+hardOption.name = "difficulty";
+hardOption.value = "hard";
+
+document.body.append(easyOption, hardOption);
+Radio buttons with the same name belong to the same group. Selecting one option deselects the others.
+
+
+
+
+
+Creating a Dropdown Menu
+A dropdown menu uses a select element containing several option elements.
+
+const menu = document.createElement("select");
+
+const easyOption = document.createElement("option");
+easyOption.textContent = "Easy";
+easyOption.value = "easy";
+
+const hardOption = document.createElement("option");
+hardOption.textContent = "Hard";
+hardOption.value = "hard";
+
+menu.append(easyOption, hardOption);
+document.body.append(menu);
+To access the selected value:
+
+const selectedValue = menu.value;
+
+
+
+
+
+
+
+
+export function startApp() {
+
+    addCheckboxes();  // move to bottom when done
+
+    addLineBreak();
+    addLineBreak();
+
+    addRadioButtons();
+
+    addLineBreak();
+    addLineBreak();
+
+    addDropDownMenu();
+
+    // we will handle using onclick, but a submit button would be better
+    // this would require using global variables for our elements
+}
+
+function addCheckboxes() {
+
+    // a checkbox does not come with text, so need to create it
+    const label = document.createElement("label");
+    label.textContent = "I agree to terms of use.";
+    label.style.color = "red";
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.onclick = () => {
+
+        if (checkbox.checked) {
+            label.style.color = "black";
+        } else {
+            label.style.color = "red";
+        }
+    }
+
+    document.body.append(checkbox, label);
+}
+
+function addLineBreak() {
+
+    const lineBreak = document.createElement("br");  // br stands for break
+    document.body.append(lineBreak);
+}
+
+function addRadioButtons() {
+
+    const labelA = document.createElement("label");
+    labelA.textContent = "Easy Mode";
+
+    const labelB = document.createElement("label");
+    labelB.textContent = "Hard Mode";
+
+    const buttonA = document.createElement("input");
+    buttonA.type = "radio";
+    buttonA.name = "groupOfButtonsA";
+    buttonA.checked = true;
+    buttonA.onclick = () => {
+
+        if (buttonA.checked) {
+            labelA.style.color = "green";
+            labelB.style.color = "black";
+        } else {
+            labelA.style.color = "black";
+            labelB.style.color = "red";
+        }
+    }
+
+    const buttonB = document.createElement("input");
+    buttonB.type = "radio";
+    buttonB.name = "groupOfButtonsA";
+    buttonB.onclick = () => {
+        
+        if (buttonB.checked) {
+            labelB.style.color = "red";
+            labelA.style.color = "black";
+        } else {
+            labelB.style.color = "black";
+            labelA.style.color = "green";
+        }
+    }
+
+    document.body.append(buttonA, labelA, buttonB, labelB);
+
+    // note: you may also see buttonA.value = "easy";  
+    // this isn't shown to user, it tells us what this button/option is for
+    // which in some use cases is very useful
+}
+
+function addDropDownMenu() {
+
+    // create options/text to put inside a menu
+    const optionA = document.createElement("option");
+    optionA.textContent = "Easy";  
+    optionA.selected = true;
+    optionA.value = "easy";
+
+    const optionB = document.createElement("option");
+    optionB.textContent = "Hard";
+    optionB.value = "hard";
+
+    // create drop down menu
+    const menu = document.createElement("select");
+    menu.style.color = "green";
+    menu.onclick = () => {
+    
+        if (menu.value === "easy") {
+            menu.style.color = "green";
+        } else if (menu.value === "hard") {
+            menu.style.color = "red";
+        }
+
+        // alternatively, you could put onClick onto the options
+        // and check for selected (not checked)
+    }
+    menu.append(optionA, optionB);
+    document.body.append(menu);
+
+    // to check value use:
+    // const selectedValue = menu.value;
+}
+</codebox-controller>
+
+    </div></section>
+
+     <!-- Closure  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+
+</slide-viewer>
+</article>
+    
+
+
+
