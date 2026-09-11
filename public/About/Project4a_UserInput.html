@@ -13,7 +13,7 @@
             myButton.onclick = () => {
                 // if x is between 3-5, set the button text to "Option B"
                 // if x is greater than 5, set it to "Option C"
-                // if x is less than 3, set it to "Option D"
+                // if x is less than 3, set it to "Option A"
                 // Hint: This should be easy if you do things in the correct order.
             };
 
@@ -21,6 +21,27 @@
         }   
         </codebox-controller>
   
+    </section>
+
+    <!-- Review -->
+    <section class="page"> <div class="slide">
+        <h1>Conditionals</h1>
+        <p>What is the value of x? Is there anything wrong with this code?</p>
+        <codebox-controller  mode="lineByLine">
+        let x = 3;
+        x = x + 4;
+        x = x - 3;
+
+        if (x >= 0) {
+            x = 0;
+        } else if (x > 1) {
+            x = 1;
+        } else {
+            x = 2;
+        }
+        </codebox-controller></div>
+        <div class="detail"></div>
+        <div class="notes"></div>
     </section>
 
     <!-- Lesson 1-->

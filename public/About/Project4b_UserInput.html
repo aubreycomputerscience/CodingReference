@@ -14,15 +14,33 @@
         <h2>Project: Build Login Page</h2>
         <multiline-text>
 1. Start a new project.
-2. Create title element and set title to "My Game".  // Using English grammar rules.
+2. Create title element and set title to "My Game".  // In this class we will use British grammar rules.
 3. Add password field.
-4. Add a submit function.
+4. Add a submit button.
 5. Create a global variable named userPassword = "My Password".
-6. Add an if statement. If the password is correct, run // setupGame().
-You can just put a comment in there. If not, turn the password field red.
-        </multiline-text>
-        <codebox-controller  mode="lineByLine">
+6. Add an if statement. If the password is not correct, turn the password field red. If the password is correct, run // setupGame(). Since we have not created a function named setup game, you will leave this commented out. 
+        
+// UPGRADES
+1. Add a label that says Password. When you click on it, it should move you
+   to the password input field. See Coding Reference.
+2. Break code up into functions. One for the title, one for the password field,
+   and one for the submit button.
+3. Add function to setupGameUI.
 
+    // function setupGameUI() {
+    //     document.body.replaceChildren();  // will remove all views
+    //     const newUI = document.createElement("p");
+    //     newUI.textContent = "Put Stuff Here";
+    //     document.body.append(newUI);
+    // }
+
+4. Update layout, fonts, etc. to make this look like a real login page. Switch to password-styled input.
+5. Update game page.
+
+</multiline-text>
+        <div class="detail"></div>
+        <div class="notes">
+ <codebox-controller  mode="lineByLine">
     let userPassword = "MyPassword";
 
     export function startApp() { 
@@ -49,30 +67,7 @@ You can just put a comment in there. If not, turn the password field red.
     
         document.body.append(submitButton);
     }
-
-// UPGRADES
-// 1) Add a label that says Password. When you click on it, it should move you
-//    to the password input field. See Coding Reference.
-// 2) Break code up into functions. One for the title, one for the password field,
-//    and one for the submit button.
-// 3) Add function to setupGameUI.
-// 4) Update layout, fonts, etc. to make this look like a real login page. Switch to password-styled input.
-// 5) Update game page.
-// function setupGameUI() {
-//     document.body.replaceChildren();  // will remove all views
-//     const newUI = document.createElement("p");
-//     newUI.textContent = "Put Stuff Here";
-//     document.body.append(newUI);
-// }
-
-// FOOD FOR THOUGHT
-// - We can store a single password in our userPassword variable,
-//   but we need to be able to store more than one item. What we
-//   really need is a list of users and their passwords.
-
         </codebox-controller></div>
-        <div class="detail"></div>
-        <div class="notes"></div>
     </section>
 
      <!-- Closure  -->
