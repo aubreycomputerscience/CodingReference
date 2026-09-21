@@ -357,8 +357,10 @@ objective-text {
     margin: 0;
 }
 
-
-
-
+.chatgpt-prompt-button {
+    display: block;
+    margin-left: auto;
+    margin-right: 1rem;
+}
 
 

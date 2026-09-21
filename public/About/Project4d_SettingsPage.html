@@ -1,0 +1,393 @@
+<article class="lesson"> <slide-viewer>
+
+    <section class="page"> <div class="slide">
+        <projectname-viewer>
+                Add Settings Page
+            </projectname-viewer>
+            <objectives-viewer>
+                <p>Add HTML elements to HTML files. Create HTML elements or link them programmatically, including labels, images, and user input boxes. (UI-1)</p>
+                <p>Use standard control structures, including if-then statements ("selection") and loops ("iteration"). (PROG-3)</p>
+                <p>Write readable TypeScript that breaks work into functions. (PROG-2)</p>
+            </objectives-viewer>
+    </section>
+
+
+    <!-- Bell Work -->
+    <section class="page"> <div class="slide">
+        <bellwork-viewer>
+            Magic School: Practice Coding
+            https://student.magicschool.ai/s/login
+            Join Code: 8Sievg
+        </bellwork-viewer></div>
+        <chat-prompt>
+Create problems similar to examples below:
+
+1. What value is stored in x after this code runs?
+
+let x = 6;
+x = x + 4;
+x = x - 2;
+
+A. 4
+B. 8
+C. 10
+D. 12
+
+2. What grade will be stored in studentGrade?
+
+let score = 10;
+let studentGrade = "";
+
+if (score >= 8) {
+    studentGrade = "B";
+} else if (score >= 9) {
+    studentGrade = "A";
+} else {
+    studentGrade = "C";
+}
+
+A. "A"
+B. "C"
+C. "B"
+D. ""
+
+3. Write the code to store the text from myTextInputField in a variable named userText. 
+[the answer is const userText = myTextInputField.value]
+        </chat-prompt>
+    </section>
+
+    
+    <!-- Lesson 1 -->
+    <section class="page"> <div class="slide">
+        <h2>Lesson I: Creating a Checkbox</h2>
+        <p>To check whether it is selected use: const isSelected = checkbox.checked;</p>
+<codebox-controller  mode="lineByLine">
+const checkbox = document.createElement("input");
+checkbox.type = "checkbox";
+
+document.body.append(checkbox);
+</codebox-controller>
+</div></section>
+
+
+    <!-- Lesson 2 -->
+    <section class="page"> <div class="slide">
+        <h2>Lesson II: Creating Radio Buttons</h2>
+        <p>Radio buttons allow one option to be selected from a group. Selecting one option deselects the others.</p>
+        <p>Radio buttons with the same name belong to the same group.</p>
+         <codebox-controller  mode="lineByLine">
+const easyOption = document.createElement("input");
+easyOption.type = "radio";
+easyOption.name = "difficulty";
+easyOption.value = "easy";
+
+const hardOption = document.createElement("input");
+hardOption.type = "radio";
+hardOption.name = "difficulty";
+hardOption.value = "hard";
+
+document.body.append(easyOption, hardOption);
+</codebox-controller>
+</div></section>
+
+    <section class="page"> <div class="slide">
+                <h2>Check whether it's selected</h2>
+    <codebox-controller  mode="lineByLine">
+if (optionA.checked) {
+    // do something
+}
+
+// or use
+if (optionA.value = "Option 1") {
+    // do something
+}
+</codebox-controller>
+<br>
+        <p>Use if option.checked or if option.value.</p>
+        <p>To set the value in code, use easyOption.checked = true.</p>
+</div></section>
+
+
+
+
+    <!-- Lesson 3 -->
+    <section class="page"> <div class="slide">
+        <h2>Lesson III: Creating a Dropdown Menu</h2>
+        <p>A dropdown menu uses a select element containing several option elements.</p>
+        <p>To access the selected value: const selectedValue = menu.value;</p>
+        <codebox-controller  mode="lineByLine">
+// create Menu Box
+const menu = document.createElement("select");
+document.body.append(menu);
+
+// create Option A
+const easyOption = document.createElement("option");
+easyOption.textContent = "Easy";
+easyOption.value = "easy";
+
+// create Option B
+const hardOption = document.createElement("option");
+hardOption.textContent = "Hard";
+hardOption.value = "hard";
+
+// Add Elements to Menu Box
+menu.append(easyOption, hardOption);
+</codebox-controller>
+</div></section>
+
+    <!-- PROJECT -->
+    <section class="page"> <div class="slide">
+        <h1>Project: Settings Page</h1>
+        <multiline-text>
+        Assignment:
+        1. Add a checkbox for agreeing to terms of use. When not selected, it should be red.
+        2. Add two Radio Buttons, one for Easy Mode and one for Hard Mode. When hard mode is selected, turn that text to red. When easy mode selected, turn easy mode text to green.
+        3. Add a Drop Down Menu, using the same options and behavior as the Radio Buttons.
+        
+    Upgrades:
+        1. Play with it to get a feel for the ins and outs.
+        2. Set the default values.
+        3. Have fun building a settings page for your game.
+        </multiline-text>
+    </div></section>
+
+
+      <!-- WALK THRU  -->
+    <section class="page"> <div class="slide">  
+        <h2>  FOLLOW ALONG  </h2> </div> 
+        <p>Password Protected</p>
+        <div class="notes">
+        <codebox-controller  mode="lineByLine">
+export function startApp() {
+
+    addCheckboxes();  // move to bottom when done
+
+    addLineBreak();
+    addLineBreak();
+
+    addRadioButtons();
+
+    addLineBreak();
+    addLineBreak();
+
+    addDropDownMenu();
+
+    // we will handle using onclick, but a submit button would be better
+    // this would require using global variables for our elements
+}
+
+function addCheckboxes() {
+
+    // a checkbox does not come with text, so need to create it
+    const label = document.createElement("label");
+    label.textContent = "I agree to terms of use.";
+    label.style.color = "red";
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.onclick = () => {
+
+        if (checkbox.checked) {
+            label.style.color = "black";
+        } else {
+            label.style.color = "red";
+        }
+    }
+
+    document.body.append(checkbox, label);
+}
+
+function addLineBreak() {
+
+    const lineBreak = document.createElement("br");  // br stands for break
+    document.body.append(lineBreak);
+}
+
+function addRadioButtons() {
+
+    const labelA = document.createElement("label");
+    labelA.textContent = "Easy Mode";
+
+    const labelB = document.createElement("label");
+    labelB.textContent = "Hard Mode";
+
+    const buttonA = document.createElement("input");
+    buttonA.type = "radio";
+    buttonA.name = "groupOfButtonsA";
+    buttonA.checked = true;
+    buttonA.onclick = () => {
+
+        if (buttonA.checked) {
+            labelA.style.color = "green";
+            labelB.style.color = "black";
+        } else {
+            labelA.style.color = "black";
+            labelB.style.color = "red";
+        }
+    }
+
+    const buttonB = document.createElement("input");
+    buttonB.type = "radio";
+    buttonB.name = "groupOfButtonsA";
+    buttonB.onclick = () => {
+        
+        if (buttonB.checked) {
+            labelB.style.color = "red";
+            labelA.style.color = "black";
+        } else {
+            labelB.style.color = "black";
+            labelA.style.color = "green";
+        }
+    }
+
+    document.body.append(buttonA, labelA, buttonB, labelB);
+
+    // note: you may also see buttonA.value = "easy";  
+    // this isn't shown to user, it tells us what this button/option is for
+    // which in some use cases is very useful
+}
+
+function addDropDownMenu() {
+
+    // create options/text to put inside a menu
+    const optionA = document.createElement("option");
+    optionA.textContent = "Easy";  
+    optionA.selected = true;
+    optionA.value = "easy";
+
+    const optionB = document.createElement("option");
+    optionB.textContent = "Hard";
+    optionB.value = "hard";
+
+    // create drop down menu
+    const menu = document.createElement("select");
+    menu.style.color = "green";
+    menu.onclick = () => {
+    
+        if (menu.value === "easy") {
+            menu.style.color = "green";
+        } else if (menu.value === "hard") {
+            menu.style.color = "red";
+        }
+
+        // alternatively, you could put onClick onto the options
+        // and check for selected (not checked)
+    }
+    menu.append(optionA, optionB);
+    document.body.append(menu);
+
+    // to check value use:
+    // const selectedValue = menu.value;
+}
+        </codebox-controller>
+        </div></section>
+
+
+    <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+     <!-- HOMEWORK  -->
+    <section class="page"> <div class="slide">  
+       <homework-viewer>
+            <p>Be ready for quiz. </p>
+            Read/Review UI/Chapter 1: Lesson 2.
+        </homework-viewer> 
+    </div></section>
+
+
+
+
+    <!-- Bell Work -->
+    <section class="page"> <div class="slide">
+        <bellwork-viewer>
+            Magic School: Practice Coding
+            https://student.magicschool.ai/s/login
+            Join Code: 8Sievg
+        </bellwork-viewer></div>
+        <chat-prompt>
+Ask students how to build a checkbox field. Then, radio buttons. And finally, a drop down menu.
+This is just a high level. If they are able to explain in words, then ask them to 
+try writing the code.
+
+Background Info: Checkboxes are normal input. Radio buttons use the name property to group them.
+Menu items require us to make a menu and then add options.
+
+SAMPLE CODE:
+
+const checkbox = document.createElement("input");
+checkbox.type = "checkbox";
+document.body.append(checkbox);
+
+
+
+const easyOption = document.createElement("input");
+easyOption.type = "radio";
+easyOption.name = "difficulty";
+easyOption.value = "easy";
+
+const hardOption = document.createElement("input");
+hardOption.type = "radio";
+hardOption.name = "difficulty";
+hardOption.value = "hard";
+
+document.body.append(easyOption, hardOption);
+
+
+// create Menu Box
+const menu = document.createElement("select");
+document.body.append(menu);
+
+// create Option A
+const easyOption = document.createElement("option");
+easyOption.textContent = "Easy";
+easyOption.value = "easy";
+
+// create Option B
+const hardOption = document.createElement("option");
+hardOption.textContent = "Hard";
+hardOption.value = "hard";
+
+// Add Elements to Menu Box
+menu.append(easyOption, hardOption);
+
+</chat-prompt>
+    </section>
+
+
+
+   <!-- YOU DO -->
+    <section class="page"> <div class="slide">
+        <div class="spacer"></div>
+        <h1>Continue Project</h1>
+    </div></section>
+
+
+
+
+             <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+     <!-- HOMEWORK  -->
+    <section class="page"> <div class="slide">  
+       <homework-viewer>
+        TBA
+        </homework-viewer> 
+    </div></section>
+
+
+
+
+
+
+
+
+</slide-viewer>
+</article>
+    
+
+
+

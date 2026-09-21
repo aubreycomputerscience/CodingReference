@@ -1,0 +1,180 @@
+<article class="lesson"> <slide-viewer>
+
+
+
+
+    
+       
+    <!-- BELLWORK III -->
+
+    <section class="page"> <div class="slide"> <bellwork-viewer>  
+        Day III: Create a lesson for a friend. What, why, when, and how.
+        In two paragraphs, explain what functions are, why we divide code into functions, when you should use them, and how we do it.
+        Then, explain global variables: what they are, why we use them, when we use them, and how we create them.
+   </bellwork-viewer> </div> </section>
+
+   
+    <!--LESSON I-->
+    <section class="page"> <div class="slide">
+
+        <h2>  LESSON I: USING IF STATEMENTS (CONDITIONALS) </h2>
+        <codebox-controller  mode="lineByLine">
+            const hitPoints = 20;
+
+            if (hitPoints < 30) {
+                // do something
+            }
+    
+            /* 
+            score === 100; // Equal to
+            score !== 100; // Not equal to
+            score > 100;   // Greater than
+            score < 100;   // Less than
+            score >= 100;  // Greater than or equal to
+            score <= 100;  // Less than or equal to
+            */
+
+        </codebox-controller> </div> 
+        <p> See Coding: If... Then</p>
+        <div class="detail">
+        </div>
+
+        <div class="detail">
+        </div>
+
+        <div class="notes">
+        </div>
+    </section>
+
+        <!--LESSON II-->
+    <section class="page"> <div class="slide">
+
+        <h2>  LESSON II: IF (TRUE) </h2>
+        <codebox-controller  mode="lineByLine">
+            let hasKey = true;
+
+            if (hasKey) {
+                // Open the door.
+            }
+
+        </codebox-controller> </div> 
+        <p> See Coding: If... Then</p>
+        <div class="detail">
+        </div>
+
+        <div class="detail">
+        </div>
+
+        <div class="notes">
+        </div>
+    </section>
+
+
+
+    <!--LESSON III-->
+    <section class="page"> <div class="slide">
+
+        <h2>  LESSON III: IF ELSE </h2>
+        <codebox-controller  mode="lineByLine">
+
+            let hasKey = false;
+
+            if (hasKey) {
+                // Open the door.
+            } else {
+                // Keep the door locked.
+            }
+
+        </codebox-controller> </div> 
+        
+        <codebox-controller  mode="lineByLine">
+
+            let hitPoints = 60;
+
+            if (hitPoints <= 0) {
+                // End the game.
+            } else if (hitPoints < 30) {
+                // Warn the player that health is low.
+            } else {
+                // Continue the game normally.
+            }
+
+        </codebox-controller> </div> 
+        <p> Practice to make sure you have it down.</p>
+        <p> See Coding: If... Then</p>
+        <div class="detail">
+        </div>
+
+        <div class="detail">
+        </div>
+
+        <div class="notes">
+        </div>
+    </section>
+
+    
+     <!-- PRACTICE  -->
+    <section class="page"> <div class="slide">  
+        <h1>FOLLOW ALONG</h1>
+        <codebox-controller  mode="lineByLine"> 
+        let hp = 50;
+
+        export function startApp() { 
+
+            const textElementA = document.createElement("p");
+            textElementA.textContent = "HP " + hp;
+            textElementA.style.fontSize = "50px";
+
+            const textElementB = document.createElement("p");
+            textElementB.textContent = "Start Game";
+            textElementB.style.fontSize = "50px";
+
+            const myButton = document.createElement("button");
+            myButton.textContent = "Attack";
+            myButton.style.fontSize = "50px";
+
+            myButton.onclick = () => {
+
+                hp = hp - 10;
+                textElementA.textContent = "HP " + hp;
+
+                if (hp === 0) {
+                    textElementB.textContent = "Game Over!"
+                } 
+            };
+
+            document.body.append(textElementA);
+            document.body.append(textElementB);
+            document.body.append(myButton);
+        }
+
+    </codebox-controller> 
+
+    <h3>UPGRADES</h3>
+    <codebox-controller  mode="lineByLine"> 
+    // 1) Use if () { } else if () {} else {} to add more messages.
+    // 2) Stylize UI.
+    // 3) Add game over image.
+    // For help, check documentation: Lessons 6.1–6.2. For help with upgrades,
+    // search the documentation. (This is something that you do every day of your
+    // career as a developer.)
+    </codebox-controller>
+    </div> <div class="detail">
+    </div></section>
+
+
+
+         <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+    </div> <div class="detail">
+    </div></section>
+
+    
+</slide-viewer>
+</article>
+
+
+
+

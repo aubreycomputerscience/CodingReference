@@ -1,0 +1,312 @@
+<article class="lesson"> <slide-viewer>
+    
+    <!-- INTRO -->
+    <section class="page"> <div class="slide">
+            <projectname-viewer>
+                Final Project: Build a Calculator
+            </projectname-viewer>
+            <objectives-viewer>
+                <p>Add HTML elements to HTML files. Create HTML elements or link them programmatically, including labels, images, and user input boxes. (UI-1)</p>
+                <p>Use standard control structures, including if-then statements ("selection") and loops ("iteration"). (PROG-3)</p>
+                <p>Write readable TypeScript that breaks work into functions. (PROG-2)</p>
+            </objectives-viewer>
+    </div></section>
+
+
+    <!-- Bell Work -->
+    <section class="page"> <div class="slide">
+        <bellwork-viewer>
+            Magic School: Practice Coding
+            https://student.magicschool.ai/s/login
+            Join Code: 8Sievg
+        </bellwork-viewer></div>
+        <chat-prompt>
+  </chat-prompt>
+    </section>
+
+
+    <!-- ASSIGNMENT -->
+    <section class="page"> <div class="slide">
+        <h2>Create a Calculator App </h2>
+        <multiline-text>
+    Assignment: 
+
+    1. Watch the Demo. Take notes on what you will need to build.
+    2. Create the UI Elements. Make sure they display on the screen.
+    3. Divide your code into functions. Make sure it still runs.
+    4. Add onclick behaviors. Place behavior in onSubmitButtonPressed() and onOperationButtonPressed(). Make sure they run.
+    5. If you need access to variables, make them global.
+    6. Thus, when the submit button is clicked, you will perform a calculation. (Or reset.)
+    7. When you select the operations button, you will change the operation from + to - to * to /.
+
+Grading: See About/Rubric
+        </multiline-text>
+    </div></section>
+
+
+
+    <section class="page"> <div class="slide">
+        <h2>Create a Calculator App (continued)  </h2>
+        <multiline-text>
+            Assignment: 
+
+    UPGRADES: 
+    1. Move common constants to global: for example, the submit button text and the marginRight 
+    2. Make pretty.
+    3. Redesign the interface. How could we design it to provide a better user experience?
+
+    CHALLENGE
+    How do we know if we should add the numbers? We are currently looking at the operationsButton text. 
+    This isn't a great way to do things. It is brittle, it won't scale, and you can't always depend on the UI storing things. 
+    A better approach is to store the information up top so everyone can see it. Thus, try storing the apps state and 
+    then update the UI to match.
+        </multiline-text>
+    </div></section>
+
+    
+        <section class="page"> <div class="slide">  
+        <h2>  FOLLOW ALONG  </h2>
+        <codebox-controller  mode="lineByLine">
+        const paragraphBreak = document.createElement("br");  // add paragraph break/return
+        
+        const valueA = Number(fieldA.value);  // Convert text/string to number. If fails, will output "NaN" (Not a Number).
+        </codebox-controller> </div> <div class="detail">
+        <h3>If complete, help right and left shoulder partners. Do not do it for them.</h3>
+    </div></section>
+
+
+
+
+     <!-- WALK THRU  -->
+    <section class="page"> <div class="slide">  
+        <h2>  FOLLOW ALONG  </h2> </div> 
+        <p>Password Protected</p>
+        <div class="notes">
+        <codebox-controller  mode="lineByLine">
+const fieldA = document.createElement("input");
+const operationButton = document.createElement("button");
+const fieldB = document.createElement("input");
+const outputText = document.createElement("label");
+const submitButton = document.createElement("button");
+
+export function startApp() { 
+
+    // add UI
+    addHeader();
+    addTextFieldA();
+    addOperationButton();
+    addTextFieldB();
+    addOutputText();
+    addSubmitButton();
+}
+
+function addHeader() {
+
+    const titleElement = document.createElement("p");
+    titleElement.textContent = "Calculator";
+    document.body.append(titleElement);
+}
+
+function addTextFieldA() {
+
+    fieldA.type = "text";
+    fieldA.style.marginRight = "8px";
+    document.body.append(fieldA);
+}
+
+function addTextFieldB() {
+
+    // fieldB moved to global
+    fieldB.textContent = "";
+    fieldB.style.marginRight = "8px";
+    document.body.append(fieldB)
+}
+
+function addOperationButton() {
+
+    // operationButton moved to global
+    operationButton.textContent = "+";
+    operationButton.style.marginRight = "8px";
+    operationButton.style.backgroundColor = "grey";
+    operationButton.onclick = () => {
+        onOperationButtonPressed();
+    }
+
+    document.body.append(operationButton);
+}
+
+function addOutputText() {
+
+    const equalSign = document.createElement("label");
+    equalSign.textContent = " = ";
+    equalSign.style.marginRight = "8px";
+    document.body.append(equalSign);
+
+    outputText.textContent = "TBA";
+    outputText.style.marginRight = "8px";
+    document.body.append(outputText);
+}
+
+function addSubmitButton() {
+
+    // add paragraph return
+    const paragraphBreakA = document.createElement("br");
+    const paragraphBreakB = document.createElement("br");
+    document.body.append(paragraphBreakA, paragraphBreakB);
+
+    // submitButton made global
+    submitButton.textContent = "Submit";
+    submitButton.style.marginRight = "8px";
+    submitButton.style.backgroundColor = "green";
+    submitButton.onclick = () => {
+        onSubmitButtonPressed()
+    }
+    document.body.append(submitButton);
+}
+
+// ACTIONS
+function onSubmitButtonPressed() {
+
+    if (submitButton.textContent === "Submit") {
+
+        submitButton.textContent = "Clear";
+        calculate();
+        giveErrorMessageIfCouldNotCalculate();
+
+    } else {
+
+        submitButton.textContent = "Submit"; 
+        resetCalculator();
+    }
+}
+
+// helpers
+function calculate() {
+    
+    const valueA = Number(fieldA.value);  // if fails, will output Not a Number (NaN)
+    const valueB = Number(fieldB.value);  
+    
+    if (operationButton.textContent === "+") {
+
+        const calculatedValue = valueA + valueB;  
+        outputText.textContent = "" + calculatedValue;  // if values not valid, will display NaN  
+
+    } else if (operationButton.textContent === "-") {
+
+        const calculatedValue = valueA - valueB;
+        outputText.textContent = "" + calculatedValue;
+
+    } else if (operationButton.textContent === "x") {
+
+        const calculatedValue = valueA * valueB;
+        outputText.textContent = "" + calculatedValue;
+
+    } else if (operationButton.textContent === "/") {
+
+        const calculatedValue = valueA / valueB;
+        outputText.textContent = "" + calculatedValue;
+    }
+}
+
+function giveErrorMessageIfCouldNotCalculate() {
+
+    if (outputText.textContent === "NaN") {
+        outputText.textContent = "Error";
+    }
+}
+
+function resetCalculator() {
+
+    fieldA.value = "";
+    fieldB.value = "";
+}
+
+function onOperationButtonPressed() {
+
+    if (operationButton.textContent === "+") {
+        operationButton.textContent = "-";
+    } else if (operationButton.textContent === "-") {
+        operationButton.textContent = "x";
+    } else if (operationButton.textContent === "x") {
+        operationButton.textContent = "/";
+    } else {
+        operationButton.textContent = "+";
+    }
+}
+        </codebox-controller>
+        </div></section>
+
+     <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+     <!-- HOMEWORK  -->
+    <!-- <section class="page"> <div class="slide">  
+       <homework-viewer>
+            <p>Be ready for quiz. </p>
+            Create label. Set text, size, and color. Add to screen. Easy peasy. 
+            (See UI/Chapter 1: Adding UI Elements Lesson 1.1 if you want to check your notes.
+        </homework-viewer> 
+    </div></section> -->
+
+
+
+    
+<!--
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxx DAY II xxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+-->
+    <!-- BELLWORK -->
+    <section class="page"> <div class="slide"> 
+        <bellwork-viewer>  
+        Daily Standup: What did you complete? What are you going to do today? What are your blockers?
+    </bellwork-viewer> </div> </section>
+
+    <!-- YOU DO -->
+    <section class="page"> <div class="slide">
+        <div class="spacer"></div>
+        <h1>Continue Project</h1>
+    </div></section>
+
+     <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+
+
+
+
+
+<!--
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxx DAY III xxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+-->
+    <!-- BELLWORK -->
+    <section class="page"> <div class="slide"> 
+        <bellwork-viewer>  
+        Daily Standup: What did you complete? What are you going to do today? What are your blockers?
+    </bellwork-viewer> </div> </section>
+
+    <!-- YOU DO -->
+    <section class="page"> <div class="slide">
+        <div class="spacer"></div>
+        <h1>Continue Project</h1>
+    </div></section>
+
+     <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+
+</slide-viewer>
+</article>
+
+
+
+
+                                 

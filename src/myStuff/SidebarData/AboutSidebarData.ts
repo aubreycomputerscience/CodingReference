@@ -42,25 +42,65 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
                 },
 
 
+                { 
+                    displayName: "- follow along",
+                    pageName: "Project3a_FollowAlong"
+                },               
+                { 
+                    displayName: "- if else",
+                    pageName: "Project3b_IfElse"
+                },                
+                { 
+                    displayName: "- scrolling game",
+                    pageName: "Project3c_ScrollingGame"
+                },                
+                { 
+                    displayName: "- options",
+                    pageName: "Project3d_Options"
+                },                
+                { 
+                    displayName: "- demo",
+                    pageName: "Project3e_Demo"
+                },                
+         
+
 
                 { 
-                    displayName: "User Input (A)",
+                    displayName: "User Input",
                     pageName: "Project4a_UserInput"
                 },
                                 { 
-                    displayName: "User Input (B)",
-                    pageName: "Project4b_UserInput"
+                    displayName: "- login page",
+                    pageName: "Project4b_LoginPage"
                 },
-                                { 
-                    displayName: "User Input (C)",
-                    pageName: "Project4c_UserInput"
+                { 
+                    displayName: "- test",
+                    pageName: "Project4c_Test"
                 },
-                                { 
-                    displayName: "User Input (D)",
-                    pageName: "Project4d_UserInput"
+                { 
+                    displayName: "- settings page",
+                    pageName: "Project4d_SettingsPage"
+                },
+
+
+                { 
+                    displayName: "Final Project",
+                    pageName: "Project5_FinalProject"
                 },
                 
         ] },
+
+        
+        {   displayName: DataTypes.SectionNames.About_CS1ProjectsB,
+            sidebarItems: [
+                { 
+                    displayName: "Loops & Lists",
+                    pageName: "TBA"
+                },
+                
+        ] },
+
+
 
         {   displayName: DataTypes.SectionNames.About_Overview,
             sidebarItems: [

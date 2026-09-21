@@ -1,0 +1,126 @@
+<article class="lesson"> <slide-viewer>
+
+
+
+
+
+
+    <!--DAY II-->  
+    <!-- BELLWORK -->
+    <section class="page"> <div class="slide"> <bellwork-viewer>  
+        Day II: What makes computer science challenging? What study skills are required to be successful? How can you better prepare for your next quiz?
+    </bellwork-viewer> </div> </section>
+
+
+     <!-- PROJECT  -->
+    <section class="page"> <div class="slide">  
+        <h2>  MOVE PLAYER: FOLLOW ALONG  </h2>
+        <p>1. Use Global Variables.</p>
+        <p>2. Learn to use Functions to break up code into small chunks.</p>
+        <codebox-controller  mode="lineByLine">  
+    // GLOBAL VARIALBES
+    const playerLabel = document.createElement("button"); // this is shared/permanent variables
+    let xPosition = 100;  
+    let yPosition = 200;
+
+    export function startApp() { 
+
+        // setup
+        addPlayer()
+        addRightButton();
+        addLeftButton();
+    }
+
+    // BUILD UI
+
+    function addPlayer() {
+    
+        playerLabel.textContent = "PLAYER";
+        playerLabel.style.fontSize = "40px";
+        playerLabel.style.position = "absolute";
+        updatePosition()  // only update the position in one place
+                          // otherwise, you have to always update in 2 places
+                          // and it is easy to forget and can be hard to manage 
+                          // in a large code base
+
+        document.body.append(playerLabel);
+    }
+
+    function addLeftButton() {
+
+        const leftButton = document.createElement("button");
+        leftButton.textContent = "<";
+        leftButton.style.fontSize = "40px";
+
+        leftButton.style.position = "absolute";
+        leftButton.style.top = "400px";
+        leftButton.style.left = "400px";
+
+        leftButton.onclick = () => {
+            onLeftButtonPressed()
+        };
+
+        document.body.append(leftButton);  // the document stores this, so isn't deleted
+    }
+
+    function addRightButton() {
+
+        const rightButton = document.createElement("button");
+        rightButton.textContent = ">";
+        rightButton.style.fontSize = "40px";
+
+        rightButton.style.position = "absolute";
+        rightButton.style.top = "400px";
+        rightButton.style.left = "450px";
+
+        rightButton.onclick = () => {
+            onRightButtonPressed()
+        };
+
+        document.body.append(rightButton);  
+    }
+
+    // ON BUTTON PRESS
+
+    function onRightButtonPressed() {
+
+        xPosition = xPosition + 10;
+        updatePosition()
+    }
+
+    function onLeftButtonPressed() {
+
+        xPosition = xPosition - 10;
+        updatePosition()
+    }
+
+    function updatePosition() {
+
+        playerLabel.style.top = yPosition + "px";   
+        playerLabel.style.left = xPosition + "px";  
+    
+        // TypeScript allows us to add a number and a string 
+        // This gives us a text string. Convenient, but sloppy!   
+    }
+
+    UPGRADES
+    // 1) add up and down buttons
+    // 2) add player image (look at coding reference for instructions)
+    // 3) add other objects that move across the screen towards you
+    //    now you have something to dodge
+
+        </codebox-controller> </div> <div class="detail">
+        <h3>If complete, help right and left shoulder partners. Do not do it for them.</h3>
+        See Coding, Lesson 2.1 User Input (Intro only).
+    </div></section>
+
+     <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+
+    </slide-viewer>
+</article>
+
+
