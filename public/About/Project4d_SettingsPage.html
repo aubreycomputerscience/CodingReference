@@ -98,7 +98,7 @@ if (optionA.checked) {
 }
 
 // or use
-if (optionA.value = "Option 1") {
+if (optionA.value === "Option 1") {
     // do something
 }
 </codebox-controller>
@@ -307,14 +307,20 @@ function addDropDownMenu() {
             Join Code: 8Sievg
         </bellwork-viewer></div>
         <chat-prompt>
-Ask students how to build a checkbox field. Then, radio buttons. And finally, a drop down menu.
-This is just a high level. If they are able to explain in words, then ask them to 
-try writing the code.
+I want students to understand the steps to build common input elements from a high level perspective. 
+First, checkboxes. Then, radio buttons. And finally, a drop down menu.
+For example, to build a radio button you need to set all the button names to the same groupName.
+To check if checked, you can use myButton.checked, etc.
+If they are able to do each of the first three (one by one), then ask them to 
+write real code. Finally, at the end give them a grade/score based on the number they got right. (I just want to 
+see if this works, not using it for anything.) If they got it right, they get full credit on that question. If they 
+made a small mistake give them half credit. Otherwise, give them none. Thus, the grade should be a percentage.
+
 
 Background Info: Checkboxes are normal input. Radio buttons use the name property to group them.
 Menu items require us to make a menu and then add options.
 
-SAMPLE CODE:
+SAMPLE CODE: (gives you an idea what we are looking for)
 
 const checkbox = document.createElement("input");
 checkbox.type = "checkbox";
