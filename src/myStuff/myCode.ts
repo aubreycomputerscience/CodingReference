@@ -4,10 +4,10 @@ import * as UI from "./myUIElements.ts";
 export function startApp() { 
 
     // build the sidebar
-    UI.generateCodingSidebar("About");
+    UI.generateCodingSidebar("SoftwareDevelopment");
 
     // update the url address in the url bar (this won't do anything else)
-    location.hash = "About";  
+    location.hash = "SoftwareDevelopment";  
 
     // based on the url, now we can load the page body content
     myLogic.loadSelectedPage();

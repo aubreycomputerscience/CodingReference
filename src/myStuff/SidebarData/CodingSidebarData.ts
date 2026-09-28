@@ -103,7 +103,7 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
                     pageName: "5_Functions"
                 },
                                { 
-                    displayName: "If... Then",
+                    displayName: "If... Else",
                     pageName: "7_IfThen"
                 },
                                { 

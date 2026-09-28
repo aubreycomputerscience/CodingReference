@@ -52,6 +52,13 @@ export class CodeBoxController extends HTMLElement {  // we are using HTML Eleme
         // build and insert html
         this.generateLineByLineText();
         const codebox = this.createCodeBoxViewAndAddItToParentView();
+
+    // xxxxxxxxxxxxxxxxx
+    // NO COPYING
+    // xxxxxxxxxxxxxxxxx
+        codebox.style.userSelect = "none";  
+    // xxxxxxxxxxxxxxxxxx
+
         this.replaceChildren(codebox);
              // alternatively, could have dumped html in
              //     this.innerHTML = `<div> new HTML </div>`

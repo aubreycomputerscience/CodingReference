@@ -94,8 +94,8 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
         {   displayName: DataTypes.SectionNames.About_CS1ProjectsB,
             sidebarItems: [
                 { 
-                    displayName: "Loops & Lists",
-                    pageName: "TBA"
+                    displayName: "Display List",
+                    pageName: "Unit2_DisplayArray"
                 },
                 
         ] },

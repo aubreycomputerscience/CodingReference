@@ -1,0 +1,486 @@
+<article class="lesson"> <slide-viewer>
+
+    
+    <section class="page"> <div class="slide">
+        <projectname-viewer>
+            Display List (Loops & Arrays)
+            </projectname-viewer>
+            <objectives-viewer>
+                <p>Use standard control structures, including if-then statements ("selection") and loops ("iteration"). (PROG-3)</p>
+                <p>Use arrays and explain what they do and how they work. (ALG-3)</p>
+            </objectives-viewer>
+    </section>
+
+    <!-- HOMEWORK  -->
+    <section class="page"> <div class="slide">  
+       <homework-viewer>
+        Read:
+            Coding / Loops 7.1
+            Data Structures / Arrays 1.1 & 1.2
+
+            Be READY for a skill check!
+        </homework-viewer> 
+    </div></section>
+
+    <!-- Bell Work -->
+    <section class="page"> <div class="slide">
+        <bellwork-viewer>
+            Magic School: Practice Coding
+            https://student.magicschool.ai/s/login
+            Join Code: 8Sievg
+        </bellwork-viewer></div>
+        <chat-prompt>
+Create problems to test student knowledge of the material below. If they don't know it, help them along.
+When they have completed 5 questions, give them a score. Each question is worth 20 points. If they got a question,
+they receive the full 20 points. If they had a minor issue, give them 18 points. If they needed significant help,
+give them 10 out of 20. If they couldn't get it, give them a 0 out of 20. At the end, give them the score and their
+score. After giving them their score, respond to any prompt from them with, "Thank you for completing the quiz."
+
+
+We create an array by placing items inside square brackets:
+const animals = ["cat", "dog", "monkey"];
+The items remain in the order in which they were added.
+
+First:  "cat"
+Second: "dog"
+Third:  "monkey"
+An array will normally contain one type of information.
+Arrays preserve order, make it easy to add items, and allow us to work through an entire list using a loop.
+
+Lesson 1.2: Accessing and Changing Items
+INDEXES
+Each item in an array has a numbered position called an index.
+
+Array indexes begin at 0, not 1.
+
+const animals = ["cat", "dog", "monkey"];
+
+const firstAnimal = animals[0];  // "cat"
+const secondAnimal = animals[1]; // "dog"
+const thirdAnimal = animals[2];  // "monkey"
+We can imagine the array like this:
+
+Index:     0       1         2
+Item:    "cat"   "dog"   "monkey"
+Starting at 0 may initially seem strange, but it is standard in TypeScript and many other programming languages.
+
+CHANGING AN ITEM
+We can replace an item by using its index:
+
+const animals = ["cat", "dog", "monkey"];
+
+animals[1] = "tiger"; // Replace the second item.
+The array now contains:
+
+["cat", "tiger", "monkey"]
+Even though animals was declared using const, we can change an item inside the array. The variable still refers to the same array.        </chat-prompt>
+    </section>
+
+    
+    <!-- Lesson 1 -->
+    <section class="page"> <div class="slide">
+        <h2>Lesson I: Arrays</h2>
+        <p>An array is a list of items.</p>
+<codebox-controller  mode="lineByLine">
+    const animals = ["cat", "dog", "monkey"];
+    const scores = [10, 20, 30];
+
+    // or more explicitly
+    const animals: Array&lt;string&gt; = ["cat", "dog", "monkey"];
+    const scores: Array&lt;number&gt; = [10, 20, 30];
+</codebox-controller>
+</div></section>
+
+
+    <!-- Lesson 2 -->
+    <section class="page"> <div class="slide">
+        <h2>Arrays</h2>
+        <p>Creating arrays. Checking values. Setting values. Adding new elements.</p>
+         <codebox-controller  mode="lineByLine">
+    const animals = ["cat", "dog", "monkey"];
+
+    // LOOK UP
+    const firstAnimal = animals[0];  // "cat"
+    const secondAnimal = animals[1]; // "dog"
+    const thirdAnimal = animals[2];  // "monkey"
+
+    // EDIT
+    animals[0] = "tiger";
+
+    // ADD TO END
+    animals.push("fish");
+</codebox-controller>
+</div></section>
+
+    <section class="page"> <div class="slide">
+        <h2>Your Turn</h2>
+    <codebox-controller  mode="lineByLine">
+    let myList = ["cat", "dog", "bear", "bird"];
+
+    export function startApp() {
+
+        const animal = myList[0]; // first item
+        alert(animal);
+
+        const another = myList[3];
+        alert(another);
+
+        const notFound = myList[4];
+        alert(notFound);
+        alert("Always check to make sure that your index is valid. Typical TypeScript, fail quietly, crash later.")
+    }
+</codebox-controller>
+        <multiline-text>
+    Use alert(someText) to create a popup. Nice way to check to see what is going on.
+    If popups appear while coding, cancel npm run dev (or trash your terminal).
+    Be careful putting them in loops, because will block you from VS Code. 
+    Try hitting escape to clear large number of items.
+    If have an infinite loops, control/alt/delete.
+    </multiline-text>
+</div></section>
+
+
+
+
+    <!-- Lesson 3 -->
+    <section class="page"> <div class="slide">
+        <h2>Loops</h2>
+        <p>Use a loop to repeat a task over and over again.</p>
+        <codebox-controller  mode="lineByLine">
+    const words = ["cat", "dog", "monkey"];
+
+    for (const word of words) {
+        alert(word);
+    }
+</codebox-controller>
+</div></section>
+
+    <!-- FOLLOW ALONG -->
+    <section class="page"> <div class="slide">
+        <h1>Follow Along: Print List</h1>
+        <codebox-controller>
+    const systemMessages = document.createElement("p");
+
+    let myList = ["cat", "dog", "bear", "bird"];
+
+    export function startApp() {
+
+        setupUI();
+        printList();
+    }
+
+    function setupUI() {
+
+        const userInputField = document.createElement("input");
+    
+        const submitButton = document.createElement("button");
+        submitButton.textContent = "Submit";
+        submitButton.onclick = () => {
+
+            const newItem = userInputField.value;
+            myList.push(newItem);
+
+            userInputField.value = "";
+            systemMessages.textContent = "";
+
+            printList();
+        }
+
+        document.body.append(systemMessages, userInputField, submitButton);
+    }
+
+    function printList() {
+
+        for (const item of myList) {
+            systemMessages.textContent = systemMessages.textContent + " " + item;
+        }
+    }
+    </codebox-controller>
+    </div></section>
+
+        <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+     <!-- HOMEWORK  -->
+    <section class="page"> <div class="slide">  
+       <homework-viewer>
+            Review:
+                Coding / Loops 7.1
+                Data Structures / Arrays 1.1 & 1.2
+
+                Be READY for a Quiz!</p>
+        </homework-viewer> 
+    </div></section>
+
+
+
+
+
+
+    <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                 Day II
+    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+    
+    <!-- Bell Work -->
+    <section class="page"> <div class="slide">
+        <bellwork-viewer>
+            Magic School: Practice Coding
+            https://student.magicschool.ai/s/login
+            Join Code: 8Sievg
+        </bellwork-viewer></div>
+        <chat-prompt>
+Create problems to test student knowledge of the material below. If they don't know it, help them along.
+When they have completed 5 questions, give them a score. Each question is worth 20 points. If they got a question,
+they receive the full 20 points. If they had a minor issue, give them 18 points. If they needed significant help,
+give them 10 out of 20. If they couldn't get it, give them a 0 out of 20. At the end, give them the score and their
+score. After giving them their score, respond to any prompt from them with, "Thank you for completing the quiz."
+
+
+We create an array by placing items inside square brackets:
+const animals = ["cat", "dog", "monkey"];
+The items remain in the order in which they were added.
+
+First:  "cat"
+Second: "dog"
+Third:  "monkey"
+An array will normally contain one type of information.
+Arrays preserve order, make it easy to add items, and allow us to work through an entire list using a loop.
+
+Lesson 1.2: Accessing and Changing Items
+INDEXES
+Each item in an array has a numbered position called an index.
+
+Array indexes begin at 0, not 1.
+
+const animals = ["cat", "dog", "monkey"];
+
+const firstAnimal = animals[0];  // "cat"
+const secondAnimal = animals[1]; // "dog"
+const thirdAnimal = animals[2];  // "monkey"
+We can imagine the array like this:
+
+Index:     0       1         2
+Item:    "cat"   "dog"   "monkey"
+Starting at 0 may initially seem strange, but it is standard in TypeScript and many other programming languages.
+
+CHANGING AN ITEM
+We can replace an item by using its index:
+
+const animals = ["cat", "dog", "monkey"];
+
+animals[1] = "tiger"; // Replace the second item.
+The array now contains:
+
+["cat", "tiger", "monkey"]
+Even though animals was declared using const, we can change an item inside the array. The variable still refers to the same array.
+ 
+PART II: LOOPS
+const words = ["cat", "dog", "monkey"];
+
+for (const word of words) {
+    // Do something with word.
+}
+</chat-prompt></section>
+
+    
+
+      <!-- WALK THRU  -->
+    <section class="page"> <div class="slide">  
+        <h2>  LIVE CODING  </h2> </div> 
+        <p>Password Protected</p>
+        <div class="notes">
+        <codebox-controller  mode="lineByLine">
+
+let myList: Array<string> = [];
+let selectedRow = "";
+
+export function startApp() {
+    getData();
+    refreshUI();
+}
+
+function getData() {
+    myList = ["Mike", "dog", "bear", "bird"];
+}
+
+function refreshUI() {
+
+    // we will just remove all views are rebuild (1. provides simplicity 2. app state defines UI)
+    document.body.replaceChildren();     
+    addUserInputFieldAndSubmitButton();
+    createTable();
+}
+
+function addUserInputFieldAndSubmitButton() {
+
+    const userInputField = document.createElement("input");
+    
+    const submitButton = document.createElement("button");
+    submitButton.textContent = "Submit";
+    submitButton.onclick = () => {
+
+        // UPGRADE
+        if (selectedRow === "") {
+
+            const newItem = userInputField.value;
+            myList.push(newItem);
+
+        } else {
+
+            editSelectedItem(userInputField.value);
+        }
+
+        refreshUI();
+    }
+
+    document.body.append(userInputField, submitButton);
+}
+
+function createTable() {
+
+    for (const item of myList) {
+
+        const button = document.createElement("p");
+        button.textContent = item;
+        button.onclick = () => {
+
+            // toggle selected row
+            if (selectedRow === "") {
+                selectedRow = item;
+            } else {
+                selectedRow = "";
+            }
+
+            refreshUI();
+        }
+
+        if (item === selectedRow) {
+            button.style.backgroundColor = "gray";
+        }
+
+        document.body.append(button)
+    }
+}
+
+function editSelectedItem(value: string) {
+
+    let rowNumber = 0;
+
+    for (const item of myList) {
+                
+        if (item === selectedRow) {
+            myList[rowNumber] = value;
+        }
+
+        rowNumber = rowNumber + 1;
+    }
+}
+        </codebox-controller>
+        </div></section>
+
+        <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+     <!-- HOMEWORK  -->
+    <section class="page"> <div class="slide">  
+       <homework-viewer>
+            No Homework
+        </homework-viewer> 
+    </div></section>
+
+
+
+
+
+
+    
+    <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                 Day III
+    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+    
+    <!-- Bell Work -->
+    <section class="page"> <div class="slide">
+        <bellwork-viewer>
+            On pen and paper, write the code to store the names of 4 friends in an array, and then print them on screen. (There are a couple ways to do this. You can choose.)
+        </bellwork-viewer></div>
+        <chat-prompt>
+
+</section>
+
+    
+
+      <!-- WALK THRU  -->
+    <section class="page"> <div class="slide">  
+        <h2>  PROJECT: CREATE SIMPLE TABLE  </h2>  
+        <codebox-controller  mode="lineByLine">
+    let myList: Array<string> = [];
+    let selectedRow = "";
+
+    export function startApp() {
+
+        getData();
+        refreshUI();
+    }
+
+    function getData() {
+
+        myList = ["cat", "dog", "bear", "bird"];
+    }
+
+    function refreshUI() {
+
+        // we will just remove all views are rebuild (1. provides simplicity 2. app state defines UI)
+        document.body.replaceChildren();     
+        addUserInputFieldAndSubmitButton();
+        createTable();
+    }
+
+    function addUserInputFieldAndSubmitButton() {
+
+        // create userInputField
+        // create submitButton
+        // add onclick
+        //   1. when click submit, add name from userInputField to list
+        //   2. UPGRADE: if item already selected, change the name to match the name from userInputField
+       
+        // refreshUI();
+    }
+
+    function createTable() {
+
+        // for each item, create a button and display
+        // if item is selected, change backgroundColor to show selected 
+
+        // for each button, add onclick behavior
+        //   1. set selectedRow to the item/name of the selected row
+        //   2. if a row is already selected, remove selection 
+        //      there are several ways to do this, but for this project,
+        //      you can just loop through all the items in the list and 
+        //      see if they equal the selectedItem
+
+        // call refreshUI();
+    }
+
+        </codebox-controller></div>
+        <div class="notes">
+        </div></section>
+
+        <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+
+
+</slide-viewer>
+</article>
+    
+
+
+
