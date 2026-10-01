@@ -116,6 +116,10 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
                     displayName: "Rubric",
                     pageName: "Rubric"
                 },
+                { 
+                    displayName: "Demo Format",
+                    pageName: "DemoFormat"
+                },
                 
         ] },
 
