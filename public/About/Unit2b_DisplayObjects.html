@@ -204,6 +204,11 @@ A class is the blueprint for our objects. All Pokemon will store the same basic 
 Instead of calling these variables, we call them properties.
 When we create an object, we call it an instance of an object (or just an instance or just an object).
 </multiline-text>
+<h2>Now, store in a list.</h2>
+<codebox-controller  mode="lineByLine">
+    let myPokemon: Array&lt;Pokemon&gt; = [];
+    myPokemon.push(pikachu);
+</codebox-controller>
 </div></section>
 
 
@@ -214,13 +219,13 @@ When we create an object, we call it an instance of an object (or just an instan
          <codebox-controller  mode="lineByLine">
     class Pokemon {
 
-        name = "";   // think let name = "";
+        name = "";  
         type = "";
         ability = "";
         funFact = "";
     }
 
-    let myPokemon: Array<Pokemon> = [];
+    let myPokemon: Array&lt;Pokemon&gt; = [];
 
     export function startApp() { 
 
