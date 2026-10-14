@@ -14,7 +14,7 @@
     <!-- HOMEWORK  -->
     <section class="page"> <div class="slide">  
        <homework-viewer>
-        Review:
+        Read:
             Coding / Loops 7.1
             Data Structures / Arrays 1.1 & 1.2
 
@@ -79,32 +79,16 @@ Even though animals was declared using const, we can change an item inside the a
     
     <!-- Lesson 1 -->
     <section class="page"> <div class="slide">
-        <h2>Lesson I: Objects</h2>
-        <p>Storing data elements together in chunks.</p>
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Ability</th>
-            <th>Fun Fact</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Pikachu</td>
-            <td>Electric</td>
-            <td>Static</td>
-            <td>Stores electricity in its cheeks.</td>
-        </tr>
-        <tr>
-            <td>Charmander</td>
-            <td>Fire</td>
-            <td>Blaze</td>
-            <td>The flame on its tail reflects its life force.</td>
-        </tr>
-    </tbody>
-</table>
+        <h2>Lesson I: Arrays</h2>
+        <p>An array is a list of items.</p>
+<codebox-controller  mode="lineByLine">
+    const animals = ["cat", "dog", "monkey"];
+    const scores = [10, 20, 30];
+
+    // or more explicitly
+    const animals: Array&lt;string&gt; = ["cat", "dog", "monkey"];
+    const scores: Array&lt;number&gt; = [10, 20, 30];
+</codebox-controller>
 </div></section>
 
 
@@ -175,17 +159,45 @@ Even though animals was declared using const, we can change an item inside the a
     <section class="page"> <div class="slide">
         <h1>Follow Along: Print List</h1>
         <codebox-controller>
+    const systemMessages = document.createElement("p");
+
+    let myList = ["cat", "dog", "bear", "bird"];
+
+    export function startApp() {
+
+        setupUI();
+        printList();
+    }
+
+    function setupUI() {
+
+        const userInputField = document.createElement("input");
     
+        const submitButton = document.createElement("button");
+        submitButton.textContent = "Submit";
+        submitButton.onclick = () => {
 
+            const newItem = userInputField.value;
+            myList.push(newItem);
 
+            userInputField.value = "";
+            systemMessages.textContent = "";
 
+            printList();
+        }
+
+        document.body.append(systemMessages, userInputField, submitButton);
+    }
+
+    function printList() {
+
+        for (const item of myList) {
+            systemMessages.textContent = systemMessages.textContent + " " + item;
+        }
+    }
     </codebox-controller>
     </div></section>
 
-
-
-
-    
         <!-- CLOSURE  -->
     <section class="page"> <div class="slide">  
        <closure-viewer></closure-viewer>  <!-- default text -->
@@ -194,8 +206,11 @@ Even though animals was declared using const, we can change an item inside the a
      <!-- HOMEWORK  -->
     <section class="page"> <div class="slide">  
        <homework-viewer>
-            Read:
-            Coding / Chapter 2: Understanding References
+            Review:
+                Coding / Loops 7.1
+                Data Structures / Arrays 1.1 & 1.2
+
+                Be READY for a Quiz!</p>
         </homework-viewer> 
     </div></section>
 
