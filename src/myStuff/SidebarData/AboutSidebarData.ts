@@ -95,7 +95,11 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
             sidebarItems: [
                 { 
                     displayName: "Display List",
-                    pageName: "Unit2_DisplayArray"
+                    pageName: "Unit2a_DisplayArray"
+                },
+                { 
+                    displayName: "- display objects",
+                    pageName: "Unit2b_DisplayObjects"
                 },
                 
         ] },

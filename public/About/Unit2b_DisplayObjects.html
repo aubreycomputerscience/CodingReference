@@ -1,0 +1,410 @@
+
+
+
+<article class="lesson"> <slide-viewer>
+
+    
+    <section class="page"> <div class="slide">
+        <projectname-viewer>
+            Introduction to Objects
+            </projectname-viewer>
+            <objectives-viewer>
+                <p>Use arrays to store and display data in lists. (Alg-3: TEKS 4D, 6Q, 6R)</p>
+                <p>Use object-oriented programming to organize code. (Prog-4: TEKS 4E, 6D, 6F)</p>
+            </objectives-viewer>
+    </section>
+
+    <!-- HOMEWORK  -->
+    <section class="page"> <div class="slide">  
+       <homework-viewer>
+        Be READY for a skill check!     
+        Coding / Loops 7.1
+        Data Structures / Arrays 1.1 & 1.2
+        </homework-viewer> 
+    </div></section>
+
+    <!-- Bell Work -->
+    <section class="page"> <div class="slide">
+            <h1>🔔 BELL WORK</h1>
+            <div>On a sheet of paper, write the code:</div>
+            <div>A) Create an array (arrayA) storing the words one, two, and three.</div>
+            <div>B) Create an empty array (arrayB).</div>
+            <div>C) Use a for loop to add the words from the first array to the second. Use push() to append items to the list.</div>
+            <div>Additional practice: Magic School: Practice Coding https://student.magicschool.ai/s/login
+            Join Code: 8Sievg</div>
+            <div>Remember: If you want to practice at home, you can always copy and paste the prompt into your favorite AI.</div>
+        
+            <br><div>
+                Please find your assigned seat quietly. Seats are alphabetical, starting on the right.
+                Please get out your class notebook (or paper).
+            </div>
+
+            <div>
+                Write your response in your notebook. (5 Minutes.)
+                Responses will be discussed after Bell Work.
+            </div>
+        </div>
+        <chat-prompt>
+Create problems to test student knowledge of the material below. If they don't know it, help them along.
+When they have completed 5 questions, give them a score. Each question is worth 20 points. If they got a question,
+they receive the full 20 points. If they had a minor issue, give them 18 points. If they needed significant help,
+give them 10 out of 20. If they couldn't get it, give them a 0 out of 20. At the end, give them the score and their
+score. After giving them their score, respond to any prompt from them with, "Thank you for completing the quiz."
+
+
+We create an array by placing items inside square brackets:
+const animals = ["cat", "dog", "monkey"];
+The items remain in the order in which they were added.
+
+First:  "cat"
+Second: "dog"
+Third:  "monkey"
+An array will normally contain one type of information.
+Arrays preserve order, make it easy to add items, and allow us to work through an entire list using a loop.
+
+Lesson 1.2: Accessing and Changing Items
+INDEXES
+Each item in an array has a numbered position called an index.
+
+Array indexes begin at 0, not 1.
+
+const animals = ["cat", "dog", "monkey"];
+
+const firstAnimal = animals[0];  // "cat"
+const secondAnimal = animals[1]; // "dog"
+const thirdAnimal = animals[2];  // "monkey"
+We can imagine the array like this:
+
+Index:     0       1         2
+Item:    "cat"   "dog"   "monkey"
+Starting at 0 may initially seem strange, but it is standard in TypeScript and many other programming languages.
+
+CHANGING AN ITEM
+We can replace an item by using its index:
+
+const animals = ["cat", "dog", "monkey"];
+
+animals[1] = "tiger"; // Replace the second item.
+The array now contains:
+
+["cat", "tiger", "monkey"]
+Even though animals was declared using const, we can change an item inside the array. The variable still refers to the same array.        </chat-prompt>
+    </section>
+
+    
+
+
+    <!-- TEASER-->
+    <section class="page"> <div class="slide">
+        <h2>How would we write the code display this list? How would we store the data?! What a mess!</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Ability</th>
+            <th>Fun Fact</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Pikachu</td>
+            <td>Electric</td>
+            <td>Static</td>
+            <td>Stores electricity in its cheeks.</td>
+        </tr>
+        <tr>
+            <td>Charmander</td>
+            <td>Fire</td>
+            <td>Blaze</td>
+            <td>The flame on its tail reflects its life force.</td>
+        </tr>
+        <tr>
+            <td>Squirtle</td>
+            <td>Water</td>
+            <td>Torrent</td>
+            <td>Can spray water from its mouth with impressive accuracy.</td>
+        </tr>
+        <tr>
+            <td>Bulbasaur</td>
+            <td>Grass</td>
+            <td>Overgrow</td>
+            <td>A plant bulb on its back grows as it absorbs sunlight.</td>
+        </tr>
+        <tr>
+            <td>Eevee</td>
+            <td>Normal</td>
+            <td>Run Away</td>
+            <td>Can evolve into several different Pokémon.</td>
+        </tr>
+        <tr>
+            <td>Snorlax</td>
+            <td>Normal</td>
+            <td>Thick Fat</td>
+            <td>Can eat enormous quantities of food and sleeps a lot.</td>
+        </tr>
+        <tr>
+            <td>Gengar</td>
+            <td>Ghost</td>
+            <td>Cursed Body</td>
+            <td>Likes to hide in shadows and startle people.</td>
+        </tr>
+    </tbody>
+</table>
+</div></section>
+
+
+
+
+
+
+
+
+
+    <!-- Lesson 1 -->
+    <section class="page"> <div class="slide">
+        <h2>Organizing Data</h2>
+        <p>Group and store information as a single object.</p>
+        <p>Then, we can use an array to store the data!</p>
+
+        <codebox-controller  mode="lineByLine">
+    // Could group information like this?
+    let name = "Pikachu";
+    let type = "Electric";  
+    let ability = "Static";
+    let funFact = "Stores electricity in its cheeks.";
+    
+    // Yes, that is the general idea.
+</codebox-controller>
+
+<h2>Step 1: What data do we want to include?</h2>
+<codebox-controller  mode="lineByLine">
+    class Pokemon {  
+
+        name = "";   // think let name = "";
+        type = "";
+        ability = "";
+        funFact = "";
+    }
+</codebox-controller>
+
+<h2>Step 2: Creating an object and setting its properties.</h2>
+<codebox-controller  mode="lineByLine">
+    let myPokemon = new Pokemon();
+    myPokemon.name = "Pikachu";
+</codebox-controller>
+
+<h2>Step 3: Reading its properties.</h2>
+<codebox-controller  mode="lineByLine">
+    let name = myPokemon.name;
+</codebox-controller>
+<multiline-text>
+VOCABULARY:
+A class is the blueprint for our objects. All Pokemon will store the same basic information.
+Instead of calling these variables, we call them properties.
+When we create an object, we call it an instance of an object (or just an instance or just an object).
+</multiline-text>
+</div></section>
+
+
+    <!-- Lesson 2 -->
+    <section class="page"> <div class="slide">
+        <h2>Follow Along: Displaying Pokemon in List</h2>
+        <p>Create objects. Set values. Read values.</p>
+         <codebox-controller  mode="lineByLine">
+    class Pokemon {
+
+        name = "";   // think let name = "";
+        type = "";
+        ability = "";
+        funFact = "";
+    }
+
+    let myPokemon: Array<Pokemon> = [];
+
+    export function startApp() { 
+
+        createPokemon();
+        displayPokemon();
+    }
+
+    function createPokemon() {
+
+        let pikachu = new Pokemon();
+        pikachu.name = "Pikachu";
+        pikachu.type = "Electric";  
+        pikachu.ability = "Static";
+        pikachu.funFact = "Stores electricity in its cheeks.";
+    
+        let charmander = new Pokemon();
+        charmander.name = "Charmander";
+        charmander.type = "Fire";
+        charmander.ability = "Blaze";
+        charmander.funFact = "The flame on its tail reflects its life force.";
+
+        myPokemon.push(pikachu, charmander);
+    }
+
+    function displayPokemon() {
+
+        for (const pokemon of myPokemon) {
+            const text = pokemon.name + " " + pokemon.type
+            //alert(text)
+        }
+    }
+</codebox-controller>
+</div></section>
+
+
+
+
+    <!-- Lesson 2 -->
+    <section class="page"> <div class="slide">
+        <h2>Displaying Pokemon in List (v2)</h2>
+        <p>Wouldn't it be nice if we could just write:</p>
+        <p> let pikachu = new Pokemon("Pikachu", "Electric", "Static", "Stores electricity in its cheeks.");</p>
+        <p>Use a little dark magic and we can.</p>
+         <codebox-controller  mode="lineByLine">
+    class Pokemon {
+
+        name: string;
+        type: string;
+        ability: string;
+        funFact: string;
+
+        constructor(name: string, type: string, ability: string, funFact: string) {
+            
+            // call let pikachu = new Pokemon("Pikachu", "Electric", "Static", "Stores electricity in its cheeks.");
+            
+            this.name = name;
+            this.type = type;
+            this.ability = ability;
+            this.funFact = funFact;
+        }
+    }
+
+    let myPokemon: Array<Pokemon> = [];
+
+    export function startApp() { 
+
+        createPokemon();
+        displayPokemon();
+    }
+
+    function createPokemon() {
+
+        let pikachu = new Pokemon("Pikachu", "Electric", "Static", "Stores electricity in its cheeks.");
+        let charmander = new Pokemon("Charmander", "Fire", "Blaze", "The flame on its tail reflects its life force.");
+        myPokemon.push(pikachu, charmander);
+    }
+
+    function displayPokemon() {
+
+        for (const pokemon of myPokemon) {
+            const text = pokemon.name + " " + pokemon.type
+            //alert(text)
+        }
+
+        for (const pokemon of myPokemon) {
+            pokemon.type = "N/A";
+        }
+
+        for (const pokemon of myPokemon) {
+            const text = pokemon.name + " " + pokemon.type
+            //alert(text)
+        }
+    }
+</codebox-controller>
+</div></section>
+
+
+
+
+
+    <section class="page"> <div class="slide">
+        <h2>Your Turn</h2>
+    <codebox-controller  mode="lineByLine">
+    let myPokemon: Array<Pokemon> = [];
+
+    export function startApp() { 
+
+        createPokemon();
+        displayPokemon();
+    }
+</codebox-controller>
+<p>Display Pokemon in a List</p>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Ability</th>
+            <th>Fun Fact</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Pikachu</td>
+            <td>Electric</td>
+            <td>Static</td>
+            <td>Stores electricity in its cheeks.</td>
+        </tr>
+        <tr>
+            <td>Charmander</td>
+            <td>Fire</td>
+            <td>Blaze</td>
+            <td>The flame on its tail reflects its life force.</td>
+        </tr>
+        <tr>
+            <td>Squirtle</td>
+            <td>Water</td>
+            <td>Torrent</td>
+            <td>Can spray water from its mouth with impressive accuracy.</td>
+        </tr>
+        <tr>
+            <td>Bulbasaur</td>
+            <td>Grass</td>
+            <td>Overgrow</td>
+            <td>A plant bulb on its back grows as it absorbs sunlight.</td>
+        </tr>
+        <tr>
+            <td>Eevee</td>
+            <td>Normal</td>
+            <td>Run Away</td>
+            <td>Can evolve into several different Pokémon.</td>
+        </tr>
+        <tr>
+            <td>Snorlax</td>
+            <td>Normal</td>
+            <td>Thick Fat</td>
+            <td>Can eat enormous quantities of food and sleeps a lot.</td>
+        </tr>
+        <tr>
+            <td>Gengar</td>
+            <td>Ghost</td>
+            <td>Cursed Body</td>
+            <td>Likes to hide in shadows and startle people.</td>
+        </tr>
+    </tbody>
+</table>
+</div></section>
+
+
+
+
+        <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+     <!-- HOMEWORK  -->
+    <section class="page"> <div class="slide">  
+       <homework-viewer>
+            Spend 5-7 Minutes reviewing this material.
+        </homework-viewer> 
+    </div></section>
+
+
+</slide-viewer>
+</article>
+    
