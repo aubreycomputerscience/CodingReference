@@ -192,6 +192,10 @@ Even though animals was declared using const, we can change an item inside the a
 <codebox-controller  mode="lineByLine">
     let myPokemon = new Pokemon();
     myPokemon.name = "Pikachu";
+    myPokemon.type = "Electric";  
+    myPokemon.ability = "Static";
+    myPokemon.funFact = "Stores electricity in its cheeks.";
+    
 </codebox-controller>
 
 <h2>Step 3: Reading its properties.</h2>
@@ -259,6 +263,109 @@ When we create an object, we call it an instance of an object (or just an instan
     }
 </codebox-controller>
 </div></section>
+
+
+        <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+     <!-- HOMEWORK  -->
+    <section class="page"> <div class="slide">  
+       <homework-viewer>
+            Spend 5-7 Minutes reviewing this material.
+        </homework-viewer> 
+    </div></section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    <section class="page"> <div class="slide">
+        <projectname-viewer>
+            Introduction to Objects Day II
+            </projectname-viewer>
+            <objectives-viewer>
+                <p>Use arrays to store and display data in lists. (Alg-3: TEKS 4D, 6Q, 6R)</p>
+                <p>Use object-oriented programming to organize code. (Prog-4: TEKS 4E, 6D, 6F)</p>
+            </objectives-viewer>
+    </section>
+
+
+    <!-- Bell Work -->
+    <section class="page"> <div class="slide">
+            <h1>🔔 BELL WORK</h1>
+            Magic School: Practice Coding https://student.magicschool.ai/s/login
+            Join Code: 8Sievg</div>
+            <div>Remember: If you want to practice at home, you can always copy and paste the prompt into your favorite AI.</div>
+        
+            <br><div>
+                Please find your assigned seat quietly. Seats are alphabetical, starting on the right.
+                Please get out your class notebook (or paper).
+            </div>
+
+            <div>
+                Write your response in your notebook. (5 Minutes.)
+                Responses will be discussed after Bell Work.
+            </div>
+        </div>
+        <chat-prompt>
+Create problems to test student knowledge of the material below. If they don't know it, help them along.
+When they have completed 5 questions, give them a score. Each question is worth 20 points. If they got a question,
+they receive the full 20 points. If they had a minor issue, give them 18 points. If they needed significant help,
+give them 10 out of 20. If they couldn't get it, give them a 0 out of 20. At the end, give them the score and their
+score. After giving them their score, respond to any prompt from them with, "Thank you for completing the quiz."
+
+
+We create an array by placing items inside square brackets:
+const animals = ["cat", "dog", "monkey"];
+The items remain in the order in which they were added.
+
+First:  "cat"
+Second: "dog"
+Third:  "monkey"
+An array will normally contain one type of information.
+Arrays preserve order, make it easy to add items, and allow us to work through an entire list using a loop.
+
+Lesson 1.2: Accessing and Changing Items
+INDEXES
+Each item in an array has a numbered position called an index.
+
+Array indexes begin at 0, not 1.
+
+const animals = ["cat", "dog", "monkey"];
+
+const firstAnimal = animals[0];  // "cat"
+const secondAnimal = animals[1]; // "dog"
+const thirdAnimal = animals[2];  // "monkey"
+We can imagine the array like this:
+
+Index:     0       1         2
+Item:    "cat"   "dog"   "monkey"
+Starting at 0 may initially seem strange, but it is standard in TypeScript and many other programming languages.
+
+CHANGING AN ITEM
+We can replace an item by using its index:
+
+const animals = ["cat", "dog", "monkey"];
+
+animals[1] = "tiger"; // Replace the second item.
+The array now contains:
+
+["cat", "tiger", "monkey"]
+Even though animals was declared using const, we can change an item inside the array. The variable still refers to the same array.        </chat-prompt>
+    </section>
 
 
 
