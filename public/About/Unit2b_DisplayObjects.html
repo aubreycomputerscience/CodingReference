@@ -292,9 +292,9 @@ When we create an object, we call it an instance of an object (or just an instan
 
 
 
-
-
-
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxx
+            DAY II
+     xxxxxxxxxxxxxxxxxxxxxxxxx -->
         
     <section class="page"> <div class="slide">
         <projectname-viewer>
@@ -399,7 +399,7 @@ Even though animals was declared using const, we can change an item inside the a
         }
     }
 
-    let myPokemon: Array<Pokemon> = [];
+    let myPokemon: Array&lt;Pokemon&gt; = [];
 
     export function startApp() { 
 
@@ -519,6 +519,196 @@ Even though animals was declared using const, we can change an item inside the a
             Spend 5-7 Minutes reviewing this material.
         </homework-viewer> 
     </div></section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxx
+            DAY III
+     xxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+         <!-- Bell Work -->
+    <section class="page"> <div class="slide">
+            <h1>🔔 BELL WORK</h1>
+            Magic School: Practice Coding https://student.magicschool.ai/s/login
+            Join Code: 8Sievg OR Quiz</div> 
+            <div>Remember: If you want to practice at home, you can always copy and paste the prompt into your favorite AI.</div>
+        
+            <br><div>
+                Please find your assigned seat quietly. Seats are alphabetical, starting on the right.
+                Please get out your class notebook (or paper).
+            </div>
+
+            <div>
+                Write your response in your notebook. (5 Minutes.)
+                Responses will be discussed after Bell Work.
+            </div>
+        </div></section>
+
+<!-- LESSON / CODING  -->
+  
+    <!-- Lesson 1 -->
+    <section class="page"> <div class="slide">
+        <h2>Selecting a Row</h2>
+         <codebox-controller  mode="lineByLine">
+    let myList: Array&lt;Pokemon&gt; = [ ];
+    let nameOfSelectedPokemon = "";
+
+    function build() {
+
+        // create a for loop and build rows/buttons one by one
+        // 1. create button
+
+        // 2. if selected, make gray
+        if (pokemon.name === nameOfSelectedPokemon) {
+            button.style.backgroundColor = "gray";
+        }
+
+        // 3. toggle
+        button.onclick = () => {
+
+            // toggle selected row
+            if (nameOfSelectedPokemon === "") {
+                nameOfSelectedPokemon = pokemon.name;
+            } else {
+                nameOfSelectedPokemon = "";
+            }
+
+            refreshUI();
+        }
+    }
+</codebox-controller>
+</div></section>
+
+  <section class="page"> <div class="slide">  
+        <h2>  LIVE CODING  </h2> </div> 
+        <p>Password Protected</p>
+        <div class="notes">
+        <codebox-controller  mode="lineByLine">
+let myList: Array<string> = [];
+let selectedRow = "";
+
+export function startApp() {
+    getData();
+    refreshUI();
+}
+
+function getData() {
+    myList = ["Mike", "dog", "bear", "bird"];
+}
+
+function refreshUI() {
+
+    // we will just remove all views are rebuild (1. provides simplicity 2. app state defines UI)
+    document.body.replaceChildren();     
+    addUserInputFieldAndSubmitButton();
+    createTable();
+}
+
+function addUserInputFieldAndSubmitButton() {
+
+    const userInputField = document.createElement("input");
+    
+    const submitButton = document.createElement("button");
+    submitButton.textContent = "Submit";
+    submitButton.onclick = () => {
+
+        // UPGRADE
+        if (selectedRow === "") {
+
+            const newItem = userInputField.value;
+            myList.push(newItem);
+
+        } else {
+
+            editSelectedItem(userInputField.value);
+        }
+
+        refreshUI();
+    }
+
+    document.body.append(userInputField, submitButton);
+}
+
+function createTable() {
+
+    for (const item of myList) {
+
+        const button = document.createElement("p");
+        button.textContent = item;
+        button.onclick = () => {
+
+            // toggle selected row
+            if (selectedRow === "") {
+                selectedRow = item;
+            } else {
+                selectedRow = "";
+            }
+
+            refreshUI();
+        }
+
+        if (item === selectedRow) {
+            button.style.backgroundColor = "gray";
+        }
+
+        document.body.append(button)
+    }
+}
+
+function editSelectedItem(value: string) {
+
+    let rowNumber = 0;
+
+    for (const item of myList) {
+                
+        if (item === selectedRow) {
+            myList[rowNumber] = value;
+        }
+
+        rowNumber = rowNumber + 1;
+    }
+}
+        </codebox-controller>
+        </div></section>
+
+
+
+
+        <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+     <!-- HOMEWORK  -->
+    <section class="page"> <div class="slide">  
+       <homework-viewer>
+        Take a day off studying. 
+        </homework-viewer> 
+    </div></section>
+
+
+
 
 
 </slide-viewer>
