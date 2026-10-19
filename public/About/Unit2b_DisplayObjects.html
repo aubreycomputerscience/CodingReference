@@ -421,14 +421,15 @@ Even though animals was declared using const, we can change an item inside the a
             //alert(text)
         }
 
-        for (const pokemon of myPokemon) {
-            pokemon.type = "N/A";
-        }
+        // you could also use a for loop to edit your pokemon
+        // for (const pokemon of myPokemon) {
+        //    pokemon.type = "N/A";
+        // }
 
-        for (const pokemon of myPokemon) {
-            const text = pokemon.name + " " + pokemon.type
-            //alert(text)
-        }
+        // for (const pokemon of myPokemon) {
+        //    const text = pokemon.name + " " + pokemon.type
+        //    //alert(text)
+        // }
     }
 </codebox-controller>
 </div></section>
@@ -549,21 +550,200 @@ Even though animals was declared using const, we can change an item inside the a
 
          <!-- Bell Work -->
     <section class="page"> <div class="slide">
-            <h1>🔔 BELL WORK</h1>
-            Magic School: Practice Coding https://student.magicschool.ai/s/login
-            Join Code: 8Sievg OR Quiz</div> 
-            <div>Remember: If you want to practice at home, you can always copy and paste the prompt into your favorite AI.</div>
-        
-            <br><div>
-                Please find your assigned seat quietly. Seats are alphabetical, starting on the right.
-                Please get out your class notebook (or paper).
-            </div>
-
-            <div>
-                Write your response in your notebook. (5 Minutes.)
-                Responses will be discussed after Bell Work.
-            </div>
+            <bellwork-viewer>
+                Read, review, and study Coding, Loops 7.1-3.
+            </bellwork-viewer>
         </div></section>
+
+            <!-- Exercises -->
+    <section class="page"> <div class="slide">
+            <h1>Practice Loops</h1>
+            <h3>Magic School: Practice Coding https://student.magicschool.ai/s/login
+            Join Code: fLKoaQ</h3>
+        <chat-prompt>
+Loops allow a program to repeat a piece of code. Different loops are useful for different kinds of repetition.
+
+Lesson 7.1: For...of Loops
+WORKING WITH A LIST
+When we want to perform an action for every item in an array, we should normally use a for...of loop.
+
+const words = ["cat", "dog", "monkey"];
+
+for (const word of words) {
+    // Do something with word.
+}
+Read this as:
+
+For each word in words, run this code.
+
+Each time the loop runs, word represents the next item in the array. The first time through the loop, word is "cat". It is then "dog" and finally "monkey".
+
+A for...of loop is usually the cleanest and safest way to work through an entire array. It handles moving from one item to the next for us.
+
+Notice that TypeScript uses the word of:
+
+for (const word of words)
+Some other programming languages use different words or syntax, so this is worth remembering.
+
+KEEPING COUNT
+Sometimes we want to count how many times the loop has run.
+
+const words = ["cat", "dog", "monkey"];
+let counter = 0;
+
+for (const word of words) {
+    // Do something with word.
+
+    counter = counter + 1;
+}
+After the loop finishes, counter is 3.
+
+There are other ways to find an item’s position in an array, but we do not normally need them when simply working through a list. Start with for...of unless you have a specific reason to manage the position yourself.
+
+You may also see this written using forEach():
+
+words.forEach((word) => {
+    // Do something with word.
+});
+This performs an action for each item, but it requires function syntax that we will cover later. For now, use for...of.
+
+Lesson 7.2: Traditional For Loops
+REPEATING A CERTAIN NUMBER OF TIMES
+A traditional for loop is useful when we want to repeat something a specific number of times.
+
+for (let i = 0; i < 10; i = i + 1) {
+    // Do something 10 times.
+}
+The first line contains three instructions:
+
+for (
+    let i = 0;  // Start at 0.
+    i < 10;     // Continue while i is less than 10.
+    i = i + 1   // Add 1 after each repetition.
+)
+The variable i keeps track of how many times the loop has run.
+
+The values of i are:
+
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+Although the loop begins at 0, it still runs ten times.
+
+We can also begin at 1:
+
+for (let i = 1; i <= 10; i = i + 1) {
+    // Do something 10 times.
+}
+Now the values are:
+
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+Both loops repeat ten times. The correct version depends on which numbers we need inside the loop.
+
+COMMON VARIATIONS
+We can change the starting value, stopping condition, or amount added each time.
+
+Count from 5 through 10:
+
+for (let i = 5; i <= 10; i = i + 1) {
+    // Use i.
+}
+Count by twos:
+
+for (let i = 0; i <= 10; i = i + 2) {
+    // i is 0, 2, 4, 6, 8, and 10.
+}
+Count backward:
+
+for (let i = 10; i > 0; i = i - 1) {
+    // i is 10, 9, 8, and so on.
+}
+You may also see the shorter forms:
+
+i++; // The same basic idea as i = i + 1.
+i--; // The same basic idea as i = i - 1.
+We will generally use the longer version at first because it makes the change easier to see.
+
+Traditional for loops often appear in programming exercises and AP exam questions. They are also useful in specialized algorithms. However, when working through every item in an array, for...of is usually easier to read and less likely to produce mistakes.
+
+Lesson 7.3: While Loops
+REPEATING WHILE SOMETHING IS TRUE
+A while loop continues running as long as its condition remains true.
+
+let number = 1;
+
+while (number <= 5) {
+    // Do something with number.
+
+    number = number + 1;
+}
+The loop checks the condition before each repetition. As long as number <= 5 is true, the code runs again.
+
+A while loop is useful when we do not know ahead of time exactly how many repetitions will be needed.
+
+while (gameIsRunning) {
+    // Update the game.
+}
+It may also be useful in certain algorithms that continue until a particular task has been completed.
+
+INFINITE LOOPS
+The major danger of a while loop is that its condition may never become false.
+
+let number = 1;
+
+while (number <= 5) {
+    // number never changes
+}
+Because number remains 1, the condition is always true. The loop continues forever. This is called an infinite loop.
+
+An infinite loop can freeze a webpage or prevent the rest of the program from running.
+
+Whenever you write a while loop, make sure that something inside the loop moves it toward completion:
+
+let number = 1;
+
+while (number <= 5) {
+    number = number + 1;
+}
+In ordinary class projects, we will not use while very often. Use it when repetition truly depends on a changing condition. Otherwise, a for...of or traditional for loop is usually clearer.
+
+Safety-critical software applies particularly strict rules to loops because an unexpected infinite loop could have serious consequences. One common rule is that every loop should have a clear upper limit on how long it can run.
+
+Check Your Understanding
+Which loop should you normally use to work through every item in an array?
+In the following loop, what does animal represent each time the loop runs?
+
+const animals = ["cat", "dog", "monkey"];
+
+for (const animal of animals) {
+    // Do something with animal.
+}
+How many times does the following loop run?
+
+for (let i = 0; i < 5; i = i + 1) {
+    // Do something.
+}
+What values does i have during the following loop?
+
+for (let i = 2; i <= 8; i = i + 2) {
+    // Do something.
+}
+Write a loop that repeats ten times.
+Write a loop that counts backward from 5 to 1.
+When might a while loop be more appropriate than a traditional for loop?
+Why does the following loop never stop?
+
+let number = 1;
+
+while (number < 10) {
+    // Do something.
+}
+Correct the preceding loop so that it eventually stops.
+Which kind of loop would you choose for each task?
+
+Perform an action for every name in an array.
+Repeat an animation step twenty times.
+Continue a game while gameIsRunning is true. 
+</chat-prompt>    </section>
+
 
 <!-- LESSON / CODING  -->
   
@@ -605,90 +785,89 @@ Even though animals was declared using const, we can change an item inside the a
         <p>Password Protected</p>
         <div class="notes">
         <codebox-controller  mode="lineByLine">
-let myList: Array<string> = [];
-let selectedRow = "";
 
-export function startApp() {
-    getData();
-    refreshUI();
+
+// Data
+let myPokemon: Array&lt;Pokemon&gt; = [ ];
+
+// UI Elements
+let myUIElements: Array&lt;HTMLButtonElement&gt; = [ ];
+
+// State
+let nameOfSelectedPokemon = "";
+
+
+export function startApp() { 
+
+    createPokemon();
+    displayPokemons();
+    showSelection();
 }
 
-function getData() {
-    myList = ["Mike", "dog", "bear", "bird"];
+function createPokemon() {
+
+    let pikachu = new Pokemon("Pikachu", "Electric", "Static", "Stores electricity in its cheeks.");
+    let charmander = new Pokemon("Charmander", "Fire", "Blaze", "The flame on its tail reflects its life force.");
+    let eevee = new Pokemon("Eevee", "Normal", "Run Away", "");
+    myPokemon.push(pikachu, charmander, eevee);
 }
 
-function refreshUI() {
+function displayPokemons() {
 
-    // we will just remove all views are rebuild (1. provides simplicity 2. app state defines UI)
-    document.body.replaceChildren();     
-    addUserInputFieldAndSubmitButton();
-    createTable();
-}
-
-function addUserInputFieldAndSubmitButton() {
-
-    const userInputField = document.createElement("input");
+    for (const pokemon of myPokemon) {
     
-    const submitButton = document.createElement("button");
-    submitButton.textContent = "Submit";
-    submitButton.onclick = () => {
-
-        // UPGRADE
-        if (selectedRow === "") {
-
-            const newItem = userInputField.value;
-            myList.push(newItem);
-
-        } else {
-
-            editSelectedItem(userInputField.value);
-        }
-
-        refreshUI();
-    }
-
-    document.body.append(userInputField, submitButton);
-}
-
-function createTable() {
-
-    for (const item of myList) {
-
-        const button = document.createElement("p");
-        button.textContent = item;
+        const button = document.createElement("button");
+        button.textContent = pokemon.name + " " + pokemon.type;
+        button.id = pokemon.name;
         button.onclick = () => {
 
-            // toggle selected row
-            if (selectedRow === "") {
-                selectedRow = item;
+            // if already selected, toggle off
+            if (nameOfSelectedPokemon === pokemon.name) {
+                nameOfSelectedPokemon = "";
             } else {
-                selectedRow = "";
+                nameOfSelectedPokemon = pokemon.name;
             }
 
-            refreshUI();
+            showSelection();
         }
 
-        if (item === selectedRow) {
-            button.style.backgroundColor = "gray";
-        }
+        const rowBreak = document.createElement("br");
 
-        document.body.append(button)
+        document.body.append(button, rowBreak);
+        myUIElements.push(button);
     }
 }
 
-function editSelectedItem(value: string) {
+function showSelection() {
 
-    let rowNumber = 0;
+    for (const row of myUIElements) {
 
-    for (const item of myList) {
-                
-        if (item === selectedRow) {
-            myList[rowNumber] = value;
+        if (row.id === nameOfSelectedPokemon) {
+            row.style.backgroundColor = "gray";
+        } else {
+            row.style.backgroundColor = "white";
         }
-
-        rowNumber = rowNumber + 1;
     }
 }
+
+class Pokemon {
+
+        name: string;
+        type: string;
+        ability: string;
+        funFact: string;
+
+        constructor(name: string, type: string, ability: string, funFact: string) {
+            
+            // call let pikachu = new Pokemon("Pikachu", "Electric", "Static", "Stores electricity in its cheeks.");
+            
+            this.name = name;
+            this.type = type;
+            this.ability = ability;
+            this.funFact = funFact;
+        }
+}
+
         </codebox-controller>
         </div></section>
 
@@ -703,7 +882,7 @@ function editSelectedItem(value: string) {
      <!-- HOMEWORK  -->
     <section class="page"> <div class="slide">  
        <homework-viewer>
-        Take a day off studying. 
+        Quiz next class.
         </homework-viewer> 
     </div></section>
 
