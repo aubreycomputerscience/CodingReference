@@ -101,10 +101,10 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
                     displayName: "- display objects",
                     pageName: "Unit2b_DisplayObjects"
                 },
-                // { 
-                //     displayName: "- look up",
-                //     pageName: "Unit2c_Dictionaries"
-                // },
+                { 
+                    displayName: "- look up",
+                    pageName: "Unit2c_Dictionaries"
+                },
                 
         ] },
 
