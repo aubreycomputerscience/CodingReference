@@ -785,8 +785,6 @@ Continue a game while gameIsRunning is true.
        
 
         <codebox-controller  mode="lineByLine">
-
-
 // Data
 let myPokemon: Array&lt;Pokemon&gt; = [ ];
 
@@ -867,7 +865,6 @@ class Pokemon {
             this.funFact = funFact;
         }
 }
-
         </codebox-controller>
         </div> </section>
 
@@ -901,6 +898,41 @@ class Pokemon {
                 QUIZ
             </bellwork-viewer>
         </div></section>
+
+        <section class="page"> <div class="slide">
+            <h2>Removing Item from List</h2>
+            <p>1. We have a list of pokemon.
+            <p>2. Create a new list of pokemon without the Pokemon we don't want.</p>
+            <p>3. Update the original list to equal the new one.</p>
+            <codebox-controller>
+    let myArray = ["Pikachu", "Eevee", "Charmander", "Regidrago"];
+
+    export function startApp() {
+
+        filter("Eevee");
+
+        // check list
+        for (const pokemon of myArray) {
+            alert(pokemon)
+        }
+    }
+
+    function filter(removePokemonName: string) {
+
+        const updatedList: Array&lt;string&gt; = [];
+
+        for (const pokemon of myArray) {
+            if (pokemon !== removePokemonName) {
+                updatedList.push(pokemon);
+            }
+        }
+
+        myArray = updatedList;
+    }
+            </codebox-controller>
+        </div></section>
+
+
 
         <section class="page"> <div class="slide">
             <h2>Complete Code</h2>

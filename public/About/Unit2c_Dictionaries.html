@@ -6,7 +6,7 @@
             Introduction to Dictionaries
             </projectname-viewer>
             <objectives-viewer>
-                <p>Use dictionaries to store and display data in lists. (Alg-3: TEKS 4D, 6Q, 6R)</p>
+                <p>Use dictionaries to store data for lookup. (Alg-3: TEKS 4D, 6Q, 6R)</p>
                 <p>Use object-oriented programming to organize code. (Prog-4: TEKS 4E, 6D, 6F)</p>
             </objectives-viewer>
     </section>
@@ -14,7 +14,7 @@
     <!-- Bell Work -->
     <section class="page"> <div class="slide">
             <h1>🔔 BELL WORK</h1>
-            <div>Magic School: Practice Arrays</div>
+            <div>Magic School: Practice Loops</div>
             <br><div>
                 Please find your assigned seat quietly. Seats are alphabetical, starting on the right.
                 Please get out your class notebook (or paper).
@@ -99,12 +99,138 @@ if (mariaGrade !== undefined) {
 
 
     <section class="page"><div class="slide"> 
-    <h2>Practice</h2>
-    <div>1. Spend 5 minutes reviewing new material.</div>
-    <div>2. Practice using Magic School.</div>
-    <chat-prompt>
+    <h2>Review</h2>
+    <div>Review Coding/Data Structures/Dictionaries 2.1-2.2.</div>
 
+    <h2>Learning the Commands</h2>
+    <p>Magic School Practice. Join code: <strong>"Srrmcg"</strong></p>
+    <chat-prompt>
+INSTRUCTIONS - Test Students on these. That is, do they remember the function names. So if asked how do you add a new value, the answer is set. (give in random order and keep checking until they get them all)
+myMap.set(key, value)	Add or update a value
+myMap.get(key)	Retrieve the value for a key
+myMap.has(key)	Check whether a key exists
+myMap.delete(key)	Delete one entry
+myMap.clear()	Delete every entry
+myMap.size	Find the number of entries
+myMap.keys()	Work through the keys
+myMap.values()	Work through the values
     </chat-prompt>
+
+    <h2>Practice Coding</h2>
+    <label>Magic School Practice. Join code: <strong>"UZTz7w"</strong></label>
+    <chat-prompt>
+INSTRUCTIONS - See if the Students Know how to use them. He are the notes from our textbook.
+
+The Oxford Dictionary contains a list of words and their corresponding definitions. This allows us to look up information with ease.
+
+In computer science, we can store information in a similar way. For
+ the keyword "cat", we can store the definition "an animal that goes meow."
+
+cat: an animal that goes meow
+dog: an animal that goes woof
+The keyword "cat" is called a key, and the information is called a value. Thus, a dictionary is a collection of key-value pairs, to put it technically. It should be noted that the keyword does not need to be text.
+
+A dictionary gives us quick access to stored information. It also allows us to add, delete, or update entries with ease. In TypeScript, we can create a dictionary using a Map.
+
+Dictionaries are useful when we frequently need to look up information using a known key. For example:
+
+Student name → grade
+State code   → state name
+User ID      → user information
+Word         → definition
+If we need to store information in an ordered list, an array is a better choice.
+
+A dictionary provides a quick lookup by key. With an array, we may have to search through the items one by one until we find the one we need. This can require a great deal of work if the array contains millions of items.
+
+Think of a dictionary as an unordered list of keys and values. In JavaScript, Map guarantees that entries will appear in insertion order when we loop through them, but dictionaries in other programming languages, generally, do not.
+
+Lesson 2.2: Using a Dictionary
+CREATING A MAP
+We can create an empty Map and state the types used for its keys and values:
+
+const grades = new Map<string, number>();
+Read this as:
+
+A Map with string keys and number values.
+
+We can also create a Map that already contains entries:
+
+const grades = new Map([
+    ["Maria", 95],
+    ["Devon", 87]
+]);
+Each entry contains a key followed by the value saved for that key.
+
+Key:   "Maria"
+Value: 95
+
+const grades = new Map<string, number>();
+
+grades.set("Maria", 95);
+grades.set("Devon", 87);
+We can later use the key "Maria" to retrieve the value 95.
+
+If the key already exists, set() replaces the old value:
+
+grades.set("Maria", 99);
+The value for the key "Maria" is now 99. A Map can contain only one value for each key.
+
+LOOKING UP A VALUE
+The get() method retrieves the value for a key:
+
+const mariaGrade = grades.get("Maria"); // 99
+If the key does not exist, get() returns undefined:
+
+const samGrade = grades.get("Sam"); // undefined
+We can check the result before using it:
+
+const mariaGrade = grades.get("Maria");
+
+if (mariaGrade !== undefined) {
+    // Use mariaGrade.
+}
+We can also use has() when we only need to know whether the key exists:
+
+if (grades.has("Maria")) {
+    // The dictionary contains an entry for Maria.
+}
+The difference is simple:
+
+get() retrieves the value for a key.
+has() tells us whether the key exists.
+DELETING ENTRIES
+The delete() method removes the entry for a key:
+
+grades.delete("Devon");
+The clear() method removes every entry:
+
+grades.clear();
+COUNTING ENTRIES
+The size property tells us how many entries are in a Map:
+
+const numberOfStudents = grades.size;
+Like an arrays length, size is a property and does not use parentheses.
+
+WORKING THROUGH A MAP
+We can use a for...of loop to work through every key and value:
+
+for (const [name, grade] of grades) {
+    // Use name and grade.
+}
+Each time through the loop, the first variable contains the key and the second contains its value.
+
+We can also work through only the keys:
+
+for (const name of grades.keys()) {
+    // Use name.
+}
+Or only the values:
+
+for (const grade of grades.values()) {
+    // Use grade.
+}
+    </chat-prompt>
+
     </div></section>
 
 
@@ -117,7 +243,7 @@ if (mariaGrade !== undefined) {
      <!-- HOMEWORK  -->
     <section class="page"> <div class="slide">  
        <homework-viewer>
-            Be ready for a quiz (?).
+            Be ready for a quiz.
         </homework-viewer> 
     </div></section>
 
@@ -317,7 +443,7 @@ if (mariaGrade !== undefined) {
      <!-- HOMEWORK  -->
     <section class="page"> <div class="slide">  
        <homework-viewer>
-            Be ready for a quiz (?).
+            Be ready for a quiz.
         </homework-viewer> 
     </div></section>
 
@@ -346,15 +472,16 @@ if (mariaGrade !== undefined) {
     
     <!-- Daily -->
     <section class="page"> <div class="slide">
-        <h2>Build Pokemon Look Up App</h2>
-        <div>1. Store Pokemon in Dictionary</div>
-        <div>2. Add user input field.</div>
-        <div>3. On submit button pressed, look up Pokemon.</div>
+        <h2>Build Quick Reference App for Dictionaries</h2>
+        <div>1. Create a DictionaryEntry class to store each entry. Each entry should have the following properties: methodName, description, exampleCode, and additionalNotes.</div>
+        <div>2. Create data objects and store in a dictionary.</div>
+        <div>3. Add user input field.</div>
+        <div>4. On submit button pressed, look up Pokemon.</div>
         <br>
         <div>Upgrades</div>
-        <div>1. Look up Pokemon when user types in.</div>
-        <div>2. Make it look nice.</div>
-        <div>3. Allow the user to add or delete Pokemon.</div>
+        <div>1. Look up words as user types.</div>
+        <div>2. Allow the user to add or delete vocabulary.</div>
+        <div>3. Update UI.</div>
     </div></section>
     
     
@@ -366,7 +493,7 @@ if (mariaGrade !== undefined) {
      <!-- HOMEWORK  -->
     <section class="page"> <div class="slide">  
        <homework-viewer>
-            Be ready for a quiz (?).
+            TBA.
         </homework-viewer> 
     </div></section>
 
