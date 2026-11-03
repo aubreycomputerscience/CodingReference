@@ -1,18 +1,331 @@
 // introduct length - 1
-
-
-
-
-here is where we can introduce Functions
+<!-- here is where we can introduce Functions
 Objects methods
 and set operations
-
-vs. multiple selection (or leave until search)
-
+const pokemonID = crypto.randomUUID(); -->
 
 
 
-fire type Pokemon
+<article class="lesson"> <slide-viewer>
+
+    
+    <section class="page"> <div class="slide">
+        <projectname-viewer>
+            Introduction to Sets
+            </projectname-viewer>
+            <objectives-viewer>
+                <p>Use set operations to store and find the intersection of elements. (Alg-3: TEKS 4D, 6Q, 6R)</p>
+                <p>Use object-oriented programming to organize code. (Prog-4: TEKS 4E, 6D, 6F)</p>
+            </objectives-viewer>
+    </section>
+
+    <!-- Bell Work -->
+    <section class="page"> <div class="slide">
+            <h1>🔔 BELL WORK</h1>
+            <div>Magic School: Practice Functions</div>
+            <br><div>
+                Please find your assigned seat quietly. Seats are alphabetical, starting on the right.
+                Please get out your class notebook (or paper).
+            </div><div>
+                Write your response in your notebook. (5 Minutes.)
+                Responses will be discussed after Bell Work.
+            </div>
+        </div>
+    </section>
+
+    
 
 
-const pokemonID = crypto.randomUUID();
+
+     <!-- Lesson 1 -->
+    <section class="page"> <div class="slide">
+        <h2>Sets</h2>
+        <p>Store data in set.</P>
+        <P>Think of a  set as an unordered group of items. It can have no duplicate values.</p>
+        <P>1. Use for quick lookup.</P>
+        <p>2. Use to remove dups.</p>
+        <p>3. Use to combine sets of data, remove elements from one set, or find which elements shared by two sets.</p>
+        <br>
+        <p>*Implementation Detail*</p>
+        <p>Unlike other programming languages, JavaScript/TypeScript will return items in the order they were added.</p>
+ 
+      
+
+
+
+
+
+        <h2>A set stores a collection of unique items. The same item cannot appear more than once.</h2>
+        <codebox-controller  mode="lineByLine">
+            
+        const animals = new Set(["cat", "dog", "monkey"]);
+        If we try to add "cat" again, the set remains unchanged:
+
+        animals.add("cat");
+
+        // animals still contains:
+        // "cat", "dog", "monkey"
+        </codebox-controller>
+
+        <multiline-text>
+Sets are useful when we mainly need to know whether an item is present. 
+For example, we might use a set to store:
+
+    usernames that have already been selected
+    students who are absent
+    items collected by a player
+    words that appear in a document
+    In review, our basic collection types have different purposes:
+
+An array stores an ordered list of items and can contain duplicates.
+A dictionary connects keys with values.
+A set stores unique items and provides a quick way to check whether an item is present.
+</multiline-text>
+
+<h2>Creating a Set</h2>
+<codebox-controller>
+const animals = new Set<string>();  // A set of strings.
+
+// or
+const animals = new Set(["cat", "dog", "monkey"]);  // We are passing in an array.
+</codebox-controller>
+
+<h2>Quick Reference</h2>
+<multiline-text>
+mySet.add("dog")	Add an item
+mySet.has("cat")	Check whether an item is present
+mySet.delete("dog")	Delete one item
+mySet.clear()	Delete every item
+mySet.size	Find the number of items
+</multiline-text>
+
+
+
+
+
+<h2>In computer science, we can store information in a similar way.</h2>
+<p>The keyword "cat" is called a key, and the information is called a value. Thus, a dictionary (also known as a Map) is a collection of key-value pairs, to put it technically.</p>
+<codebox-controller  mode="lineByLine">
+    const grades = new Map&lt;<string, number>&gt;();
+    grades.set("Maria", 95);
+</codebox-controller>
+
+<h2>Look Up Grades</h2>
+<codebox-controller  mode="lineByLine">
+const mariaGrade = grades.get("Maria");
+
+if (mariaGrade !== undefined) {
+    // Use mariaGrade.
+}
+</codebox-controller>
+<br>
+<p>Quick Reference</p>
+   <table>
+    <tr>
+        <th>Code</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>myMap.set(key, value)</td>
+        <td>Add or update dictionary with value.</td>
+    </tr>
+    <tr>
+        <td>myMap.get(key)</td>
+        <td>Retrieve the value for a key</td>
+    </tr>
+    <tr>
+        <td>myMap.has(key)</td>
+        <td>Check whether a key exists</td>
+    </tr>
+    <tr>
+        <td>myMap.delete(key)</td>
+        <td>Delete one entry</td>
+    </tr>
+    <tr>
+        <td>myMap.clear()</td>
+        <td>Delete every entry</td>
+    </tr>
+    <tr>
+        <td>myMap.size</td>
+        <td>Find the number of entries</td>
+    </tr>
+    <tr>
+        <td>myMap.keys()</td>
+        <td>Work through the keys</td>
+    </tr>
+    <tr>
+        <td>myMap.values()</td>
+        <td>Work through the values</td>
+    </tr>
+</table>
+
+</div></section>
+
+
+
+
+    <section class="page"><div class="slide"> 
+    <h2>Review</h2>
+    <div>Review Coding/Data Structures/Dictionaries 2.1-2.2.</div>
+
+    <h2>Learning the Commands</h2>
+    <p>Magic School Practice. Join code: <strong>"Srrmcg"</strong></p>
+    <chat-prompt>
+INSTRUCTIONS - Test Students on these. That is, do they remember the function names. So if asked how do you add a new value, the answer is set. (give in random order and keep checking until they get them all)
+myMap.set(key, value)	Add or update a value
+myMap.get(key)	Retrieve the value for a key
+myMap.has(key)	Check whether a key exists
+myMap.delete(key)	Delete one entry
+myMap.clear()	Delete every entry
+myMap.size	Find the number of entries
+myMap.keys()	Work through the keys
+myMap.values()	Work through the values
+    </chat-prompt>
+
+    <h2>Practice Coding</h2>
+    <label>Magic School Practice. Join code: <strong>"UZTz7w"</strong></label>
+    <chat-prompt>
+INSTRUCTIONS - See if the Students Know how to use them. He are the notes from our textbook. Make sure your quetsions
+are concrete. Thus, you ask might ask them to create a new Map to store a string and a Pokemon, in whihc case the answer would be const x = new Map<string, Pokemon>(); 
+If you want them to lookup an item, have them lookup a real item.
+
+The Oxford Dictionary contains a list of words and their corresponding definitions. This allows us to look up information with ease.
+
+In computer science, we can store information in a similar way. For
+ the keyword "cat", we can store the definition "an animal that goes meow."
+
+cat: an animal that goes meow
+dog: an animal that goes woof
+The keyword "cat" is called a key, and the information is called a value. Thus, a dictionary is a collection of key-value pairs, to put it technically. It should be noted that the keyword does not need to be text.
+
+A dictionary gives us quick access to stored information. It also allows us to add, delete, or update entries with ease. In TypeScript, we can create a dictionary using a Map.
+
+Dictionaries are useful when we frequently need to look up information using a known key. For example:
+
+Student name → grade
+State code   → state name
+User ID      → user information
+Word         → definition
+If we need to store information in an ordered list, an array is a better choice.
+
+A dictionary provides a quick lookup by key. With an array, we may have to search through the items one by one until we find the one we need. This can require a great deal of work if the array contains millions of items.
+
+Think of a dictionary as an unordered list of keys and values. In JavaScript, Map guarantees that entries will appear in insertion order when we loop through them, but dictionaries in other programming languages, generally, do not.
+
+Lesson 2.2: Using a Dictionary
+CREATING A MAP
+We can create an empty Map and state the types used for its keys and values:
+
+const grades = new Map<string, number>();
+Read this as:
+
+A Map with string keys and number values.
+
+We can also create a Map that already contains entries:
+
+const grades = new Map([
+    ["Maria", 95],
+    ["Devon", 87]
+]);
+Each entry contains a key followed by the value saved for that key.
+
+Key:   "Maria"
+Value: 95
+
+const grades = new Map<string, number>();
+
+grades.set("Maria", 95);
+grades.set("Devon", 87);
+We can later use the key "Maria" to retrieve the value 95.
+
+If the key already exists, set() replaces the old value:
+
+grades.set("Maria", 99);
+The value for the key "Maria" is now 99. A Map can contain only one value for each key.
+
+LOOKING UP A VALUE
+The get() method retrieves the value for a key:
+
+const mariaGrade = grades.get("Maria"); // 99
+If the key does not exist, get() returns undefined:
+
+const samGrade = grades.get("Sam"); // undefined
+We can check the result before using it:
+
+const mariaGrade = grades.get("Maria");
+
+if (mariaGrade !== undefined) {
+    // Use mariaGrade.
+}
+We can also use has() when we only need to know whether the key exists:
+
+if (grades.has("Maria")) {
+    // The dictionary contains an entry for Maria.
+}
+The difference is simple:
+
+get() retrieves the value for a key.
+has() tells us whether the key exists.
+DELETING ENTRIES
+The delete() method removes the entry for a key:
+
+grades.delete("Devon");
+The clear() method removes every entry:
+
+grades.clear();
+COUNTING ENTRIES
+The size property tells us how many entries are in a Map:
+
+const numberOfStudents = grades.size;
+Like an arrays length, size is a property and does not use parentheses.
+
+WORKING THROUGH A MAP
+We can use a for...of loop to work through every key and value:
+
+for (const [name, grade] of grades) {
+    // Use name and grade.
+}
+Each time through the loop, the first variable contains the key and the second contains its value.
+
+We can also work through only the keys:
+
+for (const name of grades.keys()) {
+    // Use name.
+}
+Or only the values:
+
+for (const grade of grades.values()) {
+    // Use grade.
+}
+    </chat-prompt>
+
+    </div></section>
+
+
+
+        <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+     <!-- HOMEWORK  -->
+    <section class="page"> <div class="slide">  
+       <homework-viewer>
+            Be ready for a quiz.
+        </homework-viewer> 
+    </div></section>
+
+
+
+
+
+
+
+
+
+
+</slide-viewer>
+</article>
+    
+
+

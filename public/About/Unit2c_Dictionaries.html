@@ -44,7 +44,7 @@
 <h2>In computer science, we can store information in a similar way.</h2>
 <p>The keyword "cat" is called a key, and the information is called a value. Thus, a dictionary (also known as a Map) is a collection of key-value pairs, to put it technically.</p>
 <codebox-controller  mode="lineByLine">
-    const grades = new Map<string, number>();
+    const grades = new Map&lt;<string, number>&gt;();
     grades.set("Maria", 95);
 </codebox-controller>
 
@@ -62,6 +62,10 @@ if (mariaGrade !== undefined) {
     <tr>
         <th>Code</th>
         <th>Description</th>
+    </tr>
+    <tr>
+        <td>myMap.set(key, value)</td>
+        <td>Add or update dictionary with value.</td>
     </tr>
     <tr>
         <td>myMap.get(key)</td>
@@ -119,7 +123,9 @@ myMap.values()	Work through the values
     <h2>Practice Coding</h2>
     <label>Magic School Practice. Join code: <strong>"UZTz7w"</strong></label>
     <chat-prompt>
-INSTRUCTIONS - See if the Students Know how to use them. He are the notes from our textbook.
+INSTRUCTIONS - See if the Students Know how to use them. He are the notes from our textbook. Make sure your quetsions
+are concrete. Thus, you ask might ask them to create a new Map to store a string and a Pokemon, in whihc case the answer would be const x = new Map<string, Pokemon>(); 
+If you want them to lookup an item, have them lookup a real item.
 
 The Oxford Dictionary contains a list of words and their corresponding definitions. This allows us to look up information with ease.
 
@@ -457,7 +463,148 @@ for (const grade of grades.values()) {
     <!-- Bell Work -->
     <section class="page"> <div class="slide">
             <h1>🔔 BELL WORK</h1>
-            <div>Magic School: Functions</div>
+            <div>Preview: Read Functions 5.1-5.2</div>
+                <chat-prompt>
+Chapter 5: Functions
+Lesson 5.1: What Is a Function?
+As a program becomes larger, it becomes difficult to understand everything at once. We can make the program easier to work with by dividing it into smaller pieces of code called functions.
+
+Each function should perform a small, clearly defined task. For example, a game might contain separate functions for calculating damage, healing a character, moving an enemy, and checking whether the player has won.
+
+A function gives a name to a piece of code:
+
+function healCharacter() {
+    // Restore the character's health.
+}
+The name healCharacter tells us what the function does. In this way, a good function name acts like a topic sentence. It allows us to understand the purpose of the code without immediately reading every instruction inside it.
+
+Creating a function is called defining a function. The code inside the function does not run until we call it:
+
+healCharacter();
+The parentheses tell the program to run the function.
+
+Functions help us:
+
+divide a large program into smaller tasks
+give meaningful names to sections of code
+reuse code without writing it again
+hide unnecessary details
+make programs easier to read, test, and change
+A function attached to an object or class is called a method. Functions and methods work in similar ways, but a method belongs to a particular object or class.
+
+Lesson 5.2: Using Functions
+Parameters and Arguments
+A function can receive information through parameters.
+
+function greetPerson(name: string) {
+    const greeting = "Hello, " + name;
+}
+The parameter name is a variable that belongs to the function. It allows the function to work with different names.
+
+When we call the function, we provide a value:
+
+greetPerson("Maria");
+greetPerson("Devon");
+The value passed into a function is called an argument.
+
+In this example:
+
+function greetPerson(name: string) {
+    const greeting = "Hello, " + name;
+}
+
+greetPerson("Maria");
+name is the parameter.
+"Maria" is the argument.
+A function can have more than one parameter:
+
+function calculateDamage(attack: number, defense: number) {
+    const damage = attack - defense;
+}
+The arguments are matched with the parameters according to their position:
+
+calculateDamage(30, 10);
+Here, 30 becomes attack and 10 becomes defense.
+
+Clear parameter names make function calls easier to understand:
+
+const playerAttack = 30;
+const enemyDefense = 10;
+
+calculateDamage(playerAttack, enemyDefense);
+This is often clearer than passing several unexplained numbers directly into the function.
+
+Return Values
+A function can send a result back to the code that called it. This is called a return value.
+
+function calculateDamage(attack: number, defense: number): number {
+    return attack - defense;
+}
+The type after the parentheses states what kind of value the function returns:
+
+: number
+We can store the returned value in a variable:
+
+const damage = calculateDamage(30, 10);
+The function receives 30 and 10, calculates the result, and returns 20. The value 20 is then stored in damage.
+
+A returned value can also be used directly:
+
+const remainingHitPoints =
+    hitPoints - calculateDamage(attack, defense);
+When a function reaches return, it immediately stops running:
+
+function calculateDamage(attack: number, defense: number): number {
+    if (defense >= attack) {
+        return 0;
+    }
+
+    return attack - defense;
+}
+If defense is greater than or equal to attack, the function returns 0 and skips the remaining code.
+
+A function that does not return a value can use the return type void:
+
+function healCharacter(character: Character): void {
+    character.heal();
+}
+TypeScript can usually determine the return type without our writing it. However, explicitly including it can make the purpose of a function clearer.
+
+Optional Parameters and Values
+Sometimes a parameter does not need to be provided. We can place a question mark after its name:
+
+function greetPerson(name: string, title?: string) {
+    // Use name and title.
+}
+The function can now be called with or without a title:
+
+greetPerson("Maria");
+greetPerson("Maria", "Captain");
+Inside the function, title may contain a string or it may contain undefined.
+
+We can write this more explicitly using a union type:
+
+function greetPerson(name: string, title: string | undefined) {
+    // Use name and title.
+}
+The vertical line means or. Read this as:
+
+title can contain a string or undefined.
+
+There is an important difference between these two forms. The question mark allows us to leave out the argument:
+
+greetPerson("Maria");
+With string | undefined, the argument is still required, although its value may be undefined:
+
+greetPerson("Maria", undefined);
+Union types can also describe other optional values:
+
+function findCharacter(name: string): Character | undefined {
+    // Return a Character if one is found.
+    // Otherwise, return undefined.
+}
+The function may return a Character, or it may return undefined if no matching character exists.
+    </chat-prompt>
             <br><div>
                 Please find your assigned seat quietly. Seats are alphabetical, starting on the right.
                 Please get out your class notebook (or paper).
@@ -476,7 +623,7 @@ for (const grade of grades.values()) {
         <div>1. Create a DictionaryEntry class to store each entry. Each entry should have the following properties: methodName, description, exampleCode, and additionalNotes.</div>
         <div>2. Create data objects and store in a dictionary.</div>
         <div>3. Add user input field.</div>
-        <div>4. On submit button pressed, look up Pokemon.</div>
+        <div>4. On submit button pressed, look up user input word.</div>
         <br>
         <div>Upgrades</div>
         <div>1. Look up words as user types.</div>
