@@ -22,7 +22,119 @@ const pokemonID = crypto.randomUUID(); -->
     <!-- Bell Work -->
     <section class="page"> <div class="slide">
             <h1>🔔 BELL WORK</h1>
-            <div>Magic School: Practice Functions</div>
+            <p>Magic School Practice. Join code: <strong>"TBA"</strong></p>
+    <chat-prompt>
+INSTRUCTIONS: Ask students to write simple functions. Functions should accept input parameters and have return values. 
+Questions should be concrete. Start with simple functions. For example, create a function that returns the word "Hello." 
+Then, we could ask students to create a function that finds the sum of two values. Use it to add 3 + 4 and store in a variable named sum.
+And so on and so forth.
+
+        Lesson 5.1: What Is a Function?
+As a program becomes larger, it becomes difficult to understand everything at once. We can make the program easier to work with by dividing it into smaller pieces of code called functions.
+
+Each function should perform a small, clearly defined task. For example, a game might contain separate functions for calculating damage, healing a character, moving an enemy, and checking whether the player has won.
+
+A function gives a name to a piece of code:
+
+function healCharacter() {
+    // Restore the character's health.
+}
+The name healCharacter tells us what the function does. In this way, a good function name acts like a topic sentence. It allows us to understand the purpose of the code without immediately reading every instruction inside it.
+
+Creating a function is called defining a function. The code inside the function does not run until we call it:
+
+healCharacter();
+The parentheses tell the program to run the function.
+
+Functions help us:
+
+divide a large program into smaller tasks
+give meaningful names to sections of code
+reuse code without writing it again
+hide unnecessary details
+make programs easier to read, test, and change
+A function attached to an object or class is called a method. Functions and methods work in similar ways, but a method belongs to a particular object or class.
+
+Lesson 5.2: Using Functions
+Parameters and Arguments
+A function can receive information through parameters.
+
+function greetPerson(name: string) {
+    const greeting = "Hello, " + name;
+}
+The parameter name is a variable that belongs to the function. It allows the function to work with different names.
+
+When we call the function, we provide a value:
+
+greetPerson("Maria");
+greetPerson("Devon");
+The value passed into a function is called an argument.
+
+In this example:
+
+function greetPerson(name: string) {
+    const greeting = "Hello, " + name;
+}
+
+greetPerson("Maria");
+name is the parameter.
+"Maria" is the argument.
+A function can have more than one parameter:
+
+function calculateDamage(attack: number, defense: number) {
+    const damage = attack - defense;
+}
+The arguments are matched with the parameters according to their position:
+
+calculateDamage(30, 10);
+Here, 30 becomes attack and 10 becomes defense.
+
+Clear parameter names make function calls easier to understand:
+
+const playerAttack = 30;
+const enemyDefense = 10;
+
+calculateDamage(playerAttack, enemyDefense);
+This is often clearer than passing several unexplained numbers directly into the function.
+
+Return Values
+A function can send a result back to the code that called it. This is called a return value.
+
+function calculateDamage(attack: number, defense: number): number {
+    return attack - defense;
+}
+The type after the parentheses states what kind of value the function returns:
+
+: number
+We can store the returned value in a variable:
+
+const damage = calculateDamage(30, 10);
+The function receives 30 and 10, calculates the result, and returns 20. The value 20 is then stored in damage.
+
+A returned value can also be used directly:
+
+const remainingHitPoints =
+    hitPoints - calculateDamage(attack, defense);
+When a function reaches return, it immediately stops running:
+
+function calculateDamage(attack: number, defense: number): number {
+    if (defense >= attack) {
+        return 0;
+    }
+
+    return attack - defense;
+}
+If defense is greater than or equal to attack, the function returns 0 and skips the remaining code.
+
+A function that does not return a value can use the return type void:
+
+function healCharacter(character: Character): void {
+    character.heal();
+}
+TypeScript can usually determine the return type without our writing it. However, explicitly including it can make the purpose of a function clearer.
+
+    </chat-prompt>
+
             <br><div>
                 Please find your assigned seat quietly. Seats are alphabetical, starting on the right.
                 Please get out your class notebook (or paper).
@@ -48,13 +160,11 @@ const pokemonID = crypto.randomUUID(); -->
         <br>
         <p>*Implementation Detail*</p>
         <p>Unlike other programming languages, JavaScript/TypeScript will return items in the order they were added.</p>
- 
+     </div>
+    </section>
       
 
-
-
-
-
+    <section class="page"> <div class="slide"></div>
         <h2>A set stores a collection of unique items. The same item cannot appear more than once.</h2>
         <codebox-controller  mode="lineByLine">
             
@@ -99,205 +209,12 @@ mySet.clear()	Delete every item
 mySet.size	Find the number of items
 </multiline-text>
 
-
-
-
-
-<h2>In computer science, we can store information in a similar way.</h2>
-<p>The keyword "cat" is called a key, and the information is called a value. Thus, a dictionary (also known as a Map) is a collection of key-value pairs, to put it technically.</p>
-<codebox-controller  mode="lineByLine">
-    const grades = new Map&lt;<string, number>&gt;();
-    grades.set("Maria", 95);
-</codebox-controller>
-
-<h2>Look Up Grades</h2>
-<codebox-controller  mode="lineByLine">
-const mariaGrade = grades.get("Maria");
-
-if (mariaGrade !== undefined) {
-    // Use mariaGrade.
-}
-</codebox-controller>
-<br>
-<p>Quick Reference</p>
-   <table>
-    <tr>
-        <th>Code</th>
-        <th>Description</th>
-    </tr>
-    <tr>
-        <td>myMap.set(key, value)</td>
-        <td>Add or update dictionary with value.</td>
-    </tr>
-    <tr>
-        <td>myMap.get(key)</td>
-        <td>Retrieve the value for a key</td>
-    </tr>
-    <tr>
-        <td>myMap.has(key)</td>
-        <td>Check whether a key exists</td>
-    </tr>
-    <tr>
-        <td>myMap.delete(key)</td>
-        <td>Delete one entry</td>
-    </tr>
-    <tr>
-        <td>myMap.clear()</td>
-        <td>Delete every entry</td>
-    </tr>
-    <tr>
-        <td>myMap.size</td>
-        <td>Find the number of entries</td>
-    </tr>
-    <tr>
-        <td>myMap.keys()</td>
-        <td>Work through the keys</td>
-    </tr>
-    <tr>
-        <td>myMap.values()</td>
-        <td>Work through the values</td>
-    </tr>
-</table>
-
 </div></section>
 
 
 
-
     <section class="page"><div class="slide"> 
-    <h2>Review</h2>
-    <div>Review Coding/Data Structures/Dictionaries 2.1-2.2.</div>
 
-    <h2>Learning the Commands</h2>
-    <p>Magic School Practice. Join code: <strong>"Srrmcg"</strong></p>
-    <chat-prompt>
-INSTRUCTIONS - Test Students on these. That is, do they remember the function names. So if asked how do you add a new value, the answer is set. (give in random order and keep checking until they get them all)
-myMap.set(key, value)	Add or update a value
-myMap.get(key)	Retrieve the value for a key
-myMap.has(key)	Check whether a key exists
-myMap.delete(key)	Delete one entry
-myMap.clear()	Delete every entry
-myMap.size	Find the number of entries
-myMap.keys()	Work through the keys
-myMap.values()	Work through the values
-    </chat-prompt>
-
-    <h2>Practice Coding</h2>
-    <label>Magic School Practice. Join code: <strong>"UZTz7w"</strong></label>
-    <chat-prompt>
-INSTRUCTIONS - See if the Students Know how to use them. He are the notes from our textbook. Make sure your quetsions
-are concrete. Thus, you ask might ask them to create a new Map to store a string and a Pokemon, in whihc case the answer would be const x = new Map<string, Pokemon>(); 
-If you want them to lookup an item, have them lookup a real item.
-
-The Oxford Dictionary contains a list of words and their corresponding definitions. This allows us to look up information with ease.
-
-In computer science, we can store information in a similar way. For
- the keyword "cat", we can store the definition "an animal that goes meow."
-
-cat: an animal that goes meow
-dog: an animal that goes woof
-The keyword "cat" is called a key, and the information is called a value. Thus, a dictionary is a collection of key-value pairs, to put it technically. It should be noted that the keyword does not need to be text.
-
-A dictionary gives us quick access to stored information. It also allows us to add, delete, or update entries with ease. In TypeScript, we can create a dictionary using a Map.
-
-Dictionaries are useful when we frequently need to look up information using a known key. For example:
-
-Student name → grade
-State code   → state name
-User ID      → user information
-Word         → definition
-If we need to store information in an ordered list, an array is a better choice.
-
-A dictionary provides a quick lookup by key. With an array, we may have to search through the items one by one until we find the one we need. This can require a great deal of work if the array contains millions of items.
-
-Think of a dictionary as an unordered list of keys and values. In JavaScript, Map guarantees that entries will appear in insertion order when we loop through them, but dictionaries in other programming languages, generally, do not.
-
-Lesson 2.2: Using a Dictionary
-CREATING A MAP
-We can create an empty Map and state the types used for its keys and values:
-
-const grades = new Map<string, number>();
-Read this as:
-
-A Map with string keys and number values.
-
-We can also create a Map that already contains entries:
-
-const grades = new Map([
-    ["Maria", 95],
-    ["Devon", 87]
-]);
-Each entry contains a key followed by the value saved for that key.
-
-Key:   "Maria"
-Value: 95
-
-const grades = new Map<string, number>();
-
-grades.set("Maria", 95);
-grades.set("Devon", 87);
-We can later use the key "Maria" to retrieve the value 95.
-
-If the key already exists, set() replaces the old value:
-
-grades.set("Maria", 99);
-The value for the key "Maria" is now 99. A Map can contain only one value for each key.
-
-LOOKING UP A VALUE
-The get() method retrieves the value for a key:
-
-const mariaGrade = grades.get("Maria"); // 99
-If the key does not exist, get() returns undefined:
-
-const samGrade = grades.get("Sam"); // undefined
-We can check the result before using it:
-
-const mariaGrade = grades.get("Maria");
-
-if (mariaGrade !== undefined) {
-    // Use mariaGrade.
-}
-We can also use has() when we only need to know whether the key exists:
-
-if (grades.has("Maria")) {
-    // The dictionary contains an entry for Maria.
-}
-The difference is simple:
-
-get() retrieves the value for a key.
-has() tells us whether the key exists.
-DELETING ENTRIES
-The delete() method removes the entry for a key:
-
-grades.delete("Devon");
-The clear() method removes every entry:
-
-grades.clear();
-COUNTING ENTRIES
-The size property tells us how many entries are in a Map:
-
-const numberOfStudents = grades.size;
-Like an arrays length, size is a property and does not use parentheses.
-
-WORKING THROUGH A MAP
-We can use a for...of loop to work through every key and value:
-
-for (const [name, grade] of grades) {
-    // Use name and grade.
-}
-Each time through the loop, the first variable contains the key and the second contains its value.
-
-We can also work through only the keys:
-
-for (const name of grades.keys()) {
-    // Use name.
-}
-Or only the values:
-
-for (const grade of grades.values()) {
-    // Use grade.
-}
-    </chat-prompt>
 
     </div></section>
 

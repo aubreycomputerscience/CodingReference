@@ -464,9 +464,68 @@ for (const grade of grades.values()) {
     <section class="page"> <div class="slide">
             <h1>🔔 BELL WORK</h1>
             <div>Preview: Read Functions 5.1-5.2</div>
-                <chat-prompt>
-Chapter 5: Functions
-Lesson 5.1: What Is a Function?
+                
+            <br><div>
+                Please find your assigned seat quietly. Seats are alphabetical, starting on the right.
+                Please get out your class notebook (or paper).
+            </div><div>
+                Write your response in your notebook. (5 Minutes.)
+                Responses will be discussed after Bell Work.
+            </div>
+        </div>
+    </section>
+
+
+    
+    <!-- Daily -->
+    <section class="page"> <div class="slide">
+        <h2>Build Quick Reference App for Dictionaries</h2>
+        <div>1. Create a DictionaryEntry class to store each entry. Each entry should have the following properties: methodName, description, exampleCode, and additionalNotes.</div>
+        <div>2. Create data objects and store in a dictionary.</div>
+        <div>3. Add user input field.</div>
+        <div>4. On submit button pressed, look up user input word.</div>
+        <br>
+        <div>Upgrades</div>
+        <div>1. Look up words as user types.</div>
+        <div>2. Allow the user to add or delete vocabulary.</div>
+        <div>3. Update UI.</div>
+    </div></section>
+    
+    
+    <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+     <!-- HOMEWORK  -->
+    <section class="page"> <div class="slide">  
+       <homework-viewer>
+            TBA.
+        </homework-viewer> 
+    </div></section>
+
+
+
+
+
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                 DAY IV
+     xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+
+    <!-- Bell Work -->
+    <section class="page"> <div class="slide">
+            <h1>🔔 BELL WORK</h1>
+            <p>Magic School Practice. Join code: <strong>"WpK9kg"</strong></p>
+    <chat-prompt>
+INSTRUCTIONS: Ask students to write simple functions. Functions should accept input parameters and have return values. 
+Questions should be concrete. Start with simple functions. For example, create a function that returns the word "Hello." 
+Then, we could ask students to create a function that finds the sum of two values. Use it to add 3 + 4 and store in a variable named sum.
+And so on and so forth.
+
+REFERENCE MATERIALS
+        Lesson 5.1: What Is a Function?
 As a program becomes larger, it becomes difficult to understand everything at once. We can make the program easier to work with by dividing it into smaller pieces of code called functions.
 
 Each function should perform a small, clearly defined task. For example, a game might contain separate functions for calculating damage, healing a character, moving an enemy, and checking whether the player has won.
@@ -570,41 +629,8 @@ function healCharacter(character: Character): void {
 }
 TypeScript can usually determine the return type without our writing it. However, explicitly including it can make the purpose of a function clearer.
 
-Optional Parameters and Values
-Sometimes a parameter does not need to be provided. We can place a question mark after its name:
-
-function greetPerson(name: string, title?: string) {
-    // Use name and title.
-}
-The function can now be called with or without a title:
-
-greetPerson("Maria");
-greetPerson("Maria", "Captain");
-Inside the function, title may contain a string or it may contain undefined.
-
-We can write this more explicitly using a union type:
-
-function greetPerson(name: string, title: string | undefined) {
-    // Use name and title.
-}
-The vertical line means or. Read this as:
-
-title can contain a string or undefined.
-
-There is an important difference between these two forms. The question mark allows us to leave out the argument:
-
-greetPerson("Maria");
-With string | undefined, the argument is still required, although its value may be undefined:
-
-greetPerson("Maria", undefined);
-Union types can also describe other optional values:
-
-function findCharacter(name: string): Character | undefined {
-    // Return a Character if one is found.
-    // Otherwise, return undefined.
-}
-The function may return a Character, or it may return undefined if no matching character exists.
     </chat-prompt>
+
             <br><div>
                 Please find your assigned seat quietly. Seats are alphabetical, starting on the right.
                 Please get out your class notebook (or paper).
@@ -615,20 +641,20 @@ The function may return a Character, or it may return undefined if no matching c
         </div>
     </section>
 
-
     
     <!-- Daily -->
     <section class="page"> <div class="slide">
-        <h2>Build Quick Reference App for Dictionaries</h2>
-        <div>1. Create a DictionaryEntry class to store each entry. Each entry should have the following properties: methodName, description, exampleCode, and additionalNotes.</div>
-        <div>2. Create data objects and store in a dictionary.</div>
-        <div>3. Add user input field.</div>
-        <div>4. On submit button pressed, look up user input word.</div>
-        <br>
-        <div>Upgrades</div>
-        <div>1. Look up words as user types.</div>
-        <div>2. Allow the user to add or delete vocabulary.</div>
-        <div>3. Update UI.</div>
+        <h2>Lesson (do together)</h2>
+        <p>1. Create a class called dogs.</p>
+        <p>2. Create a class called linear equation. Add methods for y value, intercepts, etc.</p>
+        <p>3. Create a class called mechs. What properties and methods would you like to add? </p>
+    </div></section>
+    
+
+        <!-- Daily -->
+    <section class="page"> <div class="slide">
+        <h2>Continue Project</h2>
+        <p>Build Quick Reference App for Dictionaries</p>
     </div></section>
     
     
@@ -636,21 +662,6 @@ The function may return a Character, or it may return undefined if no matching c
     <section class="page"> <div class="slide">  
        <closure-viewer></closure-viewer>  <!-- default text -->
     </div></section>
-
-     <!-- HOMEWORK  -->
-    <section class="page"> <div class="slide">  
-       <homework-viewer>
-            TBA.
-        </homework-viewer> 
-    </div></section>
-
-
-
-
-
-
-
-
 
 
 
