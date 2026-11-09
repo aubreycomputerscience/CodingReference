@@ -1,6 +1,8 @@
+<!-- 
 // introduct length - 1
 // const pokemonID = crypto.randomUUID();
-
+// REFERENCES FOR FUNCTIONS
+-->
 
 
 <article class="lesson"> <slide-viewer>
@@ -17,204 +19,159 @@
     </section>
 
     <!-- Bell Work -->
-    <section class="page"> <div class="slide">
+    <section class="page"> 
+        <div class="slide">
             <h1>🔔 BELL WORK</h1>
-            <p>Magic School Practice. Join code: <strong>"TBA"</strong></p>
-    <chat-prompt>
-INSTRUCTIONS: Ask students to write simple functions. Functions should accept input parameters and have return values. 
-Questions should be concrete. Start with simple functions. For example, create a function that returns the word "Hello." 
-Then, we could ask students to create a function that finds the sum of two values. Use it to add 3 + 4 and store in a variable named sum.
-And so on and so forth.
-
-        Lesson 5.1: What Is a Function?
-As a program becomes larger, it becomes difficult to understand everything at once. We can make the program easier to work with by dividing it into smaller pieces of code called functions.
-
-Each function should perform a small, clearly defined task. For example, a game might contain separate functions for calculating damage, healing a character, moving an enemy, and checking whether the player has won.
-
-A function gives a name to a piece of code:
-
-function healCharacter() {
-    // Restore the character's health.
-}
-The name healCharacter tells us what the function does. In this way, a good function name acts like a topic sentence. It allows us to understand the purpose of the code without immediately reading every instruction inside it.
-
-Creating a function is called defining a function. The code inside the function does not run until we call it:
-
-healCharacter();
-The parentheses tell the program to run the function.
-
-Functions help us:
-
-divide a large program into smaller tasks
-give meaningful names to sections of code
-reuse code without writing it again
-hide unnecessary details
-make programs easier to read, test, and change
-A function attached to an object or class is called a method. Functions and methods work in similar ways, but a method belongs to a particular object or class.
-
-Lesson 5.2: Using Functions
-Parameters and Arguments
-A function can receive information through parameters.
-
-function greetPerson(name: string) {
-    const greeting = "Hello, " + name;
-}
-The parameter name is a variable that belongs to the function. It allows the function to work with different names.
-
-When we call the function, we provide a value:
-
-greetPerson("Maria");
-greetPerson("Devon");
-The value passed into a function is called an argument.
-
-In this example:
-
-function greetPerson(name: string) {
-    const greeting = "Hello, " + name;
-}
-
-greetPerson("Maria");
-name is the parameter.
-"Maria" is the argument.
-A function can have more than one parameter:
-
-function calculateDamage(attack: number, defense: number) {
-    const damage = attack - defense;
-}
-The arguments are matched with the parameters according to their position:
-
-calculateDamage(30, 10);
-Here, 30 becomes attack and 10 becomes defense.
-
-Clear parameter names make function calls easier to understand:
-
-const playerAttack = 30;
-const enemyDefense = 10;
-
-calculateDamage(playerAttack, enemyDefense);
-This is often clearer than passing several unexplained numbers directly into the function.
-
-Return Values
-A function can send a result back to the code that called it. This is called a return value.
-
-function calculateDamage(attack: number, defense: number): number {
-    return attack - defense;
-}
-The type after the parentheses states what kind of value the function returns:
-
-: number
-We can store the returned value in a variable:
-
-const damage = calculateDamage(30, 10);
-The function receives 30 and 10, calculates the result, and returns 20. The value 20 is then stored in damage.
-
-A returned value can also be used directly:
-
-const remainingHitPoints =
-    hitPoints - calculateDamage(attack, defense);
-When a function reaches return, it immediately stops running:
-
-function calculateDamage(attack: number, defense: number): number {
-    if (defense >= attack) {
-        return 0;
-    }
-
-    return attack - defense;
-}
-If defense is greater than or equal to attack, the function returns 0 and skips the remaining code.
-
-A function that does not return a value can use the return type void:
-
-function healCharacter(character: Character): void {
-    character.heal();
-}
-TypeScript can usually determine the return type without our writing it. However, explicitly including it can make the purpose of a function clearer.
-
-    </chat-prompt>
-
-            <br><div>
-                Please find your assigned seat quietly. Seats are alphabetical, starting on the right.
-                Please get out your class notebook (or paper).
-            </div><div>
-                Write your response in your notebook. (5 Minutes.)
-                Responses will be discussed after Bell Work.
-            </div>
+            <p>Magic School Practice. Student Choice.</p>
         </div>
     </section>
 
     
-
-
-
      <!-- Lesson 1 -->
     <section class="page"> <div class="slide">
         <h2>Sets</h2>
-        <p>Store data in set.</P>
         <P>Think of a  set as an unordered group of items. It can have no duplicate values.</p>
-        <P>1. Use for quick lookup.</P>
+        <P>1. Check to see if item is a member of a group.</P>
         <p>2. Use to remove dups.</p>
         <p>3. Use to combine sets of data, remove elements from one set, or find which elements shared by two sets.</p>
         <br>
-        <p>*Implementation Detail*</p>
-        <p>Unlike other programming languages, JavaScript/TypeScript will return items in the order they were added.</p>
+        <p>*Implementation Details*</p>
+        <p>a. Unlike other programming languages, JavaScript/TypeScript will return items in the order they were added.</p>
+        <p>b. Because JavaScript/TypeScript does not allow you to put objects in sets, they can be awkward to use. </p>
      </div>
     </section>
       
-
-    <section class="page"> <div class="slide"></div>
-        <h2>A set stores a collection of unique items. The same item cannot appear more than once.</h2>
+ 
+    <section class="page"> <div class="slide">
+        <h2>In TypeScript</h2>
+        <p>A set stores a collection of unique items. The same item cannot appear more than once.</p>
         <codebox-controller  mode="lineByLine">
-            
-        const animals = new Set(["cat", "dog", "monkey"]);
-        If we try to add "cat" again, the set remains unchanged:
-
-        animals.add("cat");
-
-        // animals still contains:
-        // "cat", "dog", "monkey"
+        const animals = new Set(["cat", "dog", "monkey"]);  
+        animals.add("cat");  // If we try to add "cat" again, the set remains unchanged
         </codebox-controller>
 
         <multiline-text>
-Sets are useful when we mainly need to know whether an item is present. 
+Sets are useful when we need to know whether an item is present. 
 For example, we might use a set to store:
-
-    usernames that have already been selected
-    students who are absent
-    items collected by a player
-    words that appear in a document
-    In review, our basic collection types have different purposes:
-
-An array stores an ordered list of items and can contain duplicates.
-A dictionary connects keys with values.
-A set stores unique items and provides a quick way to check whether an item is present.
+    - Usernames that have already been selected.
+    - Students who are absent.
+    - Items collected by a player.
+    - Words that appear in a document.
 </multiline-text>
 
 <h2>Creating a Set</h2>
 <codebox-controller>
 const animals = new Set<string>();  // A set of strings.
+</codebox-controller>
 
-// or
+<h2>Creating a Set from an Array</h2>
+<codebox-controller>
 const animals = new Set(["cat", "dog", "monkey"]);  // We are passing in an array.
 </codebox-controller>
 
+<h2>Creating an Array from a Set</h2>
+<codebox-controller>
+const animalArray = [...animals];  // use the spread operator to convert a set into an array
+</codebox-controller>
+
+
 <h2>Quick Reference</h2>
-<multiline-text>
-mySet.add("dog")	Add an item
-mySet.has("cat")	Check whether an item is present
-mySet.delete("dog")	Delete one item
-mySet.clear()	Delete every item
-mySet.size	Find the number of items
-</multiline-text>
+<codebox-controller>
+    mySet.add("dog")	  // Add an item
+    mySet.has("cat")	  // Check whether an item is present
+    mySet.delete("dog")	  // Delete one item
+    mySet.clear()	      // Delete every item
+    mySet.size	          // Find the number of items
+</codebox-controller>
 
 </div></section>
 
 
+  
+     <!-- Lesson 2 -->
+    <section class="page"> <div class="slide">
+        <h2>Sets Operations (our primary use case)</h2>
+        <p>Union: Combine elements from two sets. That is, SetC = SetA + SetB.</P>
+        <P>Intersection: Find elements shared by two sets.</p>
+        <P>Difference: Remove elements from a set. That is, subtract SetA from SetB.</P>
+        <h2>Examples</h2>
+        <p>Teacher will show examples on board.</p>
+        <h2>Practice in Pairs</h2>
+        <p>Practice intersection, union, and difference.</p>
+        <p><strong>Warm-Weather Fruits:</strong> Banana, Mango, Pineapple, Watermelon, Papaya, Coconut, Guava</p>
+        <p><strong>Cold-Weather Fruits:</strong> Apple, Pear, Orange, Grapefruit, Pomegranate, Persimmon, Cranberry</p>
+        <p><strong>Fruits with Seeds:</strong> Strawberry, Kiwi, Dragon fruit, Passion fruit, Papaya, Watermelon, Pomegranate</p>
+     </div>
+    </section>
+
+
+
 
     <section class="page"><div class="slide"> 
+        <h2>In Code</h2>
+        <codebox-controller>
+    const heroesWithCapes = new Set([
+        "Batman",
+        "Superman",
+        "Thor"
+    ]);
+
+    const heroesWhoCanFly = new Set([
+        "Superman",
+        "Thor",
+        "Iron Man"
+    ]);
+        </codebox-controller>
 
 
+        <h2>Union: contains every item found in either set.</h2>
+<codebox-controller>
+    const heroesWithCapesOrFlight = heroesWithCapes.union(heroesWhoCanFly);
+
+    // Batman, Superman, Thor
+    // plus Superman, Thor, Iron Man
+    // equals Batman, Superman, Thor, Iron Man
+
+    // *Items that appear in both sets are included only once.
+</codebox-controller>
+
+<h2>Intersection: contains only the items found in both sets.</h2>
+<codebox-controller>
+    const flyingHeroesWithCapes = heroesWithCapes.intersection(heroesWhoCanFly);
+
+    // Batman, Superman, Thor
+    // and Superman, Thor, Iron Man
+    // have Superman and Thor in common
+</codebox-controller>
+
+<h2>Difference: contains the items found in the first set but not in the second.</h2>
+<codebox-controller>
+    const heroesWithCapesWhoCannotFly = heroesWithCapes.difference(heroesWhoCanFly);
+
+    // Batman, Superman, Thor
+    // minus Superman, Thor, Iron Man
+    // equals Batman
+    The order matters when finding the difference:
+
+    const flyingHeroesWithoutCapes = heroesWhoCanFly.difference(heroesWithCapes);
+
+    // Superman, Thor, Iron Man
+    // minus Batman, Superman, Thor
+    // equals Iron Man
+</codebox-controller>
     </div></section>
 
+
+
+     <!-- ACTIVITY -->
+    <section class="page"> <div class="slide">  
+       <h2>You Try</h2>
+       <p>Open Visual Studio and test it out. (Start with the first slide and move on from there.)</p>
+    <p>A. Create Sets.</p>
+    <p>B. Add Elements.</p>
+    <p>C. Check if member.</p>
+    <p>D. Try union, intersection, and difference.</p>
+    </div></section>
 
 
         <!-- CLOSURE  -->
@@ -225,7 +182,7 @@ mySet.size	Find the number of items
      <!-- HOMEWORK  -->
     <section class="page"> <div class="slide">  
        <homework-viewer>
-            Be ready for a quiz.
+            Be ready for a quiz. You should know how to create a set, add members, find the union, intersection, and difference.
         </homework-viewer> 
     </div></section>
 
@@ -234,8 +191,142 @@ mySet.size	Find the number of items
 
 
 
+<!--
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            DAY 2
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx    
+-->
+
+    <section class="page"> <div class="slide">
+        <projectname-viewer>
+            Practicing Sets (Day II)
+            </projectname-viewer>
+            <objectives-viewer>
+                <p>Use set operations to store and find the intersection of elements. (Alg-3: TEKS 4D, 6Q, 6R)</p>
+                <p>Use object-oriented programming to organize code. (Prog-4: TEKS 4E, 6D, 6F)</p>
+            </objectives-viewer>
+    </section>
+
+    <!-- Bell Work -->
+    <section class="page"> 
+        <div class="slide">
+            <h1>🔔 BELL WORK</h1>
+            <p>Skill Check (see questions on board)</p>
+        </div>
+    </section>
+
+    
+        <section class="page"> 
+        <div class="slide">
+        <h2>Data Structures: In Review</h2>
+        <multiline-text>
+In review, our basic collection types have different purposes:
+    - An array stores an ordered list of items and can contain duplicates.
+    - A dictionary connects keys with values.
+    - A set stores unique items and provides a quick way to check whether an item is present.
+</multiline-text>
+</div></section>
+
+     <!-- ACTIVITY -->
+    <section class="page"> <div class="slide">  
+       <h2>Activity</h2>
+       <p>Review: Data Structures / Sets / Check Your Understanding (at the end)</p>
+    </div></section>
 
 
+     <!-- ACTIVITY -->
+    <section class="page"> <div class="slide">  
+       <h2>Activity</h2>
+       <p>Write quiz.</p>
+    </div></section>
+
+
+        <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+
+
+<!--
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            DAY 3
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx    
+-->
+
+    <section class="page"> <div class="slide">
+        <projectname-viewer>
+            Project: Filtering Pokemon Walk Through (Day III)
+            </projectname-viewer>
+            <objectives-viewer>
+                <p>Use set operations to store and find the intersection of elements. (Alg-3: TEKS 4D, 6Q, 6R)</p>
+                <p>Use object-oriented programming to organize code. (Prog-4: TEKS 4E, 6D, 6F)</p>
+            </objectives-viewer>
+    </section>
+
+    <!-- Bell Work -->
+    <section class="page"> 
+        <div class="slide">
+            <h1>🔔 BELL WORK</h1>
+            <p>Quiz partner (using quiz from last class).</p>
+        </div>
+    </section>
+
+    
+        <section class="page"> 
+        <div class="slide">
+        <h2>Introducing the Project</h2>
+        <multiline-text>
+    Display Pokemon by Type. Filter by Level and HP.
+</multiline-text>
+</div></section>
+
+     <!-- ACTIVITY -->
+    <section class="page"> <div class="slide">  
+       <h2>Walk through code.</h2>
+    </div></section>
+
+        <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+
+
+<!--
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            DAY 4 & 5
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx    
+-->
+
+    <section class="page"> <div class="slide">
+        <projectname-viewer>
+            Project (Day IV & V)
+            </projectname-viewer>
+            <objectives-viewer>
+                <p>Use set operations to store and find the intersection of elements. (Alg-3: TEKS 4D, 6Q, 6R)</p>
+                <p>Use object-oriented programming to organize code. (Prog-4: TEKS 4E, 6D, 6F)</p>
+            </objectives-viewer>
+    </section>
+
+    <!-- Bell Work -->
+    <section class="page"> 
+        <div class="slide">
+            <h1>🔔 BELL WORK</h1>
+            <p>Quiz partner (using quiz from last class).</p>
+        </div>
+    </section>
+
+     <!-- ACTIVITY -->
+    <section class="page"> <div class="slide">  
+       <h2>Code</h2>
+       <p>Work on Project.</p>
+    </div></section>
+
+        <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
 
 
 </slide-viewer>

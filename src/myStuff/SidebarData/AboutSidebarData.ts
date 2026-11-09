@@ -98,12 +98,16 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
                     pageName: "Unit2a_DisplayArray"
                 },
                 { 
-                    displayName: "- display objects",
+                    displayName: "Display Objects",
                     pageName: "Unit2b_DisplayObjects"
                 },
                 { 
-                    displayName: "- look up",
+                    displayName: "Look Up Dictionary",
                     pageName: "Unit2c_Dictionaries"
+                },
+                { 
+                    displayName: "Filter with Sets",
+                    pageName: "Unit2c_Sets"
                 },
                 
         ] },
