@@ -333,6 +333,7 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
      <!-- ACTIVITY -->
     <section class="page"> <div class="slide">  
        <h2>Walk through code.</h2>
+       <p>Get new template to start. Or manually update compiler options to run sets.</p>
        <codebox-controller>
 
 
@@ -513,21 +514,9 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
         return Array.from(pokemon);
     }
 
-
-    // POKEMON BY TYPE
-
-    const firePokemon: Set<string> = new Set([  // we are passing an array into the constructor
-        "Charizard (III)",
-        "Arcanine (II)",
-        "Charmander (I)",
-        "Vulpix (I)",
-        "Blaziken (III)"
-    ]);
-
-    // and so on.
        </codebox-controller>
-       <p><strong>You can cut & paste the list of Pokemon, or add your own.</strong></p><br>
-       <multiline-text>
+       <br><p><strong>You can copy & paste the list of Pokemon, below, or add your own.</strong></p><br>
+       <codebox-controller canCopy = "true">
 // POKEMON BY TYPE
 
 const firePokemon: Set<string> = new Set([  // we are passing an array into the constructor
@@ -627,7 +616,7 @@ const lowHPPokemon: Set<string> = new Set([
     "Mightyena (II)",
     "Espeon (II)"
 ]);
-       </multiline-text>
+    </codebox-controller>
     </div></section>
 
         <!-- CLOSURE  -->

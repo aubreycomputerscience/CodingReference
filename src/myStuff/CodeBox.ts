@@ -56,7 +56,11 @@ export class CodeBoxController extends HTMLElement {  // we are using HTML Eleme
     // xxxxxxxxxxxxxxxxx
     // NO COPYING
     // xxxxxxxxxxxxxxxxx
-        codebox.style.userSelect = "none";  
+    const canCopy = this.hasAttribute("canCopy");  // returns true or false
+
+    if (!canCopy) {
+        codebox.style.userSelect = "none";
+    }
     // xxxxxxxxxxxxxxxxxx
 
         this.replaceChildren(codebox);
