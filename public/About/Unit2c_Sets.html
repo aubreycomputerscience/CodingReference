@@ -36,7 +36,7 @@
         <p>3. Use to combine sets of data, remove elements from one set, or find which elements shared by two sets.</p>
         <br>
         <p>*Implementation Details*</p>
-        <p>a. Unlike other programming languages, JavaScript/TypeScript will return items in the order they were added.</p>
+        <p>a. Unlike many other programming languages, JavaScript/TypeScript will return items in the order they were added.</p>
         <p>b. Because JavaScript/TypeScript does not allow you to put objects in sets, they can be awkward to use. </p>
      </div>
     </section>
@@ -61,7 +61,7 @@ For example, we might use a set to store:
 
 <h2>Creating a Set</h2>
 <codebox-controller>
-const animals = new Set<string>();  // A set of strings.
+const animals = new Set&lt;string&gt;();  // A set of strings.
 </codebox-controller>
 
 <h2>Creating a Set from an Array</h2>
@@ -227,6 +227,55 @@ In review, our basic collection types have different purposes:
 </multiline-text>
 </div></section>
 
+    <!-- Lesson -->
+    <section class="page"> <div class="slide">  
+       <h2>Functions: Passing Objects</h2>
+       <p><strong>Passing Primative Values: We just pass in a copy.</strong></p>
+       <codebox-controller>
+        function addNumbers(a: number, b: number): number {
+            return a + b;
+        }
+       </codebox-controller>
+       <br>
+        <p><strong>Objects: Pass a copy of the reference.</strong></p>
+        <p>If you change the object, you are changing the original.</p>
+       <codebox-controller>
+        let myPokemon = new Pokemon();
+
+        function addNumbers(pokemon: Pokemon) {
+            myPokemon.name = "Pikachu";  // we are changing the 
+        }
+       </codebox-controller>
+       <br>
+       <p><strong>Avoiding Confusion:</strong></p>
+       <p>When we pass an object into a function, TypeScript creates a new variable, which points to the original object. Or we could say that it creates a copy of the reference.</p>   
+       <codebox-controller>
+        let myPokemon = new Pokemon();
+
+        function addNumbers(pokemon: Pokemon) {   
+            // when call function addNumbers(
+            // TypeScript creates a new variable: let pokemon = whatever Pokemon you pass in
+
+            pokemon.name = "Eevee";  // pokemon is pointing to myPokemon
+                                     // myPokemon.name = "Eevee"
+
+            // BUT!!!
+            const anotherPokemon = new Pokemon("Charmander");
+            pokemon = anotherPokemon;  // pokemon.name === "Charmande"
+                                       // myPokemon.name === "Eevee"
+        }
+       </codebox-controller>
+       <br>
+       <p><strong>Design Considerations</strong></p>
+       <p>This is an example of poor programming language design, which adds unneeded complexity and confusion.</p>
+       <br>
+       <P>This also emphasizes the importance of clear language.</P>
+       <p>In programming, people talk about pass by reference and pass by copy. In this case, we are passing a copy of the reference.</p> 
+       <p>Unfortunately, programmers do not use these terms consistently and they are best avoided.</p>  
+       <p>What are we doing? We are creating a new variable, which points to an object.</p> 
+
+    </div></section>
+
      <!-- ACTIVITY -->
     <section class="page"> <div class="slide">  
        <h2>Activity</h2>
@@ -237,7 +286,7 @@ In review, our basic collection types have different purposes:
      <!-- ACTIVITY -->
     <section class="page"> <div class="slide">  
        <h2>Activity</h2>
-       <p>Write quiz.</p>
+       <p>Write warm up / practice quiz.</p>
     </div></section>
 
 
@@ -284,6 +333,301 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
      <!-- ACTIVITY -->
     <section class="page"> <div class="slide">  
        <h2>Walk through code.</h2>
+       <codebox-controller>
+
+
+    // UPDATED COMPILER OPTIONS TO RUN SETS:
+    //
+    //   "compilerOptions": {
+    //     "lib": ["ES2025", "DOM"],  // changed to 2025
+    //
+
+    import { TableView, TableViewVersionTwo } from "./myUIElements";
+
+    // UI
+    const tableView = new TableView();
+
+    const electricButton = document.createElement("button");
+    const fireButton = document.createElement("button");
+    const darkButton = document.createElement("button");
+    const psychicButton = document.createElement("button");
+
+    const stageIButton = document.createElement("button");
+    const stageIIButton = document.createElement("button");
+    const stageIIIButton = document.createElement("button");
+
+    const lowHPPokemonButton = document.createElement("button");
+
+    const mainView = document.createElement("div");
+
+    // STATE
+    let showElectric = true;
+    let showFire = false;
+    let showDark = false;
+    let showPsychic = false;
+
+    let showStageI = true;
+    let showStageII = true;
+    let showStageIII = true;
+
+    let lowHPPokemonOnly = false;
+
+
+    export function startApp() {
+
+        createHeader();
+        createMainView();
+        addButtonOnClickBehavior();
+        updateUI();
+    }
+
+    function createHeader() {
+
+        electricButton.textContent = "Electric";
+        fireButton.textContent = "Fire";
+        darkButton.textContent = "Dark";
+        psychicButton.textContent = "Psychic";
+
+        const lineBreak = document.createElement("br");
+
+        stageIButton.textContent = "Include Stage I";
+        stageIIButton.textContent = "Include Stage II";
+        stageIIIButton.textContent = "Include Stage III";
+
+        const lineBreakC = document.createElement("br");
+        lowHPPokemonButton.textContent = "Show Low HP Pokemon Only";
+
+        const header = document.createElement("div");
+        header.append(electricButton, fireButton, darkButton, psychicButton, lineBreak);
+        header.append(stageIButton, stageIIButton, stageIIIButton);
+        header.append(lineBreakC, lowHPPokemonButton);
+        document.body.append(header);
+    }
+
+    function addButtonOnClickBehavior() {
+
+        electricButton.onclick = () => {
+            showElectric = !showElectric;
+            updateUI();
+        }
+
+        fireButton.onclick = () => {
+            showFire = !showFire;
+            updateUI();
+        }
+
+        darkButton.onclick = () => {
+            showDark = !showDark;
+            updateUI();
+        }
+
+        psychicButton.onclick = () => {
+            showPsychic = !showPsychic;
+            updateUI();
+        }   
+
+        stageIButton.onclick = () => {
+            showStageI = !showStageI;
+            updateUI();
+        }
+
+        stageIIButton.onclick = () => {
+            showStageII = !showStageII;
+            updateUI();
+        }
+
+        stageIIIButton.onclick = () => {
+            showStageIII = !showStageIII;
+            updateUI();
+        }
+
+        lowHPPokemonButton.onclick = () => {
+            lowHPPokemonOnly = !lowHPPokemonOnly;
+            updateUI();
+        }
+    }
+
+    function createMainView() {
+
+        document.body.append(mainView);
+    } 
+
+
+    // UPDATE UI
+    function updateUI() {
+
+        showButtonSelection();
+        let pokemon = buildListOfPokemon();
+        refreshTableView(pokemon);
+    }
+
+    function refreshTableView(data: Array<string>) {
+
+        mainView.replaceChildren();
+        tableView.displayData(mainView, data, (rowNumber)=>{ 
+            // on row selection
+            // alert(rowNumber); 
+        } );  
+    }
+
+    function showButtonSelection() {
+
+        if (showElectric) {
+            electricButton.style.backgroundColor = "yellow";
+        } else {
+            electricButton.style.backgroundColor = "white";
+        }
+
+        if (showDark) {
+            darkButton.style.backgroundColor = "gray";
+        } else {
+            darkButton.style.backgroundColor = "white";
+        }
+
+        if (showFire) {
+            fireButton.style.backgroundColor = "red";
+        } else {
+            fireButton.style.backgroundColor = "white";
+        }
+
+        if (showPsychic) {
+            psychicButton.style.backgroundColor = "purple";
+        } else {
+            psychicButton.style.backgroundColor = "white";
+        }
+
+        // another way to do it which is cleaner (if, then, else)
+        stageIButton.style.backgroundColor    = showStageI   ? "green" : "white";
+        stageIIButton.style.backgroundColor   = showStageII  ? "green" : "white";
+        stageIIIButton.style.backgroundColor  = showStageIII ? "green" : "white";
+
+        lowHPPokemonButton.style.backgroundColor = lowHPPokemonOnly ? "green" : "white";
+    }
+
+    function buildListOfPokemon(): Array<string> {
+
+        let pokemon = new Set<string>();
+
+        // TODO: Filter Pokemon using Sets
+
+        return Array.from(pokemon);
+    }
+
+
+    // POKEMON BY TYPE
+
+    const firePokemon: Set<string> = new Set([  // we are passing an array into the constructor
+        "Charizard (III)",
+        "Arcanine (II)",
+        "Charmander (I)",
+        "Vulpix (I)",
+        "Blaziken (III)"
+    ]);
+
+    // and so on.
+       </codebox-controller>
+       <p><strong>You can cut & paste the list of Pokemon, or add your own.</strong></p><br>
+       <multiline-text>
+// POKEMON BY TYPE
+
+const firePokemon: Set<string> = new Set([  // we are passing an array into the constructor
+    "Charizard (III)",
+    "Arcanine (II)",
+    "Charmander (I)",
+    "Vulpix (I)",
+    "Blaziken (III)"
+]);
+
+const electricPokemon: Set<string> = new Set([
+    "Pikachu (I)",
+    "Raichu (II)",
+    "Jolteon (II)",
+    "Luxray (III)",
+    "Mareep (I)"
+]);
+
+const darkPokemon: Set<string> = new Set([
+    "Umbreon (II)",
+    "Absol (I)",
+    "Mightyena (II)",
+    "Houndoom (II)",
+    "Zoroark (III)"
+]);
+
+const psychicPokemon: Set<string> = new Set([
+    "Mewtwo (III)",
+    "Mew (I)",
+    "Alakazam (III)",
+    "Espeon (II)",
+    "Gardevoir (III)"
+]);
+
+
+// POKEMON BY STAGE
+
+const stageI: Set<string> = new Set([
+    // Fire
+    "Charmander (I)",
+    "Vulpix (I)",
+
+    // Electric
+    "Pikachu (I)",
+    "Mareep (I)",
+
+    // Dark
+    "Absol (I)",
+
+    // Psychic
+    "Mew (I)"
+]);
+
+const stageII: Set<string> = new Set([
+    // Fire
+    "Arcanine (II)",
+
+    // Electric
+    "Raichu (II)",
+    "Jolteon (II)",
+
+    // Dark
+    "Umbreon (II)",
+    "Mightyena (II)",
+    "Houndoom (II)",
+
+    // Psychic
+    "Espeon (II)"
+]);
+
+const stageIII: Set<string> = new Set([
+    // Fire
+    "Charizard (III)",
+    "Blaziken (III)",
+
+    // Electric
+    "Luxray (III)",
+
+    // Dark
+    "Zoroark (III)",
+
+    // Psychic
+    "Mewtwo (III)",
+    "Alakazam (III)",
+    "Gardevoir (III)"
+]);
+
+const lowHPPokemon: Set<string> = new Set([
+    "Charmander (I)",
+    "Vulpix (I)",
+    "Pikachu (I)",
+    "Mareep (I)",
+    "Absol (I)",
+    "Mew (I)",
+    "Raichu (II)",
+    "Jolteon (II)",
+    "Mightyena (II)",
+    "Espeon (II)"
+]);
+       </multiline-text>
     </div></section>
 
         <!-- CLOSURE  -->
