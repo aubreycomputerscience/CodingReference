@@ -1,8 +1,683 @@
 
-Flexbox
 
-HTML
 
-CSS
+<article class="lesson"> <slide-viewer>
 
-program layout
+    
+    <section class="page"> <div class="slide">
+        <projectname-viewer>
+            Layout
+            </projectname-viewer>
+            <objectives-viewer>
+                <p>Define size, shape, position, and color using CSS or code. Modify other HTML element styles or properties with the help of reference materials or AI. (UI-2: TEKS 3A, 3D, 4G)</p>
+                <p>Use flexboxes to create modern web page or app layouts. (UI-3: TEKS 4F, 4G )</p>
+            </objectives-viewer>
+    </section>
+
+
+        <!-- Bell Work -->
+    <section class="page"> 
+        <div class="slide">
+            <h1>🔔 BELL WORK</h1>
+            <p>Magic School Practice. Student Choice.</p>
+        </div>
+    </section>
+
+    
+     <!-- Lesson 1 -->
+    <section class="page"> <div class="slide">
+        <h2>Layout: Three Approaches</h2>
+        <p><strong>1. Default Layout: each element is placed after the last one.</strong></p>
+
+        <codebox-controller>
+        const messageA = document.createElement("p");
+        messageA.textContent = "Hello";
+        document.body.append(messageA);
+
+        const messageB = document.createElement("p");
+        messageB.textContent = "World";
+        document.body.append(messageB);  // placed below messageA
+        </codebox-controller><br>
+
+        <p><strong>2. Absolute Coordinates: set x and y position of each element.</strong></p>
+
+        <codebox-controller>
+        const myCharacter = document.createElement("img");
+        myCharacter.src = "images/character.png";
+        myCharacter.style.position = "absolute";  // Allows us to use left and top.
+        myCharacter.style.left = 10 + "px";  // x position - how far is it from the left margin
+        myCharacter.style.top = 20 + "px";   // y position (inverted) - how far is it below the top
+        document.body.appendChild(myCharacter);
+        </codebox-controller><br>
+
+        <p><strong>3. Flexbox: Use rules to divide up the space</strong></p><br>
+        <p> The good news: Flexible Layout (will resize for different size types), Fairly Straightfoward
+        <p> The bad: Can be wonky, brittle, hard to debug </p>
+
+    </div>
+    </section>
+      
+     <!-- EXERCISE -->
+    <section class="page"> <div class="slide">
+        <h2>Default Layout</h2>
+        <p><strong>Build Home Screen</strong></p>
+        <p>- Create Header, Body, and Footer Views</p>
+        <p>- Put labels into your header.</p>
+        <p>- Put a label into your footer.</p>
+
+        <codebox-controller>
+    import { TableView } from "./myUIElements";  // We will use TableView, a class that displays items on the screen, to cut down on the code we have to write.
+
+    const tableView = new TableView();
+    const sampleData = ["cat", "dog", "monkey", "shark"];
+
+
+    export function startApp() {
+
+        document.body.style.backgroundColor = "gray";
+
+        const header = buildHeader();
+        const body = buildBody();
+        const footer = buildFooter();
+
+        document.body.append(header, body, footer);
+    }
+
+    function buildHeader(): HTMLDivElement {
+
+        // A div is a general-purpose HTML element. 
+        // It can display text, create a visible rectangle, or hold other elements.
+        const header = document.createElement("div");
+        header.style.backgroundColor = "yellow";
+
+        const titleA = document.createElement("label");
+        titleA.textContent = "Learning ";
+      
+        const titleB = document.createElement("label");
+        titleB.textContent = "How To ";
+
+        const titleC = document.createElement("label");
+        titleC.textContent = "Layout ";
+
+        header.append(titleA, titleB, titleC);
+        return header;
+    }
+
+    function buildBody(): HTMLDivElement {
+
+        const body = document.createElement("div");
+        body.style.backgroundColor = "white";
+
+        tableView.displayData(body, sampleData, (_)=> {
+            // on click - let's see what happens
+            // does it put a new view over the footer, or does it push the footer down
+            addItemToArray(body);
+        })
+
+        return body;
+    }
+
+    function buildFooter(): HTMLDivElement {
+
+        const footer = document.createElement("div");
+        footer.style.backgroundColor = "orange";
+
+        const copyright = document.createElement("label")
+        copyright.textContent = "Copyright Stuff";
+
+        footer.append(copyright);
+        return footer;
+    }
+
+    function addItemToArray(body: HTMLElement) {
+
+        body.replaceChildren();
+        sampleData.push("new item");
+        tableView.displayData(body, sampleData, (_) => {
+            addItemToArray(body);
+        });
+    }
+    </codebox-controller><br>
+
+    </div>
+    </section>
+      
+
+
+
+
+    <!--LESSON 2: FILL SCREEN-->
+    <section class="page"> <div class="slide">
+    <h2>Claiming Space</h2>
+    <p>Use the full height of the screen.</p>
+
+    <codebox-controller>
+    function addMainView() {
+
+        const mainView = document.createElement("div");
+        mainView.style.height = "100vh";
+        mainView.style.backgroundColor = "gray";
+        document.body.append(mainView);
+    }
+    </codebox-controller><br>
+    </div>
+    </section>
+
+    
+    <!--LESSON 3: FLEXBOX -->
+    <section class="page"> <div class="slide">
+    <h2>Flexbox: Divide and Conquer</h2>
+    <multiline-text>
+    Start with the full page and divide it into boxes. 
+    Each box can then arrange the elements placed directly inside it.
+    We will insert 3 elements - header, body, & footer - displayed as three rows.
+
+    For example:
+
+    Page
+    ├── Header
+    └── Body
+    └── Footer
+
+
+    Next, we can work on the body view.
+    Divide the body into two sections or columns.
+
+    └── Body
+        ├── Sidebar
+        └── Content
+
+    This approach will allow us to layout most of the apps on the app store. 
+    Think of your favorite app. Divide it up into boxes, using pen and paper.
+    </multiline-text>
+      </div>
+    </section>
+
+    
+
+     <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+
+
+
+
+    
+    <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                         DAY II
+         xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+             <section class="page"> <div class="slide">
+        <projectname-viewer>
+            Layout (Day II)
+            </projectname-viewer>
+            <objectives-viewer>
+                <p>Define size, shape, position, and color using CSS or code. Modify other HTML element styles or properties with the help of reference materials or AI. (UI-2: TEKS 3A, 3D, 4G)</p>
+                <p>Use flexboxes to create modern web page or app layouts. (UI-3: TEKS 4F, 4G )</p>
+            </objectives-viewer>
+    </section>
+
+        <!-- Bell Work -->
+    <section class="page"> 
+        <div class="slide">
+            <h1>🔔 BELL WORK</h1>
+            <p>Using paper and pencil, divide/layout your favorite app (no games) using boxes. How do you divide things up?</p>
+        </div>
+    </section>
+
+
+    <!--LESSON 3: FLEXBOX -->
+    <section class="page"> <div class="slide">
+    <h2>Flexbox Review: Divide and Conquer</h2>
+    <multiline-text>
+    Start with the full page and divide it into boxes. 
+    Each box can then arrange the elements placed directly inside it.
+    We will insert 3 elements - header, body, & footer - displayed as three rows.
+
+    For example:
+
+    Page
+    ├── Header
+    └── Body
+    └── Footer
+
+
+    Next, we can work on the body view.
+    Divide the body into two sections or columns.
+
+    └── Body
+        ├── Sidebar
+        └── Content
+
+    This approach will allow us to layout most of the apps on the app store. 
+    Think of your favorite app. Divide it up into boxes, using pen and paper.
+    </multiline-text>
+      </div>
+    </section>
+
+
+    
+    <section class="page"> <div class="slide">
+    <h2>Flexbox: How To</h2>
+    
+    <multiline-text>
+    1. For each view, determine how to arrange the elements inside it. 
+    </multiline-text>
+    <codebox-controller>
+        mainView.style.display = "flex";
+        mainView.style.flexDirection = "column";  // it is a column, so contains rows
+    </codebox-controller><br>
+
+    <multiline-text>
+    2. Then, each subview must specify how much space it takes up.
+    </multiline-text>
+    <codebox-controller>
+    view.style.flex = "1";  // use "none" to only take up space required to fit subviews
+    </codebox-controller><br>
+
+  </div>
+    </section>
+
+
+        <!-- LESSON A -->
+        <section class="page"> <div class="slide">
+            <h2>Preview</h2>
+
+        <codebox-controller>
+        function addMainView(): HTMLElement {
+
+            const mainView = document.createElement("div");
+            mainView.style.height = "100vh";
+            mainView.style.backgroundColor = "gray";
+            document.body.append(mainView);
+
+            mainView.style.display = "flex";
+            mainView.style.flexDirection = "column";  // it is a column, so contains rows
+
+            return mainView;
+        }
+
+             <section class="page"> 
+        <div class="slide">
+            <h1>Practice</h1>
+            <multiline-text>
+                Write out the code to:
+                1. Create a main view that takes up the screen.
+                2. Add footer, body, and header views.
+                3. Use flexbox to size them. 
+                The body is 70% of the screen. The Header is 20%. And the footer is 10%.
+                4. Add a sidebar. Then, insert buttons.
+            </multiline-text>
+        </div>
+    </section>
+
+        </codebox-controller><br>
+        <h2>Project</h2>
+        <p>1. Add Header, Body, & Footer</p>
+        <p>Experiment with changing view.style.flex = "1". What happens if you change it to "2" or "3". Or to "none"?</p>
+        <p>When finish, work on upgrades.</p>
+        <codebox-controller>
+        export function startApp() {
+
+            // add main views
+            const mainView = addMainView();
+            const header = addHeader(mainView);
+            const body = addBody(mainView);
+            const footer = addFooter(mainView);
+
+            addHeaderLabels(header);
+
+            // todo:
+            addSampleEmailsToBody(body);
+            addFooterText(footer);
+        }
+
+        function addMainView(): HTMLElement {
+
+            const mainView = document.createElement("div");
+            mainView.style.height = "100vh";
+            mainView.style.backgroundColor = "gray";
+            document.body.append(mainView);
+
+            mainView.style.display = "flex";
+            mainView.style.flexDirection = "column";  // it is a column, so it display info top down
+
+            return mainView;
+        }
+
+        function addHeader(mainView: HTMLElement): HTMLElement {
+
+            const view = document.createElement("div");
+            view.style.backgroundColor = "green";
+            mainView.append(view);
+
+            // how much space should it take up
+            view.style.flex = "1";
+
+            return view;
+        }
+
+        function addBody(mainView: HTMLElement): HTMLElement {
+
+            const view = document.createElement("div");
+            view.style.backgroundColor = "yellow";
+            mainView.append(view);
+
+            // how much space should it take up
+            view.style.flex = "1";
+
+            return view;
+        }
+
+        function addFooter(mainView: HTMLElement): HTMLElement {
+
+            const view = document.createElement("div");
+            view.style.backgroundColor = "blue";
+            mainView.append(view);
+
+            // how much space should it take up
+            view.style.flex = "1";
+
+            return view;
+        }
+
+        function addHeaderLabels(headerView: HTMLElement) {
+
+            const backButton = document.createElement("button");
+            backButton.textContent = "< Back";
+            backButton.onclick = () => { alert("back"); }
+
+            const titleElement = document.createElement("div");  
+            titleElement.textContent = "My App";
+                // the browser handles the layout for div differently than buttons
+                // how can you deal with this, particularly if you don't know if all broswers will handle it the same way?
+
+            const rightButton = document.createElement("button")
+            rightButton.textContent = "Options"
+            rightButton.onclick = () => { alert("options"); }
+
+
+            // LAYOUT
+            // the header view is not a flexbox, so let's update it
+            headerView.style.display = "flex";  // move code to be next to other headerView code
+            headerView.style.flexDirection = "row";  // flex direction is confusing, the headerView is a row
+
+            backButton.style.flex = "1";
+            titleElement.style.flex = "1";
+            rightButton.style.flex = "1";
+
+            backButton.style.textAlign = "center";  // adjust to right, left, or center (buttons default to center)
+            titleElement.style.textAlign = "center";
+            rightButton.style.textAlign = "center";
+
+            headerView.append(backButton, titleElement, rightButton);
+        }
+
+        function addSampleEmailsToBody(body: HTMLElement) {
+
+            const emailASubject = document.createElement("div");
+            const emailASender = document.createElement("div");
+            const emailASnippet = document.createElement("div");
+            const emailAText = document.createElement("p");
+
+            emailASubject.textContent = "Stocks";
+            emailASender.textContent = "Dr. X";
+            emailASnippet.textContent = "Thinking about buying tech stocks? Think twice..."
+            emailAText.textContent = "Thinking about buying tech stocks? Think twice sdlfk lsdkfjlksdfj sldkfjlsfkj lskdfjl sfkjfsl";
+
+            // todo: 
+            // 1. add a second email to make sure everything works correctly
+        }
+
+        function addFooterText(footerView: HTMLElement) {
+
+            // add footer text
+            // footer should shrink to fit text
+            // push footer to the right (myElement.style.marginLeft = "auto")
+        }
+
+        // upgrade:
+        // 1. create an email class
+        // 2. use a for loop to display emails
+    </codebox-controller>
+
+  </div>
+    </section>
+
+
+   <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+
+
+
+
+    
+    <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                         DAY III
+         xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+             <section class="page"> <div class="slide">
+        <projectname-viewer>
+            Layout (Day III)
+            </projectname-viewer>
+            <objectives-viewer>
+                <p>Define size, shape, position, and color using CSS or code. Modify other HTML element styles or properties with the help of reference materials or AI. (UI-2: TEKS 3A, 3D, 4G)</p>
+                <p>Use flexboxes to create modern web page or app layouts. (UI-3: TEKS 4F, 4G )</p>
+            </objectives-viewer>
+    </section>
+
+        <!-- Bell Work -->
+    <section class="page"> 
+        <div class="slide">
+            <h1>🔔 BELL WORK</h1>
+            <multiline-text>
+            Practice Exam Questions
+            </multiline-text>
+        </div>
+    </section>
+
+<section class="page"> <div class="slide">
+    <h2>Claiming Space</h2>
+    <p>Use the full height of the screen.</p>
+
+    <codebox-controller>
+    <h2>Project</h2>
+    <p>Continue.</p>
+    </codebox-controller><br>
+    </div>
+    </section>
+
+     <codebox-controller>
+    <h2>Mockup</h2>
+    <p>What is your favorite app or website? Build a mockup of it.</p>
+    <p>That is, duplicate the UI. No interaction required.</p>
+    <p>*Flexbox is easy, in theory, but often confusing in practice. Getting it down requires repetition.</p>
+    </codebox-controller><br>
+    </div>
+    </section>
+
+    
+   <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+
+    <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                         DAY IV
+         xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+             <section class="page"> <div class="slide">
+        <projectname-viewer>
+            Layout (Day IV)
+            </projectname-viewer>
+            <objectives-viewer>
+                <p>Define size, shape, position, and color using CSS or code. Modify other HTML element styles or properties with the help of reference materials or AI. (UI-2: TEKS 3A, 3D, 4G)</p>
+                <p>Use flexboxes to create modern web page or app layouts. (UI-3: TEKS 4F, 4G )</p>
+            </objectives-viewer>
+    </section>
+
+
+        <!-- Bell Work -->
+    <section class="page"> 
+        <div class="slide">
+            <h1>🔔 BELL WORK</h1>
+            <multiline-text>
+            TBA
+            </multiline-text>
+        </div>
+    </section>
+
+    <section class="page"> 
+        <div class="slide">
+            <h1>Using CSS</h1>
+            <p>You can control Styling and Layout in Code.</p>
+            <codebox-controller>
+            // TypeScript
+
+            const sidebar = document.createElement("div");
+            sidebar.style.backgroundColor = "whitesmoke";
+            sidebar.style.width = "150px";
+            </codebox-controller> <br>
+            
+            <p> Alternatively, you can move Styling and Layout to your style.css file in VSCode. </p>
+            <p> In either case, it may be helpful to avoid duplicating code, update once.</p>
+            <p> And secondly, it is nice to have your UI setting separate from other code.</p>
+            <codebox-controller>
+            // TypeScript
+
+            const sidebar = document.createElement("div");
+            sidebar.className = "sidebar";  // link to css script, where define background color and width
+            </codebox-controller>
+            <br>
+            <codebox-controller>
+            // style.css
+
+            .sidebar {
+                width: 150px;
+                backgroundColor: whitesmoke;
+            }
+            </codebox-controller>
+        </div>
+    </section>
+
+    <section class="page"> 
+        <div class="slide">
+            <h1>Update Code: Use CSS</h1>
+            <multiline-text>
+            Review:
+            1. Layout: Lesson 4.4: Moving the Layout to CSS
+            2. Layout: Lesson 4.5: Scrolling Inside a Section
+            3. CSS: Lesson 6.2: Common Properties
+            </multiline-text>
+        </div>
+    </section>
+    
+   <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+
+
+
+
+
+
+
+    
+    <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                         DAY V
+         xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+             <section class="page"> <div class="slide">
+        <projectname-viewer>
+            Layout (Day V)
+            </projectname-viewer>
+            <objectives-viewer>
+                <p>Define size, shape, position, and color using CSS or code. Modify other HTML element styles or properties with the help of reference materials or AI. (UI-2: TEKS 3A, 3D, 4G)</p>
+                <p>Use flexboxes to create modern web page or app layouts. (UI-3: TEKS 4F, 4G )</p>
+            </objectives-viewer>
+    </section>
+
+        <!-- Bell Work -->
+    <section class="page"> 
+        <div class="slide">
+            <h1>🔔 BELL WORK</h1>
+            <multiline-text>
+            TBA
+            </multiline-text>
+        </div>
+    </section>
+
+    <section class="page"> 
+        <div class="slide">
+            <h1>Using CSS</h1>
+            <p>You can control Styling and Layout in Code.</p>
+            <codebox-controller>
+            // TypeScript
+
+            const sidebar = document.createElement("div");
+            sidebar.style.backgroundColor = "whitesmoke";
+            sidebar.style.width = "150px";
+            </codebox-controller> <br>
+            
+            <p> Alternatively, you can move Styling and Layout to your style.css file in VSCode. </p>
+            <p> In either case, it may be helpful to avoid duplicating code, update once.</p>
+            <p> And secondly, it is nice to have your UI setting separate from other code.</p>
+            <codebox-controller>
+            // TypeScript
+
+            const sidebar = document.createElement("div");
+            sidebar.className = "sidebar";  // link to css script, where define background color and width
+            </codebox-controller>
+            <br>
+            <codebox-controller>
+            // style.css
+
+            .sidebar {
+                width: 150px;
+                backgroundColor: whitesmoke;
+            }
+            </codebox-controller>
+        </div>
+    </section>
+
+    <section class="page"> 
+        <div class="slide">
+            <h1>CSS Properties</h1>
+            <multiline-text>
+            Review CSS: Lesson 6.2: Common Properties
+            Update project to use CSS
+            </multiline-text>
+        </div>
+    </section>
+    
+        <section class="page"> 
+        <div class="slide">
+            <h1>Project</h1>
+            <multiline-text>
+            If you have completed previous work, the update project to use CSS Scripts.
+            </multiline-text>
+        </div>
+    </section>
+
+   <!-- CLOSURE  -->
+    <section class="page"> <div class="slide">  
+       <closure-viewer></closure-viewer>  <!-- default text -->
+    </div></section>
+
+
+
+
+
+
+
+
+
+</slide-viewer></article>

@@ -109,7 +109,11 @@ export const data: DataTypes.SidebarGroupings = {  // create an object literal (
                     displayName: "Filter with Sets",
                     pageName: "Unit2c_Sets"
                 },
-                
+                { 
+                    displayName: "Layout",
+                    pageName: "Unit2d_Flexbox"
+                },
+
         ] },
 
 
