@@ -64,6 +64,7 @@
         <p>- Create Header, Body, and Footer Views</p>
         <p>- Put labels into your header.</p>
         <p>- Put a label into your footer.</p>
+        <p>- Find out what happens if you add new elements. Will it resize or reposition views?</p>
 
         <codebox-controller>
     import { TableView } from "./myUIElements";  // We will use TableView, a class that displays items on the screen, to cut down on the code we have to write.
@@ -277,29 +278,14 @@
     view.style.flex = "1";  // use "none" to only take up space required to fit subviews
     </codebox-controller><br>
 
-  </div>
-    </section>
 
+    <multiline-text>Remember to take up the full screen</multiline-text>
 
-        <!-- LESSON A -->
-        <section class="page"> <div class="slide">
-            <h2>Preview</h2>
-
-        <codebox-controller>
-        function addMainView(): HTMLElement {
-
-            const mainView = document.createElement("div");
-            mainView.style.height = "100vh";
-            mainView.style.backgroundColor = "gray";
-            document.body.append(mainView);
-
-            mainView.style.display = "flex";
-            mainView.style.flexDirection = "column";  // it is a column, so contains rows
-
-            return mainView;
-        }
-        </codebox-controller>
-                </div>
+    <codebox-controller>
+    mainView.style.height = "100vh";
+    </codebox-controller>
+               
+    </div>
     </section>
 
 
